@@ -1,78 +1,52 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun May 12 19:58:57 2024
-
-@author: vencov
-"""
-
 import os
 import re
 
 def create_dicts(folder_path):
-    # Define the pattern to match the date and time in the filenames
-    date_time_pattern = re.compile(r'(\d{2}_\d{2}_\d{2}_\d{2}_\d{2}_\d{2})')
+    # Define the pattern to match the date, time, and F2b in the filenames
+    date_time_f2b_pattern = re.compile(r'(\d{2}_\d{2}_\d{2}_\d{2}_\d{2}_\d{2}_F2b_\d+Hz)')
 
-    # Create dictionaries to store unique date and time strings and their corresponding filenames for '_L_' and '_R_'
+    # Create dictionaries to store unique date_time_f2b strings and their corresponding filenames for '_L_' and '_R_' based on L2 value
     date_time_filenames_dict_l = {}
     date_time_filenames_dict_r = {}
 
     # Iterate through the files in the folder
     for filename in os.listdir(folder_path):
         if 'p4swDPOAE' in filename:
-            # Strip anything after '_L_' or '_R_'
-            filename = re.sub(r'(_[LR]_).*', r'\1', filename)
-            match = date_time_pattern.search(filename)
+            match = date_time_f2b_pattern.search(filename)
             if match:
-                date_time = match.group(1)
-                lc_value = re.search(r'_L2_(\d+)dB', filename)
-                if lc_value:
-                    lc_value = int(lc_value.group(1))
+                date_time_f2b = match.group(1)
+                l2_value_match = re.search(r'L2_(\d+)dB', filename)
+                if l2_value_match:
+                    l2_value = int(l2_value_match.group(1))
                 else:
-                    lc_value = 0  # Set default value if 'Lc_' is not found
-                if "_L_" in filename:
-                    if date_time not in date_time_filenames_dict_l:
-                        date_time_filenames_dict_l[date_time] = set()
-                    date_time_filenames_dict_l[date_time].add((lc_value, filename))
-                elif "_R_" in filename:
-                    if date_time not in date_time_filenames_dict_r:
-                        date_time_filenames_dict_r[date_time] = set()
-                    date_time_filenames_dict_r[date_time].add((lc_value, filename))
+                    l2_value = 0  # Set default value if 'L2_' is not found
 
-    # Sort values by the lc_value
-    for date_time, filenames in date_time_filenames_dict_l.items():
-        date_time_filenames_dict_l[date_time] = [filename for _, filename in sorted(filenames)]
-    for date_time, filenames in date_time_filenames_dict_r.items():
-        date_time_filenames_dict_r[date_time] = [filename for _, filename in sorted(filenames)]
+                if "_L_" in filename:
+                    if l2_value not in date_time_filenames_dict_l:
+                        date_time_filenames_dict_l[l2_value] = set()
+                    date_time_filenames_dict_l[l2_value].add(date_time_f2b)
+                elif "_R_" in filename:
+                    if l2_value not in date_time_filenames_dict_r:
+                        date_time_filenames_dict_r[l2_value] = set()
+                    date_time_filenames_dict_r[l2_value].add(date_time_f2b)
+
+    # Convert sets to sorted lists and add folder path as the first element
+    date_time_filenames_dict_l = {k: [folder_path] + sorted(list(v)) for k, v in date_time_filenames_dict_l.items()}
+    date_time_filenames_dict_r = {k: [folder_path] + sorted(list(v)) for k, v in date_time_filenames_dict_r.items()}
 
     return date_time_filenames_dict_l, date_time_filenames_dict_r
 
 def print_dicts_as_command_line(folder_path):
     data_dict_l, data_dict_r = create_dicts(folder_path)
-    dLsorted = sorted(data_dict_l.values(), key=lambda x: int(re.search(r'_L2_(\d+)dB', x[0]).group(1)))
-    dRsorted = sorted(data_dict_r.values(), key=lambda x: int(re.search(r'_L2_(\d+)dB', x[0]).group(1)))
-    #Lunlist = [for prvek in  if isinstance(prvek,'list')
     
-    dLsorted.insert(0,folder_path)
-    dRsorted.insert(0,folder_path)
+    for l2_value, date_times in data_dict_l.items():
+        print(f"L2_{l2_value}_dB_L: {date_times}")
     
-    dL = [prvek[0] if isinstance(prvek,list) else prvek for prvek in dLsorted]
-    dR = [prvek[0] if isinstance(prvek,list) else prvek for prvek in dRsorted]
-    
-    print(f"{dL}")
-    print(f"{dR}")
-    
+    for l2_value, date_times in data_dict_r.items():
+        print(f"L2_{l2_value}_dB_R: {date_times}")
+
 # Specify the folder containing the files
 folder_path = "Results/s089/R/"
 
 # Print the dictionaries as command line output
 print_dicts_as_command_line(folder_path)
-
-
-
-# Extract values and sort them based on the integer value after '_Lc_'
-#s002R_values_sorted = sorted(dL.values(), key=lambda x: int(re.search(r'_Lc_(\d+)dB', x[0]).group(1)))
-
-# Convert into a new dictionary with a single key 's002R'
-#s002R_ordered = {'s002R': s002R_values_sorted}
-
