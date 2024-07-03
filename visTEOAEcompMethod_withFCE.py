@@ -145,7 +145,13 @@ subjD['s069R3'] = ['Results/s069/', 'CMclickOAE_s069_24_05_30_16_10_05_Lc_34dB_N
 subjD['s055L3'] = ['Results/s055/', 'CMclickOAE_s055_24_06_04_13_34_35_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s055_24_06_04_13_32_18_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s055_24_06_04_13_30_24_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s055_24_06_04_13_28_19_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s055_24_06_04_13_26_14_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s055_24_06_04_13_24_19_Lc_62dB_Ncl228Npulse_3072_L_']
 subjD['s055R3'] = ['Results/s055/', 'CMclickOAE_s055_24_06_04_13_54_07_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s055_24_06_04_13_52_07_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s055_24_06_04_13_49_30_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s055_24_06_04_13_47_14_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s055_24_06_04_13_45_01_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s055_24_06_04_13_42_51_Lc_62dB_Ncl228Npulse_3072_R_']
 
-subjN = 's069L3'
+subjD['s088L'] = ['Results/s088/', 'CMclickOAE_s088_24_06_20_16_10_25_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s088_24_06_20_16_08_34_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s088_24_06_20_16_06_44_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s088_24_06_20_16_04_54_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s088_24_06_20_16_02_47_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s088_24_06_20_16_00_34_Lc_62dB_Ncl228Npulse_3072_L_']
+subjD['s088R'] = ['Results/s088/', 'CMclickOAE_s088_24_06_20_16_37_52_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s088_24_06_20_16_35_42_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s088_24_06_20_16_33_32_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s088_24_06_20_16_31_16_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s088_24_06_20_16_29_06_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s088_24_06_20_16_26_56_Lc_62dB_Ncl228Npulse_3072_R_']
+
+subjD['s089L'] = ['Results/s089/', 'CMclickOAE_s089_24_07_01_11_22_31_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s089_24_07_01_11_20_26_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s089_24_07_01_11_18_20_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s089_24_07_01_11_16_14_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s089_24_07_01_11_14_01_Lc_64dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s089_24_07_01_11_11_51_Lc_70dB_Ncl228Npulse_3072_L_']
+['Results/s089/']
+
+subjN = 's089L'
 
 
 

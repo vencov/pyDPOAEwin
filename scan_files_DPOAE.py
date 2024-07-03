@@ -63,7 +63,7 @@ def print_dicts_as_command_line(folder_path):
     print(f"{dR}")
     
 # Specify the folder containing the files
-folder_path = "Results/s055/sweep_rate"
+folder_path = "Results/s089/R/"
 
 # Print the dictionaries as command line output
 print_dicts_as_command_line(folder_path)

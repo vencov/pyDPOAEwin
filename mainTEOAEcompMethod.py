@@ -14,15 +14,15 @@ latency_SC = getSClat(fsamp,bufsize,SC=10)  # estimated latency
 
 #latency_SC = 16448
 micGain = 40  # gain of the probe microphone
-ear_t = 'R' # which ear
+ear_t = 'L' # which ear
 
 # parameters of evoking stimuli
 
 #Nclicks = 2000
 
 
-Lc = 34 # required intensity of click in peSPL
-Lref = 49 # recorded intensity for 0.1 maximum of the click
+Lc = 40 # required intensity of click in peSPL
+Lref = 55 # recorded intensity for 0.1 maximum of the click
 
 save_path = 'Results/s055/scrambled/'
 save_path = 'Results/s004/Click400_8000'
@@ -31,8 +31,8 @@ save_path = 'Results/s004/Click400_8000'
 #save_path = 'Results/s080/'
 #save_path = 'Results/s003/'
 #save_path = 'Results/s004/NewClick'
-save_path = 'Results/s084/'
-subj_name = 's084'
+save_path = 'Results/s089/'
+subj_name = 's089'
 
 print(f"Playing for {Lc} dB peSPL")
 def get_time() -> str:
