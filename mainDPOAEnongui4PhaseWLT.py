@@ -18,10 +18,10 @@ f2b = 8000  # f1 start frequency
 f2e = 500 # f2 end frequency
 f2f1 = 1.2  # f2/f1 ratio
 #L1 = 53    # intensity of f1 tone
-L2 = 55   # intensity of f2 tone
+L2 = 50   # intensity of f2 tone
 L1 = int(0.4*L2+39)
 #L1 = 55
-r = 12   # sweep rate in octaves per second
+r = 4   # sweep rate in octaves per second
 fsamp = 44100; lat_SC=8236; bufsize = 2048  # 44100 Hz 2048 buffersize# sampling freuqency
 fsamp = 96000; lat_SC= 16448; bufsize = 4096
 #fsamp = 96000; lat_SC= 12352; bufsize = 4096
@@ -38,8 +38,8 @@ plt.close('all')
 
 #save_path = 'Results/s003'
 #subj_name = 's003'
-save_path = 'Results/s089/R'
-subj_name = 's089'
+save_path = 'Results/s090/'
+subj_name = 's090'
 
 
 def get_time() -> str:

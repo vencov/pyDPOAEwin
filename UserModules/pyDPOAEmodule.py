@@ -1145,6 +1145,66 @@ def giveTEOAE_MCmp(data,recsig40,latency_SC,Npulse,Nclicks,Tap=1e-3,TWt=25e-3,Ar
 
 
 
+def calcTFatF(y,fb,fe,T,fs):
+    # Use SSS technique to extract transfer function at frequency f
+    # extract the spectrum
+    
+    fft_len = int(2**np.ceil(np.log2(len(y)))) # number of samples for fft 
+    Y = np.fft.rfft(y,fft_len)/fs  # convert the response to frequency domain
+    #ax.semilogx(fx,20*np.log10(np.abs(DPgram))/(np.sqrt(2)*2e-5))
+    
+    # synchronized swept sine in the frequency domain
+    L = T/np.log(fe/fb)   # parameter of exp.swept-sine
+    f_axis = np.linspace(0, fs/2, num=round(fft_len/2)+1) # frequency axis
+    f_axis[0] = 1e-12
+    SI = 2*np.emath.sqrt(f_axis/L)*np.exp(-1j*2*np.pi*f_axis*L*(1-np.log(f_axis/fb)) + 1j*np.pi/4)
+    SI[0] = 0j
+    
+    # first Nyquist zone 
+    H = Y*SI; 
+    
+    # ifft
+    h = np.fft.irfft(H)
+    '''
+    _,ax1 = plt.subplots()
+    plot_shift = -50000
+    t_h = -(np.arange(len(h),0,-1)+plot_shift)/fs
+    ax1.plot(t_h,np.roll(h,plot_shift))
+    ax1.set_title('Output of the Nonlinear Convolution')
+    ax1.set_xlabel('time [s]')
+    ax1.autoscale(enable=True, axis='x', tight=True)
+    '''
+    N = 1 # separate 3 higher harmonics
+    dt = L*np.log(np.arange(1,N+1))*fs  # positions of higher orders up to N
+    dt_rem = dt - np.around(dt) # The time lags may be non-integer in samples, the non integer delay must be applied later
+    
+    len_Hammer = 2**13
+    shft = round(len_Hammer/2)          # number of samples to make an artificail delay
+    h_pos = np.hstack((h, h[0:shft + len_Hammer - 1]))  # periodic impulse response
+    # separation of higher orders 
+    hs = np.zeros((N,len_Hammer))
+    
+    axe_w = np.linspace(0, np.pi, num=int(len_Hammer/2+1)); # frequency axis 
+    for k in range(N):
+        hs[k,:] = h_pos[len(h)-int(round(dt[k]))-shft-1:len(h)-int(round(dt[k]))-shft+len_Hammer-1]
+        H_temp = np.fft.rfft(hs[k,:])
+    
+        # Non integer delay application
+        H_temp = H_temp * np.exp(-1j*dt_rem[k]*axe_w)
+        hs[k,:] = np.fft.fftshift(np.fft.irfft(H_temp))
+    
+    # Higher Harmonics
+    Hs = np.fft.rfft(hs)
+    Hs = Hs[0,:].flatten()
+    MicGain = 40
+    #MicCalFN = 'MicCalCurve.mat'
+    fxHs = axe_w/(np.pi)*fs/2
+    #HsC,fxI = spectrumToPa(MicCalFN,Hs,fxHs,MicGain)
+    HsC, fxI = spectrumToPaSimple(Hs,fxHs,MicGain)
+    
+    return fxI, HsC
+
+
 def mother_wavelet2(Nw,Nt,df,dt):
     vlnky = np.zeros((Nt,Nw))
     tx = (np.arange(Nt)-Nw)*dt
