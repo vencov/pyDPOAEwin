@@ -58,8 +58,14 @@ subjD['L2_30_dB_R'] =  ['Results/s055/sweep_rate/', '24_06_04_16_54_22_F2b_8000H
 subjD['L2_50_dB_L'] = ['Results/s089/R/', '24_07_01_11_27_00_F2b_8000Hz', '24_07_01_11_28_39_F2b_8000Hz', '24_07_01_11_30_23_F2b_8000Hz', '24_07_01_11_31_37_F2b_8000Hz']
 subjD['L2_55_dB_L'] = ['Results/s089/R/', '24_07_01_11_33_17_F2b_8000Hz', '24_07_01_11_34_49_F2b_8000Hz', '24_07_01_11_36_08_F2b_8000Hz', '24_07_01_11_37_15_F2b_8000Hz']
 
-subjN = 'L2_55_dB_L'
-#subjN = 's055L_L2_55'
+
+#L2_55_dB_L: ['Results/s055/sweep_rate/', '24_06_04_14_00_59_F2b_8000Hz', '24_06_04_14_02_32_F2b_8000Hz', '24_06_04_14_03_51_F2b_8000Hz']
+#L2_30_dB_L: ['Results/s055/sweep_rate/', '24_06_04_14_06_37_F2b_8000Hz', '24_06_04_14_08_26_F2b_8000Hz', '24_06_04_14_10_17_F2b_8000Hz']
+#L2_55_dB_R: ['Results/s055/sweep_rate/', '24_06_04_14_17_53_F2b_8000Hz', '24_06_04_14_19_42_F2b_8000Hz', '24_06_04_14_21_18_F2b_8000Hz', '24_06_04_16_48_24_F2b_8000Hz', '24_06_04_16_50_29_F2b_8000Hz', '24_06_04_16_51_50_F2b_8000Hz']
+#L2_30_dB_R: ['Results/s055/sweep_rate/', '24_06_04_16_54_22_F2b_8000Hz', '24_06_04_16_56_29_F2b_8000Hz', '24_06_04_16_58_25_F2b_8000Hz']
+
+#subjN = 'L2_55_dB_L'
+subjN = 's055R_L2_30'
 
 def mother_wavelet2(Nw,Nt,df,dt):
     vlnky = np.zeros((Nt,Nw))
@@ -358,7 +364,28 @@ def getDPgram(path,DatePat):
     Theta2 = Nt*sigma2 # estimation of the threshold for sample removal
     Theta3 = Nt*sigma3 # estimation of the threshold for sample removal
     Theta4 = Nt*sigma4 # estimation of the threshold for sample removal
+    #np.shape(np.mean(recMat1[np.sum(np.abs(noiseM1)>Theta1],1))
+    Bl01chosen = (sum(np.abs(noiseM1)>Theta1))==0
+    Bl02chosen = (sum(np.abs(noiseM2)>Theta2))==0
+    Bl03chosen = (sum(np.abs(noiseM3)>Theta3))==0
+    Bl04chosen = (sum(np.abs(noiseM4)>Theta4))==0
     
+    N01chosen = sum(Bl01chosen)
+    N02chosen = sum(Bl02chosen)
+    N03chosen = sum(Bl03chosen)
+    N04chosen = sum(Bl04chosen)
+    
+    
+    recMat1Mean = np.mean(recMat1[:,Bl01chosen],1)
+    recMat2Mean = np.mean(recMat2[:,Bl02chosen],1)
+    recMat3Mean = np.mean(recMat3[:,Bl03chosen],1)
+    recMat4Mean = np.mean(recMat4[:,Bl04chosen],1)
+    
+    
+    oaeDS = (recMat1Mean+recMat2Mean+recMat3Mean+recMat4Mean)/4  # exclude samples set to NaN (noisy samples)
+    DPgrR = estimateDRgram(oaeDS,f2f1,f2b,f2e,octpersec,GainMic)
+    
+    '''
     recMat1[np.abs(noiseM1)>Theta1] = np.nan
     recMat1[np.abs(noiseM2)>Theta2] = np.nan
     recMat1[np.abs(noiseM3)>Theta3] = np.nan
@@ -398,8 +425,9 @@ def getDPgram(path,DatePat):
     noiseM4[np.abs(noiseM2)>Theta2] = np.nan
     noiseM4[np.abs(noiseM3)>Theta3] = np.nan
     noiseM4[np.abs(noiseM4)>Theta4] = np.nan
-            
-    return DPgramsDict, rateOct
+    '''
+        
+    return DPgrR, rateOct, [N01chosen, N02chosen, N03chosen, N04chosen]
 
 
 
@@ -407,8 +435,9 @@ DPgr = {}
 
 for i in range(1,len(subjD[subjN])):
 
-    DPgrD, rateOct = getDPgram(subjD[subjN][0], subjD[subjN][i])
+    DPgrD, rateOct, Nchosen = getDPgram(subjD[subjN][0], subjD[subjN][i])
     DPgr[str(rateOct)] = DPgrD
+    DPgr[str(rateOct)+'ch'] = Nchosen
     
     #DPgrD10 = getDPgram(path, deL_r10)
 
@@ -421,13 +450,15 @@ pREF = np.sqrt(2)*2e-5
 
 Nopak = 4  # nuber of presentation
 
-fxx2 = DPgr['2'][str(Nopak)]['fxx']
-fxx8 = DPgr['8'][str(Nopak)]['fxx']
+fxx2 = DPgr['2']['fxx']
+fxx8 = DPgr['8']['fxx']
 
-ax.plot(fxx2[:int(len(fxx2)//2)+1],20*np.log10(np.abs(DPgr['2'][str(Nopak)]['DPgr'])/pREF),color='C3')
-ax.plot(fxx8[:int(len(fxx8)//2)+1],20*np.log10(np.abs(DPgr['8'][str(Nopak)]['DPgr'])/pREF),color='C4')
-#ax.plot(fxx2[:int(len(fxx2)//2)+1],20*np.log10(np.abs(DPgrD2['0']['NLgr'])/pREF),color='C0')
-#ax.plot(fxx2[:int(len(fxx2)//2)+1],20*np.log10(np.abs(DPgrD2['0']['NLgrN'])/pREF),":",color='C0')
+ax.plot(fxx2[:int(len(fxx2)//2)+1],20*np.log10(np.abs(DPgr['2']['DPgr'])/pREF),color='C3')
+ax.plot(fxx8[:int(len(fxx8)//2)+1],20*np.log10(np.abs(DPgr['8']['DPgr'])/pREF),color='C4')
+ax.plot(fxx2[:int(len(fxx2)//2)+1],20*np.log10(np.abs(DPgr['2']['NLgr'])/pREF),color='C5')
+ax.plot(fxx8[:int(len(fxx8)//2)+1],20*np.log10(np.abs(DPgr['8']['NLgr'])/pREF),color='C6')
+ax.plot(fxx2[:int(len(fxx2)//2)+1],20*np.log10(np.abs(DPgr['2']['NLgrN'])/pREF),color='C5')
+ax.plot(fxx2[:int(len(fxx2)//2)+1],20*np.log10(np.abs(DPgr['8']['NLgrN'])/pREF),":",color='C6')
 #ax.plot(fxx10[:int(len(fxx10)//2)+1],20*np.log10(np.abs(DPgrD10['0']['NLgr'])/pREF),color='C1')
 #ax.plot(fxx10[:int(len(fxx10)//2)+1],20*np.log10(np.abs(DPgrD10['0']['NLgrN'])/pREF),":",color='C1')
 ax.set_xlim([400,5000])

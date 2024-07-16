@@ -29,7 +29,7 @@ if not os.path.exists(pathfolder):
 
 if FPL:
     Pecs1 = Hinear1*AmpChirp  # pressure in Pascals evoked by the first speaker
-    Pecs2 = Hinear2*AmpChirp  # pressure in Pascals evoked by the second speaker
+    Pecs2 = Hinear2*AmpChirp  # pressure in Pascals     evoked by the second speaker
 
     THpar = loadmat('Calibration_files/Files/THpar.mat')
     Psrc1 = THpar['Psrc1'][0]

@@ -18,10 +18,10 @@ f2b = 8000  # f1 start frequency
 f2e = 500 # f2 end frequency
 f2f1 = 1.2  # f2/f1 ratio
 #L1 = 53    # intensity of f1 tone
-L2 = 50   # intensity of f2 tone
+L2 = 20   # intensity of f2 tone
 L1 = int(0.4*L2+39)
 #L1 = 55
-r = 4   # sweep rate in octaves per second
+r = 2   # sweep rate in octaves per second
 fsamp = 44100; lat_SC=8236; bufsize = 2048  # 44100 Hz 2048 buffersize# sampling freuqency
 fsamp = 96000; lat_SC= 16448; bufsize = 4096
 #fsamp = 96000; lat_SC= 12352; bufsize = 4096
@@ -32,14 +32,14 @@ fsamp = 96000; lat_SC= 20532; bufsize = 4096
 changeSampleRate(fsamp,bufsize,SC=10)
 lat_SC = getSClat(fsamp,bufsize,SC=10)
 micGain = 40
-ear_t = 'L' # which ear
+ear_t = 'R' # which ear
 
 plt.close('all')
 
 #save_path = 'Results/s003'
 #subj_name = 's003'
-save_path = 'Results/s090/'
-subj_name = 's090'
+save_path = 'Results/s091/'
+subj_name = 's091'
 
 
 def get_time() -> str:
@@ -199,6 +199,7 @@ try:
 
             # now we have to make NAN where the noise was to large, but we have to do it in the wave
             # which 
+            '''
             recMat1[np.abs(noiseM1)>Theta1] = np.nan 
             recMat1[np.abs(noiseM2)>Theta2] = np.nan
             recMat1[np.abs(noiseM3)>Theta3] = np.nan
@@ -242,6 +243,33 @@ try:
 
             oaeDS = (np.nanmean(recMat1,1) + np.nanmean(recMat2,1) + np.nanmean(recMat3,1) + np.nanmean(recMat4,1))/4  # exclude samples set to NaN (noisy samples)
             nfloorDS = (np.nanmean(noiseM1,1) + np.nanmean(noiseM2,1) + np.nanmean(noiseM3,1) + np.nanmean(noiseM4,1))/4
+            
+            '''
+            
+            Bl01chosen = (sum(np.abs(noiseM1)>Theta1))==0
+            Bl02chosen = (sum(np.abs(noiseM2)>Theta2))==0
+            Bl03chosen = (sum(np.abs(noiseM3)>Theta3))==0
+            Bl04chosen = (sum(np.abs(noiseM4)>Theta4))==0
+            
+            N01chosen = sum(Bl01chosen)
+            N02chosen = sum(Bl02chosen)
+            N03chosen = sum(Bl03chosen)
+            N04chosen = sum(Bl04chosen)
+            
+            
+            recMat1Mean = np.mean(recMat1[:,Bl01chosen],1)
+            recMat2Mean = np.mean(recMat2[:,Bl02chosen],1)
+            recMat3Mean = np.mean(recMat3[:,Bl03chosen],1)
+            recMat4Mean = np.mean(recMat4[:,Bl04chosen],1)
+            
+            recNoise1Mean = np.mean(noiseM1[:,Bl01chosen],1)
+            recNoise2Mean = np.mean(noiseM2[:,Bl02chosen],1)
+            recNoise3Mean = np.mean(noiseM3[:,Bl03chosen],1)
+            recNoise4Mean = np.mean(noiseM4[:,Bl04chosen],1)
+            
+            oaeDS = (recMat1Mean+recMat2Mean+recMat3Mean+recMat4Mean)/4  # exclude samples set to NaN (noisy samples)
+            nfloorDS = (recNoise1Mean+recNoise2Mean+recNoise3Mean+recNoise4Mean)/4  # exclude samples set to NaN (noisy samples)
+            
             nfilt = 2**14
             #print(oaeDS)
             #calculate frequency response

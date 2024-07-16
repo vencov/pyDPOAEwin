@@ -1015,6 +1015,88 @@ def fceDPOAEinwinSSNoisehm(oaeDS,Nsamp,f1s,L1sw,rF,fsamp,hmfftlen):
 
 
 
+def fceDPOAEinwinSS(oaeDS,Nsamp,f1s,L1sw,rF,fsamp,tau01,tau02,tshift,hmfftlen):
+    '''
+    % function [Hm, fx, hm, tx, hmnoise] = fceDPOAEinwinSS(oaeDS,Npts,f1s,L1sw,rF,fsD,tau01,tau02,tshift)
+    %
+    % calculates DPOAE with SSS technique
+    % 
+    % oaeDS - time domain signal from which DPOAE is extracted (response to
+    % swept sines in the ear canal)
+    % Npts - number of samples in oaeDS
+    % fs1 - starting frequency of the synch. swept sine (the initial frequency
+    % regardless windowing)
+    % L1sw - parameter for the swept sine: L1sw = T/log(f2/f1) (for the overall
+    % swept sine)
+    % rF - ratio of the f2/f1 frequencies used to evoke DPOAE
+    % fsD - sampling frequency
+    % tau01 - tau parametMicCalFN = 'CalibMicData.mat'er (cutoff) for first half of the recursive exponential function
+    % tau01 - tau parameter (cutoff) for the second half of the recursive exponential function
+    % region around the DPOAE impulse response
+    % tshift - time shift (for the swept sine response in the windows)
+
+    % calculate spectrum of synchronized swept sine (shifted version in case of
+    % time windows which does not start at 0 time)
+    '''
+
+    fft_len = int(2**np.ceil(np.log2(len(oaeDS)))) # number of samples for fft 
+    S,f = synchronized_swept_sine_spectra_shifted(f1s,L1sw,fsamp,fft_len,tshift)
+
+    # spectra of the output signal
+    
+    Y = np.fft.rfft(oaeDS,fft_len)/fsamp  # convert the response to frequency domain
+    
+    # frequency-domain deconvolution
+    H = Y/S
+    h = np.fft.irfft(H)  # calculated "virtual" impulse response
+    
+    rF1 = 2 - rF
+    dt = -fsamp*L1sw*np.log(rF1)     # positions of the selected (coef2) IMD component [samples]
+    dt_ = round(dt)
+    dt_rem = dt - dt_
+    hmfftlen = 2**12
+    len_IRpul = int((hmfftlen)/2) # length of the impulse response window (adequate for the used time windows for DPOAEs)
+    if dt_>0:  # upward sweep
+        hm = h[dt_-len_IRpul:dt_+len_IRpul]
+    else:  # downward sweep
+        hm = h[len(h)+dt_-len_IRpul:len(h)+dt_+len_IRpul]
+    #fig,ax = plt.subplots()
+    #ax.plot(hm)
+    #print(len(S))
+    #print(len(hm))
+    #print(len(h))
+    #print(dt_-len_IRpul+1)
+    #print(dt_+len_IRpul+1)
+    #from scipy.io import savemat
+    #data = {'hm':hm}
+    #savemat('hms015python.mat',data)
+    
+    axe_w = np.linspace(0,np.pi,len_IRpul+1,endpoint=False)
+
+    # Non-integer sample delay correction
+    Hx = np.fft.rfft(hm) * np.exp(-1j*dt_rem*axe_w)
+    hm = np.fft.irfft(Hx)
+    
+    #from scipy.io import savemat
+    #data = {'hm':hm}
+    #savemat('hms015python.mat',data)
+    
+    # apply roex windows to suppress noise and perform component separation
+    Nwindow = 10 # degree of roex windows
+    w = roexwin(len(hm),Nwindow,fsamp,tau01,tau02)
+    
+    hm = hm*w  # multiply with roex window
+    # add zeros to achieve larger number of points
+    hm = np.concatenate((np.zeros(2**11),hm,np.zeros(2**11)))
+    Hm = np.fft.rfft(np.fft.fftshift(hm))
+
+    
+    hmfftlen = len(hm)
+
+    fxall = np.arange(hmfftlen)*fsamp/hmfftlen # overall freq axis
+    fx = fxall[:round(hmfftlen/2)+1]
+    return Hm, fx
+
 def ValToPaSimple(Val,MicGain):
     # convert to Pascals at frequency fxV
 
