@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jul 16 15:18:20 2024
+Created on Wed Jul 17 10:12:05 2024
 
 
-script for swept sine rate comparison
-
-
+Scrip for noise analysis for various sweep rates
 
 @author: VV
 """
@@ -69,6 +67,7 @@ subjD['s089L_L2_65'] = ['Results/s089/R/', '24_07_04_11_16_56_F2b_8000Hz']
 
 #subjN = 'L2_55_dB_L'
 subjN = 's055L_L2_30'
+subjN = 's089L_L2_50'
 
 def mother_wavelet2(Nw,Nt,df,dt):
     vlnky = np.zeros((Nt,Nw))
@@ -379,14 +378,26 @@ def getDPgram(path,DatePat):
     N04chosen = sum(Bl04chosen)
     
     
-    recMat1Mean = np.mean(recMat1[:,Bl01chosen],1)
-    recMat2Mean = np.mean(recMat2[:,Bl02chosen],1)
-    recMat3Mean = np.mean(recMat3[:,Bl03chosen],1)
-    recMat4Mean = np.mean(recMat4[:,Bl04chosen],1)
+    recMat1C = recMat1[:,Bl01chosen]
+    recMat2C = recMat2[:,Bl02chosen]
+    recMat3C = recMat3[:,Bl03chosen]
+    recMat4C = recMat4[:,Bl04chosen]
     
     
-    oaeDS = (recMat1Mean+recMat2Mean+recMat3Mean+recMat4Mean)/4  # exclude samples set to NaN (noisy samples)
-    DPgrR = estimateDRgram(oaeDS,f2f1,f2b,f2e,octpersec,GainMic)
+    
+    
+    maxRep = min([N01chosen,N02chosen,N03chosen,N04chosen])
+    DPgrN = {}
+    for iRep in range(1,maxRep+1):
+        if iRep == 1:
+            oaeDS = (np.mean(recMat1C[:,:iRep],1)+np.mean(recMat2C[:,:iRep],1)+np.mean(recMat3C[:,:iRep],1)+np.mean(recMat4C[:,:iRep],1))/4  # exclude samples set to NaN (noisy samples)
+        else:
+            oaeDS = (np.mean(recMat1C[:,:iRep],1)+np.mean(recMat2C[:,:iRep],1)+np.mean(recMat3C[:,:iRep],1)+np.mean(recMat4C[:,:iRep],1))/4  # exclude samples set to NaN (noisy samples)
+        DPgrR = estimateDRgram(oaeDS,f2f1,f2b,f2e,octpersec,GainMic)
+        DPgrN[str(iRep)] = DPgrR
+        
+        
+        
     
     '''
     recMat1[np.abs(noiseM1)>Theta1] = np.nan
@@ -430,7 +441,7 @@ def getDPgram(path,DatePat):
     noiseM4[np.abs(noiseM4)>Theta4] = np.nan
     '''
         
-    return DPgrR, rateOct, [N01chosen, N02chosen, N03chosen, N04chosen]
+    return DPgrN, rateOct, [N01chosen, N02chosen, N03chosen, N04chosen]
 
 
 
@@ -448,18 +459,49 @@ for i in range(1,len(subjD[subjN])):
 
 
 
+
+
 plt.close('all')
 
 
 pREF = np.sqrt(2)*2e-5
 
-Nopak = 4  # nuber of presentation
 
-fxx2 = DPgr['2']['fxx']
+
+fxx2 = DPgr['2']['1']['fxx']
+
 
 f2f1 = 1.2
 f2xx = f2f1*fxx2/(2-f2f1)  # convert fdp to f2
 cycle = np.pi*2
+
+idxFdown = np.where(f2xx >= 2000)[0][0]
+idxFup = np.where(f2xx >= 4000)[0][0]
+
+
+fig,ax = plt.subplots()
+
+Nlev2 = np.zeros(len(DPgr['2']))
+for iRep in range(len(DPgr['2'])):
+    Nlev2[iRep] = 20*np.log10(np.sum(np.abs(DPgr['2'][str(iRep+1)]['NLgrN'][idxFdown:idxFup]))/pREF)
+    ax.plot(20*np.log10(np.abs(DPgr['2'][str(iRep+1)]['NLgrN'][idxFdown:idxFup])/pREF))
+    
+
+
+Nlev8 = np.zeros(len(DPgr['8']))
+for iRep in range(len(DPgr['8'])):
+    Nlev8[iRep] = 20*np.log10(np.sum(np.abs(DPgr['8'][str(iRep+1)]['NLgrN'][idxFdown:idxFup]))/pREF)
+    ax.plot(20*np.log10(np.abs(DPgr['8'][str(iRep+1)]['NLgrN'][idxFdown:idxFup])/pREF),':')
+    
+    
+fig,ax = plt.subplots()
+
+ax.plot(Nlev2)
+ax.plot(Nlev8)
+
+
+
+'''
 
 if 1==1:  # s055L
     
@@ -604,4 +646,4 @@ def InfoOnData(data_dict):
         print(f"{row[0]:<15} {row[1]:<10} {row[2]:<10} {row[3]:<10} {row[4]:<10}")
 
 InfoOnData(DPgr)
-    
+'''
