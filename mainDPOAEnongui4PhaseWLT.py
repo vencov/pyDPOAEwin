@@ -18,7 +18,7 @@ f2b = 8000  # f1 start frequency
 f2e = 500 # f2 end frequency
 f2f1 = 1.2  # f2/f1 ratio
 #L1 = 53    # intensity of f1 tone
-L2 = 20   # intensity of f2 tone
+L2 = 50   # intensity of f2 tone
 L1 = int(0.4*L2+39)
 #L1 = 55
 r = 2   # sweep rate in octaves per second
@@ -32,14 +32,14 @@ fsamp = 96000; lat_SC= 20532; bufsize = 4096
 changeSampleRate(fsamp,bufsize,SC=10)
 lat_SC = getSClat(fsamp,bufsize,SC=10)
 micGain = 40
-ear_t = 'R' # which ear
+ear_t = 'L' # which ear
 
 plt.close('all')
 
 #save_path = 'Results/s003'
 #subj_name = 's003'
-save_path = 'Results/s091/'
-subj_name = 's091'
+save_path = 'Results/s004/'
+subj_name = 'pokus'
 
 
 def get_time() -> str:

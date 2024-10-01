@@ -22,11 +22,11 @@ latency_SC = getSClat(fsamp,buffersize)
 # parameters of evoking stimuli
 
 fstep = 10
-f2b = 2100  # f1 start frequency
-f2e = 2100 # f2 end frequency
+f2b = 2400  # f1 start frequency
+f2e = 2400 # f2 end frequency
 f2f1 = 1.2  # f2/f1 ratio
-L1 = 55   # intensity of f1 tone
-L2 = 45   # intensity of f2 tone
+L1 = 70   # intensity of f1 tone
+L2 = 70   # intensity of f2 tone
 phi1 = 0
 phi2 = 0
 
@@ -36,7 +36,7 @@ f1valR = np.round(f1val / 10) * 10 # round to the 10 Hz step for fft() calculati
 f1valR = [int(val) for val in f1valR]  # convert to integers
 
 save_path = 'Results/pokus/'
-subj_name = 's060'
+subj_name = 's00d'
 
 
 def get_time() -> str:
@@ -121,7 +121,7 @@ try:
         # Get the value in fx that is closest to fdp
         closest_value = fxI[closest_index]
         fig,ax = plt.subplots()
-        ax.plot(fx[:int(len(fx)//2)+1],np.abs(Spcalib))
+        ax.plot(fx[:int(len(fx)//2)+1],20*np.log10(np.abs(Spcalib)))
         plt.show()
         idxFdpISp = int(np.where(fxI==closest_value)[0]) # find the index equal to freq value    
 

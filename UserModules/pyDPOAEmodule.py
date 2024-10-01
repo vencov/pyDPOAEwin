@@ -207,7 +207,34 @@ def synchronized_swept_sine_spectra_shifted(f1s,L1sw,fsamp,Nsamp,tshift):
     X[0] = np.inf # protect from devision by zero
     return (X,f)
 
-           
+
+def processChirpResp(recordedchirp1,recordedchirp2,latency_SC,fsamp,Nsamp,Nchirps):
+    
+    
+    y_stripSClat1 = recordedchirp1[latency_SC:] # remove the SC latency
+    y_reshaped1 = np.reshape(y_stripSClat1[:Nchirps*Nsamp],(Nchirps,Nsamp))
+    
+    y_stripSClat2 = recordedchirp2[latency_SC:] # remove the SC latency
+    y_reshaped2 = np.reshape(y_stripSClat2[:Nchirps*Nsamp],(Nchirps,Nsamp))
+
+    # take the mean across some responses:
+    Nchskip = 10 # skip first ten chirps
+
+    y_mean1 = np.mean(y_reshaped1.T[:,Nchskip:],axis=1)
+    y_mean2 = np.mean(y_reshaped2.T[:,Nchskip:],axis=1)
+    
+    # calculate spectrum
+
+    Nmean1 = len(y_mean1)  # length of the data
+    NmeanUp1 = int(2**np.ceil(2+np.log2(Nmean1)))  # interpolated length of the spectrum
+    ChResp1 =  np.fft.rfft(y_mean1,NmeanUp1)/NmeanUp1
+    fxCh1 = np.arange(NmeanUp1)*fsamp/NmeanUp1
+    fx = fxCh1[:NmeanUp1//2+1]
+    
+    ChResp2 =  np.fft.rfft(y_mean2,NmeanUp1)/NmeanUp1
+    
+    return ChResp1, ChResp2, fx
+
 def sendChirpToEar(*,AmpChirp=0.01,fsamp=44100,MicGain=40,Nchirps=300,buffersize=2048,latency_SC=8236,SC=10):
     '''
     creates a chirptrain and sends it into the sound card
@@ -333,7 +360,7 @@ def sendChirpToEar(*,AmpChirp=0.01,fsamp=44100,MicGain=40,Nchirps=300,buffersize
 
 
     fxinear = fx
-    return Hinear1, Hinear2, fxinear, y_mean1, y_mean2
+    return Hinear1, Hinear2, fxinear, y_mean1, y_mean2, recordedchirp1, recordedchirp2
 
 def giveRforTScalibration(Zec,fxPecs,num_iterations=20):
     '''

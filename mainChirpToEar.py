@@ -16,7 +16,7 @@ buffersize = 2048
 changeSampleRate(fsamp,buffersize,SC=10)
 lat_SC = getSClat(fsamp,buffersize)
 
-Hinear1, Hinear2, fxinear, y1, y2 = sendChirpToEar(AmpChirp=AmpChirp,fsamp=fsamp,MicGain=MicGain,Nchirps=300,buffersize=buffersize,latency_SC=lat_SC)
+Hinear1, Hinear2, fxinear, y1, y2, y1all, y2all = sendChirpToEar(AmpChirp=AmpChirp,fsamp=fsamp,MicGain=MicGain,Nchirps=300,buffersize=buffersize,latency_SC=lat_SC)
 #xxx, Hinear1, Hinear2, fxinear = sendChirpToEar(fsamp,MicGain)
 
 # choose SPL (0) or FPL (1) calibration

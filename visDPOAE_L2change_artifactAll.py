@@ -43,7 +43,7 @@ subjD['s089R'] = ['Results/s089/', '24_07_11_11_15_18_F2b_8000Hz', '24_07_11_11_
 subjD['s091L'] = ['Results/s091/', '24_07_11_13_33_01_F2b_8000Hz', '24_07_11_13_34_57_F2b_8000Hz', '24_07_11_13_36_53_F2b_8000Hz', '24_07_11_13_38_33_F2b_8000Hz', '24_07_11_13_40_43_F2b_8000Hz', '24_07_11_13_42_04_F2b_8000Hz', '24_07_11_13_43_39_F2b_8000Hz', '24_07_11_13_44_59_F2b_8000Hz', '24_07_11_13_46_07_F2b_8000Hz', '24_07_11_13_47_27_F2b_8000Hz']
 subjD['s091R'] = ['Results/s091/', '24_07_11_14_01_22_F2b_8000Hz', '24_07_11_14_02_44_F2b_8000Hz', '24_07_11_14_04_30_F2b_8000Hz', '24_07_11_14_05_46_F2b_8000Hz', '24_07_11_14_07_26_F2b_8000Hz', '24_07_11_14_09_27_F2b_8000Hz', '24_07_11_14_11_03_F2b_8000Hz', '24_07_11_14_12_39_F2b_8000Hz', '24_07_11_14_14_28_F2b_8000Hz', '24_07_11_14_15_55_F2b_8000Hz']
 
-subjN = 's091L'
+subjN = 's084R'
 
 #subjN = 's055L_L2_55'
 
@@ -339,7 +339,7 @@ def getDPgram(path,DatePat):
     sigma2 = np.sqrt(1/(Nsamp*n)*np.sum(np.sum(noiseM2**2,1)))
     sigma3 = np.sqrt(1/(Nsamp*n)*np.sum(np.sum(noiseM3**2,1)))
     sigma4 = np.sqrt(1/(Nsamp*n)*np.sum(np.sum(noiseM4**2,1)))
-    Nt = 8
+    Nt = 12
     Theta1 = Nt*sigma1 # estimation of the threshold for sample removal
     Theta2 = Nt*sigma2 # estimation of the threshold for sample removal
     Theta3 = Nt*sigma3 # estimation of the threshold for sample removal
@@ -505,9 +505,10 @@ ax2.set_xlabel('Frequency $f_{dp}$(Hz)')
 
 #%% visualization
 
-# plot IO for several frequencies
 
-CF = [1500,2500,4000,6000]
+import numpy as np
+
+CF = [1000,1500,2000,3000]
 CFidx = np.zeros_like(CF)
 
 DPioNL = []
@@ -524,25 +525,152 @@ for i in range(len(CF)):
     DPioNL.append(IOx)
     GAdpNL.append(GAx)
     
-fig,ax = plt.subplots()
-ax.plot(L2list,DPioNL[0])
-ax.plot(L2list,DPioNL[1])
-ax.plot(L2list,DPioNL[2])
-ax.plot(L2list,DPioNL[3])
+fig, ax = plt.subplots()
+ax.plot(L2list, DPioNL[0], label=r'${\it f}_2$ = 1 kHz')
+ax.plot(L2list, DPioNL[1], label=r'${\it f}_2$ = 1.5 kHz')
+ax.plot(L2list, DPioNL[2], label=r'${\it f}_2$ = 2 kHz')
+ax.plot(L2list, DPioNL[3], label=r'${\it f}_2$ = 3 kHz')
 
-#ax.set_title('DPOAE IO, $f_2 = 4$ kHz, '+ subj_name + ', ' + ear + ' ear')
-#ax.legend(('DP-gram','NL comp.','CR comp.','noise floor'))
-ax.set_ylabel('Amplitude (dB SPL)')
-ax.set_xlabel('$L_2$ (dB SPL)')
+# Convert L2list to a NumPy array for element-wise operations
+L2array = np.array(L2list)
+
+# Plot a gray dotted line with slope 1, shifted 35 dB down
+ax.plot(L2array, L2array - 35, color='gray', linestyle='--', linewidth=1)
+
+# Set x and y limits to the specified values
+ax.set_xlim([20, 70])  # X-axis limits from 20 dB to 70 dB
+ax.set_ylim([-20, 20])  # Y-axis limits from -20 dB to 20 dB
+
+# Increase font sizes by approximately 50%
+label_fontsize = 16  # Adjust as necessary
+legend_fontsize = 12
+text_fontsize = 13
+
+
+# Labels and legend with increased font size
+ax.set_ylabel('Amplitude (dB SPL)', fontsize=label_fontsize)
+ax.set_xlabel('$L_2$ (dB SPL)', fontsize=label_fontsize)
+ax.legend(fontsize=legend_fontsize)
+
+# Add subject name and ear information to the bottom-right corner
+if subjN[-1] == 'L':
+    ear = 'left ear'
+elif subjN[-1] == 'R':
+    ear = 'right ear'
+subject_name = subjN[:-1]  # Exclude the last character from subject name
+text_to_display = f'{subject_name} ({ear})'
+
+# Add the text in the bottom-right corner of the plot
+ax.text(0.3, 0.05, text_to_display, transform=ax.transAxes, 
+        fontsize=text_fontsize, verticalalignment='top', horizontalalignment='right')
+
+# Increase tick label font sizes
+ax.tick_params(axis='both', which='major', labelsize=label_fontsize)
+
+# Adjust layout to fit everything
+plt.tight_layout()
+
+# Second plot (optional)
+#fig, ax = plt.subplots()
+#ax.plot(L2list, GAdpNL[0])
+#ax.plot(L2list, GAdpNL[1])
+#ax.plot(L2list, GAdpNL[2])
+#ax.plot(L2list, GAdpNL[3])
+
+# Optionally, you can also add the shifted line here if relevant
+# ax.plot(L2array, L2array - 35, color='gray', linestyle='--', linewidth=1)
+
+# Set x and y limits for the second plot (if needed)
+# ax.set_xlim([20, 70])  # X-axis limits for the second plot
+# ax.set_ylim([-20, 20])  # Y-axis limits for the second plot
+
+# Adjust layout for the second plot
+plt.tight_layout()
+
+# Save the second plot as well (optional)
+plt.savefig('Figures/DPgrams/io' + subjN + '.png', format='png', dpi=300)  # Save the second graph
+
+#%% fitting
+
+
+from numpy.polynomial.polynomial import Polynomial
+from scipy.io import savemat
+def fit_polynomial(L2, y_data, degree=4):
+    """
+    Fit a polynomial to the given data and calculate key estimates.
+
+    Parameters:
+    - L2: array-like, input x-axis values (L2 levels)
+    - y_data: array-like, input y-axis values (measured amplitudes)
+    - degree: int, the degree of the polynomial to fit (default is 4)
+
+    Returns:
+    - p: Polynomial, the fitted polynomial object
+    - max_slope: float, maximum slope of the fitted curve
+    - L2_at_max_slope: float, L2 level at maximum slope
+    - OAE_level_at_max_slope: float, OAE level at maximum slope
+    - L2_half_max_slope: float, L2 level where slope drops to 50% of max slope
+    - OAE_level_half_max_slope: float, OAE level at 50% max slope
+    """
+
+    # Fit the polynomial
+    p = Polynomial.fit(L2, y_data, deg=degree)
+
+    # Generate fitted values
+    x_fit = np.linspace(np.min(L2), np.max(L2), 100)
+    y_fit = p(x_fit)
+
+    # Calculate slopes numerically for the fitted data
+    dy = np.gradient(y_fit, x_fit)
+
+    # Find the maximum slope and its corresponding L2 level
+    max_slope_index = np.argmax(dy)
+    max_slope = dy[max_slope_index]
+    L2_at_max_slope = x_fit[max_slope_index]
+    OAE_level_at_max_slope = y_fit[max_slope_index]
+
+    # Find the point where the slope decreases to 50% of the maximum slope
+    half_max_slope = max_slope / 2
+    point_below_half_max_slope = np.where(dy < half_max_slope)[0]
+
+    if len(point_below_half_max_slope) > 0:
+        L2_half_max_slope = x_fit[point_below_half_max_slope[0]]
+        OAE_level_half_max_slope = y_fit[point_below_half_max_slope[0]]
+    else:
+        L2_half_max_slope = None
+        OAE_level_half_max_slope = None
+
+    return (p, max_slope, L2_at_max_slope, OAE_level_at_max_slope,
+            L2_half_max_slope, OAE_level_half_max_slope)
+
+# Example usage
+L2 = np.array(L2list)
+
+# Create a dictionary to hold all estimated results
+estimated_results = {}
+
+# Loop through each dataset index
+for i in range(4):  # Assuming you have 4 datasets indexed from 0 to 3
+    y_data = DPioNL[i]  # Replace this with your actual dataset
+    
+    # Call the fitting function
+    fit_results = fit_polynomial(L2, y_data, degree=4)
+    
+    # Store results in the dictionary
+    estimated_results[f'fit_results_{i}'] = {
+        'fitted_polynomial': fit_results[0],
+        'max_slope': fit_results[1],
+        'L2_at_max_slope': fit_results[2],
+        'OAE_level_at_max_slope': fit_results[3],
+        'L2_half_max_slope': fit_results[4],
+        'OAE_level_half_max_slope': fit_results[5],
+    }
+
+# Save the results to a .mat file
+filename = f'estData{subjN}.mat'
+savemat(filename, estimated_results)
+
+print(f'Saved estimated results to {filename}')
 
 
 
-fig,ax = plt.subplots()
-ax.plot(L2list,GAdpNL[0])
-ax.plot(L2list,GAdpNL[1])
-ax.plot(L2list,GAdpNL[2])
-ax.plot(L2list,GAdpNL[3])
-
-
-
-#%%

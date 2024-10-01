@@ -7,7 +7,6 @@ Created on Tue Dec 19 17:11:08 2023
 @author: audiobunka
 """
 
-
 from scipy.io import loadmat
 import os
 from UserModules.pyUtilities import butter_highpass_filter 
@@ -27,7 +26,6 @@ subj_name = 's004'
 #deL_r4 = '24_02_14_14_15_13' # left ear, L2=30
 #deL_r8 = '24_02_14_14_16_10'
 #deL_r12 = '24_02_14_14_17_04'
-
 
 path = "Results/s003/rate/"
 #subj_name = 's003'
@@ -60,7 +58,7 @@ subjD['L2_30_dB_R'] =  ['Results/s055/sweep_rate/', '24_06_04_16_54_22_F2b_8000H
 subjD['L2_50_dB_L'] = ['Results/s089/R/', '24_07_01_11_27_00_F2b_8000Hz', '24_07_01_11_28_39_F2b_8000Hz', '24_07_01_11_30_23_F2b_8000Hz', '24_07_01_11_31_37_F2b_8000Hz']
 subjD['L2_55_dB_L'] = ['Results/s089/R/', '24_07_01_11_33_17_F2b_8000Hz', '24_07_01_11_34_49_F2b_8000Hz', '24_07_01_11_36_08_F2b_8000Hz', '24_07_01_11_37_15_F2b_8000Hz']
 
-subjN = 'L2_55_dB_L'
+subjN = 'L2_30_dB_L'
 #subjN = 's055L_L2_55'
 
 def mother_wavelet2(Nw,Nt,df,dt):
@@ -227,7 +225,7 @@ def getDPgram(path,DatePat):
             data = loadmat(path+ dir_list[k])
             lat = 16448
             rateOct = data['r'][0][0]
-            lat = data['lat_SC'][0][0]
+            lat = data['lat_SC'][0][0]  # read latency from recorded results
             print([path+ dir_list[k]])
             print(f"SC latency: {lat}")
             octpersec = data['r'][0][0]
@@ -355,7 +353,7 @@ fig, ax = plt.subplots()
 ax.plot(fxx2[:int(len(fxx2)//2)+1],20*np.log10(np.abs(DPgrD['0']['NLgr'])/pREF),color='C0')
 
 
-'''
+
 Nmax = 12  # maximum number of repetitions
 r = 2
 
@@ -713,3 +711,4 @@ ax.legend(('DP-gram','NL comp.','CR comp.','noise floor'))
 ax.set_ylabel('Amplitude (dB SPL)')
 ax.set_xlabel('$L_2$ (dB SPL)')
 
+'''

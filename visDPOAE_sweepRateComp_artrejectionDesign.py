@@ -461,7 +461,7 @@ f2f1 = 1.2
 f2xx = f2f1*fxx2/(2-f2f1)  # convert fdp to f2
 cycle = np.pi*2
 
-if 1==1:  # s055L
+if 1==1:  # s055L NL
     
     # Create the figure and subplots
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(6, 4))  # 2 rows, 1 column
@@ -474,10 +474,10 @@ if 1==1:  # s055L
     ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['8']['NLgrN']) / pREF), color='C1', linestyle=':', alpha=0.7)
     ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['12']['NLgrN']) / pREF), color='C2', linestyle=':', alpha=0.7)
     ax1.set_xlim([0.5, 8])
-    ax1.set_ylim([-30, 10])
+    ax1.set_ylim([-30, 20])
     ax1.set_ylabel('Amplitude (dB SPL)')
     ax1.set_xticklabels([])  # Remove x-tick labels for ax1
-    ax1.legend(['2 oct/sec, 22 rep', '8 oct/sec, 44 rep', '12 oct/sec, 50 rep', 'NF 2 oct/sec', 'NF 8 oct/sec', 'NF 12 oct/sec'], bbox_to_anchor=(1.05, 1), loc='upper left')
+    ax1.legend(['2 oct/sec,' + str(np.sum(DPgr['2ch'])) + ' rep', '8 oct/sec, ' + str(np.sum(DPgr['8ch'])) + ' rep', '12 oct/sec, ' + str(np.sum(DPgr['12ch'])) + ' rep', 'NF 2 oct/sec', 'NF 8 oct/sec', 'NF 12 oct/sec'], bbox_to_anchor=(1.05, 1), loc='upper left')
     
     # Plot phase data on ax2
     idxUnwr = np.where(f2xx >= 500)[0][0]
@@ -509,7 +509,65 @@ if 1==1:  # s055L
     # Display the plot
     plt.show()
     
-    plt.savefig('DPgr_sweeprate_s055L_30dB.jpg', format='jpg', dpi=300, bbox_inches='tight')
+    
+    fileName = 'DPgrNL' + subjN + '.jpg' 
+    fileFolder = 'Figures/'
+    plt.savefig(fileFolder + fileName, format='jpg', dpi=300, bbox_inches='tight')
+
+
+
+if 1==1:  # s055L All
+    
+    # Create the figure and subplots
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(6, 4))  # 2 rows, 1 column
+    
+    # Plot amplitude data on ax1
+    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['2']['DPgr']) / pREF), color='C0')
+    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['8']['DPgr']) / pREF), color='C1', alpha=0.7)
+    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['12']['DPgr']) / pREF), color='C2', alpha=0.7)
+    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['2']['DPgrN']) / pREF), color='C0', linestyle=':')
+    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['8']['DPgrN']) / pREF), color='C1', linestyle=':', alpha=0.7)
+    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['12']['DPgrN']) / pREF), color='C2', linestyle=':', alpha=0.7)
+    ax1.set_xlim([0.5, 8])
+    ax1.set_ylim([-30, 20])
+    ax1.set_ylabel('Amplitude (dB SPL)')
+    ax1.set_xticklabels([])  # Remove x-tick labels for ax1
+    ax1.legend(['2 oct/sec,' + str(np.sum(DPgr['2ch'])) + ' rep', '8 oct/sec, ' + str(np.sum(DPgr['8ch'])) + ' rep', '12 oct/sec, ' + str(np.sum(DPgr['12ch'])) + ' rep', 'NF 2 oct/sec', 'NF 8 oct/sec', 'NF 12 oct/sec'], bbox_to_anchor=(1.05, 1), loc='upper left')
+    
+    # Plot phase data on ax2
+    idxUnwr = np.where(f2xx >= 500)[0][0]
+    ax2.plot(f2xx[idxUnwr:len(f2xx) // 2 + 1] / 1000, np.unwrap(np.angle(DPgr['2']['DPgr'][idxUnwr:])) / cycle, color='C0')
+    ax2.plot(f2xx[idxUnwr:len(f2xx) // 2 + 1] / 1000, np.unwrap(np.angle(DPgr['8']['DPgr'][idxUnwr:])) / cycle , color='C1', alpha=0.7)
+    ax2.plot(f2xx[idxUnwr:len(f2xx) // 2 + 1] / 1000, np.unwrap(np.angle(DPgr['12']['DPgr'][idxUnwr:])) / cycle, color='C2', alpha=0.7)
+    ax2.set_xlim([0.5, 8])
+    ax2.set_ylim([-4, 0])
+    ax2.set_ylabel('Phase (cycles)')
+    ax2.set_xlabel('Frequency $f_{2}$ (kHz)')
+    
+    # Customize the ticks to be inside the plot
+    for ax in [ax1, ax2]:
+        ax.tick_params(axis='both', direction='in', length=3)  # 'in' sets ticks inside
+    
+    
+    
+    # Adjust the y-axis label positions to align them
+    label_y_pos = 0.5
+    ax1.yaxis.set_label_coords(-0.1, label_y_pos)
+    ax2.yaxis.set_label_coords(-0.1, label_y_pos)
+    
+    
+    # Adjust spacing between the panels with tight_layout
+    plt.tight_layout(pad=0.2, h_pad=0.3, w_pad=0.5)
+    
+    
+    
+    # Display the plot
+    plt.show()
+    
+    
+    fileName = 'DPgr' + subjN + '.jpg' 
+    fileFolder = 'Figures/'
+    plt.savefig(fileFolder + fileName, format='jpg', dpi=300, bbox_inches='tight')
 
 
 if 1==0:  # s089L
@@ -525,7 +583,7 @@ if 1==0:  # s089L
     ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['4']['NLgrN']) / pREF), color='C1', linestyle=':', alpha=0.7)
     ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['8']['NLgrN']) / pREF), color='C2', linestyle=':', alpha=0.7)
     ax1.set_xlim([0.5, 8])
-    ax1.set_ylim([-30, 10])
+    ax1.set_ylim([-30, 20])
     ax1.set_ylabel('Amplitude (dB SPL)')
     ax1.set_xticklabels([])  # Remove x-tick labels for ax1
     ax1.legend(['2 oct/sec, 20 rep', '4 oct/sec, 23 rep', '8 oct/sec, 19 rep', 'NF 2 oct/sec', 'NF 4 oct/sec', 'NF 8 oct/sec'], bbox_to_anchor=(1.05, 1), loc='upper left')
@@ -589,10 +647,11 @@ def InfoOnData(data_dict):
             row = [integer_part] + value_list
             # Append the row to the table
             table.append(row)
+            
     
     
     # Define the headers
-    header_main = "L2 (dB FPL)"
+    header_main = "r (oct/sec)"
     header_phases = ["Phase 1", "Phase 2", "Phase 3", "Phase 4"]
     header_full = [header_main] + header_phases
     
