@@ -43,7 +43,7 @@ subjD['s089R'] = ['Results/s089/', '24_07_11_11_15_18_F2b_8000Hz', '24_07_11_11_
 subjD['s091L'] = ['Results/s091/', '24_07_11_13_33_01_F2b_8000Hz', '24_07_11_13_34_57_F2b_8000Hz', '24_07_11_13_36_53_F2b_8000Hz', '24_07_11_13_38_33_F2b_8000Hz', '24_07_11_13_40_43_F2b_8000Hz', '24_07_11_13_42_04_F2b_8000Hz', '24_07_11_13_43_39_F2b_8000Hz', '24_07_11_13_44_59_F2b_8000Hz', '24_07_11_13_46_07_F2b_8000Hz', '24_07_11_13_47_27_F2b_8000Hz']
 subjD['s091R'] = ['Results/s091/', '24_07_11_14_01_22_F2b_8000Hz', '24_07_11_14_02_44_F2b_8000Hz', '24_07_11_14_04_30_F2b_8000Hz', '24_07_11_14_05_46_F2b_8000Hz', '24_07_11_14_07_26_F2b_8000Hz', '24_07_11_14_09_27_F2b_8000Hz', '24_07_11_14_11_03_F2b_8000Hz', '24_07_11_14_12_39_F2b_8000Hz', '24_07_11_14_14_28_F2b_8000Hz', '24_07_11_14_15_55_F2b_8000Hz']
 
-subjN = 's087R'
+subjN = 's084R'
 
 #subjN = 's055L_L2_55'
 
@@ -467,7 +467,6 @@ InfoOnData(DPgr)
 #%%
 
 
-
 fig,(ax1,ax2) = plt.subplots(2,1)
 pREF = np.sqrt(2)*2e-5
 
@@ -480,7 +479,7 @@ cList = ['C1','C3','C2','C4','C5','C6','C7','C8','C9','C10','C11']
 for i in range(len(L2list)):
 #ax.plot(fxx[:int(len(fxx)//2)+1],20*np.log10(np.abs(DPgr['30']['NLgr'])/pREF),color='C1')
     ax1.plot(f2xx,20*np.log10(np.abs(DPgr[str(L2list[i])]['NLgr'])/pREF),color=cList[i],label=str(L2list[i]))
-    ax1.plot(f2xx,20*np.log10(np.abs(DPgr[str(L2list[i])]['NLgrN'])/pREF),':',color=cList[i],label=str(L2list[i]))
+    ax1.plot(f2xx,20*np.log10(np.abs(DPgr[str(L2list[i])]['NLgrN'])/pREF),':',color=cList[i],label='_nolegend_')
 
 ax1.set_xlim([500,8000])
 ax1.set_ylim([-40,20])
@@ -494,13 +493,41 @@ for i in range(len(L2list)):
 #ax.plot(fxx[:int(len(fxx)//2)+1],20*np.log10(np.abs(DPgr['30']['NLgr'])/pREF),color='C1')
     ax2.plot(f2xx[idx1:],np.unwrap(np.angle(DPgr[str(L2list[i])]['NLgr'][idx1:]))/cycle,color=cList[i],label=str(L2list[i]))
     
+ax2.set_ylabel('Phase (cycles)')
 
 
 ax2.set_xlim([500,8000])
 ax2.set_ylim([-5,1])
-ax2.set_xlabel('Frequency $f_{dp}$(Hz)')
+ax2.set_xlabel('Frequency $f_{2}$ (kHz)')
+
+# Convert x-ticks to kHz
+ax1.set_xticks([1000, 2000, 3000, 4000,5000,6000,7000,8000])
+ax1.set_xticklabels([1, 2, 3, 4, 5, 6, 7, 8])  # Update x-tick labels to kHz
+ax2.set_xticks([1000, 2000, 3000, 4000,5000,6000,7000,8000])
+ax2.set_xticklabels([1, 2, 3, 4, 5, 6, 7, 8])  # Update x-tick labels to kHz
+
+#ax2.set_xticks([500, 1000, 2000, 4000, 8000])
+#ax2.set_xticklabels([0.5, 1, 2, 4, 8])  # Update x-tick labels to kHz
+
+# Add subject name and ear information to the bottom-right corner
+if subjN[-1] == 'L':
+    ear = 'left ear'
+elif subjN[-1] == 'R':
+    ear = 'right ear'
+subject_name = subjN[:-1]  # Exclude the last character from subject name
+text_to_display = f'{subject_name} ({ear})'
+
+# Increase font sizes by approximately 50%
+label_fontsize = 16  # Adjust as necessary
+legend_fontsize = 12
+text_fontsize = 13
+# Add the text in the bottom-right corner of the plot
+ax2.text(0.3, 0.2, text_to_display, transform=ax2.transAxes, 
+        fontsize=text_fontsize, verticalalignment='top', horizontalalignment='right')
 
 
+# Save the second plot as well (optional)
+plt.savefig('Figures/DPgrams/dpgr' + subjN + '.png', format='png', dpi=300)  # Save the second graph
 
 
 #%% visualization
@@ -513,23 +540,41 @@ CFidx = np.zeros_like(CF)
 
 DPioNL = []
 GAdpNL = []
+NOxNL = []  # Background noise array
 for i in range(len(CF)):
     
     CFidx[i] = np.where(f2xx>=CF[i])[0][0]
 
     IOx = []
     GAx = []
+    NOx = []  # Background noise array
     for j in range(len(L2list)):
         IOx.append(20*np.log10(np.abs(DPgr[str(L2list[j])]['NLgr'][CFidx[i]])/pREF))
         GAx.append(IOx[j]-L2list[j])
+        # Extract background noise and convert to dB
+        NOx.append(20 * np.log10(np.abs(DPgr[str(L2list[j])]['NLgrN'][CFidx[i]])/pREF))
+
     DPioNL.append(IOx)
     GAdpNL.append(GAx)
-    
+    NOxNL.append(NOx)
+
+data_line = []
+noise_lines = []
 fig, ax = plt.subplots()
-ax.plot(L2list, DPioNL[0], label=r'${\it f}_2$ = 1 kHz')
-ax.plot(L2list, DPioNL[1], label=r'${\it f}_2$ = 1.5 kHz')
-ax.plot(L2list, DPioNL[2], label=r'${\it f}_2$ = 2 kHz')
-ax.plot(L2list, DPioNL[3], label=r'${\it f}_2$ = 3 kHz')
+data_line.append(ax.plot(L2list, DPioNL[0], label=r'${\it f}_2$ = 1 kHz'))
+data_line.append(ax.plot(L2list, DPioNL[1], label=r'${\it f}_2$ = 1.5 kHz'))
+data_line.append(ax.plot(L2list, DPioNL[2], label=r'${\it f}_2$ = 2 kHz'))
+data_line.append(ax.plot(L2list, DPioNL[3], label=r'${\it f}_2$ = 3 kHz'))
+noise_lines.append(ax.plot(L2list, NOxNL[0], color=data_line[0][0].get_color(), 
+                               linestyle=':', linewidth=0.5, label="_nolegend_"))
+noise_lines.append(ax.plot(L2list, NOxNL[1], color=data_line[1][0].get_color(), 
+                               linestyle=':', linewidth=0.5, label="_nolegend_"))
+noise_lines.append(ax.plot(L2list, NOxNL[2], color=data_line[2][0].get_color(), 
+                               linestyle=':', linewidth=0.5, label="_nolegend_"))                   
+noise_lines.append(ax.plot(L2list, NOxNL[3], color=data_line[3][0].get_color(), 
+                               linestyle=':', linewidth=0.5, label="_nolegend_"))                   
+
+ax.tick_params(axis='both', direction='in')
 
 # Convert L2list to a NumPy array for element-wise operations
 L2array = np.array(L2list)
@@ -587,15 +632,15 @@ plt.tight_layout()
 # Adjust layout for the second plot
 plt.tight_layout()
 
-# Save the second plot as well (optional)
-plt.savefig('Figures/DPgrams/io' + subjN + '.png', format='png', dpi=300)  # Save the second graph
-
 #%% fitting
 
 
 from numpy.polynomial.polynomial import Polynomial
 from scipy.io import savemat
-def fit_polynomial(L2, y_data, degree=4):
+import numpy as np
+from numpy.polynomial import Polynomial
+
+def fit_polynomial(L2, y_data, degree=4, max_slope_limit=50):
     """
     Fit a polynomial to the given data and calculate key estimates.
 
@@ -603,14 +648,17 @@ def fit_polynomial(L2, y_data, degree=4):
     - L2: array-like, input x-axis values (L2 levels)
     - y_data: array-like, input y-axis values (measured amplitudes)
     - degree: int, the degree of the polynomial to fit (default is 4)
+    - max_slope_limit: float, the maximum allowable slope (default is 50 dB)
 
     Returns:
     - p: Polynomial, the fitted polynomial object
-    - max_slope: float, maximum slope of the fitted curve
+    - max_slope: float, maximum slope of the fitted curve (capped at max_slope_limit)
     - L2_at_max_slope: float, L2 level at maximum slope
     - OAE_level_at_max_slope: float, OAE level at maximum slope
-    - L2_half_max_slope: float, L2 level where slope drops to 50% of max slope
-    - OAE_level_half_max_slope: float, OAE level at 50% max slope
+    - L2_half_slope: float, L2 level where slope equals 1/2
+    - OAE_level_half_slope: float, OAE level at slope 1/2
+    - L2_half_max_slope: float, L2 level where slope equals max_slope/2 (above max slope)
+    - OAE_level_half_max_slope: float, OAE level at max_slope/2
     """
 
     # Fit the polynomial
@@ -620,57 +668,115 @@ def fit_polynomial(L2, y_data, degree=4):
     x_fit = np.linspace(np.min(L2), np.max(L2), 100)
     y_fit = p(x_fit)
 
+    
+
     # Calculate slopes numerically for the fitted data
     dy = np.gradient(y_fit, x_fit)
 
     # Find the maximum slope and its corresponding L2 level
-    max_slope_index = np.argmax(dy)
+    max_slope_index = np.argmax(dy[:70])
     max_slope = dy[max_slope_index]
+
+    # Cap the maximum slope at the specified limit
+    if max_slope > max_slope_limit:
+        max_slope = max_slope_limit
+
     L2_at_max_slope = x_fit[max_slope_index]
     OAE_level_at_max_slope = y_fit[max_slope_index]
 
-    # Find the point where the slope decreases to 50% of the maximum slope
-    half_max_slope = max_slope / 2
-    point_below_half_max_slope = np.where(dy < half_max_slope)[0]
+    # Calculate the target slopes (1/2 and max_slope/2)
+    slope_half = 1 / 2
+    slope_half_max = max_slope / 2
 
-    if len(point_below_half_max_slope) > 0:
-        L2_half_max_slope = x_fit[point_below_half_max_slope[0]]
-        OAE_level_half_max_slope = y_fit[point_below_half_max_slope[0]]
+    # Find the first point where the slope is below or equal to 1/2, after the max slope
+    indices_above_max_slope = np.where(x_fit > L2_at_max_slope)[0]
+    half_slope_index = np.where(dy[indices_above_max_slope] <= slope_half)[0]
+
+    if len(half_slope_index) > 0:
+        L2_half_slope = x_fit[indices_above_max_slope[half_slope_index[0]]]
+        OAE_level_half_slope = y_fit[indices_above_max_slope[half_slope_index[0]]]
+    else:
+        L2_half_slope = None
+        OAE_level_half_slope = None
+
+    # Find the first point where the slope is below or equal to max_slope/2, after the max slope
+    half_max_slope_index = np.where(dy[indices_above_max_slope] <= slope_half_max)[0]
+    if len(half_max_slope_index) > 0:
+        L2_half_max_slope = x_fit[indices_above_max_slope[half_max_slope_index[0]]]
+        OAE_level_half_max_slope = y_fit[indices_above_max_slope[half_max_slope_index[0]]]
     else:
         L2_half_max_slope = None
         OAE_level_half_max_slope = None
 
     return (p, max_slope, L2_at_max_slope, OAE_level_at_max_slope,
+            L2_half_slope, OAE_level_half_slope,
             L2_half_max_slope, OAE_level_half_max_slope)
 
+
 # Example usage
+
 L2 = np.array(L2list)
 
 # Create a dictionary to hold all estimated results
 estimated_results = {}
-
-# Loop through each dataset index
-for i in range(4):  # Assuming you have 4 datasets indexed from 0 to 3
-    y_data = DPioNL[i]  # Replace this with your actual dataset
-    
+for i in range(4):  # Loop through each dataset index
+   
+    y_data = DPioNL[i]
     # Call the fitting function
     fit_results = fit_polynomial(L2, y_data, degree=4)
     
+    x_fit = np.linspace(np.min(L2), np.max(L2), 100)  # Smooth curve for the fit
+    y_fit = fit_results[0](x_fit)
+    
+    # Plot fitted curve using the same color as the data but exclude from legend
+    ax.plot(x_fit, y_fit, color=data_line[i][0].get_color(), linestyle='--', linewidth=1, 
+            label="_nolegend_")  # No label in the legend for the fit
+
+    # Extract key points from the fit results
+    L2_at_max_slope = fit_results[2]
+    OAE_level_at_max_slope = fit_results[3]
+    L2_half_slope = fit_results[4]  # Slope of 1/2
+    OAE_level_half_slope = fit_results[5]
+    L2_half_max_slope = fit_results[6]  # Slope of max_slope / 2
+    OAE_level_half_max_slope = fit_results[7]
+
+    # Plot the point where the slope is maximum but exclude from legend
+    ax.plot(L2_at_max_slope, OAE_level_at_max_slope, 'o', color=data_line[i][0].get_color(), 
+            markersize=8, label="_nolegend_")  # Circle marker, no legend
+
+    # Plot the point where the slope is 1/2 but exclude from legend
+    if L2_half_slope is not None:
+        ax.plot(L2_half_slope, OAE_level_half_slope, 's', color=data_line[i][0].get_color(), 
+                markersize=8, label="_nolegend_")  # Square marker, no legend
+
+    # Plot the point where the slope is max_slope/2 but exclude from legend
+    if L2_half_max_slope is not None:
+        ax.plot(L2_half_max_slope, OAE_level_half_max_slope, '^', color=data_line[i][0].get_color(), 
+                markersize=8, label="_nolegend_")  # Triangle marker, no legend
+
     # Store results in the dictionary
     estimated_results[f'fit_results_{i}'] = {
         'fitted_polynomial': fit_results[0],
         'max_slope': fit_results[1],
         'L2_at_max_slope': fit_results[2],
         'OAE_level_at_max_slope': fit_results[3],
-        'L2_half_max_slope': fit_results[4],
-        'OAE_level_half_max_slope': fit_results[5],
+        'L2_half_slope': fit_results[4],
+        'OAE_level_half_slope': fit_results[5],
+        'L2_half_max_slope': fit_results[6],
+        'OAE_level_half_max_slope': fit_results[7],
     }
+
+# Show legend only for data
+ax.legend()
+
+
+# Save the second plot as well (optional)
+plt.savefig('Figures/DPgrams/io' + subjN + '.png', format='png', dpi=300)  # Save the second graph
 
 # Save the results to a .mat file
 filename = f'estData{subjN}.mat'
 savemat(filename, estimated_results)
 
 print(f'Saved estimated results to {filename}')
-
 
 
