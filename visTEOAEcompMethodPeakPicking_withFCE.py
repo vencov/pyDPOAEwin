@@ -1,7 +1,8 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Mar 14 16:20:57 2024
+Code which analyzes measured TEOAE data. It finds peaks in the amplitude finestructure
+
+Created on Wed Oct  9 14:08:48 2024
 
 @author: audiobunka
 """
@@ -154,7 +155,7 @@ subjD['s089L'] = ['Results/s089/', 'CMclickOAE_s089_24_07_01_11_22_31_Lc_40dB_Nc
 subjD['s091L'] = ['Results/s091/', 'CMclickOAE_s091_24_07_11_13_56_45_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s091_24_07_11_13_54_37_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s091_24_07_11_13_52_29_Lc_64dB_Ncl228Npulse_3072_L_']
 subjD['s091R'] = ['Results/s091/', 'CMclickOAE_s091_24_07_11_14_24_54_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s091_24_07_11_14_22_45_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s091_24_07_11_14_20_32_Lc_64dB_Ncl228Npulse_3072_R_']
 
-subjN = 's091L'
+subjN = 's088R'
 
 
 
@@ -401,8 +402,6 @@ for keys in tLINm:
     fxx = np.arange(Nt+int(2**15))*fsamp/(Nt+int(2**15))
     SClick[keys] = 2*np.fft.rfft(np.concatenate((tClick[keys],np.zeros(Nt-len(tClick[keys])),np.zeros(int(2**15)))))/len(tClick[keys])
      
-    
-    import numpy as np
    
     # Save
     
@@ -417,18 +416,21 @@ for keys in tLINm:
 
 #%% show me results in the time domain
 
-fig,ax = plt.subplots()
-LcList = []
-for keys in tLINmwf:
-    ax.plot(tLINmwf[keys]/np.sqrt(np.mean(tClick[keys]**2)))
-    LcList.append(keys)
-ax.legend(LcList)
 
-
-fig,ax = plt.subplots()
-for keys in tNLmwf:
-    ax.plot(tNLmwf[keys]/np.sqrt(np.mean(tClick[keys]**2)))
-ax.legend(LcList)
+plotTDres = 0
+if plotTDres:
+    fig,ax = plt.subplots()
+    LcList = []
+    for keys in tLINmwf:
+        ax.plot(tLINmwf[keys]/np.sqrt(np.mean(tClick[keys]**2)))
+        LcList.append(keys)
+    ax.legend(LcList)
+    
+    
+    fig,ax = plt.subplots()
+    for keys in tNLmwf:
+        ax.plot(tNLmwf[keys]/np.sqrt(np.mean(tClick[keys]**2)))
+    ax.legend(LcList)
 
 #fig,ax = plt.subplots()
 #for keys in tNLmwf:
@@ -436,138 +438,197 @@ ax.legend(LcList)
 #ax.legend(LcList)
 
 
-#%% show me results in the frequency domain
 
 
-fig,ax = plt.subplots()
-for keys in tNLmwf:
-    ax.plot(fxx[:int(len(fxx)/2+1)],20*np.log10(np.abs(SNLmwf[keys]/SClick[keys])))
+
+#%% PEAK PICKING OF TRANSFER FUNCTIONS TO FIND SEVERAL FREQUENCIES FOR ANALYSIS
+# peak picking is performed for the largest level (last key?)
+keyV = max(SNLmwf.keys())
+FreqData = fxx[:int(len(fxx)/2+1)]
+TrFuncNL = 20*np.log10(np.abs(SNLmwf[keyV]/SClick[keyV]))
+TrFuncLin = 20*np.log10(np.abs(SLINmwf[keyV]/SClick[keyV]))
+
+from scipy.signal import find_peaks
+def find_curve_peaks(x, y, interval=None, height_threshold=None, distance=None, prominence=None):
+    """
+    Detects peaks in the curve y(x) within the given interval and allows peak control with a threshold.
+
+    Parameters:
+    x: 1D array-like
+        The x-values of the curve.
+    y: 1D array-like
+        The y-values of the curve.
+    interval: tuple (xmin, xmax), optional
+        The x-range in which to search for peaks.
+    height_threshold: float, optional
+        Minimum height of peaks to detect.
+    distance: float, optional
+        Minimum horizontal distance between neighboring peaks.
+    prominence: float, optional
+        Minimum prominence of peaks (how much the peak stands out from the surroundings).
     
-ax.set_xlim([500,5000])
-ax.legend(LcList)
+    Returns:
+    peaks: 1D array
+        Indices of the detected peaks in the original data.
+    """
+    # If an interval is provided, restrict the data to the specified interval
+    if interval:
+        # Find the mask of the data within the interval
+        mask = (x >= interval[0]) & (x <= interval[1])
+        x_interval = x[mask]
+        y_interval = y[mask]
+        # Store the starting index of the interval
+        interval_start_idx = np.where(mask)[0][0]
+    else:
+        x_interval = x
+        y_interval = y
+        interval_start_idx = 0
+
+    # Detect peaks in the restricted data
+    peaks, properties = find_peaks(y_interval, height=height_threshold, distance=distance, prominence=prominence)
+
+    # Adjust the peak indices to match the original data
+    peaks_in_original = peaks + interval_start_idx
+
+    # Plotting the results
+    #plt.figure(figsize=(10, 6))
+    #plt.plot(x, y, label="Data")
+    #plt.plot(x[peaks_in_original], y[peaks_in_original], 'ro', label="Detected Peaks")
+    #plt.title("Detected Peaks in the Curve")
+    #plt.xlabel("X")
+    #plt.ylabel("Y")
+    #plt.legend()
+    #plt.show()
+
+    return peaks_in_original, properties
+
+
+# Find peaks in the interval (2, 8) with a height threshold of 0.5
+interval = (500, 4000)
+height_threshold = -70
+distance = 100  # Minimum distance between peaks
+prominence = 2  # Minimum prominence of peaks
+
+
+peaksNL, propertiesNL = find_curve_peaks(FreqData, TrFuncNL, interval=interval, height_threshold=height_threshold, distance=distance, prominence=prominence)
+peaksLin, propertiesLin = find_curve_peaks(FreqData, TrFuncLin, interval=interval, height_threshold=height_threshold, distance=distance, prominence=prominence)
+
+
+plotNLgain = 0
+if plotNLgain:
+    fig,ax = plt.subplots()
+    for keys in tNLmwf:
+        ax.plot(fxx[:int(len(fxx)/2+1)],20*np.log10(np.abs(SNLmwf[keys]/SClick[keys])))
+        
+    ax.plot(FreqData[peaksNL],TrFuncNL[peaksNL],'ro', label="Detected Peaks")
+        
+    ax.set_xlim([500,4000])
+    ax.legend(LcList)
 
 fig,ax = plt.subplots()
 for keys in tNLmwf:
     ax.plot(fxx[:int(len(fxx)/2+1)],20*np.log10(np.abs(SLINmwf[keys]/SClick[keys])))
-ax.set_xlim([500,5000])
+    
+ax.plot(FreqData[peaksLin],TrFuncLin[peaksLin],'ro', label="Detected Peaks")
+ax.set_xlim([500,4000])
 ax.legend(LcList)
 
 
 pREF = np.sqrt(2)*2e-5
 
-#%% TEOAE grams
-# draw a graph with NL and LIN
+FchosenLin = [FreqData[peaksLin[i]]/1000 for i in range(len(peaksLin))]
+FchosenNL = [FreqData[peaksNL[i]]/1000 for i in range(len(peaksNL))]
+
+
+#file_name = 'ceoaeFch' + subjN + '.mat'
+
 
 
 #plt.ylabel('ddd')
 
+#%% TEOAE Grams - Nonlinear Extraction Method
 
-fig,(ax1,ax2) = plt.subplots(2,1)
-Fc1 = 0.63
-Fc2 = 1.19
-Fc3 = 1.46
+plotNLCEOAE = 0
 
-
-plt.gcf().text(0.5, 0.9, 'Nonlinear extraction method', fontsize=12, fontweight='bold',ha='center')
-
-plt.rcParams["xtick.direction"]="in"
-plt.rcParams["ytick.direction"]="in"
-plt.rcParams["xtick.top"]=True
-plt.rcParams["ytick.right"]=True
-
-font = {'family' : 'Helvetica',
-        'weight' : 'normal',
-        'size'   : 12}
-
-plt.matplotlib.rc('font', **font)
-
-for keys in tNLmwf:
-    if keys!='70':
-        ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3,20*np.log10(np.abs(SNLmwf[keys])/pREF)-20*np.log10(3))
+if plotNLCEOAE:
     
-ax1.set_xlim([0.500,3.000])
-ax1.set_ylim([-40,10])
-#ax1.legend(LcList[:-1])
-ax1.set_ylabel('Amplitude (dB SPL)')
-ax1.plot([Fc1,Fc1],[-100,100],'--',color='gray')
-ax1.plot([Fc2,Fc2],[-100,100],'--',color='gray')
-ax1.plot([Fc3,Fc3],[-100,100],'--',color='gray')
-#ax1.plot([Fc4,Fc4],[-100,100],'--',color='gray')
+    fig, (ax1, ax2) = plt.subplots(2, 1)
+    
+    plt.gcf().text(0.5, 0.9, 'Nonlinear extraction method', fontsize=12, fontweight='bold', ha='center')
+    
+    plt.rcParams["xtick.direction"] = "in"
+    plt.rcParams["ytick.direction"] = "in"
+    plt.rcParams["xtick.top"] = True
+    plt.rcParams["ytick.right"] = True
+    
+    font = {'family': 'Helvetica', 'weight': 'normal', 'size': 12}
+    plt.matplotlib.rc('font', **font)
+    
+    # Plot for the nonlinear data
+    for keys in tNLmwf:
+        if keys != '70':
+            ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3, 20*np.log10(np.abs(SNLmwf[keys])/pREF) - 20*np.log10(3))
+    
+    # Set axis limits and labels for amplitude
+    ax1.set_xlim([0.500, 4.000])
+    ax1.set_ylim([-40, 10])
+    ax1.set_ylabel('Amplitude (dB SPL)')
+    
+    # Plot vertical lines for each frequency in Fchosen
+    for Fc in FchosenNL:
+        ax1.plot([Fc, Fc], [-100, 100], '--', color='gray')
+    
+    # Plot for the phase
+    cycle = 2 * np.pi
+    for keys in tNLmwf:
+        if keys != '70':
+            ax2.plot(fxx[:int(len(fxx)/2+1)]/1e3, np.unwrap(np.angle(SNLmwf[keys])) / cycle)
+    
+    # Set axis limits and labels for phase
+    ax2.set_xlim([0.500, 4.000])
+    ax2.legend(LcList, loc='lower left', ncol=2)
+    ax2.set_ylim([-40, 1])
+    ax2.set_ylabel('Phase (cycles)')
+    fig.supxlabel('Frequency (kHz)')
 
-cycle = 2*np.pi
+#%% TEOAE Grams - Linear Extraction Method
+fig, (ax1, ax2) = plt.subplots(2, 1)
 
-for keys in tNLmwf:
-    if keys!='70':
-        ax2.plot(fxx[:int(len(fxx)/2+1)]/1e3,np.unwrap(np.angle(SNLmwf[keys]))/cycle)
-ax2.set_xlim([0.500,3.000])
-ax2.legend(LcList,loc='lower left',ncol=2)    
-ax2.set_ylim([-40,1])
+plt.gcf().text(0.5, 0.9, 'Linear extraction method', fontsize=12, fontweight='bold', ha='center')
 
-#fig.legend(handles, labels, loc='right')
+plt.rcParams["xtick.direction"] = "in"
+plt.rcParams["ytick.direction"] = "in"
+plt.rcParams["xtick.top"] = True
+plt.rcParams["ytick.right"] = True
 
-ax2.set_ylabel('Phase (cycles)')
-fig.supxlabel('Frequency (kHz)')
-
-#plt.savefig('Figures/ceoaeNLs003L2.eps', format='eps')
-
-fig,(ax1,ax2) = plt.subplots(2,1)
-
-plt.gcf().text(0.5, 0.9, 'Linear extraction method', fontsize=12, fontweight='bold',ha='center')
-
-plt.rcParams["xtick.direction"]="in"
-plt.rcParams["ytick.direction"]="in"
-plt.rcParams["xtick.top"]=True
-plt.rcParams["ytick.right"]=True
-
-
+# Plot for the linear data
 for keys in tLINmwf:
-    if keys!='70':
-        ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3,20*np.log10(np.abs(SLINmwf[keys])/pREF))
+    if keys != '70':
+        ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3, 20*np.log10(np.abs(SLINmwf[keys])/pREF))
 
-ax1.plot([Fc1,Fc1],[-100,100],'--',color='gray')
-ax1.plot([Fc2,Fc2],[-100,100],'--',color='gray')
-ax1.plot([Fc3,Fc3],[-100,100],'--',color='gray')
-#ax1.plot([Fc4,Fc4],[-100,100],'--',color='gray')
-
+# Set axis limits and labels for amplitude
+ax1.set_xlim([0.500, 4.000])
+ax1.set_ylim([-40, 10])
 ax1.set_ylabel('Amplitude (dB SPL)')
-ax1.set_xlim([0.500,3.000])
-ax1.set_ylim([-40,10])
-#ax1.legend(LcList[:-1])
 
-cycle = 2*np.pi
+# Plot vertical lines for each frequency in Fchosen
+for Fc in FchosenLin:
+    ax1.plot([Fc, Fc], [-100, 100], '--', color='gray')
 
+# Plot for the phase
 for keys in tNLmwf:
-    if keys!='70':
-        ax2.plot(fxx[:int(len(fxx)/2+1)]/1e3,np.unwrap(np.angle(SLINmwf[keys]))/cycle)
-ax2.set_xlim([0.500,3.000])
-ax2.legend(LcList,loc='lower left',ncol=2)    
-ax2.set_ylim([-40,1])
+    if keys != '70':
+        ax2.plot(fxx[:int(len(fxx)/2+1)]/1e3, np.unwrap(np.angle(SLINmwf[keys])) / cycle)
 
+# Set axis limits and labels for phase
+ax2.set_xlim([0.500, 4.000])
+ax2.legend(LcList, loc='lower left', ncol=2)
+ax2.set_ylim([-40, 1])
 ax2.set_ylabel('Phase (cycles)')
 fig.supxlabel('Frequency (kHz)')
 
 #plt.savefig('Figures/ceoaeLINs003L2.eps', format='eps')
 
-#%%
-
-
-# combine two freq
-
-fig,ax = plt.subplots()
-for keys in tNLmwf:
-    if keys=='64':
-        ax.plot(fxx[:int(len(fxx)/2+1)],20*np.log10(np.abs(SNLmwf[keys])/pREF)-20*np.log10(3),color='k')
-        ax.plot(fxx[:int(len(fxx)/2+1)],20*np.log10(np.abs(SLINmwf[keys])/pREF),color='r')
-    
-ax.set_xlim([500,5000])
-ax.legend(LcList)
-
-
-#fig,ax = plt.subplots()
-#for keys in tNLmwf:
-#    ax.plot(fxx[:int(len(fxx)/2+1)],20*np.log10(np.abs(SHmwf[keys]/SClick[keys])))
-#ax.set_xlim([500,5000])
-#ax.legend(LcList)
 
 
 #%%
@@ -587,248 +648,195 @@ surf = ax.plot_surface(Y, X, img, cmap=cm.coolwarm,
 ax.view_init(azim=0, elev=90)
 '''
 
-fig,ax = plt.subplots()
-ax.contourf(X,Y,np.abs(cwLIN['46'])**0.2)
-ax.set_xlim((0, 2500))
+plotCWT = 0 # plot wavelet filtering
+if plotCWT:
+    fig,ax = plt.subplots()
+    ax.contourf(X,Y,np.abs(cwLIN['46'])**0.2)
+    ax.set_xlim((0, 2500))
 
 #%%
+import numpy as np
+import matplotlib.pyplot as plt
 
+# Assuming peaksNL and peaksLin are numpy arrays with the indices for peak values
+# SNLmwf and SLINmwf are the Nonlinear and Linear datasets
+# SClick is used for normalization, pREF is your reference pressure
+pREF = np.sqrt(2) * 2e-5  # Example reference pressure
 
-#Fc1 = 0.9
-#Fc2 = 1.6
-#Fc3 = 2.08
+# Number of points in peaksNL and peaksLin
+num_peaksNL = len(peaksNL)
+num_peaksLin = len(peaksLin)
 
-idx1 = np.where(fxx>=Fc1*1e3)[0][0]
-idx2 = np.where(fxx>=Fc2*1e3)[0][0]
-idx3 = np.where(fxx>=Fc3*1e3)[0][0]
-
-
-k = 0
-ioG1 = np.zeros(len(SNLmwf))
-ioG2 = np.zeros(len(SNLmwf))
-ioG3 = np.zeros(len(SNLmwf))
+# Initialize the io arrays based on the number of peaks
+ioG = np.zeros((len(SNLmwf), num_peaksNL))     # For nonlinear peaks
+ioLinG = np.zeros((len(SNLmwf), num_peaksLin)) # For linear peaks
 io = np.zeros(len(SNLmwf))
+ioLin = np.zeros(len(SNLmwf))
 
 Lvect = np.zeros(len(SNLmwf))
+
+k = 0
 for keys in tNLmwf:
-    ioG1[k] = 20*np.log10(np.abs(SNLmwf[keys][idx1])/SClick[keys][idx1])-20*np.log10(3)
-    ioG2[k] = 20*np.log10(np.abs(SNLmwf[keys][idx2])/SClick[keys][idx2])-20*np.log10(3)
-    ioG3[k] = 20*np.log10(np.abs(SNLmwf[keys][idx3])/SClick[keys][idx3])-20*np.log10(3)
-    io[k] = 20*np.log10(np.abs(SNLmwf[keys][idx1])/pREF)-20*np.log10(3)
+    # Calculate ioG for each peak in peaksNL
+    for i, idxNL in enumerate(peaksNL):
+        ioG[k, i] = 20 * np.log10(np.abs(SNLmwf[keys][idxNL]) / SClick[keys][idxNL]) - 20 * np.log10(3)
+
+    # Calculate ioLinG for each peak in peaksLin
+    for i, idxLin in enumerate(peaksLin):
+        ioLinG[k, i] = 20 * np.log10(np.abs(SLINmwf[keys][idxLin]) / SClick[keys][idxLin])
+
+    # Additional io values for the first index of peaksNL
+    io[k] = 20 * np.log10(np.abs(SNLmwf[keys][peaksNL[0]]) / pREF) - 20 * np.log10(3)
+    ioLin[k] = 20 * np.log10(np.abs(SLINmwf[keys][peaksLin[0]]) / pREF)
+
+    # Store the level vector (Lvect)
     Lvect[k] = int(keys)
     k += 1
 
-k = 0
-ioLin = np.zeros(len(SNLmwf))
-ioLinG1 = np.zeros(len(SNLmwf))
-ioLinG2 = np.zeros(len(SNLmwf))
-ioLinG3 = np.zeros(len(SNLmwf))
-
-for keys in tNLmwf:
-    ioLinG1[k] = 20*np.log10(np.abs(SLINmwf[keys][idx1])/SClick[keys][idx1])
-    ioLinG2[k] = 20*np.log10(np.abs(SLINmwf[keys][idx2])/SClick[keys][idx2])
-    ioLinG3[k] = 20*np.log10(np.abs(SLINmwf[keys][idx3])/SClick[keys][idx3])
-    ioLin[k] = 20*np.log10(np.abs(SLINmwf[keys][idx1])/pREF)
-    k += 1
-
+# Plotting the results for all peaks in one graph
 
 prop_cycle = plt.rcParams['axes.prop_cycle']
 colors = prop_cycle.by_key()['color']
 
-
-#dataO = loadmat('DPondra.mat')
-#ioF1 = dataO['ioF1'].flatten()
-#ioF2 = dataO['ioF2'].flatten()
-#ioF3 = dataO['ioF3'].flatten()
-#L2v = dataO['L2v'].flatten()
-
-pREF= np.sqrt(2)*2e-5
-
-
-#ax.plot(L2v,20*np.log10(ioF1/(pREF*10**(L2v/20))))
-
-
-fig,ax = plt.subplots()
-ax.plot(Lvect[:],ioG1[:],color=colors[0])
-ax.plot(Lvect[:],ioLinG1[:],'-',color=colors[1])
-#ax.plot(L2v,20*np.log10(ioF1/(pREF*10**(L2v/20))),color=colors[2])
-ax.plot(Lvect[:],15-Lvect[:],':',color='gray')
-ax.set_ylim([-60,-30])
-ax.set_xlim([30,65])
-ax.legend(('NL','Lin','DPOAE'))
-font = {'family' : 'Helvetica',
-        'weight' : 'normal',
-        'size'   : 17}
-
-plt.matplotlib.rc('font', **font)
-ax.set_title('0.8 kHz')
-ax.set_xlabel('Click level (dB peSPL) / Tone level (dB FPL)')
-ax.set_ylabel('Magnitude (dB re 1)')
-fig.tight_layout()
-#plt.savefig('Figures/IOg1s003.eps', format='eps')
-
-
-fig,ax = plt.subplots()
-ax.plot(Lvect[:],ioG2[:],color=colors[0])
-ax.plot(Lvect[:],ioLinG2[:],color=colors[1])
-#ax.plot(L2v,20*np.log10(ioF2/(pREF*10**(L2v/20))),color=colors[2])
-ax.plot(Lvect[:],15-Lvect[:],':',color='gray')
-ax.legend(('NL','Lin','DPOAE'))
-plt.matplotlib.rc('font', **font)
-ax.set_title('1.6 kHz')
-ax.set_xlabel('Level (dB peSPL)')
-ax.set_ylabel('Magnitude (dB re 1)')
-
-
-ax.set_ylim([-60,-30])
-ax.set_xlim([30,65])
-fig.tight_layout()
-#plt.savefig('Figures/IOg2s003.eps', format='eps')
-
-fig,ax = plt.subplots()
-ax.plot(Lvect[:],ioG3[:],color=colors[0])
-ax.plot(Lvect[:],ioLinG3[:],color=colors[1])
-#ax.plot(L2v,20*np.log10(ioF3/(pREF*10**(L2v/20))),color=colors[2])
-ax.plot(Lvect[:],15-Lvect[:],':',color='gray')
-ax.set_ylim([-60,-30])
-ax.set_xlim([30,65])
-ax.legend(('NL','Lin','DPOAE'))
-plt.matplotlib.rc('font', **font)
-ax.set_title('2.08 kHz')
-ax.set_xlabel('Level (dB peSPL)')
-ax.set_ylabel('Magnitude (dB re 1)')
-ax.set_xlim([30,65])
-fig.tight_layout()
-plt.savefig('Figures/IOg3s003.eps', format='eps')
-
-
-
-
-
-fig,ax = plt.subplots()
-ax.plot(Lvect[:],ioG1[:],linestyle='-',color=colors[0])
-ax.plot(Lvect[:],ioLinG1[:],linestyle='--',color=colors[0])
-ax.plot(Lvect[:],15-Lvect[:],':',color='gray')
-
-
-
-k = 0
-ioG = np.zeros(len(SNLmwf))
-io = np.zeros(len(SNLmwf))
-
-Lvect = np.zeros(len(SNLmwf))
-for keys in tNLmwf:
-    ioG[k] = 20*np.log10(np.abs(SNLmwf[keys][idx])/SClick[keys][idx])-20*np.log10(3)
-    io[k] = 20*np.log10(np.abs(SNLmwf[keys][idx])/pREF)-20*np.log10(3)
-    Lvect[k] = int(keys)
-    k += 1
-
-
-idx = np.where(fxx>=f_xx)[0][0]
-k = 0
-ioLin = np.zeros(len(SNLmwf))
-ioLinG = np.zeros(len(SNLmwf))
-
-for keys in tNLmwf:
-    ioLinG[k] = 20*np.log10(np.abs(SLINmwf[keys][idx])/SClick[keys][idx])
-    ioLin[k] = 20*np.log10(np.abs(SLINmwf[keys][idx])/pREF)
-    k += 1
-
-
-
-ax.plot(Lvect[:],ioG[:])
-ax.plot(Lvect[:],ioLinG[:])
-
-
-
-
-f_xx = Fc4*1e3
-
-idx = np.where(fxx>=f_xx)[0][0]
-k = 0
-ioG = np.zeros(len(SNLmwf))
-io = np.zeros(len(SNLmwf))
-
-Lvect = np.zeros(len(SNLmwf))
-for keys in tNLmwf:
-    ioG[k] = 20*np.log10(np.abs(SNLmwf[keys][idx])/SClick[keys][idx])-20*np.log10(3)
-    io[k] = 20*np.log10(np.abs(SNLmwf[keys][idx])/pREF)-20*np.log10(3)
-    Lvect[k] = int(keys)
-    k += 1
-
-
-idx = np.where(fxx>=f_xx)[0][0]
-k = 0
-ioLin = np.zeros(len(SNLmwf))
-ioLinG = np.zeros(len(SNLmwf))
-
-for keys in tNLmwf:
-    ioLinG[k] = 20*np.log10(np.abs(SLINmwf[keys][idx])/SClick[keys][idx])
-    ioLin[k] = 20*np.log10(np.abs(SLINmwf[keys][idx])/pREF)
-    k += 1
-
-
-
-ax.plot(Lvect[:],ioG[:])
-ax.plot(Lvect[:],ioLinG[:])
-
-
-ax.set_ylim([-55,-25])
-
-
-
-
-
-
-
-
-
+plotIOall = 0
+if plotIOall:
+    
+    fig, ax = plt.subplots()
+    
+    # Plot all nonlinear peak data
+    #for i in range(num_peaksNL):
+    #    ax.plot(Lvect[:], ioG[:, i], color=colors[i % len(colors)], linestyle='-', label=f'NL {FreqData[peaksNL[i]] / 1e3:.2f} kHz')
+    
+    # Plot all linear peak data
+    for i in range(num_peaksLin):
+        ax.plot(Lvect[:], ioLinG[:, i], color=colors[(i + num_peaksNL) % len(colors)], linestyle='--', label=f'Lin {FreqData[peaksLin[i]] / 1e3:.2f} kHz')
+    
+    # Add a reference line for DPOAE (example: 15 - Lvect)
+    ax.plot(Lvect[:], 15 - Lvect[:], ':', color='gray', label='DPOAE')
+    
+    # Set plot properties
+    ax.set_ylim([-60, -30])
+    ax.set_xlim([30, 65])
+    ax.legend(loc='upper right', ncol=2)
+    
+    font = {'family': 'Helvetica', 'weight': 'normal', 'size': 17}
+    plt.matplotlib.rc('font', **font)
+    
+    # Title and labels
+    ax.set_title('TEOAE gain functions')
+    ax.set_xlabel('Click level (dB peSPL) / Tone level (dB FPL)')
+    ax.set_ylabel('Magnitude (dB re 1)')
+    fig.tight_layout()
+    
+    # Save the figure
+    #plt.savefig('Figures/FreqResponse_AllPeaks.eps', format='eps')
+    
+    plt.show()
 
 
 
 
 
 #%% fitovani Gain fce
+from scipy.optimize import curve_fit
+from scipy.io import savemat
 
-#L = np.arange(35,75,5)
-x = 10**(Lvect[:]/20)*np.sqrt(2)*2e-5
-
-y = 10**(ioLin[:]/20)
-
-
+# Example functions (already provided)
 def p_to_dB(p):
-    return 20*np.log10(np.abs(p))
-
+    return 20 * np.log10(np.abs(p))
 
 def dB_to_p(I):
-    return (10**(I/20))
+    return 10**(I / 20)
 
 def func(A, G0, Act, alpha):
-    return (G0/((1 + (A/Act))**alpha))
+    return G0 / ((1 + (A / Act))**alpha)
+
+# List of starting rows (one for each column of ioLinG)
+start_rows = [0, 0, 0, 0, 0,0,0]  # Example values, adjust as needed
+
+# Dictionary to store extracted fitting information for each frequency
+fit_results = {}
+
+# Loop over each column of ioLinG (assuming ioLinG is a numpy array)
+for col_idx in range(ioLinG.shape[1]):
+    # Get the starting row for the current column
+    start_row = start_rows[col_idx]
+    
+    # Use only data from the specified starting row onward
+    x = 10**(Lvect[start_row:] / 20) * np.sqrt(2) * 2e-5
+    y = 10**(ioLinG[start_row:, col_idx] / 20)
+    
+    # Fit parameters with bounds
+    bounds = (
+        (dB_to_p(-50), 0.001, 0),     # lower bounds
+        (dB_to_p(-10), 0.089, 1)    # upper bounds (adjust alpha max slope)
+    )
+    
+    # Fit the data
+    popt, pcov = curve_fit(func, x, y, bounds=bounds)
+    
+    # Extract fitting results
+    Peak_str = popt[0]  # Peak strength in pressure
+    Comp_thresh = popt[1]  # Compression threshold in pressure
+    Comp_slope = popt[2]  # Compression slope
+    
+    # Store results in a dictionary with the column index as the key
+    fit_results[col_idx] = {
+        'Peak_strength_dB': p_to_dB(Peak_str),
+        'Compression_slope': Comp_slope,
+        'Compression_threshold_dB': 20 * np.log10(Comp_thresh / (np.sqrt(2) * 2e-5)),
+        'FchosenLin': FchosenLin[col_idx],  # Corresponding frequency element
+        'Start_row': start_row  # Starting row used for this column
+    }
+    
+    # Plot the results
+    x_fit = np.linspace(min(x), max(x) + 0.3, 1000)
+    y_fit = func(x_fit, *popt)
+    fig, ax = plt.subplots()
+    plt.scatter(Lvect[start_row:], 20 * np.log10(y), label='Data', color='red')
+    plt.plot(20 * np.log10(x_fit / (np.sqrt(2) * 2e-5)), 20 * np.log10(y_fit), label='Fitted Curve', color='blue')
+    plt.xlabel('Level (dB peSPL)')
+    plt.ylabel('Magnitude (dB re 1)')
+    plt.plot(Lvect[start_row:] + 20, 0 - Lvect[start_row:], linestyle='--', label='Max slope -1 dB')
+    
+    # Set the title with ith value from FchosenLin and the starting row
+    plt.title(f'Column {col_idx}: FchosenLin = {FchosenLin[col_idx]}, Start Row = {start_row}')
+    
+    # Write results onto the graph
+    results_text = (
+        f"Peak strength, G0 = {p_to_dB(Peak_str):.2f} dB\n"
+        f"Compression slope, alpha = {Comp_slope:.2f}\n"
+        f"Compression Threshold, Act = {20 * np.log10(Comp_thresh / (np.sqrt(2) * 2e-5)):.2f} dB"
+    )
+    plt.text(0.05, 0.95, results_text, transform=ax.transAxes, fontsize=10,
+             verticalalignment='top', bbox=dict(facecolor='white', alpha=0.5))
+
+    plt.legend()
+    plt.show()
+
+# Prepare data to be saved
+data_to_save = {
+    'FchosenLin': FchosenLin,
+    'FchosenNL': FchosenNL,
+    'fit_results': fit_results  # Add fitting results to the saved data
+}
+
+# File name for saving
+file_name = 'fit_results_' + subjN + '.mat'
+
+# Save the data into a .mat file
+savemat(file_name, data_to_save)
+
+print(f"Data successfully saved to {file_name}")
+
+#fig,ax = plt.subplots()
+#ax.plot(x,np.abs(y))
+#ax.plot(x,Peak_str/(1+x/Comp_thresh)**Comp_slope)
 
 
-from scipy.optimize import curve_fit
-popt, pcov = curve_fit(func, x, y, bounds=((dB_to_p(-50), 0.001, 0),(dB_to_p(-10), 0.089, 3)))
+#fig,ax = plt.subplots()
+#ax.plot(Lvect[:],20*np.log10(np.abs(y)))
 
+#x2 = 10**(np.arange(10,80,5)/20)*np.sqrt(2)*2e-5
 
-Peak_str = popt[0] # Peak strength in dB
-Comp_thresh = popt[1] # Compression threshold in dB
-Comp_slope = popt[2]
-
-print("Peak strength, G0 = "+str(p_to_dB(Peak_str))+" dB")
-print("Compression slope, alpha = "+str(popt[2]))
-print("Compression Threshold, Act = "+str(20*np.log10(Comp_thresh/(np.sqrt(2)*2e-5)))+" dB")
-
-
-
-fig,ax = plt.subplots()
-ax.plot(x,np.abs(y))
-ax.plot(x,Peak_str/(1+x/Comp_thresh)**Comp_slope)
-
-
-fig,ax = plt.subplots()
-ax.plot(Lvect[:],20*np.log10(np.abs(y)))
-
-x2 = 10**(np.arange(10,80,5)/20)*np.sqrt(2)*2e-5
-
-ax.plot(np.arange(10,80,5),20*np.log10((Peak_str/(1+x2/Comp_thresh)**Comp_slope)))
+#ax.plot(np.arange(10,80,5),20*np.log10((Peak_str/(1+x2/Comp_thresh)**Comp_slope)))
