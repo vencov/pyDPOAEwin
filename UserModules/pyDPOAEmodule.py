@@ -195,6 +195,9 @@ def generateDPOAEstimulusPhase(f2f1,fs,f2start,f2stop,phase1,phase2,octpersec,L1
     return tone1, tone2  # returning back two tones separately for presentation by each speaker
 
 
+
+
+
 def synchronized_swept_sine_spectra_shifted(f1s,L1sw,fsamp,Nsamp,tshift):
     '''
     returns SSS in freq domain
@@ -206,6 +209,7 @@ def synchronized_swept_sine_spectra_shifted(f1s,L1sw,fsamp,Nsamp,tshift):
     X = 1/2*np.emath.sqrt(L1sw/f)*np.exp(1j*2*np.pi*f*L1sw*(1 - np.log(f/f1s)) - 1j*np.pi/4)*np.exp(-1j*2*np.pi*f*tshift)
     X[0] = np.inf # protect from devision by zero
     return (X,f)
+
 
 
 def processChirpResp(recordedchirp1,recordedchirp2,latency_SC,fsamp,Nsamp,Nchirps):
@@ -654,6 +658,22 @@ def makeTwoPureTones(ftone1,ftone2,Ltone1,Ltone2,phitone1,phitone2,T,fs,ch1,ch2,
 
 
 
+
+def makeTwoArbTones(t1,t2,ch1,ch2):
+    # return two tones for DPOAE measurement, tone1 and tone2 are sent into respective speakers
+    # tone 1    
+    
+    if ch1==1 and ch2 == 2:
+        twtones = np.column_stack((t1, t2, t1+t2))
+    elif ch1==2 and ch2==1:
+        twtones = np.column_stack((t2, t1, t1+t2))
+    else:      
+        raise ValueError("wrong cahnnels!!!")
+
+    return twtones
+
+
+
 def makeLFPureTone(ftone,Ltone,phitone,T,fs,fade=(4410,4410)):
     '''
     generate a LF pure tone for biasing experiments
@@ -743,6 +763,78 @@ def makePureTone(ftone,Ltone,phitone,T,fs,channel,fade=(4410,4410)):
        
     
     return s
+
+
+
+def makeAmpSweptPureTone(ftone,Ltoneb,Ltones,phitone,T,fs,channel,fade=(4410,4410)):
+    '''
+    generate a pure tone linearly swept in amplitude
+    '''
+
+    # load calibration data for in situ calibration
+    probecal = loadmat('Calibration_files/Files/InEarCalData.mat')
+    if channel==1:
+        Hprobe = probecal['Hinear1']
+        fxprobe = probecal['fxinear']
+    elif channel==2:
+        Hprobe = probecal['Hinear2']
+        fxprobe = probecal['fxinear']
+
+    tx = np.arange(0,T,1/fs)
+
+    s = np.sin(2*np.pi*ftone*tx + phitone)  # pure tone
+    
+    
+   
+    # fade-in the input signal
+    if fade[0]>0:
+        s[0:fade[0]] = s[0:fade[0]] * ((-np.cos(np.arange(fade[0])/fade[0]*np.pi)+1) / 2)
+
+    # fade-out the input signal
+    if fade[1]>0:
+        s[-fade[1]:] = s[-fade[1]:] *  ((np.cos(np.arange(fade[1])/fade[1]*np.pi)+1) / 2)
+
+    dBsw = np.linspace(0,Ltones-Ltoneb,len(tx))
+    ssw = s*10**(dBsw/20)   # amplitude swept tone
+
+
+    s = np.pad(s, (0, 4096), 'constant')  # add some zeros to the end
+
+
+    ssw = np.pad(ssw, (0, 4096), 'constant')  # add some zeros to the end
+
+
+    fft_len = len(s) # number of samples for fft
+
+
+    Sin = np.fft.rfft(s,fft_len)
+    axe_w = np.linspace(0, np.pi, num=int(fft_len/2+1))
+    fxSin = axe_w/(np.pi)*fs/2
+    #fig,ax = plt.subplots()
+    #ax.plot(fxSin,np.abs(Sin))
+    #draw_DPOAE(fxSin, Sin)
+
+    Hrint = np.interp(fxSin,fxprobe.flatten(),Hprobe.flatten())
+
+    #fig,ax = plt.subplots()
+    #ax.plot(fxSin,np.abs(Hrint))
+    #draw_DPOAE(fxSin, Hrint) 
+
+    #fig,ax = plt.subplots()
+    #ax.plot(fxSin,np.abs(Sin/Hrint))
+    #draw_DPOAE(fxSin, Sin/Hrint)
+
+    SinC = Sin/Hrint
+
+    sig = np.fft.irfft(SinC)
+
+    scaleF = np.sqrt(np.mean(sig**2))/np.sqrt(np.mean(s**2))    
+
+    sswC = 10**(Ltoneb/20)*np.sqrt(2)*2e-5*scaleF*ssw
+
+       
+    
+    return sswC
 
 
 def calcDPstst(oaeDS,f2f1,f2,f1,fsamp,Twin,T,GainMic,Thresh):
