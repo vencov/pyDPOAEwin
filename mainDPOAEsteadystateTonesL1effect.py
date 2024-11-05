@@ -19,7 +19,7 @@ fsamp = 44100 # sampling freuqency
 micGain = 40  # gain of the probe microphone
 ear_t = 'L' # which ear
 Twin = 100e-3 # window length for averaging in the time domain
-T = 3  # tone duration
+T = 4  # tone duration
 ch1 = 1 # first tone goes to the channel 1
 ch2 = 2 # second tone goes to the channel 2
 buffersize = 2048
@@ -29,14 +29,14 @@ latency_SC = getSClat(fsamp,buffersize)
 # parameters of evoking stimuli
 
 fstep = 10
-f2b = 2400  # f2 frequency
+f2b = 5000  # f2 frequency
 f2f1 = 1.2  # f2/f1 ratio
 f1val = f2b/f2f1  # f1value
 f1valR = np.round(f1val / 10) * 10 # round to the 10 Hz step for fft() calculation in 100 ms long windows
 
 
 
-L1b = 40   # starting intensity in dB
+L1b = 35   # starting intensity in dB
 L1e = 65   # end intensity in dB 
 stepL1 = 5  # intensity step in dB
 L1vect = np.arange(L1b,L1e+stepL1,stepL1)
@@ -46,7 +46,7 @@ phi2 = 0
 
 
 save_path = 'Results/pokus/'
-subj_name = 's00d'
+subj_name = 's00p'
 
 
 def get_time() -> str:
@@ -88,7 +88,7 @@ try:
 
         file_name = 'ststDPOAE_' + subj_name + '_' + t[2:] + '_' + 'F2' + '_' + str(f2b) + 'F1' + '_' + str(f1valR) + 'L1' + '_' + str(L1) + 'dB' + '_' + 'L2' + '_' + str(L2) + 'dB' + '_' +  ear_t
             
-        #savemat(save_path + '/' + file_name + '.mat', data)
+        savemat(save_path + '/' + file_name + '.mat', data)
         # now do processing to show the result to the experimenter
             #    
         cut_off = 200 # cut of frequency of the high pass filter

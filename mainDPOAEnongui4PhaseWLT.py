@@ -18,7 +18,7 @@ f2b = 8000  # f1 start frequency
 f2e = 500 # f2 end frequency
 f2f1 = 1.2  # f2/f1 ratio
 #L1 = 53    # intensity of f1 tone
-L2 = 50   # intensity of f2 tone
+L2 = 45   # intensity of f2 tone
 L1 = int(0.4*L2+39)
 #L1 = 55
 r = 2   # sweep rate in octaves per second
@@ -38,8 +38,8 @@ plt.close('all')
 
 #save_path = 'Results/s003'
 #subj_name = 's003'
-save_path = 'Results/s004/'
-subj_name = 'pokus'
+save_path = 'Results/fav01/'
+subj_name = 's001'
 
 
 def get_time() -> str:

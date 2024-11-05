@@ -41,8 +41,8 @@ plt.close('all')
 
 #save_path = 'Results/s003'
 #subj_name = 's003'
-save_path = 'Results/s004/'
-subj_name = 'pokus'
+save_path = 'Results/fav02/'
+subj_name = 's001'
 
 # now to stop measurement by s key
 

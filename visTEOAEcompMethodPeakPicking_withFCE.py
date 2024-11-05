@@ -125,26 +125,26 @@ subjD['s004L1'] = ['Results/s004/Click400_8000/', 'CMclickOAE_s004_24_05_06_15_0
 
 subjD['s004R1'] = ['Results/s004/Click400_8000/', 'CMclickOAE_s004_24_05_06_17_28_34_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s004_24_05_06_17_26_49_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s004_24_05_06_17_25_01_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s004_24_05_06_17_23_17_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s004_24_05_06_17_21_10_Lc_64dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s004_24_05_06_17_19_21_Lc_68dB_Ncl228Npulse_3072_R_']
 
-subjD['s004L2'] = ['Results/s004/Click400_4000/', 'CMclickOAE_s004_24_05_06_15_49_03_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s004_24_05_06_15_47_19_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s004_24_05_06_15_45_31_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s004_24_05_06_15_43_43_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s004_24_05_06_15_41_56_Lc_64dB_Ncl228Npulse_3072_L_']
+subjD['s004L'] = ['Results/s004/Click400_4000/', 'CMclickOAE_s004_24_05_06_15_49_03_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s004_24_05_06_15_47_19_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s004_24_05_06_15_45_31_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s004_24_05_06_15_43_43_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s004_24_05_06_15_41_56_Lc_64dB_Ncl228Npulse_3072_L_']
     
-subjD['s004R2'] = ['Results/s004/Click400_4000/', 'CMclickOAE_s004_24_05_06_15_59_16_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s004_24_05_06_15_57_32_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s004_24_05_06_15_55_46_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s004_24_05_06_15_53_59_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s004_24_05_06_15_52_11_Lc_64dB_Ncl228Npulse_3072_R_']
+subjD['s004R'] = ['Results/s004/Click400_4000/', 'CMclickOAE_s004_24_05_06_15_59_16_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s004_24_05_06_15_57_32_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s004_24_05_06_15_55_46_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s004_24_05_06_15_53_59_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s004_24_05_06_15_52_11_Lc_64dB_Ncl228Npulse_3072_R_']
 
 subjD['s003R2'] = ['Results/s003/Click400_4000/', 'CMclickOAE_s003_24_05_07_14_11_48_Lc_30dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_10_03_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_08_13_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_06_27_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_04_38_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_02_50_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_13_59_16_Lc_64dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_00_58_Lc_64dB_Ncl228Npulse_3072_R_']
 
 subjD['s003L2'] = ['Results/s003/Click400_4000/', 'CMclickOAE_s003_24_05_07_14_32_55_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s003_24_05_07_14_31_09_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s003_24_05_07_14_29_21_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s003_24_05_07_14_27_25_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s003_24_05_07_14_25_40_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s003_24_05_07_14_23_51_Lc_62dB_Ncl228Npulse_3072_L_']
 
-subjD['s080L2'] = ['Results/s080/click400_4000/', 'CMclickOAE_s080_24_05_10_15_40_26_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s080_24_05_10_15_38_42_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s080_24_05_10_15_36_56_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s080_24_05_10_15_35_11_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s080_24_05_10_15_33_27_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s080_24_05_10_15_31_42_Lc_64dB_Ncl228Npulse_3072_L_']
-subjD['s080R2'] =['Results/s080/click400_4000/', 'CMclickOAE_s080_24_05_10_15_28_41_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s080_24_05_10_15_26_53_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s080_24_05_10_15_25_08_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s080_24_05_10_15_23_21_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s080_24_05_10_15_21_33_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s080_24_05_10_15_19_48_Lc_64dB_Ncl228Npulse_3072_R_']
+subjD['s080L'] = ['Results/s080/click400_4000/', 'CMclickOAE_s080_24_05_10_15_40_26_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s080_24_05_10_15_38_42_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s080_24_05_10_15_36_56_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s080_24_05_10_15_35_11_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s080_24_05_10_15_33_27_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s080_24_05_10_15_31_42_Lc_64dB_Ncl228Npulse_3072_L_']
+subjD['s080R'] =['Results/s080/click400_4000/', 'CMclickOAE_s080_24_05_10_15_28_41_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s080_24_05_10_15_26_53_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s080_24_05_10_15_25_08_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s080_24_05_10_15_23_21_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s080_24_05_10_15_21_33_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s080_24_05_10_15_19_48_Lc_64dB_Ncl228Npulse_3072_R_']
 
-subjD['s074L2'] = ['Results/s074/c400_4000/', 'CMclickOAE_s074_24_05_28_13_49_18_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s074_24_05_28_13_47_23_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s074_24_05_28_13_45_12_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s074_24_05_28_13_43_22_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s074_24_05_28_13_41_16_Lc_60dB_Ncl228Npulse_3072_L_']
-subjD['s074R2'] = ['Results/s074/c400_4000/', 'CMclickOAE_s074_24_05_28_14_04_07_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s074_24_05_28_14_02_10_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s074_24_05_28_13_59_57_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s074_24_05_28_13_57_49_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s074_24_05_28_13_56_11_Lc_60dB_Ncl228Npulse_3072_R_']
+subjD['s074L'] = ['Results/s074/c400_4000/', 'CMclickOAE_s074_24_05_28_13_49_18_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s074_24_05_28_13_47_23_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s074_24_05_28_13_45_12_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s074_24_05_28_13_43_22_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s074_24_05_28_13_41_16_Lc_60dB_Ncl228Npulse_3072_L_']
+subjD['s074R'] = ['Results/s074/c400_4000/', 'CMclickOAE_s074_24_05_28_14_04_07_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s074_24_05_28_14_02_10_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s074_24_05_28_13_59_57_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s074_24_05_28_13_57_49_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s074_24_05_28_13_56_11_Lc_60dB_Ncl228Npulse_3072_R_']
 
 
-subjD['s069L3'] = ['Results/s069/', 'CMclickOAE_s069_24_05_30_15_54_42_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s069_24_05_30_15_52_32_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s069_24_05_30_15_50_26_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s069_24_05_30_15_48_36_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s069_24_05_30_15_46_43_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s069_24_05_30_15_44_34_Lc_64dB_Ncl228Npulse_3072_L_']
-subjD['s069R3'] = ['Results/s069/', 'CMclickOAE_s069_24_05_30_16_10_05_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s069_24_05_30_16_08_03_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s069_24_05_30_16_06_04_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s069_24_05_30_16_04_01_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s069_24_05_30_16_01_34_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s069_24_05_30_15_59_31_Lc_64dB_Ncl228Npulse_3072_R_']
+subjD['s069L'] = ['Results/s069/', 'CMclickOAE_s069_24_05_30_15_54_42_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s069_24_05_30_15_52_32_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s069_24_05_30_15_50_26_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s069_24_05_30_15_48_36_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s069_24_05_30_15_46_43_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s069_24_05_30_15_44_34_Lc_64dB_Ncl228Npulse_3072_L_']
+subjD['s069R'] = ['Results/s069/', 'CMclickOAE_s069_24_05_30_16_10_05_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s069_24_05_30_16_08_03_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s069_24_05_30_16_06_04_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s069_24_05_30_16_04_01_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s069_24_05_30_16_01_34_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s069_24_05_30_15_59_31_Lc_64dB_Ncl228Npulse_3072_R_']
 
-subjD['s055L3'] = ['Results/s055/', 'CMclickOAE_s055_24_06_04_13_34_35_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s055_24_06_04_13_32_18_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s055_24_06_04_13_30_24_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s055_24_06_04_13_28_19_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s055_24_06_04_13_26_14_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s055_24_06_04_13_24_19_Lc_62dB_Ncl228Npulse_3072_L_']
-subjD['s055R3'] = ['Results/s055/', 'CMclickOAE_s055_24_06_04_13_54_07_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s055_24_06_04_13_52_07_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s055_24_06_04_13_49_30_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s055_24_06_04_13_47_14_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s055_24_06_04_13_45_01_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s055_24_06_04_13_42_51_Lc_62dB_Ncl228Npulse_3072_R_']
+subjD['s055L'] = ['Results/s055/', 'CMclickOAE_s055_24_06_04_13_34_35_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s055_24_06_04_13_32_18_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s055_24_06_04_13_30_24_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s055_24_06_04_13_28_19_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s055_24_06_04_13_26_14_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s055_24_06_04_13_24_19_Lc_62dB_Ncl228Npulse_3072_L_']
+subjD['s055R'] = ['Results/s055/', 'CMclickOAE_s055_24_06_04_13_54_07_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s055_24_06_04_13_52_07_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s055_24_06_04_13_49_30_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s055_24_06_04_13_47_14_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s055_24_06_04_13_45_01_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s055_24_06_04_13_42_51_Lc_62dB_Ncl228Npulse_3072_R_']
 
 subjD['s088L'] = ['Results/s088/', 'CMclickOAE_s088_24_06_20_16_10_25_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s088_24_06_20_16_08_34_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s088_24_06_20_16_06_44_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s088_24_06_20_16_04_54_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s088_24_06_20_16_02_47_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s088_24_06_20_16_00_34_Lc_62dB_Ncl228Npulse_3072_L_']
 subjD['s088R'] = ['Results/s088/', 'CMclickOAE_s088_24_06_20_16_37_52_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s088_24_06_20_16_35_42_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s088_24_06_20_16_33_32_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s088_24_06_20_16_31_16_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s088_24_06_20_16_29_06_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s088_24_06_20_16_26_56_Lc_62dB_Ncl228Npulse_3072_R_']
@@ -155,7 +155,7 @@ subjD['s089L'] = ['Results/s089/', 'CMclickOAE_s089_24_07_01_11_22_31_Lc_40dB_Nc
 subjD['s091L'] = ['Results/s091/', 'CMclickOAE_s091_24_07_11_13_56_45_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s091_24_07_11_13_54_37_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s091_24_07_11_13_52_29_Lc_64dB_Ncl228Npulse_3072_L_']
 subjD['s091R'] = ['Results/s091/', 'CMclickOAE_s091_24_07_11_14_24_54_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s091_24_07_11_14_22_45_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s091_24_07_11_14_20_32_Lc_64dB_Ncl228Npulse_3072_R_']
 
-subjN = 's088R'
+subjN = 's004L'
 
 
 
@@ -594,6 +594,8 @@ if plotNLCEOAE:
 #%% TEOAE Grams - Linear Extraction Method
 fig, (ax1, ax2) = plt.subplots(2, 1)
 
+cycle = np.pi*2
+
 plt.gcf().text(0.5, 0.9, 'Linear extraction method', fontsize=12, fontweight='bold', ha='center')
 
 plt.rcParams["xtick.direction"] = "in"
@@ -625,6 +627,17 @@ ax2.set_xlim([0.500, 4.000])
 ax2.legend(LcList, loc='lower left', ncol=2)
 ax2.set_ylim([-40, 1])
 ax2.set_ylabel('Phase (cycles)')
+
+
+if subjN[-1] == 'R':
+    earS = ' right '
+elif subjN[-1] == 'L':
+    earS = ' left '
+    
+# Add "s088, right ear" text in the upper right corner of ax1
+ax2.text(0.95, 0.9, subjN[:-1] + earS + 'ear', transform=ax2.transAxes, ha='right', va='top')
+
+
 fig.supxlabel('Frequency (kHz)')
 
 #plt.savefig('Figures/ceoaeLINs003L2.eps', format='eps')
@@ -738,6 +751,10 @@ if plotIOall:
 
 
 #%% fitovani Gain fce
+
+#%%
+import numpy as np
+import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 from scipy.io import savemat
 
@@ -752,91 +769,103 @@ def func(A, G0, Act, alpha):
     return G0 / ((1 + (A / Act))**alpha)
 
 # List of starting rows (one for each column of ioLinG)
-start_rows = [0, 0, 0, 0, 0,0,0]  # Example values, adjust as needed
+start_rows = np.zeros(ioLinG.shape[1])  # Example values, adjust as needed
 
 # Dictionary to store extracted fitting information for each frequency
 fit_results = {}
 
 # Loop over each column of ioLinG (assuming ioLinG is a numpy array)
 for col_idx in range(ioLinG.shape[1]):
-    # Get the starting row for the current column
-    start_row = start_rows[col_idx]
-    
-    # Use only data from the specified starting row onward
-    x = 10**(Lvect[start_row:] / 20) * np.sqrt(2) * 2e-5
-    y = 10**(ioLinG[start_row:, col_idx] / 20)
-    
-    # Fit parameters with bounds
-    bounds = (
-        (dB_to_p(-50), 0.001, 0),     # lower bounds
-        (dB_to_p(-10), 0.089, 1)    # upper bounds (adjust alpha max slope)
-    )
-    
-    # Fit the data
-    popt, pcov = curve_fit(func, x, y, bounds=bounds)
-    
-    # Extract fitting results
-    Peak_str = popt[0]  # Peak strength in pressure
-    Comp_thresh = popt[1]  # Compression threshold in pressure
-    Comp_slope = popt[2]  # Compression slope
-    
-    # Store results in a dictionary with the column index as the key
-    fit_results[col_idx] = {
-        'Peak_strength_dB': p_to_dB(Peak_str),
-        'Compression_slope': Comp_slope,
-        'Compression_threshold_dB': 20 * np.log10(Comp_thresh / (np.sqrt(2) * 2e-5)),
-        'FchosenLin': FchosenLin[col_idx],  # Corresponding frequency element
-        'Start_row': start_row  # Starting row used for this column
-    }
-    
-    # Plot the results
-    x_fit = np.linspace(min(x), max(x) + 0.3, 1000)
-    y_fit = func(x_fit, *popt)
-    fig, ax = plt.subplots()
-    plt.scatter(Lvect[start_row:], 20 * np.log10(y), label='Data', color='red')
-    plt.plot(20 * np.log10(x_fit / (np.sqrt(2) * 2e-5)), 20 * np.log10(y_fit), label='Fitted Curve', color='blue')
-    plt.xlabel('Level (dB peSPL)')
-    plt.ylabel('Magnitude (dB re 1)')
-    plt.plot(Lvect[start_row:] + 20, 0 - Lvect[start_row:], linestyle='--', label='Max slope -1 dB')
-    
-    # Set the title with ith value from FchosenLin and the starting row
-    plt.title(f'Column {col_idx}: FchosenLin = {FchosenLin[col_idx]}, Start Row = {start_row}')
-    
-    # Write results onto the graph
-    results_text = (
-        f"Peak strength, G0 = {p_to_dB(Peak_str):.2f} dB\n"
-        f"Compression slope, alpha = {Comp_slope:.2f}\n"
-        f"Compression Threshold, Act = {20 * np.log10(Comp_thresh / (np.sqrt(2) * 2e-5)):.2f} dB"
-    )
-    plt.text(0.05, 0.95, results_text, transform=ax.transAxes, fontsize=10,
-             verticalalignment='top', bbox=dict(facecolor='white', alpha=0.5))
+    done = False
+    while not done:
+        # Get the starting row for the current column
+        print(f"\nProcessing Column {col_idx} - FchosenLin = {FchosenLin[col_idx]}")
+        user_input = input("Enter a number (0 to max) to set starting row or 'e' to move to next point: ")
+        
+        if user_input.lower() == 'e':
+            # Move to the next point if 'e' is pressed
+            done = True
+            plt.close('all')
+            start_rows[col_idx] = start_row
+            continue
+        else:
+            try:
+                # Validate and update the starting row if a number is provided
+                start_row = start_rows[col_idx] = int(user_input)
+                if start_row < 0 or start_row >= len(Lvect):
+                    print("Invalid starting row. Please try again.")
+                    continue
+            except ValueError:
+                print("Invalid input. Please enter a number or 'e'.")
+                continue
 
-    plt.legend()
-    plt.show()
+        # Prepare data for fitting
+        x = 10**(Lvect[start_row:] / 20) * np.sqrt(2) * 2e-5
+        y = 10**(ioLinG[start_row:, col_idx] / 20)
+        
+        # Fit parameters with bounds
+        bounds = (
+            (dB_to_p(-50), 0.001, 0),     # lower bounds
+            (dB_to_p(-10), 0.089, 1)      # upper bounds (adjust alpha max slope)
+        )
+        
+        # Fit the data
+        popt, pcov = curve_fit(func, x, y, bounds=bounds)
+        
+        # Extract fitting results
+        Peak_str = popt[0]  # Peak strength in pressure
+        Comp_thresh = popt[1]  # Compression threshold in pressure
+        Comp_slope = popt[2]  # Compression slope
+        
+        # Store results in a dictionary with the column index as the key
+        fit_results[col_idx] = {
+            'Peak_strength_dB': p_to_dB(Peak_str),
+            'Compression_slope': Comp_slope,
+            'Compression_threshold_dB': 20 * np.log10(Comp_thresh / (np.sqrt(2) * 2e-5)),
+            'FchosenLin': FchosenLin[col_idx],  # Corresponding frequency element
+            'Start_row': start_row  # Starting row used for this column
+        }
+        
+        # Plot the results
+        x_fit = np.linspace(min(x), max(x) + 0.3, 1000)
+        y_fit = func(x_fit, *popt)
+        fig, ax = plt.subplots()
+        plt.scatter(Lvect[start_row:], 20 * np.log10(y), label='Data', color='red')
+        plt.plot(20 * np.log10(x_fit / (np.sqrt(2) * 2e-5)), 20 * np.log10(y_fit), label='Fitted Curve', color='blue')
+        plt.xlabel('Level (dB peSPL)')
+        plt.ylabel('Magnitude (dB re 1)')
+        plt.plot(Lvect[start_row:] + 20, 0 - Lvect[start_row:], linestyle='--', label='Max slope -1 dB')
+        
+        # Set the title with ith value from FchosenLin and the starting row
+        plt.title(f'Column {col_idx}: FchosenLin = {FchosenLin[col_idx]}, Start Row = {start_row}')
+        
+        # Write results onto the graph
+        results_text = (
+            f"Peak strength, G0 = {p_to_dB(Peak_str):.2f} dB\n"
+            f"Compression slope, alpha = {Comp_slope:.2f}\n"
+            f"Compression Threshold, Act = {20 * np.log10(Comp_thresh / (np.sqrt(2) * 2e-5)):.2f} dB"
+        )
+        plt.text(0.05, 0.95, results_text, transform=ax.transAxes, fontsize=10,
+                 verticalalignment='top', bbox=dict(facecolor='white', alpha=0.5))
+        
+        plt.legend()
+        plt.show()
+        plt.pause(0.1)  # Ensure the plot renders before continuing
 
-# Prepare data to be saved
+print(start_rows)
+
+# Prepare data to be saved, including chosen start_rows
 data_to_save = {
     'FchosenLin': FchosenLin,
     'FchosenNL': FchosenNL,
-    'fit_results': fit_results  # Add fitting results to the saved data
+    'fit_results': fit_results,  # Add fitting results to the saved data
+    'start_rows': start_rows     # Add chosen start rows to saved data
 }
 
 # File name for saving
-file_name = 'fit_results_' + subjN + '.mat'
+file_name = 'Estimace/CEOAEfit_results_' + subjN + '.mat'
 
 # Save the data into a .mat file
 savemat(file_name, data_to_save)
 
 print(f"Data successfully saved to {file_name}")
-
-#fig,ax = plt.subplots()
-#ax.plot(x,np.abs(y))
-#ax.plot(x,Peak_str/(1+x/Comp_thresh)**Comp_slope)
-
-
-#fig,ax = plt.subplots()
-#ax.plot(Lvect[:],20*np.log10(np.abs(y)))
-
-#x2 = 10**(np.arange(10,80,5)/20)*np.sqrt(2)*2e-5
-
-#ax.plot(np.arange(10,80,5),20*np.log10((Peak_str/(1+x2/Comp_thresh)**Comp_slope)))

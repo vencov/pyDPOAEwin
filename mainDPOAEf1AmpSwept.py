@@ -36,7 +36,7 @@ latency_SC = getSClat(fsamp,buffersize)
 # parameters of evoking stimuli
 
 fstep = 10
-f2b = 2400  # f2 frequency
+f2b = 1200  # f2 frequency
 f2f1 = 1.2  # f2/f1 ratio
 f1val = f2b/f2f1  # f1value
 f1valR = np.round(f1val / 10) * 10 # round to the 10 Hz step for fft() calculation in 100 ms long windows
@@ -57,8 +57,8 @@ phi1 = 0
 phi2 = 0
 
 
-save_path = 'Results/pokus/'
-subj_name = 's00d'
+save_path = 'Results/fav02/'
+subj_name = 's002'
 
 
 def get_time() -> str:
