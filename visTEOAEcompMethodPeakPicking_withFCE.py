@@ -32,7 +32,12 @@ def giveMatricesTEOAE(FolderName,FileName,Nopak,latency_SC):
             counterSTR = str(counter)    
     
     
-        data = loadmat(FolderName+FileName+counterSTR+".mat")
+        try:
+            data = loadmat(FolderName + FileName + counterSTR + ".mat")
+           # Process your data here
+        except FileNotFoundError:
+            break
+        
         Lc = data['Lc'][0][0]
         recsig20 = data['recsig'][:,0]
     
@@ -149,13 +154,33 @@ subjD['s055R'] = ['Results/s055/', 'CMclickOAE_s055_24_06_04_13_54_07_Lc_34dB_Nc
 subjD['s088L'] = ['Results/s088/', 'CMclickOAE_s088_24_06_20_16_10_25_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s088_24_06_20_16_08_34_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s088_24_06_20_16_06_44_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s088_24_06_20_16_04_54_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s088_24_06_20_16_02_47_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s088_24_06_20_16_00_34_Lc_62dB_Ncl228Npulse_3072_L_']
 subjD['s088R'] = ['Results/s088/', 'CMclickOAE_s088_24_06_20_16_37_52_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s088_24_06_20_16_35_42_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s088_24_06_20_16_33_32_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s088_24_06_20_16_31_16_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s088_24_06_20_16_29_06_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s088_24_06_20_16_26_56_Lc_62dB_Ncl228Npulse_3072_R_']
 
+
 subjD['s089L'] = ['Results/s089/', 'CMclickOAE_s089_24_07_01_11_22_31_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s089_24_07_01_11_20_26_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s089_24_07_01_11_18_20_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s089_24_07_01_11_16_14_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s089_24_07_01_11_14_01_Lc_64dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s089_24_07_01_11_11_51_Lc_70dB_Ncl228Npulse_3072_L_']
-['Results/s089/']
+subjD['s089R'] = ['Results/s089/', 'CMclickOAE_s089_24_07_11_12_05_12_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s089_24_07_11_12_03_19_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s089_24_07_11_12_01_28_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s089_24_07_11_11_59_37_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s089_24_07_11_11_57_33_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s089_24_07_11_11_55_27_Lc_64dB_Ncl228Npulse_3072_R_']
 
 subjD['s091L'] = ['Results/s091/', 'CMclickOAE_s091_24_07_11_13_56_45_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s091_24_07_11_13_54_37_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s091_24_07_11_13_52_29_Lc_64dB_Ncl228Npulse_3072_L_']
 subjD['s091R'] = ['Results/s091/', 'CMclickOAE_s091_24_07_11_14_24_54_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s091_24_07_11_14_22_45_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s091_24_07_11_14_20_32_Lc_64dB_Ncl228Npulse_3072_R_']
 
-subjN = 's004L'
+subjD['s007L'] = ['Results/s007/', 'CMclickOAE_s007_24_05_30_15_18_24_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s007_24_05_30_15_16_11_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s007_24_05_30_15_13_56_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s007_24_05_30_15_11_38_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s007_24_05_30_15_09_23_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s007_24_05_30_15_07_05_Lc_61dB_Ncl228Npulse_3072_L_']
+subjD['s007R'] = ['Results/s007/', 'CMclickOAE_s007_24_05_30_15_00_24_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s007_24_05_30_14_58_08_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s007_24_05_30_14_56_11_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s007_24_05_30_14_54_08_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s007_24_05_30_14_51_53_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s007_24_05_30_14_50_02_Lc_64dB_Ncl228Npulse_3072_R_']
+
+subjD['s087L'] = ['Results/s087/', 'CMclickOAE_s087_24_06_20_13_56_24_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s087_24_06_20_13_54_33_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s087_24_06_20_13_52_42_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s087_24_06_20_13_50_48_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s087_24_06_20_13_48_37_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s087_24_06_20_13_46_17_Lc_62dB_Ncl228Npulse_3072_L_']
+subjD['s087R'] = ['Results/s087/', 'CMclickOAE_s087_24_06_20_14_11_50_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s087_24_06_20_14_09_42_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s087_24_06_20_14_07_37_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s087_24_06_20_14_05_05_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s087_24_06_20_14_02_58_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s087_24_06_20_14_01_04_Lc_62dB_Ncl228Npulse_3072_R_']
+
+subjD['s086L'] = ['Results/s086/', 'CMclickOAE_s086_24_06_20_12_27_33_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s086_24_06_20_12_25_44_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s086_24_06_20_12_23_55_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s086_24_06_20_12_21_43_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s086_24_06_20_12_19_31_Lc_58dB_Ncl228Npulse_3072_L_']
+subjD['s086R'] = ['Results/s086/', 'CMclickOAE_s086_24_06_20_12_41_47_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s086_24_06_20_12_39_54_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s086_24_06_20_12_38_05_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s086_24_06_20_12_36_09_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s086_24_06_20_12_34_22_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s086_24_06_20_12_32_21_Lc_62dB_Ncl228Npulse_3072_R_']
+
+subjD['s084L'] = ['Results/s084/', 'CMclickOAE_s084_24_06_04_15_21_27_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s084_24_06_04_15_19_05_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s084_24_06_04_15_16_54_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s084_24_06_04_15_14_35_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s084_24_06_04_15_12_23_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s084_24_06_04_15_09_54_Lc_60dB_Ncl228Npulse_3072_L_']
+subjD['s084R'] = ['Results/s084/', 'CMclickOAE_s084_24_06_04_15_35_54_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s084_24_06_04_15_34_02_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s084_24_06_04_15_32_05_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s084_24_06_04_15_30_05_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s084_24_06_04_15_27_54_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s084_24_06_04_15_25_39_Lc_60dB_Ncl228Npulse_3072_R_']
+
+
+subjD['s072L'] = ['Results/s072/', 'CMclickOAE_s072_24_06_05_12_06_59_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s072_24_06_05_12_04_50_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s072_24_06_05_12_02_41_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s072_24_06_05_12_00_29_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s072_24_06_05_11_58_16_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s072_24_06_05_11_56_05_Lc_62dB_Ncl228Npulse_3072_L_']
+subjD['s072R'] = ['Results/s072/', 'CMclickOAE_s072_24_06_05_12_21_26_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s072_24_06_05_12_19_15_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s072_24_06_05_12_17_07_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s072_24_06_05_12_14_56_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s072_24_06_05_12_12_47_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s072_24_06_05_12_10_36_Lc_62dB_Ncl228Npulse_3072_R_']
+
+subjD['s063L'] = ['Results/s063/', 'CMclickOAE_s063_24_06_05_13_31_28_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_29_37_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_27_46_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_25_56_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_24_04_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_21_43_Lc_62dB_Ncl228Npulse_3072_L_']
+subjD['s063R'] = ['Results/s063/', 'CMclickOAE_s063_24_06_05_14_02_23_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_14_00_27_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_58_36_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_56_24_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_54_14_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_52_20_Lc_62dB_Ncl228Npulse_3072_R_']
+
+subjN = 's063R'
 
 
 
@@ -771,6 +796,7 @@ def func(A, G0, Act, alpha):
 # List of starting rows (one for each column of ioLinG)
 start_rows = np.zeros(ioLinG.shape[1])  # Example values, adjust as needed
 
+fig, ax = plt.subplots()
 # Dictionary to store extracted fitting information for each frequency
 fit_results = {}
 
@@ -785,7 +811,7 @@ for col_idx in range(ioLinG.shape[1]):
         if user_input.lower() == 'e':
             # Move to the next point if 'e' is pressed
             done = True
-            plt.close('all')
+            #plt.close('all')
             start_rows[col_idx] = start_row
             continue
         else:
@@ -829,7 +855,7 @@ for col_idx in range(ioLinG.shape[1]):
         # Plot the results
         x_fit = np.linspace(min(x), max(x) + 0.3, 1000)
         y_fit = func(x_fit, *popt)
-        fig, ax = plt.subplots()
+        plt.clf()
         plt.scatter(Lvect[start_row:], 20 * np.log10(y), label='Data', color='red')
         plt.plot(20 * np.log10(x_fit / (np.sqrt(2) * 2e-5)), 20 * np.log10(y_fit), label='Fitted Curve', color='blue')
         plt.xlabel('Level (dB peSPL)')
