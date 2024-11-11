@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jul 16 15:18:20 2024
+Created on Wed Nov  6 14:23:04 2024
 
-
-script for swept sine rate comparison
-
-
-
-@author: VV
+@author: audiobunka
 """
+
+
+
 
 from scipy.io import loadmat
 import os
@@ -19,56 +17,32 @@ import matplotlib.pyplot as plt
 import UserModules.pyDPOAEmodule as pDP
     
 plt.close('all')
-# for s056
-path = "Results/s004/speedeffect/"
-subj_name = 's004'
-
-# left ear
-#ear = 'left'
-#deL_r2 = '24_02_14_14_13_59'
-#deL_r4 = '24_02_14_14_15_13' # left ear, L2=30
-#deL_r8 = '24_02_14_14_16_10'
-#deL_r12 = '24_02_14_14_17_04'
-
-
-path = "Results/s003/rate/"
-#subj_name = 's003'
-
-# left ear
-ear = 'left'
-deL_r2 = '24_03_20_12_59_37'
-deL_r4 = '24_03_20_13_00_47' # left ear, L2=30
-deL_r6 = '24_03_20_13_01_36'
-deL_r8 = '24_03_20_13_02_24'
-deL_r10 = '24_03_20_13_03_16'
 
 
 f2f1 = 1.2
 
-fsamp = 96000; lat = 16448
-
+fsamp = 96000
+    
 subjD = {}
 
+subjD['s004R'] = ['Results/TW/subject4_4phase/aa/', '24_05_21_12_25_26_F2b_8000Hz', '24_05_21_12_27_01_F2b_8000Hz', '24_05_21_12_28_32_F2b_8000Hz', '24_05_21_12_30_03_F2b_8000Hz']
 
-subjD['s055L_L2_30'] = ['Results/s055/sweep_rate/', '24_06_04_14_06_37_F2b', '24_06_04_14_08_26_F2b', '24_06_04_14_10_17_F2b']
-subjD['s055L_L2_55'] = ['Results/s055/sweep_rate/', '24_06_04_14_00_59_F2b', '24_06_04_14_02_32_F2b', '24_06_04_14_03_51_F2b']
-subjD['s055R_L2_30'] = ['Results/s055/sweep_rate/', 'p4swDPOAE_s055_24_06_04_16_54_22_F2b_8000HzF2a_500HzL1_51dB_L2_30dB_f2f1_120.0_Oct_20_R_', 'p4swDPOAE_s055_24_06_04_16_56_29_F2b_8000HzF2a_500HzL1_51dB_L2_30dB_f2f1_120.0_Oct_80_R_', 'p4swDPOAE_s055_24_06_04_16_58_25_F2b_8000HzF2a_500HzL1_51dB_L2_30dB_f2f1_120.0_Oct_120_R_', 'p4swDPOAE_s055_24_06_04_14_17_53_F2b_8000HzF2a_500HzL1_61dB_L2_55dB_f2f1_120.0_Oct_20_R_', 'p4swDPOAE_s055_24_06_04_14_19_42_F2b_8000HzF2a_500HzL1_61dB_L2_55dB_f2f1_120.0_Oct_80_R_', 'p4swDPOAE_s055_24_06_04_14_21_18_F2b_8000HzF2a_500HzL1_61dB_L2_55dB_f2f1_120.0_Oct_120_R_', 'p4swDPOAE_s055_24_06_04_16_48_24_F2b_8000HzF2a_500HzL1_61dB_L2_55dB_f2f1_120.0_Oct_20_R_', 'p4swDPOAE_s055_24_06_04_16_50_29_F2b_8000HzF2a_500HzL1_61dB_L2_55dB_f2f1_120.0_Oct_80_R_', 'p4swDPOAE_s055_24_06_04_16_51_50_F2b_8000HzF2a_500HzL1_61dB_L2_55dB_f2f1_120.0_Oct_120_R_']
+subjD['s004R2'] = ['Results/TW/subject4_4phase/', '24_05_21_12_51_16_F2b_8000Hz', '24_05_21_12_52_57_F2b_8000Hz', '24_05_21_12_54_45_F2b_8000Hz', '24_05_21_12_56_19_F2b_8000Hz']
 
-#subjD['L2_55_dB_L'] = ['Results/s055/sweep_rate/', '24_06_04_14_00_59_F2b_8000Hz', '24_06_04_14_02_32_F2b_8000Hz', '24_06_04_14_03_51_F2b_8000Hz']
-#subjD['L2_30_dB_L'] = ['Results/s055/sweep_rate/', '24_06_04_14_06_37_F2b_8000Hz', '24_06_04_14_08_26_F2b_8000Hz', '24_06_04_14_10_17_F2b_8000Hz']
-#subjD['L2_55_dB_R'] = ['Results/s055/sweep_rate/', '24_06_04_14_17_53_F2b_8000Hz', '24_06_04_14_19_42_F2b_8000Hz', '24_06_04_14_21_18_F2b_8000Hz', '24_06_04_16_48_24_F2b_8000Hz', '24_06_04_16_50_29_F2b_8000Hz', '24_06_04_16_51_50_F2b_8000Hz']
-#subjD['L2_30_dB_R'] =  ['Results/s055/sweep_rate/', '24_06_04_16_54_22_F2b_8000Hz', '24_06_04_16_56_29_F2b_8000Hz', '24_06_04_16_58_25_F2b_8000Hz']
+subjD['s011R'] = ['Results/TW/s011_4phase/', '24_05_21_13_30_14_F2b_8000Hz', '24_05_21_13_31_47_F2b_8000Hz', '24_05_21_13_33_42_F2b_8000Hz', '24_05_21_13_35_43_F2b_8000Hz', '24_05_21_13_37_29_F2b_8000Hz', '24_05_21_13_39_34_F2b_8000Hz', '24_05_21_13_40_02_F2b_8000Hz']
 
-#subjD['L2_50_dB_L'] = ['Results/s089/R/', '24_07_01_11_27_00_F2b_8000Hz', '24_07_01_11_28_39_F2b_8000Hz', '24_07_01_11_30_23_F2b_8000Hz', '24_07_01_11_31_37_F2b_8000Hz']
-#subjD['L2_55_dB_L'] = ['Results/s089/R/', '24_07_01_11_33_17_F2b_8000Hz', '24_07_01_11_34_49_F2b_8000Hz', '24_07_01_11_36_08_F2b_8000Hz', '24_07_01_11_37_15_F2b_8000Hz']
+#subjD['s005L'] = ['Results/TW/subject5_4phase/', '24_07_16_08_51_10_F2b_8000Hz', '24_07_16_08_53_18_F2b_8000Hz', '24_07_16_08_54_49_F2b_8000Hz', '24_07_16_08_56_20_F2b_8000Hz', '24_07_16_08_58_31_F2b_8000Hz', '24_07_16_12_48_10_F2b_8000Hz', '24_07_16_12_50_23_F2b_8000Hz', '24_07_16_12_51_52_F2b_8000Hz', '24_07_16_12_53_23_F2b_8000Hz', '24_07_16_12_55_28_F2b_8000Hz']
+#subjD['s005R'] =  ['Results/TW/subject5_4phase/', '24_07_16_09_01_28_F2b_8000Hz', '24_07_16_09_03_37_F2b_8000Hz', '24_07_16_09_05_10_F2b_8000Hz', '24_07_16_09_06_39_F2b_8000Hz', '24_07_16_09_08_09_F2b_8000Hz', '24_07_16_12_58_25_F2b_8000Hz', '24_07_16_12_59_56_F2b_8000Hz', '24_07_16_13_01_40_F2b_8000Hz', '24_07_16_13_03_21_F2b_8000Hz', '24_07_16_13_04_39_F2b_8000Hz', '24_07_16_13_05_21_F2b_8000Hz']
 
+subjD['s005La'] =  ['Results/TW/subject5_4phase/after/', '24_07_16_12_48_10_F2b_8000Hz', '24_07_16_12_50_23_F2b_8000Hz', '24_07_16_12_51_52_F2b_8000Hz', '24_07_16_12_53_23_F2b_8000Hz', '24_07_16_12_55_28_F2b_8000Hz']
+subjD['s005Ra'] = ['Results/TW/subject5_4phase/after/', '24_07_16_12_58_25_F2b_8000Hz', '24_07_16_12_59_56_F2b_8000Hz', '24_07_16_13_01_40_F2b_8000Hz', '24_07_16_13_03_21_F2b_8000Hz', '24_07_16_13_04_39_F2b_8000Hz', '24_07_16_13_05_21_F2b_8000Hz']
 
-subjD['s089L_L2_50'] = ['Results/s089/R/', '24_07_01_11_27_00_F2b_8000Hz', '24_07_01_11_28_39_F2b_8000Hz', '24_07_01_11_30_23_F2b_8000Hz', '24_07_01_11_31_37_F2b_8000Hz']
-subjD['s089L_L2_55'] =  ['Results/s089/R/', '24_07_01_11_33_17_F2b_8000Hz', '24_07_01_11_34_49_F2b_8000Hz', '24_07_01_11_36_08_F2b_8000Hz', '24_07_01_11_37_15_F2b_8000Hz']
-subjD['s089L_L2_65'] = ['Results/s089/R/', '24_07_04_11_16_56_F2b_8000Hz']
+subjD['s005Lb'] =  ['Results/TW/subject5_4phase/before/', '24_07_16_08_51_10_F2b_8000Hz', '24_07_16_08_53_18_F2b_8000Hz', '24_07_16_08_54_49_F2b_8000Hz', '24_07_16_08_56_20_F2b_8000Hz', '24_07_16_08_58_31_F2b_8000Hz']
+subjD['s005Rb'] =  ['Results/TW/subject5_4phase/before/', '24_07_16_09_01_28_F2b_8000Hz', '24_07_16_09_03_37_F2b_8000Hz', '24_07_16_09_05_10_F2b_8000Hz', '24_07_16_09_06_39_F2b_8000Hz', '24_07_16_09_08_09_F2b_8000Hz']
 
-#subjN = 'L2_55_dB_L'
-subjN = 's089L_L2_55'
+subjN = 's005Ra'
+
+#subjN = 's055L_L2_55'
 
 def mother_wavelet2(Nw,Nt,df,dt):
     vlnky = np.zeros((Nt,Nw))
@@ -106,7 +80,7 @@ def wavelet_filterDPOAE(signal, wavelet_basis,fx):
     
     
     
-    for k in range(14,400):
+    for k in range(20,400):
         # Compute the Fourier transform of the wavelet basis function
         wbtf = 2*np.fft.fft(wavelet_basis[:, k])/len(wavelet_basis[:, k])
         
@@ -273,7 +247,8 @@ def getDPgram(path,DatePat):
             data = loadmat(path+ dir_list[k])
             #lat = 16448
             rateOct = data['r'][0][0]
-            lat = data['lat_SC'][0][0]
+            #lat = data['lat_SC'][0][0]
+            lat = 4180
             print([path+ dir_list[k]])
             print(f"SC latency: {lat}")
             octpersec = data['r'][0][0]
@@ -283,7 +258,7 @@ def getDPgram(path,DatePat):
             L1dB = data['L1'][0][0]
             L2dB = data['L2'][0][0]
             fsamp = data['fsamp'][0][0]
-            GainMic = 40
+            GainMic = 0
             
             recSig1 = data['recsigp1'][:,0]
             recSig2 = data['recsigp2'][:,0]
@@ -430,200 +405,22 @@ def getDPgram(path,DatePat):
     noiseM4[np.abs(noiseM4)>Theta4] = np.nan
     '''
         
-    return DPgrR, rateOct, [N01chosen, N02chosen, N03chosen, N04chosen]
+    return DPgrR, rateOct, L2dB, f2f1, [N01chosen, N02chosen, N03chosen, N04chosen]
 
 
 
 DPgr = {}
-
+L2list = []
+f2f1list = []
 for i in range(1,len(subjD[subjN])):
 
-    DPgrD, rateOct, Nchosen = getDPgram(subjD[subjN][0], subjD[subjN][i])
-    DPgr[str(rateOct)] = DPgrD
-    DPgr[str(rateOct)+'ch'] = Nchosen
-    
+    DPgrD, rateOct, L2, f2f1, Nchosen = getDPgram(subjD[subjN][0], subjD[subjN][i])
+    DPgr[str(L2)] = DPgrD
+    DPgr[str(L2)+'ch'] = Nchosen
+    L2list.append(L2)  # list of L2 values
+    f2f1list.append(f2f1)
     #DPgrD10 = getDPgram(path, deL_r10)
 
-#%%
-
-
-
-plt.close('all')
-
-
-pREF = np.sqrt(2)*2e-5
-
-Nopak = 4  # nuber of presentation
-
-fxx2 = DPgr['2']['fxx']
-
-f2f1 = 1.2
-f2xx = f2f1*fxx2/(2-f2f1)  # convert fdp to f2
-cycle = np.pi*2
-
-if 1==1:  # s055L NL
-    
-    # Create the figure and subplots
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(6, 4))  # 2 rows, 1 column
-    
-    # Plot amplitude data on ax1
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['2']['NLgr']) / pREF), color='C0')
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['8']['NLgr']) / pREF), color='C1', alpha=0.7)
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['12']['NLgr']) / pREF), color='C2', alpha=0.7)
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['2']['NLgrN']) / pREF), color='C0', linestyle=':')
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['8']['NLgrN']) / pREF), color='C1', linestyle=':', alpha=0.7)
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['12']['NLgrN']) / pREF), color='C2', linestyle=':', alpha=0.7)
-    ax1.set_xlim([0.5, 8])
-    ax1.set_ylim([-30, 20])
-    ax1.set_ylabel('Amplitude (dB SPL)')
-    ax1.set_xticklabels([])  # Remove x-tick labels for ax1
-    ax1.legend(['2 oct/sec,' + str(np.sum(DPgr['2ch'])) + ' rep', '8 oct/sec, ' + str(np.sum(DPgr['8ch'])) + ' rep', '12 oct/sec, ' + str(np.sum(DPgr['12ch'])) + ' rep', 'NF 2 oct/sec', 'NF 8 oct/sec', 'NF 12 oct/sec'], bbox_to_anchor=(1.05, 1), loc='upper left')
-    
-    # Plot phase data on ax2
-    idxUnwr = np.where(f2xx >= 500)[0][0]
-    ax2.plot(f2xx[idxUnwr:len(f2xx) // 2 + 1] / 1000, np.unwrap(np.angle(DPgr['2']['NLgr'][idxUnwr:])) / cycle, color='C0')
-    ax2.plot(f2xx[idxUnwr:len(f2xx) // 2 + 1] / 1000, np.unwrap(np.angle(DPgr['8']['NLgr'][idxUnwr:])) / cycle , color='C1', alpha=0.7)
-    ax2.plot(f2xx[idxUnwr:len(f2xx) // 2 + 1] / 1000, np.unwrap(np.angle(DPgr['12']['NLgr'][idxUnwr:])) / cycle, color='C2', alpha=0.7)
-    ax2.set_xlim([0.5, 8])
-    ax2.set_ylim([-4, 0])
-    ax2.set_ylabel('Phase (cycles)')
-    ax2.set_xlabel('Frequency $f_{2}$ (kHz)')
-    
-    # Customize the ticks to be inside the plot
-    for ax in [ax1, ax2]:
-        ax.tick_params(axis='both', direction='in', length=3)  # 'in' sets ticks inside
-    
-    
-    
-    # Adjust the y-axis label positions to align them
-    label_y_pos = 0.5
-    ax1.yaxis.set_label_coords(-0.1, label_y_pos)
-    ax2.yaxis.set_label_coords(-0.1, label_y_pos)
-    
-    
-    # Adjust spacing between the panels with tight_layout
-    plt.tight_layout(pad=0.2, h_pad=0.3, w_pad=0.5)
-    
-    
-    
-    # Display the plot
-    plt.show()
-    
-    
-    fileName = 'DPgrNL' + subjN + '.jpg' 
-    fileFolder = 'Figures/'
-    plt.savefig(fileFolder + fileName, format='jpg', dpi=300, bbox_inches='tight')
-
-
-
-if 1==1:  # s055L All
-    
-    # Create the figure and subplots
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(6, 4))  # 2 rows, 1 column
-    
-    # Plot amplitude data on ax1
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['2']['DPgr']) / pREF), color='C0')
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['8']['DPgr']) / pREF), color='C1', alpha=0.7)
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['12']['DPgr']) / pREF), color='C2', alpha=0.7)
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['2']['DPgrN']) / pREF), color='C0', linestyle=':')
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['8']['DPgrN']) / pREF), color='C1', linestyle=':', alpha=0.7)
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['12']['DPgrN']) / pREF), color='C2', linestyle=':', alpha=0.7)
-    ax1.set_xlim([0.5, 8])
-    ax1.set_ylim([-30, 20])
-    ax1.set_ylabel('Amplitude (dB SPL)')
-    ax1.set_xticklabels([])  # Remove x-tick labels for ax1
-    ax1.legend(['2 oct/sec,' + str(np.sum(DPgr['2ch'])) + ' rep', '8 oct/sec, ' + str(np.sum(DPgr['8ch'])) + ' rep', '12 oct/sec, ' + str(np.sum(DPgr['12ch'])) + ' rep', 'NF 2 oct/sec', 'NF 8 oct/sec', 'NF 12 oct/sec'], bbox_to_anchor=(1.05, 1), loc='upper left')
-    
-    # Plot phase data on ax2
-    idxUnwr = np.where(f2xx >= 500)[0][0]
-    ax2.plot(f2xx[idxUnwr:len(f2xx) // 2 + 1] / 1000, np.unwrap(np.angle(DPgr['2']['DPgr'][idxUnwr:])) / cycle, color='C0')
-    ax2.plot(f2xx[idxUnwr:len(f2xx) // 2 + 1] / 1000, np.unwrap(np.angle(DPgr['8']['DPgr'][idxUnwr:])) / cycle , color='C1', alpha=0.7)
-    ax2.plot(f2xx[idxUnwr:len(f2xx) // 2 + 1] / 1000, np.unwrap(np.angle(DPgr['12']['DPgr'][idxUnwr:])) / cycle, color='C2', alpha=0.7)
-    ax2.set_xlim([0.5, 8])
-    ax2.set_ylim([-4, 0])
-    ax2.set_ylabel('Phase (cycles)')
-    ax2.set_xlabel('Frequency $f_{2}$ (kHz)')
-    
-    # Customize the ticks to be inside the plot
-    for ax in [ax1, ax2]:
-        ax.tick_params(axis='both', direction='in', length=3)  # 'in' sets ticks inside
-    
-    
-    
-    # Adjust the y-axis label positions to align them
-    label_y_pos = 0.5
-    ax1.yaxis.set_label_coords(-0.1, label_y_pos)
-    ax2.yaxis.set_label_coords(-0.1, label_y_pos)
-    
-    
-    # Adjust spacing between the panels with tight_layout
-    plt.tight_layout(pad=0.2, h_pad=0.3, w_pad=0.5)
-    
-    
-    
-    # Display the plot
-    plt.show()
-    
-    
-    fileName = 'DPgr' + subjN + '.jpg' 
-    fileFolder = 'Figures/'
-    plt.savefig(fileFolder + fileName, format='jpg', dpi=300, bbox_inches='tight')
-
-
-if 1==0:  # s089L
-    
-    # Create the figure and subplots
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(6, 4))  # 2 rows, 1 column
-    
-    # Plot amplitude data on ax1
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['2']['NLgr']) / pREF), color='C0')
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['4']['NLgr']) / pREF), color='C1', alpha=0.7)
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['8']['NLgr']) / pREF), color='C2', alpha=0.7)
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['2']['NLgrN']) / pREF), color='C0', linestyle=':')
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['4']['NLgrN']) / pREF), color='C1', linestyle=':', alpha=0.7)
-    ax1.plot(f2xx[:len(f2xx) // 2 + 1] / 1000, 20 * np.log10(np.abs(DPgr['8']['NLgrN']) / pREF), color='C2', linestyle=':', alpha=0.7)
-    ax1.set_xlim([0.5, 8])
-    ax1.set_ylim([-30, 20])
-    ax1.set_ylabel('Amplitude (dB SPL)')
-    ax1.set_xticklabels([])  # Remove x-tick labels for ax1
-    ax1.legend(['2 oct/sec, 20 rep', '4 oct/sec, 23 rep', '8 oct/sec, 19 rep', 'NF 2 oct/sec', 'NF 4 oct/sec', 'NF 8 oct/sec'], bbox_to_anchor=(1.05, 1), loc='upper left')
-    
-    # Plot phase data on ax2
-    idxUnwr = np.where(f2xx >= 500)[0][0]
-    ax2.plot(f2xx[idxUnwr:len(f2xx) // 2 + 1] / 1000, np.unwrap(np.angle(DPgr['2']['NLgr'][idxUnwr:])) / cycle, color='C0')
-    ax2.plot(f2xx[idxUnwr:len(f2xx) // 2 + 1] / 1000, np.unwrap(np.angle(DPgr['4']['NLgr'][idxUnwr:])) / cycle , color='C1', alpha=0.7)
-    ax2.plot(f2xx[idxUnwr:len(f2xx) // 2 + 1] / 1000, np.unwrap(np.angle(DPgr['8']['NLgr'][idxUnwr:])) / cycle, color='C2', alpha=0.7)
-    ax2.set_xlim([0.5, 8])
-    ax2.set_ylim([-4, 0])
-    ax2.set_ylabel('Phase (cycles)')
-    ax2.set_xlabel('Frequency $f_{2}$ (kHz)')
-    
-    # Customize the ticks to be inside the plot
-    for ax in [ax1, ax2]:
-        ax.tick_params(axis='both', direction='in', length=3)  # 'in' sets ticks inside
-    
-    
-    
-    # Adjust the y-axis label positions to align them
-    label_y_pos = 0.5
-    ax1.yaxis.set_label_coords(-0.1, label_y_pos)
-    ax2.yaxis.set_label_coords(-0.1, label_y_pos)
-    
-    
-    # Adjust spacing between the panels with tight_layout
-    plt.tight_layout(pad=0.2, h_pad=0.3, w_pad=0.5)
-    
-    
-    
-    # Display the plot
-    plt.show()
-    
-    plt.savefig('DPgr_sweeprate_s089L_55dB.jpg', format='jpg', dpi=300, bbox_inches='tight')
-
-
-
-
-#%%
 
 def InfoOnData(data_dict):
     
@@ -647,11 +444,10 @@ def InfoOnData(data_dict):
             row = [integer_part] + value_list
             # Append the row to the table
             table.append(row)
-            
     
     
     # Define the headers
-    header_main = "r (oct/sec)"
+    header_main = "L2 (dB FPL)"
     header_phases = ["Phase 1", "Phase 2", "Phase 3", "Phase 4"]
     header_full = [header_main] + header_phases
     
@@ -663,4 +459,322 @@ def InfoOnData(data_dict):
         print(f"{row[0]:<15} {row[1]:<10} {row[2]:<10} {row[3]:<10} {row[4]:<10}")
 
 InfoOnData(DPgr)
+
+
+
+#%%
+
+
+fig,(ax1,ax2) = plt.subplots(2,1)
+pREF = np.sqrt(2)*2e-5
+
+Nopak = 4  # nuber of presentation
+
+fxx = DPgr['65']['fxx']
+f2xx = f2f1list[-1]*fxx[:int(len(fxx)//2)+1]/(2-f2f1)
+cList = ['C1','C3','C2','C4','C5','C6','C7','C8','C9','C10','C11']
+#fxx8 = DPgr['12']['fxx']
+for i in range(len(L2list)):
+#ax.plot(fxx[:int(len(fxx)//2)+1],20*np.log10(np.abs(DPgr['30']['NLgr'])/pREF),color='C1')
+    ax1.plot(f2xx,20*np.log10(np.abs(DPgr[str(L2list[i])]['NLgr'])/pREF),color=cList[i],label=str(L2list[i]))
+    ax1.plot(f2xx,20*np.log10(np.abs(DPgr[str(L2list[i])]['NLgrN'])/pREF),':',color=cList[i],label='_nolegend_')
+
+ax1.set_xlim([500,8000])
+ax1.set_ylim([-40,20])
+ax1.legend()
+ax1.set_ylabel('Amplitude (dB SPL)')
+
+cycle = 2*np.pi
+F2start = 700
+idx1 = np.where(f2xx>=F2start)[0][0]  # freq index for unwraping
+for i in range(len(L2list)):
+#ax.plot(fxx[:int(len(fxx)//2)+1],20*np.log10(np.abs(DPgr['30']['NLgr'])/pREF),color='C1')
+    ax2.plot(f2xx[idx1:],np.unwrap(np.angle(DPgr[str(L2list[i])]['NLgr'][idx1:]))/cycle,color=cList[i],label=str(L2list[i]))
     
+ax2.set_ylabel('Phase (cycles)')
+
+
+ax2.set_xlim([500,8000])
+ax2.set_ylim([-5,1])
+ax2.set_xlabel('Frequency $f_{2}$ (kHz)')
+
+# Convert x-ticks to kHz
+ax1.set_xticks([1000, 2000, 3000, 4000,5000,6000,7000,8000])
+ax1.set_xticklabels([1, 2, 3, 4, 5, 6, 7, 8])  # Update x-tick labels to kHz
+ax2.set_xticks([1000, 2000, 3000, 4000,5000,6000,7000,8000])
+ax2.set_xticklabels([1, 2, 3, 4, 5, 6, 7, 8])  # Update x-tick labels to kHz
+
+#ax2.set_xticks([500, 1000, 2000, 4000, 8000])
+#ax2.set_xticklabels([0.5, 1, 2, 4, 8])  # Update x-tick labels to kHz
+
+# Add subject name and ear information to the bottom-right corner
+if subjN[-1] == 'L':
+    ear = 'left ear'
+elif subjN[-1] == 'R':
+    ear = 'right ear'
+subject_name = subjN[:-1]  # Exclude the last character from subject name
+text_to_display = f'{subject_name} ({ear})'
+
+# Increase font sizes by approximately 50%
+label_fontsize = 16  # Adjust as necessary
+legend_fontsize = 12
+text_fontsize = 13
+# Add the text in the bottom-right corner of the plot
+ax2.text(0.3, 0.2, text_to_display, transform=ax2.transAxes, 
+        fontsize=text_fontsize, verticalalignment='top', horizontalalignment='right')
+
+
+# Save the second plot as well (optional)
+plt.savefig('Figures/DPgrams/dpgr' + subjN + '.png', format='png', dpi=300)  # Save the second graph
+
+
+#%% visualization
+
+
+import numpy as np
+
+CF = [1000,1500,2000,3000]
+CFidx = np.zeros_like(CF)
+
+DPioNL = []
+GAdpNL = []
+NOxNL = []  # Background noise array
+for i in range(len(CF)):
+    
+    CFidx[i] = np.where(f2xx>=CF[i])[0][0]
+
+    IOx = []
+    GAx = []
+    NOx = []  # Background noise array
+    for j in range(len(L2list)):
+        IOx.append(20*np.log10(np.abs(DPgr[str(L2list[j])]['NLgr'][CFidx[i]])/pREF))
+        GAx.append(IOx[j]-L2list[j])
+        # Extract background noise and convert to dB
+        NOx.append(20 * np.log10(np.abs(DPgr[str(L2list[j])]['NLgrN'][CFidx[i]])/pREF))
+
+    DPioNL.append(IOx)
+    GAdpNL.append(GAx)
+    NOxNL.append(NOx)
+
+data_line = []
+noise_lines = []
+fig, ax = plt.subplots()
+data_line.append(ax.plot(L2list, DPioNL[0], label=r'${\it f}_2$ = 1 kHz'))
+data_line.append(ax.plot(L2list, DPioNL[1], label=r'${\it f}_2$ = 1.5 kHz'))
+data_line.append(ax.plot(L2list, DPioNL[2], label=r'${\it f}_2$ = 2 kHz'))
+data_line.append(ax.plot(L2list, DPioNL[3], label=r'${\it f}_2$ = 3 kHz'))
+noise_lines.append(ax.plot(L2list, NOxNL[0], color=data_line[0][0].get_color(), 
+                               linestyle=':', linewidth=0.5, label="_nolegend_"))
+noise_lines.append(ax.plot(L2list, NOxNL[1], color=data_line[1][0].get_color(), 
+                               linestyle=':', linewidth=0.5, label="_nolegend_"))
+noise_lines.append(ax.plot(L2list, NOxNL[2], color=data_line[2][0].get_color(), 
+                               linestyle=':', linewidth=0.5, label="_nolegend_"))                   
+noise_lines.append(ax.plot(L2list, NOxNL[3], color=data_line[3][0].get_color(), 
+                               linestyle=':', linewidth=0.5, label="_nolegend_"))                   
+
+ax.tick_params(axis='both', direction='in')
+
+# Convert L2list to a NumPy array for element-wise operations
+L2array = np.array(L2list)
+
+# Plot a gray dotted line with slope 1, shifted 35 dB down
+ax.plot(L2array, L2array - 35, color='gray', linestyle='--', linewidth=1)
+
+# Set x and y limits to the specified values
+ax.set_xlim([20, 70])  # X-axis limits from 20 dB to 70 dB
+ax.set_ylim([-20, 20])  # Y-axis limits from -20 dB to 20 dB
+
+# Increase font sizes by approximately 50%
+label_fontsize = 16  # Adjust as necessary
+legend_fontsize = 12
+text_fontsize = 13
+
+
+# Labels and legend with increased font size
+ax.set_ylabel('Amplitude (dB SPL)', fontsize=label_fontsize)
+ax.set_xlabel('$L_2$ (dB SPL)', fontsize=label_fontsize)
+ax.legend(fontsize=legend_fontsize)
+
+# Add subject name and ear information to the bottom-right corner
+if subjN[-1] == 'L':
+    ear = 'left ear'
+elif subjN[-1] == 'R':
+    ear = 'right ear'
+subject_name = subjN[:-1]  # Exclude the last character from subject name
+text_to_display = f'{subject_name} ({ear})'
+
+# Add the text in the bottom-right corner of the plot
+ax.text(0.3, 0.05, text_to_display, transform=ax.transAxes, 
+        fontsize=text_fontsize, verticalalignment='top', horizontalalignment='right')
+
+# Increase tick label font sizes
+ax.tick_params(axis='both', which='major', labelsize=label_fontsize)
+
+# Adjust layout to fit everything
+plt.tight_layout()
+
+# Second plot (optional)
+#fig, ax = plt.subplots()
+#ax.plot(L2list, GAdpNL[0])
+#ax.plot(L2list, GAdpNL[1])
+#ax.plot(L2list, GAdpNL[2])
+#ax.plot(L2list, GAdpNL[3])
+
+# Optionally, you can also add the shifted line here if relevant
+# ax.plot(L2array, L2array - 35, color='gray', linestyle='--', linewidth=1)
+
+# Set x and y limits for the second plot (if needed)
+# ax.set_xlim([20, 70])  # X-axis limits for the second plot
+# ax.set_ylim([-20, 20])  # Y-axis limits for the second plot
+
+# Adjust layout for the second plot
+plt.tight_layout()
+
+#%% fitting
+
+
+from numpy.polynomial.polynomial import Polynomial
+from scipy.io import savemat
+import numpy as np
+from numpy.polynomial import Polynomial
+
+def fit_polynomial(L2, y_data, degree=4, max_slope_limit=50):
+    """
+    Fit a polynomial to the given data and calculate key estimates.
+
+    Parameters:
+    - L2: array-like, input x-axis values (L2 levels)
+    - y_data: array-like, input y-axis values (measured amplitudes)
+    - degree: int, the degree of the polynomial to fit (default is 4)
+    - max_slope_limit: float, the maximum allowable slope (default is 50 dB)
+
+    Returns:
+    - p: Polynomial, the fitted polynomial object
+    - max_slope: float, maximum slope of the fitted curve (capped at max_slope_limit)
+    - L2_at_max_slope: float, L2 level at maximum slope
+    - OAE_level_at_max_slope: float, OAE level at maximum slope
+    - L2_half_slope: float, L2 level where slope equals 1/2
+    - OAE_level_half_slope: float, OAE level at slope 1/2
+    - L2_half_max_slope: float, L2 level where slope equals max_slope/2 (above max slope)
+    - OAE_level_half_max_slope: float, OAE level at max_slope/2
+    """
+
+    # Fit the polynomial
+    p = Polynomial.fit(L2, y_data, deg=degree)
+
+    # Generate fitted values
+    x_fit = np.linspace(np.min(L2), np.max(L2), 100)
+    y_fit = p(x_fit)
+
+    
+
+    # Calculate slopes numerically for the fitted data
+    dy = np.gradient(y_fit, x_fit)
+
+    # Find the maximum slope and its corresponding L2 level
+    max_slope_index = np.argmax(dy[:70])
+    max_slope = dy[max_slope_index]
+
+    # Cap the maximum slope at the specified limit
+    if max_slope > max_slope_limit:
+        max_slope = max_slope_limit
+
+    L2_at_max_slope = x_fit[max_slope_index]
+    OAE_level_at_max_slope = y_fit[max_slope_index]
+
+    # Calculate the target slopes (1/2 and max_slope/2)
+    slope_half = 1 / 2
+    slope_half_max = max_slope / 2
+
+    # Find the first point where the slope is below or equal to 1/2, after the max slope
+    indices_above_max_slope = np.where(x_fit > L2_at_max_slope)[0]
+    half_slope_index = np.where(dy[indices_above_max_slope] <= slope_half)[0]
+
+    if len(half_slope_index) > 0:
+        L2_half_slope = x_fit[indices_above_max_slope[half_slope_index[0]]]
+        OAE_level_half_slope = y_fit[indices_above_max_slope[half_slope_index[0]]]
+    else:
+        L2_half_slope = None
+        OAE_level_half_slope = None
+
+    # Find the first point where the slope is below or equal to max_slope/2, after the max slope
+    half_max_slope_index = np.where(dy[indices_above_max_slope] <= slope_half_max)[0]
+    if len(half_max_slope_index) > 0:
+        L2_half_max_slope = x_fit[indices_above_max_slope[half_max_slope_index[0]]]
+        OAE_level_half_max_slope = y_fit[indices_above_max_slope[half_max_slope_index[0]]]
+    else:
+        L2_half_max_slope = None
+        OAE_level_half_max_slope = None
+
+    return (p, max_slope, L2_at_max_slope, OAE_level_at_max_slope,
+            L2_half_slope, OAE_level_half_slope,
+            L2_half_max_slope, OAE_level_half_max_slope)
+
+
+# Example usage
+
+L2 = np.array(L2list)
+
+# Create a dictionary to hold all estimated results
+estimated_results = {}
+for i in range(4):  # Loop through each dataset index
+   
+    y_data = DPioNL[i]
+    # Call the fitting function
+    fit_results = fit_polynomial(L2, y_data, degree=4)
+    
+    x_fit = np.linspace(np.min(L2), np.max(L2), 100)  # Smooth curve for the fit
+    y_fit = fit_results[0](x_fit)
+    
+    # Plot fitted curve using the same color as the data but exclude from legend
+    ax.plot(x_fit, y_fit, color=data_line[i][0].get_color(), linestyle='--', linewidth=1, 
+            label="_nolegend_")  # No label in the legend for the fit
+
+    # Extract key points from the fit results
+    L2_at_max_slope = fit_results[2]
+    OAE_level_at_max_slope = fit_results[3]
+    L2_half_slope = fit_results[4]  # Slope of 1/2
+    OAE_level_half_slope = fit_results[5]
+    L2_half_max_slope = fit_results[6]  # Slope of max_slope / 2
+    OAE_level_half_max_slope = fit_results[7]
+
+    # Plot the point where the slope is maximum but exclude from legend
+    ax.plot(L2_at_max_slope, OAE_level_at_max_slope, 'o', color=data_line[i][0].get_color(), 
+            markersize=8, label="_nolegend_")  # Circle marker, no legend
+
+    # Plot the point where the slope is 1/2 but exclude from legend
+    if L2_half_slope is not None:
+        ax.plot(L2_half_slope, OAE_level_half_slope, 's', color=data_line[i][0].get_color(), 
+                markersize=8, label="_nolegend_")  # Square marker, no legend
+
+    # Plot the point where the slope is max_slope/2 but exclude from legend
+    if L2_half_max_slope is not None:
+        ax.plot(L2_half_max_slope, OAE_level_half_max_slope, '^', color=data_line[i][0].get_color(), 
+                markersize=8, label="_nolegend_")  # Triangle marker, no legend
+
+    # Store results in the dictionary
+    estimated_results[f'fit_results_{i}'] = {
+        'fitted_polynomial': fit_results[0],
+        'max_slope': fit_results[1],
+        'L2_at_max_slope': fit_results[2],
+        'OAE_level_at_max_slope': fit_results[3],
+        'L2_half_slope': fit_results[4],
+        'OAE_level_half_slope': fit_results[5],
+        'L2_half_max_slope': fit_results[6],
+        'OAE_level_half_max_slope': fit_results[7],
+    }
+
+# Show legend only for data
+ax.legend()
+
+
+# Save the second plot as well (optional)
+plt.savefig('Figures/DPgrams/io' + subjN + '.png', format='png', dpi=300)  # Save the second graph
+
+# Save the results to a .mat file
+filename = f'estData{subjN}.mat'
+savemat(filename, estimated_results)
+
+print(f'Saved estimated results to {filename}')
+
+
