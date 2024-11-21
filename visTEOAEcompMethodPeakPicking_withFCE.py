@@ -46,20 +46,21 @@ def giveMatricesTEOAE(FolderName,FileName,Nopak,latency_SC):
         Nclicks = data['Nclicks'][0][0]
         fsamp = data['fsamp'][0][0]
       
-        tTD01, tTD02, tTD03, tTD04, wz, midx, tN01, tN02, tN03, tN04 = giveTEOAE_MCmp(data,recsig20,latency_SC,Npulse,Nclicks,Tap=1e-3,TWt=17e-3,ArtRej=1000)
+        tTD01, tTD02, tTD03, tTD04, wz, midx, tN01, tN02, tN03, tN04, nTDest = giveTEOAE_MCmp(data,recsig20,latency_SC,Npulse,Nclicks,Tap=1e-3,TWt=17e-3,ArtRej=1000)
         
         if counter == 1:
             recMat1 = tTD01
             recMat2 = tTD02
             recMat3 = tTD03
             recMat4 = tTD04
+            nMat1 = nTDest
         else:
             recMat1 = np.c_[recMat1, tTD01]  # add to make a matrix with columns for every run
             recMat2 = np.c_[recMat2, tTD02]  # add to make a matrix with columns for every run
             recMat3 = np.c_[recMat3, tTD03]  # add to make a matrix with columns for every run
             recMat4 = np.c_[recMat4, tTD04]  # add to make a matrix with columns for every run
-        
-    return recMat1, recMat2, recMat3, recMat4, wz, midx, Lc, fsamp
+            nMat1 = np.c_[nMat1, nTDest]
+    return recMat1, recMat2, recMat3, recMat4, nMat1, wz, midx, Lc, fsamp
 
 
 
@@ -134,9 +135,9 @@ subjD['s004L'] = ['Results/s004/Click400_4000/', 'CMclickOAE_s004_24_05_06_15_49
     
 subjD['s004R'] = ['Results/s004/Click400_4000/', 'CMclickOAE_s004_24_05_06_15_59_16_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s004_24_05_06_15_57_32_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s004_24_05_06_15_55_46_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s004_24_05_06_15_53_59_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s004_24_05_06_15_52_11_Lc_64dB_Ncl228Npulse_3072_R_']
 
-subjD['s003R2'] = ['Results/s003/Click400_4000/', 'CMclickOAE_s003_24_05_07_14_11_48_Lc_30dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_10_03_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_08_13_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_06_27_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_04_38_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_02_50_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_13_59_16_Lc_64dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_00_58_Lc_64dB_Ncl228Npulse_3072_R_']
+subjD['s003R'] = ['Results/s003/Click400_4000/', 'CMclickOAE_s003_24_05_07_14_11_48_Lc_30dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_10_03_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_08_13_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_06_27_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_04_38_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_02_50_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_13_59_16_Lc_64dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s003_24_05_07_14_00_58_Lc_64dB_Ncl228Npulse_3072_R_']
 
-subjD['s003L2'] = ['Results/s003/Click400_4000/', 'CMclickOAE_s003_24_05_07_14_32_55_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s003_24_05_07_14_31_09_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s003_24_05_07_14_29_21_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s003_24_05_07_14_27_25_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s003_24_05_07_14_25_40_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s003_24_05_07_14_23_51_Lc_62dB_Ncl228Npulse_3072_L_']
+subjD['s003L'] = ['Results/s003/Click400_4000/', 'CMclickOAE_s003_24_05_07_14_32_55_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s003_24_05_07_14_31_09_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s003_24_05_07_14_29_21_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s003_24_05_07_14_27_25_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s003_24_05_07_14_25_40_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s003_24_05_07_14_23_51_Lc_62dB_Ncl228Npulse_3072_L_']
 
 subjD['s080L'] = ['Results/s080/click400_4000/', 'CMclickOAE_s080_24_05_10_15_40_26_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s080_24_05_10_15_38_42_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s080_24_05_10_15_36_56_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s080_24_05_10_15_35_11_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s080_24_05_10_15_33_27_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s080_24_05_10_15_31_42_Lc_64dB_Ncl228Npulse_3072_L_']
 subjD['s080R'] =['Results/s080/click400_4000/', 'CMclickOAE_s080_24_05_10_15_28_41_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s080_24_05_10_15_26_53_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s080_24_05_10_15_25_08_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s080_24_05_10_15_23_21_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s080_24_05_10_15_21_33_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s080_24_05_10_15_19_48_Lc_64dB_Ncl228Npulse_3072_R_']
@@ -170,7 +171,7 @@ subjD['s087R'] = ['Results/s087/', 'CMclickOAE_s087_24_06_20_14_11_50_Lc_34dB_Nc
 subjD['s086L'] = ['Results/s086/', 'CMclickOAE_s086_24_06_20_12_27_33_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s086_24_06_20_12_25_44_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s086_24_06_20_12_23_55_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s086_24_06_20_12_21_43_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s086_24_06_20_12_19_31_Lc_58dB_Ncl228Npulse_3072_L_']
 subjD['s086R'] = ['Results/s086/', 'CMclickOAE_s086_24_06_20_12_41_47_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s086_24_06_20_12_39_54_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s086_24_06_20_12_38_05_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s086_24_06_20_12_36_09_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s086_24_06_20_12_34_22_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s086_24_06_20_12_32_21_Lc_62dB_Ncl228Npulse_3072_R_']
 
-subjD['s084L'] = ['Results/s084/', 'CMclickOAE_s084_24_06_04_15_21_27_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s084_24_06_04_15_19_05_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s084_24_06_04_15_16_54_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s084_24_06_04_15_14_35_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s084_24_06_04_15_12_23_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s084_24_06_04_15_09_54_Lc_60dB_Ncl228Npulse_3072_L_']
+subjD['s084L'] = ['Results/s084/', 'CMclickOAE_s084_24_06_04_15_21_27_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s084_24_06_04_15_16_54_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s084_24_06_04_15_14_35_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s084_24_06_04_15_12_23_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s084_24_06_04_15_09_54_Lc_60dB_Ncl228Npulse_3072_L_']
 subjD['s084R'] = ['Results/s084/', 'CMclickOAE_s084_24_06_04_15_35_54_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s084_24_06_04_15_34_02_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s084_24_06_04_15_32_05_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s084_24_06_04_15_30_05_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s084_24_06_04_15_27_54_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s084_24_06_04_15_25_39_Lc_60dB_Ncl228Npulse_3072_R_']
 
 
@@ -180,7 +181,7 @@ subjD['s072R'] = ['Results/s072/', 'CMclickOAE_s072_24_06_05_12_21_26_Lc_34dB_Nc
 subjD['s063L'] = ['Results/s063/', 'CMclickOAE_s063_24_06_05_13_31_28_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_29_37_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_27_46_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_25_56_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_24_04_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_21_43_Lc_62dB_Ncl228Npulse_3072_L_']
 subjD['s063R'] = ['Results/s063/', 'CMclickOAE_s063_24_06_05_14_02_23_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_14_00_27_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_58_36_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_56_24_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_54_14_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_52_20_Lc_62dB_Ncl228Npulse_3072_R_']
 
-subjN = 's063R'
+subjN = 's002L'
 
 
 
@@ -191,6 +192,7 @@ TEOAE = {}
 tClick = {}
 tLINm = {}
 tHm = {}
+nEst = {}
 tNLm = {}
 fxD = {}
 LcList = []
@@ -198,7 +200,7 @@ latency_SC = 20532
 #latency_SC = 20544
 latency_SC = 8304
 for i in range(1,len(subjD[subjN])):
-    recMat1, recMat2, recMat3, recMat4, wz, midx, Lc,fsamp = giveMatricesTEOAE(subjD[subjN][0], subjD[subjN][i], Nopak,latency_SC)
+    recMat1, recMat2, recMat3, recMat4, recNMat, wz, midx, Lc,fsamp = giveMatricesTEOAE(subjD[subjN][0], subjD[subjN][i], Nopak,latency_SC)
     
     if i==1:
         midxT = midx
@@ -208,13 +210,15 @@ for i in range(1,len(subjD[subjN])):
     t1 = ((np.mean(recMat1,1)+np.mean(recMat2,1)+np.mean(recMat3,1))-np.mean(recMat4,1))  # perform averaging in time and calculating TEOAE using compression method
     tLin = ((np.mean(recMat1,1)+np.mean(recMat2,1)+np.mean(recMat3,1)))/3 # perform averaging in time and calculating TEOAE using compression method
     tHigh = np.mean(recMat4,1)
+    nLin = np.mean(recNMat,1)
+    
     # extract click
     Nrw = 20 # order of the roex win
     Trwc = 0.001 # half of rw for click 
     rwC = roexwin(2*midx+1,Nrw,fsamp,Trwc,Trwc)
     
     tClick[str(Lc)] = tLin[:len(rwC)]*rwC
-    
+    #nEst[str(Lc)] = nLin  # estimated noise signal
     # extract CEOAE
     
     Tceoae = 10e-3
@@ -222,7 +226,7 @@ for i in range(1,len(subjD[subjN])):
     tNLm[str(Lc)] = t1[midxT:2400+midxT]*rwS
     tLINm[str(Lc)] = tLin[midxT:2400+midxT]*rwS
     tHm[str(Lc)] = tHigh[midxT:2400+midxT]*rwS
-    
+    nEst[str(Lc)] = nLin[midxT:2400+midxT]*rwS  # estimated noise signal
     #TEOAE[str(Lc)] = 2*np.fft.rfft(np.concatenate((t1[midxT:],np.zeros(int(2**15)))))/Nfft  # calculate spectrum
     
     Ns = len(np.concatenate((t1[midxT:],np.zeros(int(2**15)))))
@@ -373,15 +377,17 @@ def wavelet_filter(signal, wavelet_basis):
     return filtered_signal, coefwti
 
 
-
+nLINmwf={}
 tLINmwf={}
 tNLmwf={}
 tHmwf={}
 SLINmwf={}
+SNLINmwf={}
 SHmwf={}
 SNLmwf={}
 SClick={}
 cwLIN = {}
+ncwLIN = {}
 cwH = {}
 cwNL = {}
 for keys in tLINm:
@@ -390,6 +396,7 @@ for keys in tLINm:
     f2max = 5000
     
     hm_50lin = np.concatenate((np.zeros(len(tLINm[keys])),tLINm[keys]))
+    Nhm_50 = np.concatenate((np.zeros(len(nEst[keys])),nEst[keys]))
     hm_50nl = np.concatenate((np.zeros(len(tNLm[keys])),tNLm[keys]))
     hm_50H = np.concatenate((np.zeros(len(tHm[keys])),tHm[keys]))
     
@@ -416,12 +423,15 @@ for keys in tLINm:
 
     tLINmwf[keys],cwLIN[keys] = wavelet_filter(hm_50lin, vlnky)
     
+    nLINmwf[keys],ncwLIN[keys] = wavelet_filter(Nhm_50, vlnky)
+    
     tNLmwf[keys],cwNL[keys] = wavelet_filter(hm_50nl, vlnky)
     
     tHmwf[keys],cwH[keys] = wavelet_filter(hm_50H, vlnky)
     
     
     SLINmwf[keys] = 2*np.fft.rfft(np.concatenate((tLINmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
+    SNLINmwf[keys] = 2*np.fft.rfft(np.concatenate((nLINmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
     SNLmwf[keys] = 2*np.fft.rfft(np.concatenate((tNLmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
     SHmwf[keys] = 2*np.fft.rfft(np.concatenate((3*tLINmwf[keys]-tHmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
     fxx = np.arange(Nt+int(2**15))*fsamp/(Nt+int(2**15))
@@ -632,6 +642,7 @@ plt.rcParams["ytick.right"] = True
 for keys in tLINmwf:
     if keys != '70':
         ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3, 20*np.log10(np.abs(SLINmwf[keys])/pREF))
+        ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3, 20*np.log10(np.abs(SNLINmwf[keys])/pREF),':')
 
 # Set axis limits and labels for amplitude
 ax1.set_xlim([0.500, 4.000])
@@ -844,13 +855,15 @@ for col_idx in range(ioLinG.shape[1]):
         Comp_slope = popt[2]  # Compression slope
         
         # Store results in a dictionary with the column index as the key
-        fit_results[col_idx] = {
+        fit_results[f'{round(1000*FchosenLin[col_idx])}'] = {
             'Peak_strength_dB': p_to_dB(Peak_str),
             'Compression_slope': Comp_slope,
             'Compression_threshold_dB': 20 * np.log10(Comp_thresh / (np.sqrt(2) * 2e-5)),
             'FchosenLin': FchosenLin[col_idx],  # Corresponding frequency element
             'Start_row': start_row  # Starting row used for this column
         }
+        
+        
         
         # Plot the results
         x_fit = np.linspace(min(x), max(x) + 0.3, 1000)
@@ -881,17 +894,13 @@ for col_idx in range(ioLinG.shape[1]):
 print(start_rows)
 
 # Prepare data to be saved, including chosen start_rows
-data_to_save = {
-    'FchosenLin': FchosenLin,
-    'FchosenNL': FchosenNL,
-    'fit_results': fit_results,  # Add fitting results to the saved data
-    'start_rows': start_rows     # Add chosen start rows to saved data
-}
+fit_results['FchosenLin'] = FchosenLin
+fit_results['FchosenNL'] = FchosenNL
 
 # File name for saving
 file_name = 'Estimace/CEOAEfit_results_' + subjN + '.mat'
 
 # Save the data into a .mat file
-savemat(file_name, data_to_save)
+savemat(file_name, fit_results)
 
 print(f"Data successfully saved to {file_name}")

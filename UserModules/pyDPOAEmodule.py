@@ -1274,13 +1274,17 @@ def giveTEOAE_MCmp(data,recsig40,latency_SC,Npulse,Nclicks,Tap=1e-3,TWt=25e-3,Ar
     
     # noise rejections
     
-    rct01f = np.reshape(rct01f[:Nclicks*Npulse],(Npulse,Nclicks),order='F')
     
+    NnoiseF = len(rct01f[Nclicks*Npulse+6000:])//Npulse
+    nct01f = np.reshape(rct01f[Nclicks*Npulse+6000:Nclicks*Npulse+6000+NnoiseF*Npulse],(Npulse,NnoiseF),order='F')
+    # noise estimation from last samples
+    rct01f = np.reshape(rct01f[:Nclicks*Npulse],(Npulse,Nclicks),order='F')
     # here we have a matrix, each response is in separate column, 
     # we should calcaulte mean across corresponding levels
     
     step = 4 # length of levelS vector (number of click levels in scramble)
     mrct01l = np.mean(rct01f[:,::step],1)
+    nrct01l = np.mean(nct01f,1)
     #mrct02l = np.mean(rct01f[:,1:step],1)
     #mrct03l = np.mean(rct01f[:,2:step],1)
     #mrct04l = np.mean(rct01f[:,3:step],1)
@@ -1341,7 +1345,7 @@ def giveTEOAE_MCmp(data,recsig40,latency_SC,Npulse,Nclicks,Tap=1e-3,TWt=25e-3,Ar
     
         
     
-    return rch01, rch02, rch03, rch04, window_with_zeros, max_index, MatN01, MatN02, MatN03, MatN04
+    return rch01, rch02, rch03, rch04, window_with_zeros, max_index, MatN01, MatN02, MatN03, MatN04, nrct01l
 
 
 

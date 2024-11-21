@@ -57,7 +57,7 @@ subjD['s089R'] = ['Results/s089/', '24_07_11_11_15_18_F2b_8000Hz', '24_07_11_11_
 subjD['s091L'] = ['Results/s091/', '24_07_11_13_33_01_F2b_8000Hz', '24_07_11_13_34_57_F2b_8000Hz', '24_07_11_13_36_53_F2b_8000Hz', '24_07_11_13_38_33_F2b_8000Hz', '24_07_11_13_40_43_F2b_8000Hz', '24_07_11_13_42_04_F2b_8000Hz', '24_07_11_13_43_39_F2b_8000Hz', '24_07_11_13_44_59_F2b_8000Hz', '24_07_11_13_46_07_F2b_8000Hz', '24_07_11_13_47_27_F2b_8000Hz']
 subjD['s091R'] = ['Results/s091/', '24_07_11_14_01_22_F2b_8000Hz', '24_07_11_14_02_44_F2b_8000Hz', '24_07_11_14_04_30_F2b_8000Hz', '24_07_11_14_05_46_F2b_8000Hz', '24_07_11_14_07_26_F2b_8000Hz', '24_07_11_14_09_27_F2b_8000Hz', '24_07_11_14_11_03_F2b_8000Hz', '24_07_11_14_12_39_F2b_8000Hz', '24_07_11_14_14_28_F2b_8000Hz', '24_07_11_14_15_55_F2b_8000Hz']
 
-subjN = 's084R'
+subjN = 's091R'     
 
 #subjN = 's055L_L2_55'
 
@@ -749,37 +749,37 @@ for i in range(len(CF)):  # Loop through each dataset index
             label="_nolegend_")  # No label in the legend for the fit
 
     # Extract key points from the fit results
-    L2_at_max_slope = fit_results[2]
-    OAE_level_at_max_slope = fit_results[3]
-    L2_half_slope = fit_results[4]  # Slope of 1/2
-    OAE_level_half_slope = fit_results[5]
-    L2_half_max_slope = fit_results[6]  # Slope of max_slope / 2
-    OAE_level_half_max_slope = fit_results[7]
+    L2_at_max_slope = fit_results[2] if fit_results[2] != None else np.nan
+    OAE_level_at_max_slope = fit_results[3] if fit_results[3] != None else np.nan
+    L2_half_slope = fit_results[4]  if fit_results[4] != None else np.nan# Slope of 1/2
+    OAE_level_half_slope = fit_results[5] if fit_results[5] != None else np.nan
+    L2_half_max_slope = fit_results[6]  if fit_results[6] != None else np.nan# Slope of max_slope / 2
+    OAE_level_half_max_slope = fit_results[7] if fit_results[7] != None else np.nan
 
     # Plot the point where the slope is maximum but exclude from legend
     ax.plot(L2_at_max_slope, OAE_level_at_max_slope, 'o', color=data_line[i][0].get_color(), 
             markersize=8, label="_nolegend_")  # Circle marker, no legend
 
     # Plot the point where the slope is 1/2 but exclude from legend
-    if L2_half_slope is not None:
+    if L2_half_slope is not np.nan:
         ax.plot(L2_half_slope, OAE_level_half_slope, 's', color=data_line[i][0].get_color(), 
                 markersize=8, label="_nolegend_")  # Square marker, no legend
 
     # Plot the point where the slope is max_slope/2 but exclude from legend
-    if L2_half_max_slope is not None:
+    if L2_half_max_slope is not np.nan:
         ax.plot(L2_half_max_slope, OAE_level_half_max_slope, '^', color=data_line[i][0].get_color(), 
                 markersize=8, label="_nolegend_")  # Triangle marker, no legend
 
     # Store results in the dictionary
     estimated_results[f'fit_results_{i}'] = {
-        'fitted_polynomial': fit_results[0],
-        'max_slope': fit_results[1],
-        'L2_at_max_slope': fit_results[2],
-        'OAE_level_at_max_slope': fit_results[3],
-        'L2_half_slope': fit_results[4],
-        'OAE_level_half_slope': fit_results[5],
-        'L2_half_max_slope': fit_results[6],
-        'OAE_level_half_max_slope': fit_results[7],
+        'fitted_polynomial': fit_results[0]  if fit_results[0] != None else np.nan,
+        'max_slope': fit_results[1]  if fit_results[1] != None else np.nan,
+        'L2_at_max_slope': fit_results[2]  if fit_results[2] != None else np.nan,
+        'OAE_level_at_max_slope': fit_results[3]  if fit_results[3] != None else np.nan,
+        'L2_half_slope': fit_results[4]  if fit_results[4] != None else np.nan,
+        'OAE_level_half_slope': fit_results[5]  if fit_results[5] != None else np.nan,
+        'L2_half_max_slope': fit_results[6]  if fit_results[6] != None else np.nan,
+        'OAE_level_half_max_slope': fit_results[7]  if fit_results[7] != None else np.nan,
     }
 
 # Show legend only for data
