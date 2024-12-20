@@ -181,7 +181,11 @@ subjD['s072R'] = ['Results/s072/', 'CMclickOAE_s072_24_06_05_12_21_26_Lc_34dB_Nc
 subjD['s063L'] = ['Results/s063/', 'CMclickOAE_s063_24_06_05_13_31_28_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_29_37_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_27_46_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_25_56_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_24_04_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_21_43_Lc_62dB_Ncl228Npulse_3072_L_']
 subjD['s063R'] = ['Results/s063/', 'CMclickOAE_s063_24_06_05_14_02_23_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_14_00_27_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_58_36_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_56_24_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_54_14_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_52_20_Lc_62dB_Ncl228Npulse_3072_R_']
 
-subjN = 's002L'
+subjD['s001L'] = ['Results/s001/GACR/','CMclickOAE_s001_24_12_18_10_26_34_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s001_24_12_18_10_26_34_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s001_24_12_18_10_26_34_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s001_24_12_18_10_26_34_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s001_24_12_18_10_26_34_Lc_64dB_Ncl228Npulse_3072_L_']
+
+subjD['s001R'] = ['Results/s001/GACR/','CMclickOAE_s001_24_12_18_10_48_54_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s001_24_12_18_10_48_54_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s001_24_12_18_10_48_54_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s001_24_12_18_10_48_54_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s001_24_12_18_10_48_54_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s001_24_12_18_10_48_54_Lc_64dB_Ncl228Npulse_3072_R_']
+
+subjN = 's001L'
 
 
 

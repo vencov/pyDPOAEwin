@@ -106,7 +106,7 @@ def RMEplayrecBias(dataout,fsamp,*,SC=10,buffersize=2048):
     blocksize - buffersize
     '''
     global recorded_data, generated_signal, blocksize,idxPointer
-    chan_in = 7  # number of channels for input and output
+    chan_in = 6  # number of channels for input and output
     output = np.empty((1,chan_in))
     Nsamp = len(dataout)  # number of samples in the signal which is sent to the sound card
     #generated_signal = np.tile(dataout,(chan_in,1)).T

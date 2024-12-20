@@ -20,7 +20,9 @@ f2b = 8000  # f1 start frequency
 f2e = 500 # f2 end frequency
 f2f1 = 1.2  # f2/f1 ratio
 #L1 = 53    # intensity of f1 tone
-L2list = np.arange(65,20,-5)  # make a list of L2 values
+L2list = np.arange(55,20,-5)  # make a list of L2 values
+L2 = 60
+Lstep = 5
 
 
 #L1 = 55
@@ -32,17 +34,18 @@ fsamp = 96000; lat_SC= 16436; bufsize = 4096
 fsamp = 96000; lat_SC= 20532; bufsize = 4096
 #fsamp = 96000; lat_SC= 20544; bufsize = 4096
 
-changeSampleRate(fsamp,bufsize,SC=10)
-lat_SC = getSClat(fsamp,bufsize,SC=10)
+DevNum = 10
+changeSampleRate(fsamp,bufsize,SC=DevNum)
+lat_SC = getSClat(fsamp,bufsize,SC=DevNum)
 micGain = 40
-ear_t = 'L' # which ear
+ear_t = 'R' # which ear
 
 plt.close('all')
 
 #save_path = 'Results/s003'
 #subj_name = 's003'
-save_path = 'Results/fav02/'
-subj_name = 's001'
+save_path = 'Results/s102/'
+subj_name = 's102'
 
 # now to stop measurement by s key
 
@@ -65,6 +68,16 @@ def stop_meas():
     
     print("Measurement stopped")
 
+
+# Function to get user input with a default value
+def get_user_input(prompt: str, default_value):
+    user_input = input(f"{prompt} (default: {default_value}): ")
+    # If the user presses Enter without providing input, return the default value
+    if user_input.strip() == '':
+        return default_value
+    return type(default_value)(user_input)  # Convert to the type of the default value
+
+
 # Register a hotkey (e.g., 's') to stop the loop
 hotkey_s = keyboard.add_hotkey('s', stop_loop) # a key to stop one 
 hotkey_e = keyboard.add_hotkey('e', stop_meas) # a key to stop measurement
@@ -75,9 +88,9 @@ iL2 = 0
 #for iL2 in range(len(L2list)):
 while runningM:
     running = True  # loop is running
-    L2 = L2list[iL2]
-    L1 = int(0.4*L2+39)
-    
+    #L2 = L2list[iL2]
+    L1 = int(0.4*L2+39)  # scissor paradigm
+    #L1 = L2 + 10  # L2 + 10 dB paradigm
     def get_time() -> str:
         # to get current time
         now_time = datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S')
@@ -146,13 +159,13 @@ while runningM:
         
         counter += 1
         print('Rep: {}'.format(counter))    
-        recsigp1 = RMEplayrec(sp1,fsamp,SC=10,buffersize=bufsize) # send signal to the sound card
+        recsigp1 = RMEplayrec(sp1,fsamp,SC=DevNum,buffersize=bufsize) # send signal to the sound card
         #time.sleep(1) 
-        recsigp2 = RMEplayrec(sp2,fsamp,SC=10,buffersize=bufsize) # send signal to the sound card
+        recsigp2 = RMEplayrec(sp2,fsamp,SC=DevNum,buffersize=bufsize) # send signal to the sound card
         #time.sleep(1) 
-        recsigp3 = RMEplayrec(sp3,fsamp,SC=10,buffersize=bufsize) # send signal to the sound card
+        recsigp3 = RMEplayrec(sp3,fsamp,SC=DevNum,buffersize=bufsize) # send signal to the sound card
         #time.sleep(1) 
-        recsigp4 = RMEplayrec(sp4,fsamp,SC=10,buffersize=bufsize) # send signal to the sound card
+        recsigp4 = RMEplayrec(sp4,fsamp,SC=DevNum,buffersize=bufsize) # send signal to the sound card
         if counter<10:  # to add 0 before the counter number
             counterSTR = '0' + str(counter)
         else:
@@ -369,7 +382,7 @@ while runningM:
             ax1.set_ylim([-40,20])
 
             ax1.set_ylabel('Amplitude (dB SPL)')
-            ax1.legend(('DPOAE','NL comp.','CR comp.','noise floor'))
+            ax1.legend(('DPOAE','NL comp.','DPOAE n.f.','NL n.f.'))
 
             DPphaseU = np.copy(np.angle(SDPOAENmwf)[~np.isnan(SDPOAENmwf)])
             DPphaseU = np.unwrap(DPphaseU)
@@ -396,9 +409,14 @@ while runningM:
             
             fig.canvas.draw()
             fig.canvas.flush_events()
-            plt.pause(0.0001) #Note this correction
-        iL2 += 1       
-  
+            plt.pause(0.1) #Note this correction
+            
+            
+    iL2 += 1
+    if runningM:
+        Lstep = get_user_input("Write level step in dB", Lstep)
+        L2 = L2 - Lstep       
+     
 
 # Register a hotkey (e.g., 's') to stop the loop
 keyboard.remove_hotkey(hotkey_s) # a key to stop one 

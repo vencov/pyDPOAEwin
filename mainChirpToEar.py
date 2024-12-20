@@ -10,7 +10,7 @@ lat_SC=8236  # 44100 Hz 2048 buffersize
 lat_SC=8205  # 44100 Hz 2048 buffersize
 #lat_SC=8356  # 44100 Hz 2048 buffersize
 lat_SC=10284
-AmpChirp = 0.04
+AmpChirp = 0.02
 buffersize = 2048
 
 changeSampleRate(fsamp,buffersize,SC=10)

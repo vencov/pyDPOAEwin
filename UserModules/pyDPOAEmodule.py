@@ -118,7 +118,7 @@ def generateSSSPhase(fs,fstart,fstop,phase,octpersec,Level,channel):
     #print(T)
     
     #fade = [441, 441]   # samlpes to fade-in and fade-out the input signal
-    fade = [1024, 4800]   # samlpes to fade-in and fade-out the input signal
+    fade = [1024, 2400]   # samlpes to fade-in and fade-out the input signal
     L = T/np.log(fstop/fstart)
     t = np.arange(0,np.round(fs*T-1)/fs,1/fs)  # time axis
     s = np.sin(2*np.pi*(fstart)*L*np.exp(t/L)+phase)       # generated swept-sine signal
@@ -1516,3 +1516,65 @@ def roexwin(N,n,fs,tc1,tc2):
     G = np.concatenate((np.flip(G1), G2))
 
     return G
+
+
+def create_noise(mod_len, fs, Hleft, Hright, fxL, fxR, lb, lend):
+    """
+    Create noise with a sinusoidal envelope.
+
+    Parameters:
+    - mod_len: float, modulation duration in seconds.
+    - fs: int, sampling frequency in Hz.
+
+    Returns:
+    - noise_samples: int, total number of noise samples.
+    - n_reps: int, number of repetitions per loop.
+    - H: numpy.ndarray, noise amplitude matrix with repetitions.
+    """
+    clicks_per_condition = 1000
+    loop_duration = mod_len * 30  # n/sec
+    n_loops = int(np.ceil(clicks_per_condition / loop_duration))
+
+    noise_samples = int(round(mod_len * fs))
+    n_reps = int(loop_duration / (mod_len * 2))  # Number of repetition
+
+    h = np.linspace(lb, lend, noise_samples)
+    h[0] = np.finfo(float).eps
+    h = np.concatenate((h, np.flipud(h)))
+    #h = 10 ** (h / 20) # Conversion to linear values
+    h = 10**(h/20)*np.sqrt(2)*2e-5
+    # h /= np.max(np.abs(h)) # Normalization
+
+    H = np.tile(h, (n_reps, 1)).T  # Matrix of noise amplitude
+    
+    noise = np.random.normal(0, 1, noise_samples * 2)
+
+    noiserfft = np.fft.rfft(noise)
+
+    Nnrfft = len(noiserfft)
+    fx =np.arange(2*Nnrfft-2)/(2*Nnrfft-1)
+    fx = 44100*fx
+
+    hifreq = 14000
+    lofreq = 200
+
+    # Calculate bandwidth and RMS noise
+    bw = hifreq - lofreq
+
+
+    nptslofreq = np.where(fx >= lofreq)[0][0]
+    nptshifreq = np.where(fx >= hifreq)[0][0]
+
+    # Zero out undesired frequency bands
+    noiserfft[:nptslofreq] = 0.0
+    noiserfft[nptshifreq:] = 0.0
+
+    Hrint = np.interp(fx[nptslofreq:nptshifreq],fxL,Hleft)
+    noiseSc = np.zeros_like(noiserfft)
+    noiseSc[nptslofreq:nptshifreq] = noiserfft[nptslofreq:nptshifreq]/np.abs(Hrint)
+
+     # 10**(Ltone/20)*numpy.sqrt(2)*2e-5
+    stim1 = h*np.real(np.fft.irfft(noiseSc))
+    
+
+    return stim1

@@ -17,8 +17,8 @@ from scipy.io import savemat
 from UserModules.pyUtilities import butter_highpass_filter
 plt.close('all')
 fsamp = 96000; bufsize = 4096;
-
-latency_SC = getSClat(fsamp,bufsize,SC=10)  # estimated latency
+DevNum = 10
+latency_SC = getSClat(fsamp,bufsize,SC=DevNum)  # estimated latency
 
 #latency_SC = 16448
 micGain = 40  # gain of the probe microphone
@@ -29,18 +29,23 @@ ear_t = 'R' # which ear
 #Nclicks = 2000
 
 
-Lc = 52 # required intensity of click in peSPL
-Lref = 53 # recorded intensity for 0.1 maximum of the click
+
+Lref = 54 # recorded intensity for 0.1 maximum of the click
+
+
+LcStart = 64  # starting click level
+Lc = LcStart
+Lstep = 6  # default step
 
 save_path = 'Results/s055/scrambled/'
-save_path = 'Results/s004/'
+save_path = 'Results/s102/'
 #save_path = 'Results/s063/Cmp/'
 #save_path = 'Results/s078/'
 #save_path = 'Results/s080/'
 #save_path = 'Results/s003/'
 #save_path = 'Results/s004/NewClick'
 #save_path = 'Results/s091/'
-subj_name = 's004'
+subj_name = 's102'
 
 print(f"Playing for {Lc} dB peSPL")
 def get_time() -> str:
@@ -75,8 +80,6 @@ yupr,Env = generateClickTrainCmp(cfname,ClickInRun,levelS,Npulse)
 #yupr = generateClickTrain(cfname, Nclicks,Npulse)
 clicktrainmat01 = np.vstack((Env*yupr,np.zeros_like(yupr),yupr)).T 
 
-LcStart = 64  # starting click level
-Lstep = 6  # default step
 
 
 # Enable interactive mode
@@ -161,8 +164,8 @@ while runningM:
     
     while running and runningM:
         counter += 1
-        if counter==12:
-            running = False
+        #if counter==12:
+        #    running = False
         print('Rep: {}'.format(counter))    
 
 
@@ -171,7 +174,7 @@ while runningM:
         else:
             counterSTR = str(counter)    
 
-        recordedclicktrain01 = RMEplayrec(Amp*clicktrainmat01,fsamp,SC=10,buffersize=bufsize)
+        recordedclicktrain01 = RMEplayrec(Amp*clicktrainmat01,fsamp,SC=DevNum,buffersize=bufsize)
         recsig = recordedclicktrain01
 
         data = {"recsig": recsig,"fsamp":fsamp,"Nclicks":Nclicks,"Lc":Lc,"Npulse":Npulse,"levelS":levelS,"latency_SC":latency_SC}  # dictionary
@@ -190,7 +193,7 @@ while runningM:
         fsampa = np.zeros(1)
         fsampa[0] = fsamp
         data2 = {"fsamp":fsampa}
-        tTD01, tTD02, tTD03, tTD04, wz, midx, nM01, nM02, nM03, nM04 = giveTEOAE_MCmp(data2,recordedclicktrain01f,latency_SC,Npulse,Nclicks,Tap=1e-3,TWt=20e-3,ArtRej=100000)
+        tTD01, tTD02, tTD03, tTD04, wz, midx, nM01, nM02, nM03, nM04, dummyV = giveTEOAE_MCmp(data2,recordedclicktrain01f,latency_SC,Npulse,Nclicks,Tap=1e-3,TWt=20e-3,ArtRej=100000)
             
         if counter == 1:
             recMat1 = tTD01
