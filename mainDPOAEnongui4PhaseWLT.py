@@ -32,7 +32,7 @@ fsamp = 96000; lat_SC= 20532; bufsize = 4096
 changeSampleRate(fsamp,bufsize,SC=10)
 lat_SC = getSClat(fsamp,bufsize,SC=10)
 micGain = 40
-ear_t = 'L' # which ear
+ear_t = 'R' # which ear
 
 plt.close('all')
 

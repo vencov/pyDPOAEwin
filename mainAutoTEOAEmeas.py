@@ -22,7 +22,7 @@ latency_SC = getSClat(fsamp,bufsize,SC=DevNum)  # estimated latency
 
 #latency_SC = 16448
 micGain = 40  # gain of the probe microphone
-ear_t = 'R' # which ear
+ear_t = 'L' # which ear
 
 # parameters of evoking stimuli
 
@@ -30,7 +30,7 @@ ear_t = 'R' # which ear
 
 
 
-Lref = 54 # recorded intensity for 0.1 maximum of the click
+Lref = 61 # recorded intensity for 0.1 maximum of the click
 
 
 LcStart = 64  # starting click level
@@ -38,14 +38,14 @@ Lc = LcStart
 Lstep = 6  # default step
 
 save_path = 'Results/s055/scrambled/'
-save_path = 'Results/s102/'
+save_path = 'Results/s133/'
 #save_path = 'Results/s063/Cmp/'
 #save_path = 'Results/s078/'
 #save_path = 'Results/s080/'
 #save_path = 'Results/s003/'
 #save_path = 'Results/s004/NewClick'
 #save_path = 'Results/s091/'
-subj_name = 's102'
+subj_name = 's133'
 
 print(f"Playing for {Lc} dB peSPL")
 def get_time() -> str:
@@ -61,7 +61,7 @@ t = get_time() # current date and time
 
 Npulse = 2048+1024
 #Npulse = 2048
-
+           
 # measurement phase
 
     
@@ -159,7 +159,7 @@ while runningM:
     running = True
     
     Amp = 0.1*10**((Lc-Lref)/20)
-
+    #Amp = 0
     print(f"Click level {Lc} dB")
     
     while running and runningM:

@@ -46,7 +46,7 @@ def print_dicts_as_command_line(folder_path):
         print(f"L2_{l2_value}_dB_R: {date_times}")
 
 # Specify the folder containing the files
-folder_path = "Results/s089/R/"
+folder_path = "Results/s126/"
 
 # Print the dictionaries as command line output
 print_dicts_as_command_line(folder_path)

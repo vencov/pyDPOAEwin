@@ -46,21 +46,21 @@ def giveMatricesTEOAE(FolderName,FileName,Nopak,latency_SC):
         Nclicks = data['Nclicks'][0][0]
         fsamp = data['fsamp'][0][0]
       
-        tTD01, tTD02, tTD03, tTD04, wz, midx, tN01, tN02, tN03, tN04, nTDest = giveTEOAE_MCmp(data,recsig20,latency_SC,Npulse,Nclicks,Tap=1e-3,TWt=17e-3,ArtRej=1000)
+        tTD01, tTD02, tTD03, tTD04, wz, midx, tN01, tN02, tN03, tN04 = giveTEOAE_MCmp(data,recsig20,latency_SC,Npulse,Nclicks,Tap=1e-3,TWt=17e-3,ArtRej=1000)
         
         if counter == 1:
             recMat1 = tTD01
             recMat2 = tTD02
             recMat3 = tTD03
             recMat4 = tTD04
-            nMat1 = nTDest
+           # nMat1 = nTDest
         else:
             recMat1 = np.c_[recMat1, tTD01]  # add to make a matrix with columns for every run
             recMat2 = np.c_[recMat2, tTD02]  # add to make a matrix with columns for every run
             recMat3 = np.c_[recMat3, tTD03]  # add to make a matrix with columns for every run
             recMat4 = np.c_[recMat4, tTD04]  # add to make a matrix with columns for every run
-            nMat1 = np.c_[nMat1, nTDest]
-    return recMat1, recMat2, recMat3, recMat4, nMat1, wz, midx, Lc, fsamp
+           # nMat1 = np.c_[nMat1, nTDest]
+    return recMat1, recMat2, recMat3, recMat4,  wz, midx, Lc, fsamp
 
 
 
@@ -181,20 +181,46 @@ subjD['s072R'] = ['Results/s072/', 'CMclickOAE_s072_24_06_05_12_21_26_Lc_34dB_Nc
 subjD['s063L'] = ['Results/s063/', 'CMclickOAE_s063_24_06_05_13_31_28_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_29_37_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_27_46_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_25_56_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_24_04_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_21_43_Lc_62dB_Ncl228Npulse_3072_L_']
 subjD['s063R'] = ['Results/s063/', 'CMclickOAE_s063_24_06_05_14_02_23_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_14_00_27_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_58_36_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_56_24_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_54_14_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_52_20_Lc_62dB_Ncl228Npulse_3072_R_']
 
-subjD['s001L'] = ['Results/s001/GACR/','CMclickOAE_s001_24_12_18_10_26_34_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s001_24_12_18_10_26_34_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s001_24_12_18_10_26_34_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s001_24_12_18_10_26_34_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s001_24_12_18_10_26_34_Lc_64dB_Ncl228Npulse_3072_L_']
-
-subjD['s001R'] = ['Results/s001/GACR/','CMclickOAE_s001_24_12_18_10_48_54_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s001_24_12_18_10_48_54_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s001_24_12_18_10_48_54_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s001_24_12_18_10_48_54_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s001_24_12_18_10_48_54_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s001_24_12_18_10_48_54_Lc_64dB_Ncl228Npulse_3072_R_']
 
 
-subjD['s122L'] = ['Results/s122/', 'CMclickOAE_s122_25_02_10_16_35_14_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s122_25_02_10_16_35_14_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s122_25_02_10_16_35_14_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s122_25_02_10_16_35_14_Lc_64dB_Ncl228Npulse_3072_L_']
-
-subjD['s122R'] = ['Results/s122/', 'CMclickOAE_s122_25_02_10_16_55_54_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s122_25_02_10_16_55_54_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s122_25_02_10_16_55_54_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s122_25_02_10_16_55_54_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s122_25_02_10_16_55_54_Lc_64dB_Ncl228Npulse_3072_R_']
-
-subjN = 's122L'
 
 
-subjN = 's122R'
+# healthy ear
 
+
+subjD['s999L'] =['Results/s999/','CMclickOAE_s999_24_11_05_11_36_13_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s999_24_11_05_11_36_13_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s999_24_11_05_11_36_13_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s999_24_11_05_11_36_13_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s999_24_11_05_11_36_13_Lc_64dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s999_24_11_05_11_36_13_Lc_70dB_Ncl228Npulse_3072_L_']
+# md ear (notice that there is mistake in left  and right ear)
+
+
+
+
+subjD['s999R'] = ['Results/s999/', 'CMclickOAE_s999_24_11_05_11_59_45_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s999_24_11_05_11_59_45_Lc_64dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s999_24_11_05_11_59_45_Lc_70dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s999_24_11_05_11_59_45_Lc_76dB_Ncl228Npulse_3072_R_'], ['CMclickOAE_s999_24_11_05_12_07_42_Lc_66dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s999_24_11_05_12_07_42_Lc_72dB_Ncl228Npulse_3072_R_']
+
+subjD['s998L'] = ['Results/s998/','CMclickOAE_s998_24_11_08_08_15_10_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s998_24_11_08_08_15_10_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s998_24_11_08_08_15_10_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s998_24_11_08_08_15_10_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s998_24_11_08_08_15_10_Lc_64dB_Ncl228Npulse_3072_L_']
+
+subjD['s998R'] =  ['Results/s998/','CMclickOAE_s998_24_11_08_08_43_33_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s998_24_11_08_08_43_33_Lc_64dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s998_24_11_08_08_43_33_Lc_66dB_Ncl228Npulse_3072_R_']
+
+subjD['s997L'] = ['Results/s997/','CMclickOAE_s997_24_11_19_12_09_55_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s997_24_11_19_12_09_55_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s997_24_11_19_12_09_55_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s997_24_11_19_12_09_55_Lc_64dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s997_24_11_19_12_09_55_Lc_70dB_Ncl228Npulse_3072_L_']
+
+subjD['s997R'] = ['Results/s997/','CMclickOAE_s997_24_11_19_12_32_11_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s997_24_11_19_12_32_11_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s997_24_11_19_12_32_11_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s997_24_11_19_12_32_11_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s997_24_11_19_12_32_11_Lc_64dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s997_24_11_19_12_32_11_Lc_70dB_Ncl228Npulse_3072_R_']
+
+subjD['s100L'] = ['Results/s100/','CMclickOAE_s100_24_12_04_16_13_47_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s100_24_12_04_16_13_47_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s100_24_12_04_16_13_47_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s100_24_12_04_16_13_47_Lc_64dB_Ncl228Npulse_3072_L_']
+
+subjD['s100R'] = ['Results/s100/','CMclickOAE_s100_24_12_04_15_51_18_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s100_24_12_04_15_51_18_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s100_24_12_04_15_51_18_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s100_24_12_04_15_51_18_Lc_64dB_Ncl228Npulse_3072_R_']
+
+subjD['s092L'] = ['Results/s092/', 'CMclickOAE_s092_24_12_05_11_36_18_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s092_24_12_05_11_36_18_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s092_24_12_05_11_36_18_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s092_24_12_05_11_36_18_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s092_24_12_05_11_36_18_Lc_64dB_Ncl228Npulse_3072_L_']
+subjD['s092R'] = ['Results/s092/','CMclickOAE_s092_24_12_05_11_54_40_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s092_24_12_05_11_54_40_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s092_24_12_05_11_54_40_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s092_24_12_05_11_54_40_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s092_24_12_05_11_54_40_Lc_64dB_Ncl228Npulse_3072_R_']
+
+subjD['s995L'] = ['Results/s995/','CMclickOAE_s995_24_12_20_11_55_20_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s995_24_12_20_11_55_20_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s995_24_12_20_11_55_20_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s995_24_12_20_11_55_20_Lc_64dB_Ncl228Npulse_3072_L_']
+subjD['s995R'] = ['Results/s995/','CMclickOAE_s995_24_12_20_12_20_11_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s995_24_12_20_12_20_11_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s995_24_12_20_12_20_11_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s995_24_12_20_12_20_11_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s995_24_12_20_12_20_11_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s995_24_12_20_12_20_11_Lc_64dB_Ncl228Npulse_3072_R_']
+
+subjD['s996L'] = ['Results/s996/', 'CMclickOAE_s996_24_12_13_11_47_52_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s996_24_12_13_11_47_52_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s996_24_12_13_11_47_52_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s996_24_12_13_11_47_52_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s996_24_12_13_11_47_52_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s996_24_12_13_11_47_52_Lc_64dB_Ncl228Npulse_3072_L_']
+subjD['s996R'] = ['Results/s996/','CMclickOAE_s996_24_12_13_12_12_44_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s996_24_12_13_12_12_44_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s996_24_12_13_12_12_44_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s996_24_12_13_12_12_44_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s996_24_12_13_12_12_44_Lc_64dB_Ncl228Npulse_3072_R_']
+
+
+['Results/s097/', ['CMclickOAE_s097_24_12_10_09_44_37_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s097_24_12_10_09_44_37_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s097_24_12_10_09_44_37_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s097_24_12_10_09_44_37_Lc_64dB_Ncl228Npulse_3072_L_']]
+
+subjN = 's999L'
 
 
 
@@ -211,8 +237,10 @@ LcList = []
 latency_SC = 20532
 #latency_SC = 20544
 latency_SC = 8304
+
+
 for i in range(1,len(subjD[subjN])):
-    recMat1, recMat2, recMat3, recMat4, recNMat, wz, midx, Lc,fsamp = giveMatricesTEOAE(subjD[subjN][0], subjD[subjN][i], Nopak,latency_SC)
+    recMat1, recMat2, recMat3, recMat4, wz, midx, Lc,fsamp = giveMatricesTEOAE(subjD[subjN][0], subjD[subjN][i], Nopak,latency_SC)
     
     if i==1:
         midxT = midx
@@ -222,7 +250,7 @@ for i in range(1,len(subjD[subjN])):
     t1 = ((np.mean(recMat1,1)+np.mean(recMat2,1)+np.mean(recMat3,1))-np.mean(recMat4,1))  # perform averaging in time and calculating TEOAE using compression method
     tLin = ((np.mean(recMat1,1)+np.mean(recMat2,1)+np.mean(recMat3,1)))/3 # perform averaging in time and calculating TEOAE using compression method
     tHigh = np.mean(recMat4,1)
-    nLin = np.mean(recNMat,1)
+    #nLin = np.mean(recNMat,1)
     
     # extract click
     Nrw = 20 # order of the roex win
@@ -238,7 +266,7 @@ for i in range(1,len(subjD[subjN])):
     tNLm[str(Lc)] = t1[midxT:2400+midxT]*rwS
     tLINm[str(Lc)] = tLin[midxT:2400+midxT]*rwS
     tHm[str(Lc)] = tHigh[midxT:2400+midxT]*rwS
-    nEst[str(Lc)] = nLin[midxT:2400+midxT]*rwS  # estimated noise signal
+   # nEst[str(Lc)] = nLin[midxT:2400+midxT]*rwS  # estimated noise signal
     #TEOAE[str(Lc)] = 2*np.fft.rfft(np.concatenate((t1[midxT:],np.zeros(int(2**15)))))/Nfft  # calculate spectrum
     
     Ns = len(np.concatenate((t1[midxT:],np.zeros(int(2**15)))))
@@ -246,6 +274,10 @@ for i in range(1,len(subjD[subjN])):
     
     fxD[str(Lc)] = fxx[:Ns//2+1]  # take half of the frequency axis
     LcList.append(str(Lc))
+
+
+
+
 #fig,ax = plt.subplots()
 #ax.plot(tTD01[midx:])
 #ax.plot(tTD02[midx:])
@@ -408,7 +440,7 @@ for keys in tLINm:
     f2max = 5000
     
     hm_50lin = np.concatenate((np.zeros(len(tLINm[keys])),tLINm[keys]))
-    Nhm_50 = np.concatenate((np.zeros(len(nEst[keys])),nEst[keys]))
+    #Nhm_50 = np.concatenate((np.zeros(len(nEst[keys])),nEst[keys]))
     hm_50nl = np.concatenate((np.zeros(len(tNLm[keys])),tNLm[keys]))
     hm_50H = np.concatenate((np.zeros(len(tHm[keys])),tHm[keys]))
     
@@ -435,7 +467,7 @@ for keys in tLINm:
 
     tLINmwf[keys],cwLIN[keys] = wavelet_filter(hm_50lin, vlnky)
     
-    nLINmwf[keys],ncwLIN[keys] = wavelet_filter(Nhm_50, vlnky)
+    #nLINmwf[keys],ncwLIN[keys] = wavelet_filter(Nhm_50, vlnky)
     
     tNLmwf[keys],cwNL[keys] = wavelet_filter(hm_50nl, vlnky)
     
@@ -443,7 +475,7 @@ for keys in tLINm:
     
     
     SLINmwf[keys] = 2*np.fft.rfft(np.concatenate((tLINmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
-    SNLINmwf[keys] = 2*np.fft.rfft(np.concatenate((nLINmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
+    #SNLINmwf[keys] = 2*np.fft.rfft(np.concatenate((nLINmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
     SNLmwf[keys] = 2*np.fft.rfft(np.concatenate((tNLmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
     SHmwf[keys] = 2*np.fft.rfft(np.concatenate((3*tLINmwf[keys]-tHmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
     fxx = np.arange(Nt+int(2**15))*fsamp/(Nt+int(2**15))
@@ -652,9 +684,9 @@ plt.rcParams["ytick.right"] = True
 
 # Plot for the linear data
 for keys in tLINmwf:
-    if keys != '70':
+    if keys != '74':
         ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3, 20*np.log10(np.abs(SLINmwf[keys])/pREF))
-        ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3, 20*np.log10(np.abs(SNLINmwf[keys])/pREF),':')
+       #ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3, 20*np.log10(np.abs(SNLINmwf[keys])/pREF),':')
 
 # Set axis limits and labels for amplitude
 ax1.set_xlim([0.500, 4.000])
@@ -667,7 +699,7 @@ for Fc in FchosenLin:
 
 # Plot for the phase
 for keys in tNLmwf:
-    if keys != '70':
+    if keys != '74':
         ax2.plot(fxx[:int(len(fxx)/2+1)]/1e3, np.unwrap(np.angle(SLINmwf[keys])) / cycle)
 
 # Set axis limits and labels for phase
@@ -799,7 +831,7 @@ if plotIOall:
 
 
 #%% fitovani Gain fce
-
+'''
 #%%
 import numpy as np
 import matplotlib.pyplot as plt
@@ -916,3 +948,4 @@ file_name = 'Estimace/CEOAEfit_results_' + subjN + '.mat'
 savemat(file_name, fit_results)
 
 print(f"Data successfully saved to {file_name}")
+'''

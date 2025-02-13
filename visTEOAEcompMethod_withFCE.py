@@ -154,7 +154,9 @@ subjD['s089L'] = ['Results/s089/', 'CMclickOAE_s089_24_07_01_11_22_31_Lc_40dB_Nc
 subjD['s091L'] = ['Results/s091/', 'CMclickOAE_s091_24_07_11_13_56_45_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s091_24_07_11_13_54_37_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s091_24_07_11_13_52_29_Lc_64dB_Ncl228Npulse_3072_L_']
 subjD['s091R'] = ['Results/s091/', 'CMclickOAE_s091_24_07_11_14_24_54_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s091_24_07_11_14_22_45_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s091_24_07_11_14_20_32_Lc_64dB_Ncl228Npulse_3072_R_']
 
-subjN = 's091L'
+subjD['s122L'] = ['Results/s122/', 'CMclickOAE_s122_25_02_10_16_35_14_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s122_25_02_10_16_35_14_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s122_25_02_10_16_35_14_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s122_25_02_10_16_35_14_Lc_64dB_Ncl228Npulse_3072_L_']
+
+subjN = 's122L'
 
 
 
@@ -172,7 +174,7 @@ latency_SC = 20532
 #latency_SC = 20544
 latency_SC = 8304
 for i in range(1,len(subjD[subjN])):
-    recMat1, recMat2, recMat3, recMat4, wz, midx, Lc,fsamp = giveMatricesTEOAE(subjD[subjN][0], subjD[subjN][i], Nopak,latency_SC)
+    recMat1, recMat2, recMat3, recMat4, wz, midx, Lc,fsamp, tempA,tempB = giveMatricesTEOAE(subjD[subjN][0], subjD[subjN][i], Nopak,latency_SC)
     
     if i==1:
         midxT = midx

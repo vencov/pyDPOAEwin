@@ -61,7 +61,32 @@ subjD['s001R'] = ['Results/s001/GACR/', '24_12_18_10_36_45_F2b_8000Hz', '24_12_1
 subjD['s101L'] = ['Results/s101/', '24_12_18_13_38_13_F2b_8000Hz', '24_12_18_13_39_17_F2b_8000Hz', '24_12_18_13_40_16_F2b_8000Hz', '24_12_18_13_41_33_F2b_8000Hz', '24_12_18_13_43_03_F2b_8000Hz', '24_12_18_13_44_49_F2b_8000Hz', '24_12_18_13_46_03_F2b_8000Hz', '24_12_18_13_47_49_F2b_8000Hz']
 subjD['s101R'] = ['Results/s101/', '24_12_18_13_15_39_F2b_8000Hz', '24_12_18_13_17_11_F2b_8000Hz', '24_12_18_13_18_32_F2b_8000Hz', '24_12_18_13_19_31_F2b_8000Hz', '24_12_18_13_20_46_F2b_8000Hz', '24_12_18_13_21_44_F2b_8000Hz', '24_12_18_13_22_44_F2b_8000Hz', '24_12_18_13_23_43_F2b_8000Hz', '24_12_18_13_24_57_F2b_8000Hz']
 
-subjN = 's097L'
+subjD['s119L'] = ['Results/s119/', '25_01_22_11_32_21_F2b_8000Hz', '25_01_22_11_33_35_F2b_8000Hz', '25_01_22_11_34_50_F2b_8000Hz', '25_01_22_11_36_04_F2b_8000Hz', '25_01_22_11_37_18_F2b_8000Hz', '25_01_22_11_38_48_F2b_8000Hz', '25_01_22_11_40_18_F2b_8000Hz']
+subjD['s119R'] = ['Results/s119/', '25_01_22_11_54_46_F2b_8000Hz', '25_01_22_11_55_45_F2b_8000Hz', '25_01_22_11_56_59_F2b_8000Hz', '25_01_22_11_58_13_F2b_8000Hz', '25_01_22_11_59_28_F2b_8000Hz', '25_01_22_12_00_42_F2b_8000Hz', '25_01_22_12_01_56_F2b_8000Hz']
+
+subjD['s124L'] = ['Results/s124/', '25_01_22_14_11_05_F2b_8000Hz', '25_01_22_14_11_49_F2b_8000Hz', '25_01_22_14_12_49_F2b_8000Hz', '25_01_22_14_14_04_F2b_8000Hz', '25_01_22_14_15_18_F2b_8000Hz', '25_01_22_14_16_33_F2b_8000Hz', '25_01_22_14_17_47_F2b_8000Hz', '25_01_22_14_18_46_F2b_8000Hz']
+subjD['s124R'] = ['Results/s124/', '25_01_22_13_49_12_F2b_8000Hz', '25_01_22_13_50_11_F2b_8000Hz', '25_01_22_13_51_10_F2b_8000Hz', '25_01_22_13_52_09_F2b_8000Hz', '25_01_22_13_53_08_F2b_8000Hz', '25_01_22_13_54_07_F2b_8000Hz', '25_01_22_13_55_06_F2b_8000Hz', '25_01_22_13_56_21_F2b_8000Hz', '25_01_22_13_57_35_F2b_8000Hz']
+
+subjD['s126L'] = ['Results/s126/', '25_02_05_10_00_44_F2b_8000Hz', '25_02_05_10_01_47_F2b_8000Hz', '25_02_05_10_02_55_F2b_8000Hz', '25_02_05_10_04_11_F2b_8000Hz', '25_02_05_10_05_32_F2b_8000Hz', '25_02_05_10_06_48_F2b_8000Hz', '25_02_05_10_07_47_F2b_8000Hz', '25_02_05_10_09_03_F2b_8000Hz']
+subjD['s126R'] = ['Results/s126/', '25_02_05_10_24_02_F2b_8000Hz', '25_02_05_10_25_17_F2b_8000Hz', '25_02_05_10_26_17_F2b_8000Hz', '25_02_05_10_27_32_F2b_8000Hz', '25_02_05_10_28_32_F2b_8000Hz', '25_02_05_10_29_32_F2b_8000Hz', '25_02_05_10_30_31_F2b_8000Hz', '25_02_05_10_31_31_F2b_8000Hz']
+
+subjD['s127L'] = ['Results/s127/', '25_02_05_13_51_54_F2b_8000Hz', '25_02_05_13_53_25_F2b_8000Hz', '25_02_05_13_54_40_F2b_8000Hz', '25_02_05_13_55_55_F2b_8000Hz', '25_02_05_13_57_10_F2b_8000Hz', '25_02_05_13_58_40_F2b_8000Hz', '25_02_05_13_59_55_F2b_8000Hz']
+subjD['s127R'] = ['Results/s127/', '25_02_05_14_18_12_F2b_8000Hz', '25_02_05_14_19_27_F2b_8000Hz', '25_02_05_14_20_42_F2b_8000Hz', '25_02_05_14_21_58_F2b_8000Hz', '25_02_05_14_23_29_F2b_8000Hz', '25_02_05_14_25_14_F2b_8000Hz', '25_02_05_14_25_58_F2b_8000Hz', '25_02_05_14_26_42_F2b_8000Hz', '25_02_05_14_27_44_F2b_8000Hz', '25_02_05_14_28_43_F2b_8000Hz']
+
+subjD['s995L2s'] =  ['Results/s995/', '25_02_07_13_29_24_F2b_8000Hz', '25_02_07_13_31_10_F2b_8000Hz', '25_02_07_13_32_26_F2b_8000Hz', '25_02_07_13_37_50_F2b_8000Hz', '25_02_07_13_39_05_F2b_8000Hz', '25_02_07_13_40_21_F2b_8000Hz', '25_02_07_13_41_54_F2b_8000Hz']
+subjD['s995R2s'] = ['Results/s995/', '25_02_07_14_00_07_F2b_8000Hz', '25_02_07_14_01_38_F2b_8000Hz', '25_02_07_14_02_46_F2b_8000Hz', '25_02_07_14_03_45_F2b_8000Hz', '25_02_07_14_05_01_F2b_8000Hz', '25_02_07_14_06_01_F2b_8000Hz', '25_02_07_14_07_17_F2b_8000Hz', '25_02_07_14_08_33_F2b_8000Hz']
+
+subjD['s122L'] = ['Results/s122/', '25_02_10_16_23_36_F2b_8000Hz', '25_02_10_16_24_36_F2b_8000Hz', '25_02_10_16_25_20_F2b_8000Hz', '25_02_10_16_26_19_F2b_8000Hz', '25_02_10_16_27_35_F2b_8000Hz', '25_02_10_16_28_49_F2b_8000Hz', '25_02_10_16_30_05_F2b_8000Hz']
+subjD['s122R'] = ['Results/s122/', '25_02_10_16_43_42_F2b_8000Hz', '25_02_10_16_44_46_F2b_8000Hz', '25_02_10_16_46_16_F2b_8000Hz', '25_02_10_16_47_31_F2b_8000Hz', '25_02_10_16_48_47_F2b_8000Hz', '25_02_10_16_50_01_F2b_8000Hz', '25_02_10_16_51_33_F2b_8000Hz', '25_02_10_16_52_48_F2b_8000Hz']
+    
+
+subjD['s116L'] = ['Results/s116/', '25_02_10_13_54_40_F2b_8000Hz', '25_02_10_13_55_58_F2b_8000Hz', '25_02_10_13_56_57_F2b_8000Hz', '25_02_10_13_57_58_F2b_8000Hz', '25_02_10_13_59_19_F2b_8000Hz', '25_02_10_14_00_35_F2b_8000Hz', '25_02_10_14_01_49_F2b_8000Hz']
+subjD['s116R'] = ['Results/s116/', '25_02_10_14_18_29_F2b_8000Hz', '25_02_10_14_19_29_F2b_8000Hz', '25_02_10_14_20_45_F2b_8000Hz', '25_02_10_14_21_44_F2b_8000Hz', '25_02_10_14_22_44_F2b_8000Hz', '25_02_10_14_24_01_F2b_8000Hz', '25_02_10_14_25_32_F2b_8000Hz', '25_02_10_14_26_53_F2b_8000Hz']
+
+subjD['s112L'] = ['Results/s112/', '25_02_10_11_30_13_F2b_8000Hz', '25_02_10_11_31_30_F2b_8000Hz', '25_02_10_11_32_30_F2b_8000Hz', '25_02_10_11_33_29_F2b_8000Hz', '25_02_10_11_34_28_F2b_8000Hz', '25_02_10_11_35_27_F2b_8000Hz', '25_02_10_11_36_26_F2b_8000Hz']
+subjD['s112R'] = ['Results/s112/', '25_02_10_11_48_31_F2b_8000Hz', '25_02_10_11_49_30_F2b_8000Hz', '25_02_10_11_50_48_F2b_8000Hz', '25_02_10_11_52_18_F2b_8000Hz', '25_02_10_11_53_20_F2b_8000Hz', '25_02_10_11_54_39_F2b_8000Hz', '25_02_10_11_55_54_F2b_8000Hz']
+
+subjN = 's096L'
 
 #subjN = 's055L_L2_55'
 
@@ -101,7 +126,7 @@ def wavelet_filterDPOAE(signal, wavelet_basis,fx):
     
     
     
-    for k in range(20,400):
+    for k in range(10,400):
         # Compute the Fourier transform of the wavelet basis function
         wbtf = 2*np.fft.fft(wavelet_basis[:, k])/len(wavelet_basis[:, k])
         
@@ -553,7 +578,7 @@ plt.savefig('Figures/DPgrams/dpgr' + subjN + '.png', format='png', dpi=300)  # S
 
 import numpy as np
 
-CF = [2000,3000,4500,7000]
+CF = [2000,3000,4000,7000]
 CFidx = np.zeros_like(CF)
 
 DPioNL = []
@@ -798,3 +823,129 @@ savemat(filename, estimated_results)
 print(f'Saved estimated results to {filename}')
 
 
+#%%
+
+
+
+# Define your desired range
+L2_min, L2_max = 30, 60  # Example range
+
+# Convert DPioNL[0] to a NumPy array
+DPio01 = np.array(DPioNL[0])
+NFio01 = np.array(NOxNL[0])
+# Select elements where L2list is within the desired range
+mask = (L2array >= L2_min) & (L2array <= L2_max)
+DPio01 = DPio01[mask]
+NFio01 = NFio01[mask]
+
+nDPio01 = (10**(DPio01/20))/np.max(10**(DPio01/20))
+
+# Compute the difference
+valid_mask = (DPio01 - NFio01) > 6  # Boolean mask
+
+# Apply cumulative sum only to valid values, setting others to zero
+cumsum_result = np.cumsum(np.where(valid_mask, DPio01, 0))
+
+
+DPio01 = np.array(DPioNL[0])
+
+
+nDPio01 = (10**(DPio01/20))/np.max(10**(DPio01/20))
+
+cnDPio01 = np.cumsum(nDPio01, axis=0)  # Cumulative sum along rows
+
+
+DPio02 = np.array(DPioNL[1])
+
+
+nDPio02 = (10**(DPio02/20))/np.max(10**(DPio02/20))
+
+cnDPio02 = np.cumsum(nDPio02, axis=0)  # Cumulative sum along rows
+
+
+DPio03 = np.array(DPioNL[2])
+
+
+nDPio03 = (10**(DPio03/20))/np.max(10**(DPio03/20))
+
+cnDPio03 = np.cumsum(nDPio03, axis=0)  # Cumulative sum along rows
+
+
+DPio04 = np.array(DPioNL[3])
+
+
+nDPio04 = (10**(DPio04/20))/np.max(10**(DPio04/20))
+
+cnDPio04 = np.cumsum(nDPio04, axis=0)  # Cumulative sum along rows
+
+
+
+fig,ax = plt.subplots()
+
+ax.plot(nDPio01)  # Cumulative sum along rows)
+
+fig,ax = plt.subplots()
+
+ax.plot(cnDPio01)  # Cumulative sum along rows)
+ax.plot(cnDPio02)  # Cumulative sum along rows)
+ax.plot(cnDPio03)  # Cumulative sum along rows)
+ax.plot(cnDPio04)  # Cumulative sum along rows)
+
+
+#%%
+
+
+# Define your desired range
+L2_min, L2_max = 30, 60  
+
+# Initialize lists to store results for each x
+DPio_selected, NFio_selected, cumsum_results, nDPio_results = [], [], [], []
+
+# Loop over all x in DPioNL
+for x in range(len(DPioNL)):  
+    DPio = np.array(DPioNL[x])
+    NFio = np.array(NOxNL[x])
+
+    # Select elements where L2array is within the desired range
+    mask = (L2array >= L2_min) & (L2array <= L2_max)
+    DPio, NFio = DPio[mask], NFio[mask]
+
+    # Normalize DPio values
+    nDPio = (10**(DPio / 20)) / np.max(10**(DPio / 20))
+
+    # Compute the valid mask for cumulative sum condition
+    valid_mask = (DPio - NFio) > 6  
+
+    # Compute cumulative sum only for valid values
+    cumsum_result = np.cumsum(np.where(valid_mask, nDPio, 0))
+
+    # Store results
+    DPio_selected.append(DPio)
+    NFio_selected.append(NFio)
+    nDPio_results.append(nDPio)
+    cumsum_results.append(cumsum_result)
+
+
+
+fig,ax = plt.subplots()
+
+for i in range(len(cumsum_results)):
+    ax.plot(cumsum_results[i])  # Cumulative sum along rows)
+    
+    
+
+#%% save into matfile
+
+data = {'CF':CF,'DPioNL':DPioNL,'NOxNL':NOxNL,'L2array':L2array,'cres':cumsum_results,'L2min':L2_min,'L2max':L2_max}
+
+# File name for saving
+file_name = 'Estimace/DPioCS_results_' + subjN + '.mat'
+
+# Save the data into a .mat file
+savemat(file_name, data)
+
+print(f"Data successfully saved to {file_name}")
+
+
+
+    

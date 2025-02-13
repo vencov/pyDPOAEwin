@@ -21,12 +21,12 @@ f2e = 500 # f2 end frequency
 f2f1 = 1.2  # f2/f1 ratio
 #L1 = 53    # intensity of f1 tone
 L2list = np.arange(55,20,-5)  # make a list of L2 values
-L2 = 60
+L2 = 40
 Lstep = 5
-
+artThresh = 12  # threshodl for artifact removal
 
 #L1 = 55
-r = 2   # sweep rate in octaves per second
+r = 4   # sweep rate in octaves per second
 fsamp = 44100; lat_SC=8236; bufsize = 2048  # 44100 Hz 2048 buffersize# sampling freuqency
 fsamp = 96000; lat_SC= 16448; bufsize = 4096
 #fsamp = 96000; lat_SC= 12352; bufsize = 4096
@@ -38,14 +38,14 @@ DevNum = 10
 changeSampleRate(fsamp,bufsize,SC=DevNum)
 lat_SC = getSClat(fsamp,bufsize,SC=DevNum)
 micGain = 40
-ear_t = 'R' # which ear
+ear_t = 'L' # which ear
 
 plt.close('all')
 
 #save_path = 'Results/s003'
 #subj_name = 's003'
-save_path = 'Results/s102/'
-subj_name = 's102'
+save_path = 'Results/s140/'
+subj_name = 's140'
 
 # now to stop measurement by s key
 
@@ -243,10 +243,11 @@ while runningM:
             sigma2 = np.sqrt(1/(Nsamp*counter)*np.sum(np.sum(noiseM2**2,1)))
             sigma3 = np.sqrt(1/(Nsamp*counter)*np.sum(np.sum(noiseM3**2,1)))
             sigma4 = np.sqrt(1/(Nsamp*counter)*np.sum(np.sum(noiseM4**2,1)))
-            Theta1 = 8*sigma1 # estimation of the threshold for sample removal
-            Theta2 = 8*sigma2 # estimation of the threshold for sample removal
-            Theta3 = 8*sigma3 # estimation of the threshold for sample removal
-            Theta4 = 8*sigma4 # estimation of the threshold for sample removal
+            
+            Theta1 = artThresh*sigma1 # estimation of the threshold for sample removal
+            Theta2 = artThresh*sigma2 # estimation of the threshold for sample removal
+            Theta3 = artThresh*sigma3 # estimation of the threshold for sample removal
+            Theta4 = artThresh*sigma4 # estimation of the threshold for sample removal
 
             # now we have to make NAN where the noise was to large, but we have to do it in the wave
             # which 
