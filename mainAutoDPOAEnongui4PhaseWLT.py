@@ -21,12 +21,12 @@ f2e = 500 # f2 end frequency
 f2f1 = 1.2  # f2/f1 ratio
 #L1 = 53    # intensity of f1 tone
 L2list = np.arange(55,20,-5)  # make a list of L2 values
-L2 = 40
+L2 = 65
 Lstep = 5
 artThresh = 12  # threshodl for artifact removal
 
 #L1 = 55
-r = 4   # sweep rate in octaves per second
+r = 2   # sweep rate in octaves per second
 fsamp = 44100; lat_SC=8236; bufsize = 2048  # 44100 Hz 2048 buffersize# sampling freuqency
 fsamp = 96000; lat_SC= 16448; bufsize = 4096
 #fsamp = 96000; lat_SC= 12352; bufsize = 4096
@@ -38,14 +38,14 @@ DevNum = 10
 changeSampleRate(fsamp,bufsize,SC=DevNum)
 lat_SC = getSClat(fsamp,bufsize,SC=DevNum)
 micGain = 40
-ear_t = 'L' # which ear
+ear_t = 'R' # which ear
 
 plt.close('all')
 
 #save_path = 'Results/s003'
 #subj_name = 's003'
-save_path = 'Results/s140/'
-subj_name = 's140'
+save_path = 'Results/s120/'
+subj_name = 's120'
 
 # now to stop measurement by s key
 

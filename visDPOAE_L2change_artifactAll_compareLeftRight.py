@@ -108,8 +108,15 @@ subjD['s995R2s'] = ['Results/s995/', '25_02_07_14_00_07_F2b_8000Hz', '25_02_07_1
  
 subjD['s995L2_10'] = ['Results/s995/','25_02_07_13_39_05_F2b_8000Hz', '_25_02_07_13_40_21_F2b_8000Hz','25_02_07_13_41_54_F2b_8000Hz']
 
-subjN_L = 's995L2s'
-subjN_R = 's995L2_10'
+subjD['s140L'] = ['Results/s140/', '25_02_13_16_53_28_F2b_8000Hz', '25_02_13_16_54_44_F2b_8000Hz', '25_02_13_16_55_51_F2b_8000Hz', '25_02_13_16_57_07_F2b_8000Hz', '25_02_13_16_58_39_F2b_8000Hz', '25_02_13_16_59_54_F2b_8000Hz', '25_02_13_17_01_26_F2b_8000Hz', '25_02_13_17_02_42_F2b_8000Hz']
+subjD['s140R'] = ['Results/s140/', '25_02_13_16_24_56_F2b_8000Hz', '25_02_13_16_26_10_F2b_8000Hz', '25_02_13_16_27_27_F2b_8000Hz', '25_02_13_16_28_27_F2b_8000Hz', '25_02_13_16_29_42_F2b_8000Hz', '25_02_13_16_30_42_F2b_8000Hz', '25_02_13_16_32_14_F2b_8000Hz', '25_02_13_16_33_46_F2b_8000Hz']
+
+
+subjD['s120L'] = ['Results/s120/', '25_02_19_11_22_51_F2b_8000Hz', '25_02_19_11_23_50_F2b_8000Hz', '25_02_19_11_24_49_F2b_8000Hz', '25_02_19_11_25_48_F2b_8000Hz', '25_02_19_11_26_46_F2b_8000Hz', '25_02_19_11_27_45_F2b_8000Hz', '25_02_19_11_28_44_F2b_8000Hz', '25_02_19_11_29_59_F2b_8000Hz', '25_02_19_11_31_16_F2b_8000Hz']
+subjD['s120R'] = ['Results/s120/', '25_02_19_11_41_44_F2b_8000Hz', '25_02_19_11_42_28_F2b_8000Hz', '25_02_19_11_43_43_F2b_8000Hz', '25_02_19_11_44_27_F2b_8000Hz', '25_02_19_11_45_25_F2b_8000Hz', '25_02_19_11_46_58_F2b_8000Hz', '25_02_19_11_48_12_F2b_8000Hz', '25_02_19_11_49_42_F2b_8000Hz', '25_02_19_11_50_57_F2b_8000Hz']
+
+subjN_L = 's120L'
+subjN_R = 's120R'
 
 
 
@@ -561,44 +568,46 @@ f2xx_R /= 1000
 
 cList = ['C1', 'C3', 'C2', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10', 'C11']
 
-for i in range(len(L2list_L)):
+L2mensi = L2list_L if len(L2list_L)<=len(L2list_R) else L2list_R
+
+for i in range(len(L2mensi)):
     # Left ear data (included in legend)
     ax1.plot(
-        f2xx_L, 
-        20 * np.log10(np.abs(DPgr_L[str(L2list_L[i])]['NLgr']) / pREF), 
-        color=cList[i], 
-        label=str(L2list_L[i])
+        f2xx_L,
+        20 * np.log10(np.abs(DPgr_L[str(L2mensi[i])]['NLgr']) / pREF),
+        color=cList[i],
+        label=str(L2mensi[i])
     )
 
     # Left ear noise (not in legend)
     ax1.plot(
-        f2xx_L, 
-        20 * np.log10(np.abs(DPgr_L[str(L2list_L[i])]['NLgrN']) / pREF), 
-        ':', 
-        color=cList[i], 
+        f2xx_L,
+        20 * np.log10(np.abs(DPgr_L[str(L2mensi[i])]['NLgrN']) / pREF),
+        ':',
+        color=cList[i],
         label='_nolegend_'
     )
 
     # Right ear data (not in legend)
     ax1.plot(
-        f2xx_R, 
-        20 * np.log10(np.abs(DPgr_R[str(L2list_R[i])]['NLgr']) / pREF), 
-        '--', 
-        color=cList[i], 
+        f2xx_R,
+        20 * np.log10(np.abs(DPgr_R[str(L2mensi[i])]['NLgr']) / pREF),
+        '--',
+        color=cList[i],
         label='_nolegend_'
     )
 
     # Right ear noise (not in legend)
     ax1.plot(
-        f2xx_R, 
-        20 * np.log10(np.abs(DPgr_R[str(L2list_R[i])]['NLgrN']) / pREF), 
-        ':', 
-        color=cList[i], 
+        f2xx_R,
+        20 * np.log10(np.abs(DPgr_R[str(L2mensi[i])]['NLgrN']) / pREF),
+        ':',
+        color=cList[i],
         label='_nolegend_'
     )
 
 ax1.set_xlim([0.5, 8])
-ax1.set_ylim([-40, 20])
+ax1.set_ylim([-30, 20])
 ax1.set_ylabel('Amplitude (dB SPL)', fontsize=14)
 
 # Set x-tick lines inward & increase font size
@@ -609,21 +618,21 @@ cycle = 2 * np.pi
 F2start = 700 / 1000
 idx1 = np.where(f2xx_L >= F2start)[0][0]  # Frequency index for unwrapping
 
-for i in range(len(L2list_L)):
+for i in range(len(L2mensi)):
     # Left ear phase (included in legend)
     ax2.plot(
-        f2xx_L[idx1:], 
-        np.unwrap(np.angle(DPgr_L[str(L2list_L[i])]['NLgr'][idx1:])) / cycle, 
-        color=cList[i], 
-        label=str(L2list_L[i])
+        f2xx_L[idx1:],
+        np.unwrap(np.angle(DPgr_L[str(L2mensi[i])]['NLgr'][idx1:])) / cycle,
+        color=cList[i],
+        label=str(L2mensi[i])
     )
 
     # Right ear phase (not in legend)
     ax2.plot(
-        f2xx_R[idx1:], 
-        np.unwrap(np.angle(DPgr_R[str(L2list_R[i])]['NLgr'][idx1:])) / cycle, 
-        '--', 
-        color=cList[i], 
+        f2xx_R[idx1:],
+        np.unwrap(np.angle(DPgr_R[str(L2mensi[i])]['NLgr'][idx1:])) / cycle,
+        '--',
+        color=cList[i],
         label='_nolegend_'
     )
 
@@ -638,17 +647,36 @@ ax2.tick_params(axis='y', direction='in',labelsize=12)
 
 # Place only one legend outside the plot (to the right) with italic L and subscript 2
 ax1.legend(
-    title=r"$\mathit{L}_2$ dB FPL (Left Ear)",  # L2 in italic with subscript
+    title=r"$\mathit{L}_2$ dB FPL",  # L2 in italic with subscript
     title_fontsize=14,
     fontsize=12,
     loc='center left',
     bbox_to_anchor=(1, 0.5)
 )
 
+import matplotlib.lines as mlines
+
+# Custom legend handles
+left_ear_line = mlines.Line2D([], [], color='black', linestyle='-', label='Left ear')
+right_ear_line = mlines.Line2D([], [], color='black', linestyle='--', label='Right ear')
+
+# Create L2 labels without duplicating line styles
+l2_handles = [mlines.Line2D([], [], color=cList[i], linestyle='-', label=str(L2mensi[i])) for i in range(len(L2mensi))]
+
+# First legend: Ear distinction
+legend1 = ax1.legend(handles=[left_ear_line, right_ear_line], loc='upper right', title="")
+
+# Second legend: L2 values
+legend2 = ax1.legend(handles=l2_handles, title=r"$\mathit{L}_2$ dB FPL", title_fontsize=14, fontsize=12, loc='center left', bbox_to_anchor=(1, 0.5))
+
+# Add the first legend back to the plot
+ax1.add_artist(legend1)
+
+ax2.text(0.05, 0.05, subjN_L[:-1], transform=ax2.transAxes, fontsize=12, verticalalignment='bottom', horizontalalignment='left')
+
 plt.show()
 
 plt.savefig(f'Figures/DPgrams/DPgrBothEars{subjN_L}.png', format='png', dpi=300)
-
 
 
 #%% fitting
@@ -657,11 +685,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Define center frequencies
-CF = [1000, 1500, 2000, 4000]
+CF = [2000, 3000, 4000, 7000]
 CFidx = np.zeros_like(CF)
 
 DPioNL_L = []
 GAdpNL_L = []
+NOxNL_L = []
+NOxNL_R = []
 DPioNL_R = []
 GAdpNL_R = []
 
@@ -671,19 +701,26 @@ for i in range(len(CF)):
 
     IOx_L = []
     GAx_L = []
+    NOx_L = []
     for j in range(len(L2list_L)):
         IOx_L.append(20 * np.log10(np.abs(DPgr_L[str(L2list_L[j])]['NLgr'][CFidx[i]]) / pREF))
         GAx_L.append(IOx_L[j] - L2list_L[j])
+        NOx_L.append(20 * np.log10(np.abs(DPgr_L[str(L2list_L[j])]['NLgrN'][CFidx[i]])/pREF))
     DPioNL_L.append(IOx_L)
     GAdpNL_L.append(GAx_L)
+    NOxNL_L.append(NOx_L)
 
     IOx_R = []
     GAx_R = []
+    NOx_R = []
     for j in range(len(L2list_R)):
         IOx_R.append(20 * np.log10(np.abs(DPgr_R[str(L2list_R[j])]['NLgr'][CFidx[i]]) / pREF))
         GAx_R.append(IOx_R[j] - L2list_R[j])
+        NOx_R.append(20 * np.log10(np.abs(DPgr_R[str(L2list_R[j])]['NLgrN'][CFidx[i]])/pREF))
+
     DPioNL_R.append(IOx_R)
     GAdpNL_R.append(GAx_R)
+    NOxNL_R.append(NOx_R)
 
 # Create figure
 fig, ax = plt.subplots(figsize=(7, 5))
@@ -697,12 +734,19 @@ for i in range(len(CF)):
         L2list_L, DPioNL_L[i], label=r'${\it f}_2$ = ' + str(CF[i] / 1000) + ' kHz'
     )
     colors.append(line.get_color())  # Store color for right ear
+    ax.plot(L2list_L, NOxNL_L[i], color=colors[i],
+                               linestyle=':', linewidth=0.5, label="_nolegend_")
+
+
 
 # Plot right ear data (dashed lines with same colors)
 for i in range(len(CF)):
     ax.plot(
         L2list_R, DPioNL_R[i], linestyle='--', color=colors[i], label='_nolegend_'
     )
+    ax.plot(L2list_R, NOxNL_R[i], color=colors[i],
+                               linestyle=':', linewidth=0.5, label="_nolegend_")
+
 
 # Convert L2list to NumPy array for element-wise operations
 L2array = np.array(L2list_L)
@@ -711,7 +755,7 @@ L2array = np.array(L2list_L)
 ax.plot(L2array, L2array - 35, color='gray', linestyle='--', linewidth=1)
 
 # Set x and y limits
-ax.set_xlim([20, 70])  
+ax.set_xlim([20, 70])
 ax.set_ylim([-20, 20])
 
 # Increase font sizes
@@ -730,7 +774,7 @@ subject_name = subjN_L[:-1]
 text_to_display = f'{subject_name}'
 
 ax.text(
-    0.1, 0.05, text_to_display, transform=ax.transAxes, 
+    0.1, 0.05, text_to_display, transform=ax.transAxes,
     fontsize=text_fontsize, verticalalignment='top', horizontalalignment='right'
 )
 
@@ -741,5 +785,153 @@ ax.tick_params(axis='both', which='major', labelsize=label_fontsize, direction='
 plt.tight_layout()
 plt.show()
 
+
+import matplotlib.lines as mlines
+
+# Custom legend handles for left and right ear
+left_ear_line = mlines.Line2D([], [], color='black', linestyle='-', label='Left ear')
+right_ear_line = mlines.Line2D([], [], color='black', linestyle='--', label='Right ear')
+
+# Create L2 labels (without duplicating line styles)
+l2_handles = [
+    mlines.Line2D([], [], color=colors[i], linestyle='-', label=r'${\it f}_2$ = ' + str(int(CF[i] / 1000)))
+    for i in range(len(CF))
+]
+
+# First legend: Ear distinction (top right)
+legend1 = ax.legend(handles=[left_ear_line, right_ear_line], loc='upper right', title="")
+
+# Second legend: Frequency labels (side)
+legend2 = ax.legend(handles=l2_handles, title=r"$\mathit{f}_2$ (kHz)", title_fontsize=14, fontsize=12, loc='upper left')
+
+# Add the first legend back to the plot
+ax.add_artist(legend1)
+
+# Subject name & ear information (bottom left)
+text_to_display = ''
+ax.text(
+    0.02, 0.05, text_to_display, transform=ax.transAxes,
+    fontsize=legend_fontsize, verticalalignment='bottom', horizontalalignment='left'
+)
+
+
+
 # Save the figure
 plt.savefig(f'Figures/DPgrams/ioBothEars{subjN_L}.png', format='png', dpi=300)
+
+#%%
+
+# Convert L2list to a NumPy array for element-wise operations
+L2array_L = np.array(L2list_L)
+L2array_R = np.array(L2list_R)
+
+
+
+# Define your desired range
+L2_min, L2_max = 30, 60
+
+# Initialize lists to store results for each x
+DPio_selected_L, NFio_selected_L, cumsum_results_L, nDPio_results_L = [], [], [], []
+DPio_selected_R, NFio_selected_R, cumsum_results_R, nDPio_results_R = [], [], [], []
+
+# Loop over all x in DPioNL
+for x in range(len(DPioNL_L)):
+    DPio = np.array(DPioNL_L[x])
+    NFio = np.array(NOxNL_L[x])
+
+    # Select elements where L2array is within the desired range
+    mask = (L2array_L >= L2_min) & (L2array_L <= L2_max)
+    DPio, NFio = DPio[mask], NFio[mask]
+
+    # Normalize DPio values
+    nDPio = (10**(DPio / 20)) / np.max(10**(DPio / 20))
+
+    # Compute the valid mask for cumulative sum condition
+    valid_mask1 = (DPio - NFio) > 6
+    valid_mask2 = DPio > -20
+    valid_mask = valid_mask1*valid_mask2
+
+
+    # Compute cumulative sum only for valid values
+    cumsum_result = np.cumsum(np.where(valid_mask, nDPio, 0))
+
+    # Store results
+    DPio_selected_L.append(DPio)
+    NFio_selected_L.append(NFio)
+    nDPio_results_L.append(nDPio)
+    cumsum_results_L.append(cumsum_result)
+
+# Loop over all x in DPioNL
+for x in range(len(DPioNL_R)):
+    DPio = np.array(DPioNL_R[x])
+    NFio = np.array(NOxNL_R[x])
+
+    # Select elements where L2array is within the desired range
+    mask = (L2array_R >= L2_min) & (L2array_R <= L2_max)
+    DPio, NFio = DPio[mask], NFio[mask]
+
+    # Normalize DPio values
+    nDPio = (10**(DPio / 20)) / np.max(10**(DPio / 20))
+
+    # Compute the valid mask for cumulative sum condition
+    valid_mask1 = (DPio - NFio) > 6
+    valid_mask2 = DPio > -20
+    valid_mask = valid_mask1*valid_mask2
+
+    # Compute cumulative sum only for valid values
+    cumsum_result = np.cumsum(np.where(valid_mask, nDPio, 0))
+
+    # Store results
+    DPio_selected_R.append(DPio)
+    NFio_selected_R.append(NFio)
+    nDPio_results_R.append(nDPio)
+    cumsum_results_R.append(cumsum_result)
+
+
+
+fig, ax = plt.subplots(figsize=(7, 5))
+
+colors = []  # Store colors for consistency
+
+mask_L = (L2array_L >= L2_min) & (L2array_L <= L2_max)
+
+mask_R = (L2array_L >= L2_min) & (L2array_L <= L2_max)
+
+
+# Plot left ear data (solid lines)
+for i in range(len(cumsum_results_L)):
+    line, = ax.plot(L2list_L[1:len(cumsum_results_L[i])+1], cumsum_results_L[i] * 5, label=f'${{\it f}}_2$ = {CF[i] / 1000} kHz')
+    colors.append(line.get_color())  # Store color for right ear
+
+# Plot right ear data (dashed lines, same colors)
+for i in range(len(cumsum_results_R)):
+    ax.plot(L2list_R[1:len(cumsum_results_R[i])+1], cumsum_results_R[i] * 5, '--', color=colors[i], label='_nolegend_')
+
+# Reverse X-axis (high to low L2 values)
+ax.invert_xaxis()
+
+# Labels
+ax.set_xlabel(r'$L_2$ (dB FPL)', fontsize=14)
+ax.set_ylabel('$\sum_{L_2=60}^{30} DPOAE(L_2) \Delta L$', fontsize=14)
+
+# Custom legend handles
+left_ear_line = mlines.Line2D([], [], color='black', linestyle='-', label='Left ear')
+right_ear_line = mlines.Line2D([], [], color='black', linestyle='--', label='Right ear')
+
+# Create separate legends
+legend1 = ax.legend(handles=[left_ear_line, right_ear_line], loc='upper center', title="", fontsize=12)
+l2_handles = [
+    mlines.Line2D([], [], color=colors[i], linestyle='-', label=f'${{\it f}}_2$ = {int(CF[i] / 1000)}') for i in range(len(CF))
+]
+legend2 = ax.legend(handles=l2_handles, title=r"$\mathit{f}_2$ (kHz)", title_fontsize=12, fontsize=12, loc='upper left')
+ax.add_artist(legend1)  # Add ear legend separately
+ax.set_ylim([5,30])
+# Save & show
+
+# Increase tick label font sizes and set both x and y tick marks inward
+ax.tick_params(axis='both', which='major', labelsize=label_fontsize, direction='in')
+
+
+plt.tight_layout()
+plt.savefig(f'Figures/CumsumBothEars{subjN_L}.png', format='png', dpi=300)
+plt.show()
