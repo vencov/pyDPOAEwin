@@ -48,14 +48,12 @@ def print_dicts_as_command_line(folder_path):
     dLsorted.insert(0,folder_path)
     dRsorted.insert(0,folder_path)
     
-    dL = [prvek[0] if isinstance(prvek,list) else prvek for prvek in dLsorted]
-    dR = [prvek[0] if isinstance(prvek,list) else prvek for prvek in dRsorted]
     
-    print(f"{dL}")
-    print(f"{dR}")
+    print(f"{dLsorted}")
+    print(f"{dRsorted}")
     
 # Specify the folder containing the files
-folder_path = "Results/s122/"
+folder_path = "Results/s127/"
 
 # Print the dictionaries as command line output
 print_dicts_as_command_line(folder_path)

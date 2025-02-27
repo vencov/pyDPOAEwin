@@ -54,6 +54,26 @@ rct01f = np.reshape(rct01f[:Nclicks*Npulse],(Npulse,Nclicks),order='F')
 
 mrct01f = np.mean(rct01f,1)
 
+y_dev = rct01f-mrct01f[:,np.newaxis]
+
+# Example threshold
+threshold = 0.01  # Adjust this based on your criteria
+
+# Compute the maximum absolute deviation for each frame
+max_dev_per_frame = np.max(np.abs(y_dev), axis=0)
+
+# Identify frames where the deviation exceeds the threshold
+frames_to_skip = np.where(max_dev_per_frame > threshold)[0]
+
+print("Frames to skip:", frames_to_skip)
+
+
+# Select only the columns that are NOT in frames_to_skip
+valid_columns = np.setdiff1d(np.arange(rct01f[:, :].shape[1]), frames_to_skip)
+
+# Compute the mean only for the selected columns
+mrct01f = np.mean(rct01f[:, :][:, valid_columns], axis=1)
+
 # calibrate
 MG = 40
 

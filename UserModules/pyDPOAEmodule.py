@@ -315,6 +315,32 @@ def sendChirpToEar(*,AmpChirp=0.01,fsamp=44100,MicGain=40,Nchirps=300,buffersize
 
     y_mean1 = np.mean(y_reshaped1.T[:,Nchskip:],axis=1)
     y_mean2 = np.mean(y_reshaped2.T[:,Nchskip:],axis=1)
+    
+    # artifact rejection (reject frams which are affected by some artifact)
+    
+    y_dev1 = y_reshaped1.T[:,Nchskip:] - y_mean1[:,np.newaxis]
+    y_dev2 = y_reshaped2.T[:,Nchskip:] - y_mean2[:,np.newaxis]
+    # Example threshold
+    threshold = 0.01  # Adjust this based on your criteria
+
+    # Compute the maximum absolute deviation for each frame
+    max_dev_per_frame1 = np.max(np.abs(y_dev1), axis=0)
+    max_dev_per_frame2 = np.max(np.abs(y_dev2), axis=0)
+
+    # Identify frames where the deviation exceeds the threshold
+    frames_to_skip1 = np.where(max_dev_per_frame1 > threshold)[0]
+    frames_to_skip2 = np.where(max_dev_per_frame2 > threshold)[0]
+
+    print("Frames to skip:", frames_to_skip1)
+    print("Frames to skip:", frames_to_skip2)
+    
+    # Select only the columns that are NOT in frames_to_skip
+    valid_columns1 = np.setdiff1d(np.arange(y_reshaped1.T[:, Nchskip:].shape[1]), frames_to_skip1)
+    valid_columns2 = np.setdiff1d(np.arange(y_reshaped2.T[:, Nchskip:].shape[1]), frames_to_skip2)
+    # Compute the mean only for the selected columns
+    y_mean1 = np.mean(y_reshaped1.T[:, Nchskip:][:, valid_columns1], axis=1)
+    y_mean2 = np.mean(y_reshaped2.T[:, Nchskip:][:, valid_columns2], axis=1)
+    
     if plotflag:
         fig,ax = plt.subplots()
         ax.plot(y_mean1)

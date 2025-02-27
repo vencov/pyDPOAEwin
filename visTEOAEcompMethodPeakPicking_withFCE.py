@@ -190,10 +190,14 @@ subjD['s122L'] = ['Results/s122/', 'CMclickOAE_s122_25_02_10_16_35_14_Lc_46dB_Nc
 
 subjD['s122R'] = ['Results/s122/', 'CMclickOAE_s122_25_02_10_16_55_54_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s122_25_02_10_16_55_54_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s122_25_02_10_16_55_54_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s122_25_02_10_16_55_54_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s122_25_02_10_16_55_54_Lc_64dB_Ncl228Npulse_3072_R_']
 
+
+subjD['s127L'] = ['Results/s127/', 'CMclickOAE_s127_25_02_05_14_07_01_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s127_25_02_05_14_07_01_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s127_25_02_05_14_07_01_Lc_64dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s127_25_02_05_14_12_31_Lc_68dB_Ncl228Npulse_3072_L_']
+subjD['s127R'] = ['Results/s127/','CMclickOAE_s127_25_02_05_14_31_15_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s127_25_02_05_14_31_15_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s127_25_02_05_14_31_15_Lc_64dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s127_25_02_05_14_31_15_Lc_68dB_Ncl228Npulse_3072_R_']
+
 subjN = 's122L'
 
 
-subjN = 's122R'
+subjN = 's127L'
 
 
 
@@ -216,7 +220,7 @@ for i in range(1,len(subjD[subjN])):
     
     if i==1:
         midxT = midx
-        
+    print(i)    
     #t1 = wz*((np.mean(recMat1,1)+np.mean(recMat2,1)+np.mean(recMat3,1))-np.mean(recMat4,1))  # perform averaging in time and calculating TEOAE using compression method
     #tLin = wz*((np.mean(recMat1,1)+np.mean(recMat2,1)+np.mean(recMat3,1)))/3 # perform averaging in time and calculating TEOAE using compression method
     t1 = ((np.mean(recMat1,1)+np.mean(recMat2,1)+np.mean(recMat3,1))-np.mean(recMat4,1))  # perform averaging in time and calculating TEOAE using compression method
@@ -650,11 +654,17 @@ plt.rcParams["ytick.direction"] = "in"
 plt.rcParams["xtick.top"] = True
 plt.rcParams["ytick.right"] = True
 
+
+# Store colors for consistency
+colors = []
+i = 0  
 # Plot for the linear data
 for keys in tLINmwf:
     if keys != '70':
-        ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3, 20*np.log10(np.abs(SLINmwf[keys])/pREF))
-        ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3, 20*np.log10(np.abs(SNLINmwf[keys])/pREF),':')
+        line, = ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3, 20*np.log10(np.abs(SLINmwf[keys])/pREF))
+        colors.append(line.get_color())
+        ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3, 20*np.log10(np.abs(SNLINmwf[keys])/pREF),':',color=colors[i])
+        i += 1
 
 # Set axis limits and labels for amplitude
 ax1.set_xlim([0.500, 4.000])
@@ -666,9 +676,11 @@ for Fc in FchosenLin:
     ax1.plot([Fc, Fc], [-100, 100], '--', color='gray')
 
 # Plot for the phase
-for keys in tNLmwf:
+i = 0
+for keys in tLINmwf:
     if keys != '70':
-        ax2.plot(fxx[:int(len(fxx)/2+1)]/1e3, np.unwrap(np.angle(SLINmwf[keys])) / cycle)
+        ax2.plot(fxx[:int(len(fxx)/2+1)]/1e3, np.unwrap(np.angle(SLINmwf[keys])) / cycle,color=colors[i])
+        i += 1
 
 # Set axis limits and labels for phase
 ax2.set_xlim([0.500, 4.000])
@@ -688,7 +700,7 @@ ax2.text(0.95, 0.9, subjN[:-1] + earS + 'ear', transform=ax2.transAxes, ha='righ
 
 fig.supxlabel('Frequency (kHz)')
 
-#plt.savefig('Figures/ceoaeLINs003L2.eps', format='eps')
+plt.savefig('Figures/s127/ceoaeLINs127Left.png', format='png')
 
 
 
