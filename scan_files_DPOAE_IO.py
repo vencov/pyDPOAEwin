@@ -44,7 +44,7 @@ def print_dicts_as_command_line(folder_path):
         print(f"Sweep Rate {sweep_rate}Hz_R: {date_times}")
 
 # Specify the folder containing the files
-folder_path = "Results/s136/"
+folder_path = "Results/s098/"
 
 # Print the dictionaries as command line output
 print_dicts_as_command_line(folder_path)

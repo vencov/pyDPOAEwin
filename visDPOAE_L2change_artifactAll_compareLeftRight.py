@@ -120,10 +120,36 @@ subjD['s127L'] = ['Results/s127/', '25_02_05_13_51_54_F2b_8000Hz', '25_02_05_13_
 subjD['s127R'] = ['Results/s127/', '25_02_05_14_18_12_F2b_8000Hz', '25_02_05_14_19_27_F2b_8000Hz', '25_02_05_14_20_42_F2b_8000Hz', '25_02_05_14_21_58_F2b_8000Hz', '25_02_05_14_23_29_F2b_8000Hz', '25_02_05_14_25_14_F2b_8000Hz', '25_02_05_14_25_58_F2b_8000Hz', '25_02_05_14_26_42_F2b_8000Hz']
 
 
-subjN_L = 's127L'
-subjN_R = 's127R'
+subjD['s139L'] = ['Results/s139/', '25_03_03_13_44_54_F2b_8000Hz', '25_03_03_13_46_40_F2b_8000Hz', '25_03_03_13_49_01_F2b_8000Hz', '25_03_03_13_51_05_F2b_8000Hz']
+subjD['s139R'] = ['Results/s139/', '25_03_03_14_11_28_F2b_8000Hz', '25_03_03_14_12_59_F2b_8000Hz', '25_03_03_14_14_44_F2b_8000Hz', '25_03_03_14_16_31_F2b_8000Hz']
+
+subjD['s139L_10'] = ['Results/s139/L1L210/', '25_03_03_13_53_00_F2b_8000Hz', '25_03_03_13_54_30_F2b_8000Hz']
+subjD['s139R_10'] = ['Results/s139/L1L210/', '25_03_03_14_18_37_F2b_8000Hz', '25_03_03_14_20_07_F2b_8000Hz']
+
+subjD['s138L'] = ['Results/s138/', '25_03_03_16_10_43_F2b_8000Hz', '25_03_03_16_12_14_F2b_8000Hz', '25_03_03_16_13_45_F2b_8000Hz', '25_03_03_16_15_46_F2b_8000Hz', '25_03_03_16_17_33_F2b_8000Hz', '25_03_03_16_19_44_F2b_8000Hz']
+subjD['s138R'] = ['Results/s138/', '25_03_03_16_36_15_F2b_8000Hz', '25_03_03_16_37_46_F2b_8000Hz', '25_03_03_16_39_32_F2b_8000Hz', '25_03_03_16_41_03_F2b_8000Hz']
+
+subjD['s138L_10'] = ['Results/s138/L1L210/', '25_03_03_16_21_35_F2b_8000Hz', '25_03_03_16_23_06_F2b_8000Hz']
+subjD['s138R_10'] = ['Results/s138/L1L210/', '25_03_03_16_42_42_F2b_8000Hz', '25_03_03_16_44_15_F2b_8000Hz']
+
+subjD['s135L_10'] = ['Results/s135/L1L210/', '25_02_19_10_00_27_F2b_8000Hz', '25_02_19_10_01_26_F2b_8000Hz']
+subjD['s135R_10'] = ['Results/s135/L1L210/', '25_02_19_10_22_49_F2b_8000Hz', '25_02_19_10_23_48_F2b_8000Hz']
+
+subjD['s135L'] = ['Results/s135/', '25_02_19_09_50_25_F2b_8000Hz', '25_02_19_09_51_55_F2b_8000Hz', '25_02_19_09_53_40_F2b_8000Hz', '25_02_19_09_55_26_F2b_8000Hz', '25_02_19_09_57_11_F2b_8000Hz', '25_02_19_09_58_50_F2b_8000Hz']
+subjD['s135R'] = ['Results/s135/', '25_02_19_10_14_03_F2b_8000Hz', '25_02_19_10_15_52_F2b_8000Hz', '25_02_19_10_17_07_F2b_8000Hz', '25_02_19_10_18_38_F2b_8000Hz', '25_02_19_10_19_53_F2b_8000Hz', '25_02_19_10_21_15_F2b_8000Hz']
 
 
+subjD['s096L'] = ['Results/s096/', '24_12_09_13_24_12_F2b_8000Hz', '24_12_09_13_25_28_F2b_8000Hz', '24_12_09_13_26_58_F2b_8000Hz', '24_12_09_13_28_28_F2b_8000Hz', '24_12_09_13_29_28_F2b_8000Hz', '24_12_09_13_30_43_F2b_8000Hz', '24_12_09_13_31_58_F2b_8000Hz']
+subjD['s096R'] = ['Results/s096/', '24_12_09_13_46_18_F2b_8000Hz', '24_12_09_13_47_49_F2b_8000Hz']
+
+subjD['s096R_10'] = ['Results/s096/L1L210/', '24_12_09_13_49_23_F2b_8000Hz', '24_12_09_13_50_53_F2b_8000Hz']
+
+subjD['s098L'] = ['Results/s098/', '24_12_11_13_25_43_F2b_8000Hz', '24_12_11_13_26_27_F2b_8000Hz', '24_12_11_13_27_28_F2b_8000Hz', '24_12_11_13_28_45_F2b_8000Hz', '24_12_11_13_30_31_F2b_8000Hz', '24_12_11_13_32_02_F2b_8000Hz']
+subjD['s098R'] = ['Results/s098/', '24_12_11_13_44_03_F2b_8000Hz', '24_12_11_13_44_48_F2b_8000Hz', '24_12_11_13_45_34_F2b_8000Hz', '24_12_11_13_46_50_F2b_8000Hz', '24_12_11_13_48_06_F2b_8000Hz', '24_12_11_13_49_37_F2b_8000Hz', '24_12_11_13_51_08_F2b_8000Hz']
+
+
+subjN_L = 's084L'
+subjN_R = 's084R'
 
 
 #subjN = 's055L_L2_55'
@@ -564,8 +590,8 @@ pREF = np.sqrt(2) * 2e-5
 
 Nopak = 4  # number of presentations
 
-fxx_L = DPgr_L['55']['fxx']
-fxx_R = DPgr_R['55']['fxx']
+fxx_L = DPgr_L['50']['fxx']
+fxx_R = DPgr_R['50']['fxx']
 f2xx_L = f2f1list_L[-1] * fxx_L[: int(len(fxx_L) // 2) + 1] / (2 - f2f1)
 f2xx_R = f2f1list_R[-1] * fxx_R[: int(len(fxx_R) // 2) + 1] / (2 - f2f1)
 f2xx_L /= 1000
@@ -905,12 +931,12 @@ mask_R = (L2array_L >= L2_min) & (L2array_L <= L2_max)
 
 # Plot left ear data (solid lines)
 for i in range(len(cumsum_results_L)):
-    line, = ax.plot(L2list_L[1:len(cumsum_results_L[i])+1], cumsum_results_L[i] * 5, label=f'${{\it f}}_2$ = {CF[i] / 1000} kHz')
+    line, = ax.plot(L2array_L[mask_L], cumsum_results_L[i] * 5, label=f'${{\it f}}_2$ = {CF[i] / 1000} kHz')
     colors.append(line.get_color())  # Store color for right ear
 
 # Plot right ear data (dashed lines, same colors)
 for i in range(len(cumsum_results_R)):
-    ax.plot(L2list_R[1:len(cumsum_results_R[i])+1], cumsum_results_R[i] * 5, '--', color=colors[i], label='_nolegend_')
+    ax.plot(L2array_R[mask_R], cumsum_results_R[i] * 5, '--', color=colors[i], label='_nolegend_')
 
 # Reverse X-axis (high to low L2 values)
 ax.invert_xaxis()

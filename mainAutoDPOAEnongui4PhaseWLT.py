@@ -21,7 +21,7 @@ f2e = 500 # f2 end frequency
 f2f1 = 1.2  # f2/f1 ratio
 #L1 = 53    # intensity of f1 tone
 L2list = np.arange(55,20,-5)  # make a list of L2 values
-L2 = 65
+L2 = 60
 Lstep = 5
 artThresh = 12  # threshodl for artifact removal
 
@@ -44,8 +44,8 @@ plt.close('all')
 
 #save_path = 'Results/s003'
 #subj_name = 's003'
-save_path = 'Results/s120/'
-subj_name = 's120'
+save_path = 'Results/s138/'
+subj_name = 's138'
 
 # now to stop measurement by s key
 
@@ -90,7 +90,7 @@ while runningM:
     running = True  # loop is running
     #L2 = L2list[iL2]
     L1 = int(0.4*L2+39)  # scissor paradigm
-    #L1 = L2 + 10  # L2 + 10 dB paradigm
+    L1 = L2 + 10  # L2 + 10 dB paradigm
     def get_time() -> str:
         # to get current time
         now_time = datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S')
