@@ -1,5 +1,20 @@
 # -*- coding: utf-8 -*-
 """
+Created on Tue Mar 18 17:24:58 2025
+
+@author: vacla
+"""
+
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Mar 18 17:17:33 2025
+
+@author: vacla
+"""
+
+
+# -*- coding: utf-8 -*-
+"""
 Code which analyzes measured TEOAE data. It finds peaks in the amplitude finestructure
 
 Created on Wed Oct  9 14:08:48 2024
@@ -46,21 +61,21 @@ def giveMatricesTEOAE(FolderName,FileName,Nopak,latency_SC):
         Nclicks = data['Nclicks'][0][0]
         fsamp = data['fsamp'][0][0]
       
-        tTD01, tTD02, tTD03, tTD04, wz, midx, tN01, tN02, tN03, tN04, nTDest = giveTEOAE_MCmp(data,recsig20,latency_SC,Npulse,Nclicks,Tap=1e-3,TWt=17e-3,ArtRej=1000)
+        tTD01, tTD02, tTD03, tTD04, wz, midx, tN01, tN02, tN03, tN04 = giveTEOAE_MCmp(data,recsig20,latency_SC,Npulse,Nclicks,Tap=1e-3,TWt=17e-3,ArtRej=1000)
         
         if counter == 1:
             recMat1 = tTD01
             recMat2 = tTD02
             recMat3 = tTD03
             recMat4 = tTD04
-            nMat1 = nTDest
+           # nMat1 = nTDest
         else:
             recMat1 = np.c_[recMat1, tTD01]  # add to make a matrix with columns for every run
             recMat2 = np.c_[recMat2, tTD02]  # add to make a matrix with columns for every run
             recMat3 = np.c_[recMat3, tTD03]  # add to make a matrix with columns for every run
             recMat4 = np.c_[recMat4, tTD04]  # add to make a matrix with columns for every run
-            nMat1 = np.c_[nMat1, nTDest]
-    return recMat1, recMat2, recMat3, recMat4, nMat1, wz, midx, Lc, fsamp
+           # nMat1 = np.c_[nMat1, nTDest]
+    return recMat1, recMat2, recMat3, recMat4,  wz, midx, Lc, fsamp
 
 
 
@@ -181,158 +196,163 @@ subjD['s072R'] = ['Results/s072/', 'CMclickOAE_s072_24_06_05_12_21_26_Lc_34dB_Nc
 subjD['s063L'] = ['Results/s063/', 'CMclickOAE_s063_24_06_05_13_31_28_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_29_37_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_27_46_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_25_56_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_24_04_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s063_24_06_05_13_21_43_Lc_62dB_Ncl228Npulse_3072_L_']
 subjD['s063R'] = ['Results/s063/', 'CMclickOAE_s063_24_06_05_14_02_23_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_14_00_27_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_58_36_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_56_24_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_54_14_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s063_24_06_05_13_52_20_Lc_62dB_Ncl228Npulse_3072_R_']
 
-subjD['s001L'] = ['Results/s001/GACR/','CMclickOAE_s001_24_12_18_10_26_34_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s001_24_12_18_10_26_34_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s001_24_12_18_10_26_34_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s001_24_12_18_10_26_34_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s001_24_12_18_10_26_34_Lc_64dB_Ncl228Npulse_3072_L_']
 
-subjD['s001R'] = ['Results/s001/GACR/','CMclickOAE_s001_24_12_18_10_48_54_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s001_24_12_18_10_48_54_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s001_24_12_18_10_48_54_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s001_24_12_18_10_48_54_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s001_24_12_18_10_48_54_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s001_24_12_18_10_48_54_Lc_64dB_Ncl228Npulse_3072_R_']
-
-
-subjD['s122L'] = ['Results/s122/', 'CMclickOAE_s122_25_02_10_16_35_14_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s122_25_02_10_16_35_14_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s122_25_02_10_16_35_14_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s122_25_02_10_16_35_14_Lc_64dB_Ncl228Npulse_3072_L_']
-
-subjD['s122R'] = ['Results/s122/', 'CMclickOAE_s122_25_02_10_16_55_54_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s122_25_02_10_16_55_54_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s122_25_02_10_16_55_54_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s122_25_02_10_16_55_54_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s122_25_02_10_16_55_54_Lc_64dB_Ncl228Npulse_3072_R_']
+# healthy ear
 
 
-subjD['s127L'] = ['Results/s127/', 'CMclickOAE_s127_25_02_05_14_07_01_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s127_25_02_05_14_07_01_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s127_25_02_05_14_07_01_Lc_64dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s127_25_02_05_14_12_31_Lc_68dB_Ncl228Npulse_3072_L_']
-subjD['s127R'] = ['Results/s127/','CMclickOAE_s127_25_02_05_14_31_15_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s127_25_02_05_14_31_15_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s127_25_02_05_14_31_15_Lc_64dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s127_25_02_05_14_31_15_Lc_68dB_Ncl228Npulse_3072_R_']
+subjD['s999L'] =['Results/s999/','CMclickOAE_s999_24_11_05_11_36_13_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s999_24_11_05_11_36_13_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s999_24_11_05_11_36_13_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s999_24_11_05_11_36_13_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s999_24_11_05_11_36_13_Lc_64dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s999_24_11_05_11_36_13_Lc_70dB_Ncl228Npulse_3072_L_']
+# md ear (notice that there is mistake in left  and right ear)
 
 
-subjD['pok'] = ['Results/pokus/', 'CMclickOAE_pok_25_03_12_15_47_52_Lc_50dB_Ncl228Npulse_3072_R_', 'CMclickOAE_pok_25_03_12_15_47_52_Lc_60dB_Ncl228Npulse_3072_R_', 'CMclickOAE_pok_25_03_12_15_47_52_Lc_70dB_Ncl228Npulse_3072_R_']
+subjD['s999R'] = ['Results/s999/', 'CMclickOAE_s999_24_11_05_11_59_45_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s999_24_11_05_11_59_45_Lc_64dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s999_24_11_05_11_59_45_Lc_70dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s999_24_11_05_12_07_42_Lc_66dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s999_24_11_05_12_07_42_Lc_72dB_Ncl228Npulse_3072_R_']
 
-subjD['s121L'] = ['Results/s121/', 'CMclickOAE_s121_25_03_13_09_38_23_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s121_25_03_13_09_38_23_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s121_25_03_13_09_38_23_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s121_25_03_13_09_38_23_Lc_64dB_Ncl228Npulse_3072_L_']
-subjD['s121R'] = ['Results/s121/', 'CMclickOAE_s121_25_03_13_09_16_38_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s121_25_03_13_09_16_38_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s121_25_03_13_09_16_38_Lc_64dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s121_25_03_13_09_16_08_Lc_70dB_Ncl228Npulse_3072_R_']
+subjD['s998L'] = ['Results/s998/','CMclickOAE_s998_24_11_08_08_15_10_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s998_24_11_08_08_15_10_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s998_24_11_08_08_15_10_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s998_24_11_08_08_15_10_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s998_24_11_08_08_15_10_Lc_64dB_Ncl228Npulse_3072_L_']
 
-subjD['s138L'] = ['Results/s138/', 'CMclickOAE_s138_25_03_03_16_26_41_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s138_25_03_03_16_26_41_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s138_25_03_03_16_26_41_Lc_64dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s138_25_03_03_16_26_41_Lc_70dB_Ncl228Npulse_3072_L_']
-subjD['s138R'] = ['Results/s138/', 'CMclickOAE_s138_25_03_03_16_47_30_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s138_25_03_03_16_47_30_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s138_25_03_03_16_47_30_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s138_25_03_03_16_47_30_Lc_64dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s138_25_03_03_16_47_30_Lc_70dB_Ncl228Npulse_3072_R_']
+subjD['s998R'] =  ['Results/s998/','CMclickOAE_s998_24_11_08_08_43_33_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s998_24_11_08_08_43_33_Lc_64dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s998_24_11_08_08_43_33_Lc_66dB_Ncl228Npulse_3072_R_']
 
-subjD['s995L'] = ['Results/s995/', 'CMclickOAE_s995_25_02_07_13_47_16_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s995_25_02_07_13_47_16_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s995_25_02_07_13_47_16_Lc_64dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s995_25_02_07_13_53_16_Lc_64dB_Ncl228Npulse_3072_L_','CMclickOAE_s995_25_02_07_14_15_42_Lc_64dB_Ncl228Npulse_3072_L_']
-subjD['s995R'] = ['Results/s995/', 'CMclickOAE_s995_25_02_07_14_16_59_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s995_25_02_07_14_16_59_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s995_25_02_07_14_16_59_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s995_25_02_07_14_16_59_Lc_62dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s995_25_02_07_14_16_59_Lc_68dB_Ncl228Npulse_3072_R_']
+subjD['s997L'] = ['Results/s997/','CMclickOAE_s997_24_11_19_12_09_55_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s997_24_11_19_12_09_55_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s997_24_11_19_12_09_55_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s997_24_11_19_12_09_55_Lc_64dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s997_24_11_19_12_09_55_Lc_70dB_Ncl228Npulse_3072_L_']
 
-subjD['s139L'] = [ 'Results/s139/', 'CMclickOAE_s139_25_03_03_13_58_41_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s139_25_03_03_13_58_41_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s139_25_03_03_13_58_41_Lc_64dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s139_25_03_03_13_58_41_Lc_70dB_Ncl228Npulse_3072_L_']
-subjD['s139R'] = ['Results/s139/', 'CMclickOAE_s139_25_03_03_14_23_01_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s139_25_03_03_14_23_01_Lc_64dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s139_25_03_03_14_23_01_Lc_70dB_Ncl228Npulse_3072_R_']
+subjD['s997R'] = ['Results/s997/','CMclickOAE_s997_24_11_19_12_32_11_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s997_24_11_19_12_32_11_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s997_24_11_19_12_32_11_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s997_24_11_19_12_32_11_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s997_24_11_19_12_32_11_Lc_64dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s997_24_11_19_12_32_11_Lc_70dB_Ncl228Npulse_3072_R_']
 
-subjN = 's139L'
+subjD['s100L'] = ['Results/s100/','CMclickOAE_s100_24_12_04_16_13_47_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s100_24_12_04_16_13_47_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s100_24_12_04_16_13_47_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s100_24_12_04_16_13_47_Lc_64dB_Ncl228Npulse_3072_L_']
+
+subjD['s100R'] = ['Results/s100/','CMclickOAE_s100_24_12_04_15_51_18_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s100_24_12_04_15_51_18_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s100_24_12_04_15_51_18_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s100_24_12_04_15_51_18_Lc_64dB_Ncl228Npulse_3072_R_']
+
+subjD['s092L'] = ['Results/s092/', 'CMclickOAE_s092_24_12_05_11_36_18_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s092_24_12_05_11_36_18_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s092_24_12_05_11_36_18_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s092_24_12_05_11_36_18_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s092_24_12_05_11_36_18_Lc_64dB_Ncl228Npulse_3072_L_']
+subjD['s092R'] = ['Results/s092/','CMclickOAE_s092_24_12_05_11_54_40_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s092_24_12_05_11_54_40_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s092_24_12_05_11_54_40_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s092_24_12_05_11_54_40_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s092_24_12_05_11_54_40_Lc_64dB_Ncl228Npulse_3072_R_']
+
+subjD['s995L'] = ['Results/s995/','CMclickOAE_s995_24_12_20_11_55_20_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s995_24_12_20_11_55_20_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s995_24_12_20_11_55_20_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s995_24_12_20_11_55_20_Lc_64dB_Ncl228Npulse_3072_L_']
+subjD['s995R'] = ['Results/s995/','CMclickOAE_s995_24_12_20_12_20_11_Lc_34dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s995_24_12_20_12_20_11_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s995_24_12_20_12_20_11_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s995_24_12_20_12_20_11_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s995_24_12_20_12_20_11_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s995_24_12_20_12_20_11_Lc_64dB_Ncl228Npulse_3072_R_']
+
+subjD['s996L'] = ['Results/s996/', 'CMclickOAE_s996_24_12_13_11_47_52_Lc_34dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s996_24_12_13_11_47_52_Lc_40dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s996_24_12_13_11_47_52_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s996_24_12_13_11_47_52_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s996_24_12_13_11_47_52_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s996_24_12_13_11_47_52_Lc_64dB_Ncl228Npulse_3072_L_']
+subjD['s996R'] = ['Results/s996/','CMclickOAE_s996_24_12_13_12_12_44_Lc_40dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s996_24_12_13_12_12_44_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s996_24_12_13_12_12_44_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s996_24_12_13_12_12_44_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s996_24_12_13_12_12_44_Lc_64dB_Ncl228Npulse_3072_R_']
+
+subjD['s994L'] = ['Results/s994/', 'CMclickOAE_s994_25_01_07_12_28_39_Lc_64dB_Ncl228Npulse_3072_L_']
+subjD['s994R'] = ['Results/s994/', 'CMclickOAE_s994_25_01_07_12_19_20_Lc_64dB_Ncl228Npulse_3072_R_']
 
 
+subjD['s993L'] = ['Results/s993/', 'CMclickOAE_s993_25_01_17_11_22_32_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s993_25_01_17_11_22_32_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s993_25_01_17_11_22_32_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s993_25_01_17_11_22_32_Lc_64dB_Ncl228Npulse_3072_L_']
+subjD['s993R'] = ['Results/s993/','CMclickOAE_s993_25_01_17_11_49_50_Lc_46dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s993_25_01_17_11_49_50_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s993_25_01_17_11_49_50_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s993_25_01_17_11_49_50_Lc_64dB_Ncl228Npulse_3072_R_']
 
-#subjN = 'pok'
+subjD['s992L'] = ['Results/s992/', 'CMclickOAE_s992_25_01_24_12_06_51_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s992_25_01_24_12_06_51_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s992_25_01_24_12_06_51_Lc_64dB_Ncl228Npulse_3072_L_']
+subjD['s992R'] = ['Results/s992/', 'CMclickOAE_s992_25_01_24_12_23_23_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s992_25_01_24_12_23_23_Lc_64dB_Ncl228Npulse_3072_R_']
 
+subjD['s991L'] = ['Results/s991/', 'CMclickOAE_s991_25_02_28_13_46_49_Lc_46dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s991_25_02_28_13_46_49_Lc_52dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s991_25_02_28_13_46_49_Lc_58dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s991_25_02_28_13_46_49_Lc_64dB_Ncl228Npulse_3072_L_']
+ 
+subjD['s999L'] = ['Results/s999/Feb2825/', 'CMclickOAE_s999_25_02_28_12_45_15_Lc_48dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s999_25_02_28_12_45_15_Lc_54dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s999_25_02_28_12_45_15_Lc_60dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s999_25_02_28_12_45_15_Lc_66dB_Ncl228Npulse_3072_L_', 'CMclickOAE_s999_25_02_28_12_45_15_Lc_72dB_Ncl228Npulse_3072_L_']
 
+subjD['s999R'] = ['Results/s999/Feb2825/', 'CMclickOAE_s999_25_02_28_13_12_27_Lc_52dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s999_25_02_28_13_12_27_Lc_58dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s999_25_02_28_13_12_27_Lc_64dB_Ncl228Npulse_3072_R_', 'CMclickOAE_s999_25_02_28_13_12_27_Lc_70dB_Ncl228Npulse_3072_R_']
 
+subjN_L = 's999L'
+subjN_R = 's999R'
 
 Nopak = 12
 Nfft = 1920
 TEOAE = {}
-tClick = {}
-tLINm = {}
+tClick_L = {}
+tLINm_L = {}
 tHm = {}
 nEst = {}
 tNLm = {}
-fxD = {}
-LcList = []
+fxD_L = {}
+LcList_L = []
 latency_SC = 20532
 #latency_SC = 20544
-latency_SC = 8304
-for i in range(1,len(subjD[subjN])):
-    recMat1, recMat2, recMat3, recMat4, recNMat, wz, midx, Lc,fsamp = giveMatricesTEOAE(subjD[subjN][0], subjD[subjN][i], Nopak,latency_SC)
+latency_SC = 6253
+
+
+for i in range(1,len(subjD[subjN_L])):
+    recMat1, recMat2, recMat3, recMat4, wz, midx, Lc,fsamp = giveMatricesTEOAE(subjD[subjN_L][0], subjD[subjN_L][i], Nopak,latency_SC)
     
     if i==1:
         midxT = midx
-    print(i)    
+        
     #t1 = wz*((np.mean(recMat1,1)+np.mean(recMat2,1)+np.mean(recMat3,1))-np.mean(recMat4,1))  # perform averaging in time and calculating TEOAE using compression method
     #tLin = wz*((np.mean(recMat1,1)+np.mean(recMat2,1)+np.mean(recMat3,1)))/3 # perform averaging in time and calculating TEOAE using compression method
     t1 = ((np.mean(recMat1,1)+np.mean(recMat2,1)+np.mean(recMat3,1))-np.mean(recMat4,1))  # perform averaging in time and calculating TEOAE using compression method
     tLin = ((np.mean(recMat1,1)+np.mean(recMat2,1)+np.mean(recMat3,1)))/3 # perform averaging in time and calculating TEOAE using compression method
     tHigh = np.mean(recMat4,1)
-    nLin = np.mean(recNMat,1)
+    #nLin = np.mean(recNMat,1)
     
     # extract click
     Nrw = 20 # order of the roex win
     Trwc = 0.001 # half of rw for click 
     rwC = roexwin(2*midx+1,Nrw,fsamp,Trwc,Trwc)
     
-    tClick[str(Lc)] = tLin[:len(rwC)]*rwC
+    tClick_L[str(Lc)] = tLin[:len(rwC)]*rwC
     #nEst[str(Lc)] = nLin  # estimated noise signal
     # extract CEOAE
     
-    Tceoae = 7e-3
+    Tceoae = 8e-3
     rwS = roexwin(2400,Nrw,fsamp,Tceoae,Tceoae)
-    tNLm[str(Lc)] = t1[midxT:2400+midxT]*rwS
-    tLINm[str(Lc)] = tLin[midxT:2400+midxT]*rwS
-    tHm[str(Lc)] = tHigh[midxT:2400+midxT]*rwS
-    nEst[str(Lc)] = nLin[midxT:2400+midxT]*rwS  # estimated noise signal
-    TEOAE[str(Lc)] = 2*np.fft.rfft(np.concatenate((t1[midxT:],np.zeros(int(2**15)))))/Nfft  # calculate spectrum
+    #tNLm[str(Lc)] = t1[midxT:2400+midxT]*rwS
+    tLINm_L[str(Lc)] = tLin[midxT:2400+midxT]*rwS
+    #tHm[str(Lc)] = tHigh[midxT:2400+midxT]*rwS
+   # nEst[str(Lc)] = nLin[midxT:2400+midxT]*rwS  # estimated noise signal
+    #TEOAE[str(Lc)] = 2*np.fft.rfft(np.concatenate((t1[midxT:],np.zeros(int(2**15)))))/Nfft  # calculate spectrum
     
     Ns = len(np.concatenate((t1[midxT:],np.zeros(int(2**15)))))
     fxx = np.arange(Ns)*fsamp/Ns
     
-    fxD[str(Lc)] = fxx[:Ns//2+1]  # take half of the frequency axis
-    LcList.append(str(Lc))
-#fig,ax = plt.subplots()
-#ax.plot(tTD01[midx:])
-#ax.plot(tTD02[midx:])
-#ax.plot(tTD03[midx:])
-#ax.plot(tTD04[midx:])
+    fxD_L[str(Lc)] = fxx[:Ns//2+1]  # take half of the frequency axis
+    LcList_L.append(str(Lc))
 
 
-#fig,ax = plt.subplots()
-#ax.plot(np.mean(recMat1,1))
-#ax.plot(np.mean(recMat2,1))
-#ax.plot(np.mean(recMat3,1))
-#ax.plot(np.mean(recMat4,1))
 
-
-#[52,70,58,40,64,46]
-
-
-#fig,ax = plt.subplots()
-#ax.plot((np.mean(recMat1,1)+np.mean(recMat2,1)+np.mean(recMat3,1))/3-np.mean(recMat4,1)/10**(9/20))
-#ax.plot(0.0001*wz)
-
-
-'''
+Nopak = 12
 Nfft = 1920
+TEOAE = {}
+tClick_R = {}
+tLINm_R = {}
+tHm = {}
+nEst = {}
+tNLm = {}
+fxD_R = {}
+LcList_R = []
+latency_SC = 20532
+#latency_SC = 20544
+latency_SC = 6253
+
+
+for i in range(1,len(subjD[subjN_R])):
+    recMat1, recMat2, recMat3, recMat4, wz, midx, Lc,fsamp = giveMatricesTEOAE(subjD[subjN_R][0], subjD[subjN_R][i], Nopak,latency_SC)
+    
+    if i==1:
+        midxT = midx
+        
+    #t1 = wz*((np.mean(recMat1,1)+np.mean(recMat2,1)+np.mean(recMat3,1))-np.mean(recMat4,1))  # perform averaging in time and calculating TEOAE using compression method
+    #tLin = wz*((np.mean(recMat1,1)+np.mean(recMat2,1)+np.mean(recMat3,1)))/3 # perform averaging in time and calculating TEOAE using compression method
+    t1 = ((np.mean(recMat1,1)+np.mean(recMat2,1)+np.mean(recMat3,1))-np.mean(recMat4,1))  # perform averaging in time and calculating TEOAE using compression method
+    tLin = ((np.mean(recMat1,1)+np.mean(recMat2,1)+np.mean(recMat3,1)))/3 # perform averaging in time and calculating TEOAE using compression method
+    tHigh = np.mean(recMat4,1)
+    #nLin = np.mean(recNMat,1)
+    
+    # extract click
+    Nrw = 20 # order of the roex win
+    Trwc = 0.001 # half of rw for click 
+    rwC = roexwin(2*midx+1,Nrw,fsamp,Trwc,Trwc)
+    
+    tClick_R[str(Lc)] = tLin[:len(rwC)]*rwC
+    #nEst[str(Lc)] = nLin  # estimated noise signal
+    # extract CEOAE
+    
+    Tceoae = 8e-3
+    rwS = roexwin(2400,Nrw,fsamp,Tceoae,Tceoae)
+    #tNLm[str(Lc)] = t1[midxT:2400+midxT]*rwS
+    tLINm_R[str(Lc)] = tLin[midxT:2400+midxT]*rwS
+    #tHm[str(Lc)] = tHigh[midxT:2400+midxT]*rwS
+   # nEst[str(Lc)] = nLin[midxT:2400+midxT]*rwS  # estimated noise signal
+    #TEOAE[str(Lc)] = 2*np.fft.rfft(np.concatenate((t1[midxT:],np.zeros(int(2**15)))))/Nfft  # calculate spectrum
+    
+    Ns = len(np.concatenate((t1[midxT:],np.zeros(int(2**15)))))
+    fxx = np.arange(Ns)*fsamp/Ns
+    
+    fxD_R[str(Lc)] = fxx[:Ns//2+1]  # take half of the frequency axis
+    LcList_R.append(str(Lc))
 
 
 
-#t1 = np.mean(recMat4,1)-np.mean(recMat1,1)/10**(12/20)
-#t2 = np.mean(recMat6,1)-np.mean(recMat3,1)/10**(12/20)
-#t3 = np.mean(recMat1,1)-np.mean(recMat5,1)/10**(12/20)
-#t4 = np.mean(recMat3,1)-np.mean(recMat2,1)/10**(12/20)
-#t5 = np.mean(recMat5,1)-np.mean(recMat2,1)/2
 
-
-teoaeFD20 = 2*np.fft.rfft(np.concatenate((t1[midx:],np.zeros(int(2**15)))))/Nfft
-#teoaeFD56 = 2*np.fft.rfft(np.concatenate((teoaeTD56[midx:],np.zeros(int(2**15)))))/Nfft
-
-fsamp = 96000
-#Ns = len(np.concatenate((t1[midx:],np.zeros(int(2**15)))))
-Ns = len((TEOAE['40']))
-
-cycle = 2*np.pi
-
-fig,(ax1, ax2) = plt.subplots(2,1)
-ax1.plot(fxD[LcList[0]],20*np.log10(np.abs(TEOAE[LcList[0]])/(np.sqrt(2)*2e-5)),color='C00')
-ax1.plot(fxD[LcList[1]],20*np.log10(np.abs(TEOAE[LcList[1]])/(np.sqrt(2)*2e-5)),color='C01')
-ax1.plot(fxD[LcList[2]],20*np.log10(np.abs(TEOAE[LcList[2]])/(np.sqrt(2)*2e-5)),color='C02')
-ax1.plot(fxD[LcList[3]],20*np.log10(np.abs(TEOAE[LcList[3]])/(np.sqrt(2)*2e-5)),color='C03')
-ax1.plot(fxD[LcList[4]],20*np.log10(np.abs(TEOAE[LcList[4]])/(np.sqrt(2)*2e-5)),color='C04')
-
-#ax1.plot(fx[:Ns//2+1],20*np.log10(np.abs(teoaeFD56)/(np.sqrt(2)*2e-5)),color='C06')
-
-ax1.set_xlim(200,5000)
-ax1.set_ylim(-40,10)
-
-cycle = 2*np.pi
-ax2.plot(fxD[LcList[0]],np.unwrap(np.angle(TEOAE[LcList[0]]))/cycle,color='C00')
-ax2.plot(fxD[LcList[1]],np.unwrap(np.angle(TEOAE[LcList[1]]))/cycle,color='C01')
-ax2.plot(fxD[LcList[2]],np.unwrap(np.angle(TEOAE[LcList[2]]))/cycle,color='C02')
-ax2.plot(fxD[LcList[3]],np.unwrap(np.angle(TEOAE[LcList[3]]))/cycle,color='C03')
-ax2.plot(fxD[LcList[4]],np.unwrap(np.angle(TEOAE[LcList[4]]))/cycle,color='C04')
-ax2.set_xlim(200,5000)
-ax2.set_ylim(-60,10)
-ax2.set_xlabel('Frequnecy (Hz)')
-ax2.set_ylabel('Phase (cycles)')
-plt.show()
-'''
 
 #%% wavelet tr.
 
@@ -409,28 +429,26 @@ def wavelet_filter(signal, wavelet_basis):
     return filtered_signal, coefwti
 
 
-nLINmwf={}
-tLINmwf={}
-tNLmwf={}
-tHmwf={}
-SLINmwf={}
-SNLINmwf={}
-SHmwf={}
-SNLmwf={}
-SClick={}
-cwLIN = {}
-ncwLIN = {}
-cwH = {}
-cwNL = {}
-for keys in tLINm:
+nLINmwf_L={}
+tLINmwf_L={}
+
+
+SLINmwf_L={}
+SNLINmwf_L={}
+SClick_L={}
+cwLIN_L = {}
+ncwLIN_L = {}
+cwH_L = {}
+cwNL_L = {}
+for keys in tLINm_L:
     
 
     f2max = 5000
     
-    hm_50lin = np.concatenate((np.zeros(len(tLINm[keys])),tLINm[keys]))
-    Nhm_50 = np.concatenate((np.zeros(len(nEst[keys])),nEst[keys]))
-    hm_50nl = np.concatenate((np.zeros(len(tNLm[keys])),tNLm[keys]))
-    hm_50H = np.concatenate((np.zeros(len(tHm[keys])),tHm[keys]))
+    hm_50lin = np.concatenate((np.zeros(len(tLINm_L[keys])),tLINm_L[keys]))
+    #Nhm_50 = np.concatenate((np.zeros(len(nEst[keys])),nEst[keys]))
+#    hm_50nl = np.concatenate((np.zeros(len(tNLm[keys])),tNLm[keys]))
+#    hm_50H = np.concatenate((np.zeros(len(tHm[keys])),tHm[keys]))
     
     fs = fsamp
     #t = np.arange(0,0.1,1/fs)
@@ -453,21 +471,21 @@ for keys in tLINm:
     vlnky = mother_wavelet2(Nw,Nt,df,dt)
 
 
-    tLINmwf[keys],cwLIN[keys] = wavelet_filter(hm_50lin, vlnky)
+    tLINmwf_L[keys],cwLIN_L[keys] = wavelet_filter(hm_50lin, vlnky)
     
-    nLINmwf[keys],ncwLIN[keys] = wavelet_filter(Nhm_50, vlnky)
+    #nLINmwf[keys],ncwLIN[keys] = wavelet_filter(Nhm_50, vlnky)
     
-    tNLmwf[keys],cwNL[keys] = wavelet_filter(hm_50nl, vlnky)
+    #tNLmwf[keys],cwNL[keys] = wavelet_filter(hm_50nl, vlnky)
     
-    tHmwf[keys],cwH[keys] = wavelet_filter(hm_50H, vlnky)
+    #tHmwf[keys],cwH[keys] = wavelet_filter(hm_50H, vlnky)
     
     
-    SLINmwf[keys] = 2*np.fft.rfft(np.concatenate((tLINmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
-    SNLINmwf[keys] = 2*np.fft.rfft(np.concatenate((nLINmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
-    SNLmwf[keys] = 2*np.fft.rfft(np.concatenate((tNLmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
-    SHmwf[keys] = 2*np.fft.rfft(np.concatenate((3*tLINmwf[keys]-tHmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
-    fxx = np.arange(Nt+int(2**15))*fsamp/(Nt+int(2**15))
-    SClick[keys] = 2*np.fft.rfft(np.concatenate((tClick[keys],np.zeros(Nt-len(tClick[keys])),np.zeros(int(2**15)))))/len(tClick[keys])
+    SLINmwf_L[keys] = 2*np.fft.rfft(np.concatenate((tLINmwf_L[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
+    #SNLINmwf[keys] = 2*np.fft.rfft(np.concatenate((nLINmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
+    #SNLmwf[keys] = 2*np.fft.rfft(np.concatenate((tNLmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
+    #SHmwf[keys] = 2*np.fft.rfft(np.concatenate((3*tLINmwf[keys]-tHmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
+    fxx_L = np.arange(Nt+int(2**15))*fsamp/(Nt+int(2**15))
+    SClick_L[keys] = 2*np.fft.rfft(np.concatenate((tClick_L[keys],np.zeros(Nt-len(tClick_L[keys])),np.zeros(int(2**15)))))/len(tClick_L[keys])
      
    
     # Save
@@ -479,41 +497,90 @@ for keys in tLINm:
     #read_dictionary = np.load('my_file.npy',allow_pickle='TRUE').item()
     #print(read_dictionary['hello']) # displays "world"
 
+
+nLINmwf_R={}
+tLINmwf_R={}
     
 
-#%% show me results in the time domain
+SLINmwf_R={}
+SNLINmwf_R={}
+SClick_R={}
+cwLIN_R = {}
+ncwLIN_R = {}
+cwH_R = {}
+cwNL_R = {}
+for keys in tLINm_R:
+    
 
-
-plotTDres = 1
-if plotTDres:
-    fig,ax = plt.subplots()
-    LcList = []
-    for keys in tLINmwf:
-        ax.plot(tLINmwf[keys]/np.sqrt(np.mean(tClick[keys]**2)))
-        LcList.append(keys)
-    ax.legend(LcList)
+    f2max = 5000
+    
+    hm_50lin = np.concatenate((np.zeros(len(tLINm_R[keys])),tLINm_R[keys]))
+    #Nhm_50 = np.concatenate((np.zeros(len(nEst[keys])),nEst[keys]))
+#    hm_50nl = np.concatenate((np.zeros(len(tNLm[keys])),tNLm[keys]))
+#    hm_50H = np.concatenate((np.zeros(len(tHm[keys])),tHm[keys]))
+    
+    fs = fsamp
+    #t = np.arange(0,0.1,1/fs)
+    t = np.arange(0,len(hm_50lin)/fs,1/fs)
+    # Finding signal by adding three different signals
+    #signal = np.cos(2 * np.pi * 1000 * t)# + np.real(np.exp(-7 * (t-0.4)**2)*np.exp(1j*2*np.pi*2*(t-0.4)))
     
     
-    fig,ax = plt.subplots()
-    for keys in tNLmwf:
-        ax.plot(tNLmwf[keys]/np.sqrt(np.mean(tClick[keys]**2)))
-    ax.legend(LcList)
+    dt = 1/fs
+    Nt = len(t)
+    fx = np.arange(Nt)*fs/Nt   # frequency axis
+    df = fx[1]-fx[0]
 
-#fig,ax = plt.subplots()
-#for keys in tNLmwf:
-#    ax.plot((3*tLINmwf[keys]-tHmwf[keys])/np.sqrt(np.mean(tClick[keys]**2)))
-#ax.legend(LcList)
+    print(df)
+    print(Nt)
+    Nw = Nt//2  # number of wavelet filters
+    Nwmax = int(f2max//df)  # maximal wavelet which is usefull for the given frequency range
+    
+    
+    vlnky = mother_wavelet2(Nw,Nt,df,dt)
 
+
+    tLINmwf_R[keys],cwLIN_R[keys] = wavelet_filter(hm_50lin, vlnky)
+    
+    #nLINmwf[keys],ncwLIN[keys] = wavelet_filter(Nhm_50, vlnky)
+    
+    #tNLmwf[keys],cwNL[keys] = wavelet_filter(hm_50nl, vlnky)
+    
+    #tHmwf[keys],cwH[keys] = wavelet_filter(hm_50H, vlnky)
+    
+    
+    SLINmwf_R[keys] = 2*np.fft.rfft(np.concatenate((tLINmwf_R[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
+    #SNLINmwf[keys] = 2*np.fft.rfft(np.concatenate((nLINmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
+    #SNLmwf[keys] = 2*np.fft.rfft(np.concatenate((tNLmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
+    #SHmwf[keys] = 2*np.fft.rfft(np.concatenate((3*tLINmwf[keys]-tHmwf[keys],np.zeros(int(2**15)))))/Nw  # calculate spectrum
+    fxx_R = np.arange(Nt+int(2**15))*fsamp/(Nt+int(2**15))
+    SClick_R[keys] = 2*np.fft.rfft(np.concatenate((tClick_R[keys],np.zeros(Nt-len(tClick_R[keys])),np.zeros(int(2**15)))))/len(tClick_R[keys])
+     
+   
+    # Save
+    
+    #np.save('s069t01.npy', tLINmwf) 
+    #np.save('s069t02.npy', tClick) 
+
+    # Load
+    #read_dictionary = np.load('my_file.npy',allow_pickle='TRUE').item()
+    #print(read_dictionary['hello']) # displays "world"
 
 
 
 
 #%% PEAK PICKING OF TRANSFER FUNCTIONS TO FIND SEVERAL FREQUENCIES FOR ANALYSIS
 # peak picking is performed for the largest level (last key?)
-keyV = max(SNLmwf.keys())
-FreqData = fxx[:int(len(fxx)/2+1)]
-TrFuncNL = 20*np.log10(np.abs(SNLmwf[keyV]/SClick[keyV]))
-TrFuncLin = 20*np.log10(np.abs(SLINmwf[keyV]/SClick[keyV]))
+keyV = max(SLINmwf_L.keys())
+FreqData_L = fxx_L[:int(len(fxx_L)/2+1)]
+#TrFuncNL = 20*np.log10(np.abs(SNLmwf[keyV]/SClick[keyV]))
+TrFuncLin_L = 20*np.log10(np.abs(SLINmwf_L[keyV]/SClick_L[keyV]))
+
+keyV = max(SLINmwf_R.keys())
+FreqData_R = fxx_R[:int(len(fxx_R)/2+1)]
+#TrFuncNL = 20*np.log10(np.abs(SNLmwf[keyV]/SClick[keyV]))
+TrFuncLin_R = 20*np.log10(np.abs(SLINmwf_R[keyV]/SClick_R[keyV]))
+
 
 from scipy.signal import find_peaks
 def find_curve_peaks(x, y, interval=None, height_threshold=None, distance=None, prominence=None):
@@ -574,37 +641,104 @@ def find_curve_peaks(x, y, interval=None, height_threshold=None, distance=None, 
 interval = (500, 4000)
 height_threshold = -70
 distance = 100  # Minimum distance between peaks
-prominence = 2  # Minimum prominence of peaks
+prominence = 2
 
 
-peaksNL, propertiesNL = find_curve_peaks(FreqData, TrFuncNL, interval=interval, height_threshold=height_threshold, distance=distance, prominence=prominence)
-peaksLin, propertiesLin = find_curve_peaks(FreqData, TrFuncLin, interval=interval, height_threshold=height_threshold, distance=distance, prominence=prominence)
+#peaksNL, propertiesNL = find_curve_peaks(FreqData, TrFuncNL, interval=interval, height_threshold=height_threshold, distance=distance, prominence=prominence)
+peaksLin_L, propertiesLin_L = find_curve_peaks(FreqData_L, TrFuncLin_L, interval=interval, height_threshold=height_threshold, distance=distance, prominence=prominence)
+peaksLin_R, propertiesLin_R = find_curve_peaks(FreqData_R, TrFuncLin_R, interval=interval, height_threshold=height_threshold, distance=distance, prominence=prominence)
 
 
-plotNLgain = 0
+plotNLgain = 1
 if plotNLgain:
-    fig,ax = plt.subplots()
-    for keys in tNLmwf:
-        ax.plot(fxx[:int(len(fxx)/2+1)],20*np.log10(np.abs(SNLmwf[keys]/SClick[keys])))
+    # fig,ax = plt.subplots()
+    # for keys in tNLmwf:
+    #     ax.plot(fxx[:int(len(fxx)/2+1)],20*np.log10(np.abs(SNLmwf[keys]/SClick[keys])))
         
-    ax.plot(FreqData[peaksNL],TrFuncNL[peaksNL],'ro', label="Detected Peaks")
+    # ax.plot(FreqData[peaksNL],TrFuncNL[peaksNL],'ro', label="Detected Peaks")
         
-    ax.set_xlim([500,4000])
-    ax.legend(LcList)
+    # ax.set_xlim([500,4000])
+    # ax.legend(LcList)
 
-fig,ax = plt.subplots()
-for keys in tNLmwf:
-    ax.plot(fxx[:int(len(fxx)/2+1)],20*np.log10(np.abs(SLINmwf[keys]/SClick[keys])))
+    fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(6, 5))
     
-ax.plot(FreqData[peaksLin],TrFuncLin[peaksLin],'ro', label="Detected Peaks")
-ax.set_xlim([500,4000])
-ax.legend(LcList)
+    # Left ear
+    for keys in tLINmwf_L:
+        ax1.plot(fxx_L[:int(len(fxx_L)/2+1)]/1000, 20*np.log10(np.abs(SLINmwf_L[keys] / SClick_L[keys])),label=keys)
+    
+    ax1.set_xlim([0.500, 3])
+    ax1.set_ylim([-80, -20])
+    ax1.set_ylabel("Magnitude (dB)")
+    ax1.text(ax1.get_xlim()[1], ax1.get_ylim()[1] - 7, 
+         subjN_L[:-1] + " left ear", fontsize=12, fontweight="normal", ha="right")
 
+    idxS = 200
+    for keys in tLINmwf_L:
+        ax2.plot(fxx_L[idxS:int(len(fxx_L)/2+1)]/1000, np.unwrap(np.angle(SLINmwf_L[keys][idxS:] / SClick_L[keys][idxS:])) / (2*np.pi),label=keys)
+    
+    ax2.set_xlim([0.500, 3])
+    ax2.set_ylim([-24, 0])
+    ax2.set_ylabel("Phase (cycles)")
+    ax2.set_xlabel("Frequency (kHz)")
+    
+    # Hide x-ticks on the top panel
+    ax1.tick_params(labelbottom=False)
+    
+    # Single legend outside the figure
+    # Add legend inside the figure but outside the panels
+    ax1.legend(loc="upper left", bbox_to_anchor=(1, 1))
 
+    # Adjust layout to make space for legend inside the figure
+    plt.tight_layout(rect=[0, 0, 0.99, 1])
+
+    plt.show()
+    file_name = 'CEOAEgain' + subjN_L  + 'Feb25' 
+    fig.savefig("Figures/" + file_name + ".png", dpi=300, bbox_inches="tight")
+
+    
+    fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(6, 5))
+    
+    # Right ear
+    for keys in tLINmwf_R:
+        ax1.plot(fxx_R[:int(len(fxx_R)/2+1)]/1000, 20*np.log10(np.abs(SLINmwf_R[keys] / SClick_R[keys])),label=keys)
+    
+    ax1.set_xlim([0.500, 3])
+    ax1.set_ylim([-80, -20])
+    ax1.set_ylabel("Magnitude (dB)")
+    
+    # Add text in the upper-left corner of the upper panel
+    ax1.text(ax1.get_xlim()[1], ax1.get_ylim()[1] - 7, 
+         subjN_R[:-1] + " right ear", fontsize=12, fontweight="normal", ha="right")
+
+    idxS = 200
+    for keys in tLINmwf_R:
+        ax2.plot(fxx_R[idxS:int(len(fxx_R)/2+1)]/1000, np.unwrap(np.angle(SLINmwf_R[keys][idxS:] / SClick_R[keys][idxS:])) / (2*np.pi),label=keys)
+    
+    ax2.set_xlim([0.500, 3])
+    ax2.set_ylim([-24, 0])
+    ax2.set_ylabel("Phase (cycles)")
+    ax2.set_xlabel("Frequency (kHz)")
+    
+    
+    # Hide x-ticks on the top panel
+    ax1.tick_params(labelbottom=False)
+
+    ax1.legend(loc="upper left", bbox_to_anchor=(1, 1))
+
+    # Adjust layout to make space for legend inside the figure
+    plt.tight_layout(rect=[0, 0, 0.99, 1])
+
+    plt.show()
+    file_name = 'CEOAEgain' + subjN_R + 'Feb25' 
+    fig.savefig("Figures/" + file_name + ".png", dpi=300, bbox_inches="tight")
+
+    
 pREF = np.sqrt(2)*2e-5
 
-FchosenLin = [FreqData[peaksLin[i]]/1000 for i in range(len(peaksLin))]
-FchosenNL = [FreqData[peaksNL[i]]/1000 for i in range(len(peaksNL))]
+FchosenLin_L = [FreqData_L[peaksLin_L[i]]/1000 for i in range(len(peaksLin_L))]
+FchosenLin_R = [FreqData_R[peaksLin_R[i]]/1000 for i in range(len(peaksLin_R))]
+#FchosenNL = [FreqData[peaksNL[i]]/1000 for i in range(len(peaksNL))]
+# Save figure
 
 
 #file_name = 'ceoaeFch' + subjN + '.mat'
@@ -613,110 +747,126 @@ FchosenNL = [FreqData[peaksNL[i]]/1000 for i in range(len(peaksNL))]
 
 #plt.ylabel('ddd')
 
-#%% TEOAE Grams - Nonlinear Extraction Method
 
-plotNLCEOAE = 0
-
-if plotNLCEOAE:
     
-    fig, (ax1, ax2) = plt.subplots(2, 1)
-    
-    plt.gcf().text(0.5, 0.9, 'Nonlinear extraction method', fontsize=12, fontweight='bold', ha='center')
-    
-    plt.rcParams["xtick.direction"] = "in"
-    plt.rcParams["ytick.direction"] = "in"
-    plt.rcParams["xtick.top"] = True
-    plt.rcParams["ytick.right"] = True
-    
-    font = {'family': 'Helvetica', 'weight': 'normal', 'size': 12}
-    plt.matplotlib.rc('font', **font)
-    
-    # Plot for the nonlinear data
-    for keys in tNLmwf:
-        if keys != '70':
-            ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3, 20*np.log10(np.abs(SNLmwf[keys])/pREF) - 20*np.log10(3))
-    
-    # Set axis limits and labels for amplitude
-    ax1.set_xlim([0.500, 4.000])
-    ax1.set_ylim([-40, 10])
-    ax1.set_ylabel('Amplitude (dB SPL)')
-    
-    # Plot vertical lines for each frequency in Fchosen
-    for Fc in FchosenNL:
-        ax1.plot([Fc, Fc], [-100, 100], '--', color='gray')
-    
-    # Plot for the phase
-    cycle = 2 * np.pi
-    for keys in tNLmwf:
-        if keys != '70':
-            ax2.plot(fxx[:int(len(fxx)/2+1)]/1e3, np.unwrap(np.angle(SNLmwf[keys])) / cycle)
-    
-    # Set axis limits and labels for phase
-    ax2.set_xlim([0.500, 4.000])
-    ax2.legend(LcList, loc='lower left', ncol=2)
-    ax2.set_ylim([-40, 1])
-    ax2.set_ylabel('Phase (cycles)')
-    fig.supxlabel('Frequency (kHz)')
 
 #%% TEOAE Grams - Linear Extraction Method
 fig, (ax1, ax2) = plt.subplots(2, 1)
 
 cycle = np.pi*2
 
-plt.gcf().text(0.5, 0.9, 'Linear extraction method', fontsize=12, fontweight='bold', ha='center')
+plt.gcf().text(0.5, 0.9, '', fontsize=12, fontweight='bold', ha='center')
 
 plt.rcParams["xtick.direction"] = "in"
 plt.rcParams["ytick.direction"] = "in"
 plt.rcParams["xtick.top"] = True
 plt.rcParams["ytick.right"] = True
 
-
-# Store colors for consistency
-colors = []
-i = 0  
 # Plot for the linear data
-for keys in tLINmwf:
-    if keys != '72':
-        line, = ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3, 20*np.log10(np.abs(SLINmwf[keys])/pREF))
-        colors.append(line.get_color())
-        ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3, 20*np.log10(np.abs(SNLINmwf[keys])/pREF),':',color=colors[i])
-        i += 1
+for keys in tLINmwf_L:
+    if keys != '74':
+        ax1.plot(fxx_L[:int(len(fxx_L)/2+1)]/1e3, 20*np.log10(np.abs(SLINmwf_L[keys])/pREF))
+       #ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3, 20*np.log10(np.abs(SNLINmwf[keys])/pREF),':')
 
 # Set axis limits and labels for amplitude
 ax1.set_xlim([0.500, 4.000])
-ax1.set_ylim([-40, 10])
+ax1.set_ylim([-25, 15])
 ax1.set_ylabel('Amplitude (dB SPL)')
 
 # Plot vertical lines for each frequency in Fchosen
-for Fc in FchosenLin:
+for Fc in FchosenLin_L[::2]:
     ax1.plot([Fc, Fc], [-100, 100], '--', color='gray')
 
 # Plot for the phase
-i = 0
-for keys in tLINmwf:
-    if keys != '70':
-        ax2.plot(fxx[:int(len(fxx)/2+1)]/1e3, np.unwrap(np.angle(SLINmwf[keys])) / cycle,color=colors[i])
-        i += 1
+for keys in tLINmwf_L:
+    if keys != '74':
+        ax2.plot(fxx_L[:int(len(fxx_L)/2+1)]/1e3, np.unwrap(np.angle(SLINmwf_L[keys])) / cycle)
 
 # Set axis limits and labels for phase
 ax2.set_xlim([0.500, 4.000])
-ax2.legend(LcList, loc='lower left', ncol=2)
+ax2.legend(LcList_L, loc='lower left', ncol=2,fontsize=10)
 ax2.set_ylim([-40, 1])
 ax2.set_ylabel('Phase (cycles)')
 
 
-if subjN[-1] == 'R':
+if subjN_L[-1] == 'R':
     earS = ' right '
-elif subjN[-1] == 'L':
+elif subjN_L[-1] == 'L':
     earS = ' left '
     
 # Add "s088, right ear" text in the upper right corner of ax1
-ax2.text(0.95, 0.9, subjN[:-1] + earS + 'ear', transform=ax2.transAxes, ha='right', va='top')
+ax2.text(0.95, 0.9, subjN_L[:-1] + earS + 'ear', transform=ax2.transAxes, ha='right', va='top')
 
 
 fig.supxlabel('Frequency (kHz)')
 
-plt.savefig('Figures/s127/ceoaeLINs127Left.png', format='png')
+subj = subjN_L[:-1]
+ear_side = 'left'
+filename = f"Figures/CEOAE_{subj}_{ear_side}.png"
+plt.savefig(filename, dpi=300, bbox_inches='tight')
+
+#plt.savefig('Figures/ceoaeLINs003L2.eps', format='eps')
+
+
+#%%
+#%% TEOAE Grams - Linear Extraction Method
+fig, (ax1, ax2) = plt.subplots(2, 1)
+
+cycle = np.pi*2
+
+plt.gcf().text(0.5, 0.9, '', fontsize=12, fontweight='bold', ha='center')
+
+plt.rcParams["xtick.direction"] = "in"
+plt.rcParams["ytick.direction"] = "in"
+plt.rcParams["xtick.top"] = True
+plt.rcParams["ytick.right"] = True
+
+# Plot for the linear data
+for keys in tLINmwf_R:
+    if keys != '74':
+        ax1.plot(fxx_R[:int(len(fxx_R)/2+1)]/1e3, 20*np.log10(np.abs(SLINmwf_R[keys])/pREF))
+       #ax1.plot(fxx[:int(len(fxx)/2+1)]/1e3, 20*np.log10(np.abs(SNLINmwf[keys])/pREF),':')
+
+# Set axis limits and labels for amplitude
+ax1.set_xlim([0.500, 4.000])
+ax1.set_ylim([-25, 15])
+ax1.set_ylabel('Amplitude (dB SPL)')
+
+# Plot vertical lines for each frequency in Fchosen
+for Fc in FchosenLin_R[::2]:
+    ax1.plot([Fc, Fc], [-100, 100], '--', color='gray')
+
+# Plot for the phase
+for keys in tLINmwf_R:
+    if keys != '74':
+        ax2.plot(fxx_R[:int(len(fxx_R)/2+1)]/1e3, np.unwrap(np.angle(SLINmwf_R[keys])) / cycle)
+
+# Set axis limits and labels for phase
+ax2.set_xlim([0.500, 4.000])
+ax2.legend(LcList_R, loc='lower left', ncol=2,fontsize=10)
+ax2.set_ylim([-40, 1])
+ax2.set_ylabel('Phase (cycles)')
+
+
+if subjN_R[-1] == 'R':
+    earS = ' right '
+elif subjN_R[-1] == 'L':
+    earS = ' left '
+    
+# Add "s088, right ear" text in the upper right corner of ax1
+ax2.text(0.95, 0.9, subjN_R[:-1] + earS + 'ear', transform=ax2.transAxes, ha='right', va='top')
+
+
+fig.supxlabel('Frequency (kHz)')
+
+subj = subjN_R[:-1]
+ear_side = 'right'
+filename = f"Figures/CEOAE_{subj}_{ear_side}.png"
+plt.savefig(filename, dpi=300, bbox_inches='tight')
+print(f"Figure saved: {filename}")
+
+#plt.savefig('Figures/ceoaeLINs003L2.eps', format='eps')
+
 
 
 
@@ -753,41 +903,53 @@ import matplotlib.pyplot as plt
 pREF = np.sqrt(2) * 2e-5  # Example reference pressure
 
 # Number of points in peaksNL and peaksLin
-num_peaksNL = len(peaksNL)
-num_peaksLin = len(peaksLin)
+
+num_peaksLin_L = len(peaksLin_L)
+num_peaksLin_R = len(peaksLin_R)
 
 # Initialize the io arrays based on the number of peaks
-ioG = np.zeros((len(SNLmwf), num_peaksNL))     # For nonlinear peaks
-ioLinG = np.zeros((len(SNLmwf), num_peaksLin)) # For linear peaks
-io = np.zeros(len(SNLmwf))
-ioLin = np.zeros(len(SNLmwf))
 
-Lvect = np.zeros(len(SNLmwf))
+ioLinG_L = np.zeros((len(SLINmwf_L), num_peaksLin_L)) # For linear peaks
+
+Lvect_L = np.zeros(len(SLINmwf_L))
 
 k = 0
-for keys in tNLmwf:
+for keys in tLINmwf_L:
     # Calculate ioG for each peak in peaksNL
-    for i, idxNL in enumerate(peaksNL):
-        ioG[k, i] = 20 * np.log10(np.abs(SNLmwf[keys][idxNL]) / SClick[keys][idxNL]) - 20 * np.log10(3)
-
+   
     # Calculate ioLinG for each peak in peaksLin
-    for i, idxLin in enumerate(peaksLin):
-        ioLinG[k, i] = 20 * np.log10(np.abs(SLINmwf[keys][idxLin]) / SClick[keys][idxLin])
-
-    # Additional io values for the first index of peaksNL
-    io[k] = 20 * np.log10(np.abs(SNLmwf[keys][peaksNL[0]]) / pREF) - 20 * np.log10(3)
-    ioLin[k] = 20 * np.log10(np.abs(SLINmwf[keys][peaksLin[0]]) / pREF)
+    for i, idxLin_L in enumerate(peaksLin_L):
+        ioLinG_L[k, i] = 20 * np.log10(np.abs(SLINmwf_L[keys][idxLin_L])/pREF)
 
     # Store the level vector (Lvect)
-    Lvect[k] = int(keys)
+    Lvect_L[k] = int(keys)
     k += 1
+
+
+
+ioLinG_R = np.zeros((len(SLINmwf_R), num_peaksLin_R)) # For linear peaks
+
+Lvect_R = np.zeros(len(SLINmwf_R))
+
+k = 0
+for keys in tLINmwf_R:
+    # Calculate ioG for each peak in peaksNL
+   
+    # Calculate ioLinG for each peak in peaksLin
+    for i, idxLin_R in enumerate(peaksLin_R):
+        ioLinG_R[k, i] = 20 * np.log10(np.abs(SLINmwf_R[keys][idxLin_R])/pREF)
+
+    # Store the level vector (Lvect)
+    Lvect_R[k] = int(keys)
+    k += 1
+
 
 # Plotting the results for all peaks in one graph
 
 prop_cycle = plt.rcParams['axes.prop_cycle']
 colors = prop_cycle.by_key()['color']
 
-plotIOall = 0
+plotIOall = 1
 if plotIOall:
     
     fig, ax = plt.subplots()
@@ -797,37 +959,153 @@ if plotIOall:
     #    ax.plot(Lvect[:], ioG[:, i], color=colors[i % len(colors)], linestyle='-', label=f'NL {FreqData[peaksNL[i]] / 1e3:.2f} kHz')
     
     # Plot all linear peak data
-    for i in range(num_peaksLin):
-        ax.plot(Lvect[:], ioLinG[:, i], color=colors[(i + num_peaksNL) % len(colors)], linestyle='--', label=f'Lin {FreqData[peaksLin[i]] / 1e3:.2f} kHz')
+    for i in range(0,num_peaksLin_L,2):
+        ax.plot(Lvect_L[:], ioLinG_L[:, i], color=colors[(i + num_peaksLin_L) % len(colors)], linestyle='-', label=f'Lin {FreqData_L[peaksLin_L[i]] / 1e3:.2f} kHz')
     
     # Add a reference line for DPOAE (example: 15 - Lvect)
-    ax.plot(Lvect[:], 15 - Lvect[:], ':', color='gray', label='DPOAE')
+    ax.plot(Lvect_L[:], Lvect_L[:]-50, ':', color='gray', label='DPOAE')
     
     # Set plot properties
-    ax.set_ylim([-60, -30])
-    ax.set_xlim([30, 65])
+    ax.set_ylim([-25, 10])
+    ax.set_xlim([40, 75])
     ax.legend(loc='upper right', ncol=2)
     
-    font = {'family': 'Helvetica', 'weight': 'normal', 'size': 17}
-    plt.matplotlib.rc('font', **font)
+    #font = {'family': 'Helvetica', 'weight': 'normal', 'size': 17}
+    #plt.matplotlib.rc('font', **font)
     
     # Title and labels
-    ax.set_title('TEOAE gain functions')
+    ax.set_title('CEOAE I/O')
     ax.set_xlabel('Click level (dB peSPL) / Tone level (dB FPL)')
     ax.set_ylabel('Magnitude (dB re 1)')
     fig.tight_layout()
     
     # Save the figure
-    #plt.savefig('Figures/FreqResponse_AllPeaks.eps', format='eps')
+    
+    plt.show()
+    
+    fig, ax = plt.subplots()
+    
+    # Plot all nonlinear peak data
+    #for i in range(num_peaksNL):
+    #    ax.plot(Lvect[:], ioG[:, i], color=colors[i % len(colors)], linestyle='-', label=f'NL {FreqData[peaksNL[i]] / 1e3:.2f} kHz')
+    
+    # Plot all linear peak data
+    for i in range(0,num_peaksLin_R,2):
+        ax.plot(Lvect_R[:], ioLinG_R[:, i], color=colors[(i + num_peaksLin_R) % len(colors)], linestyle='-', label=f'Lin {FreqData_R[peaksLin_R[i]] / 1e3:.2f} kHz')
+    
+    # Add a reference line for DPOAE (example: 15 - Lvect)
+    ax.plot(Lvect_R[:], Lvect_R[:]-50, ':', color='gray', label='DPOAE')
+    
+    # Set plot properties
+    ax.set_ylim([-25, 10])
+    ax.set_xlim([40, 75])
+    ax.legend(loc='upper right', ncol=2)
+    
+    #font = {'family': 'Helvetica', 'weight': 'normal', 'size': 17}
+    #plt.matplotlib.rc('font', **font)
+    
+    # Title and labels
+    ax.set_title('CEOAE I/O')
+    ax.set_xlabel('Click level (dB peSPL) / Tone level (dB FPL)')
+    ax.set_ylabel('Magnitude (dB re 1)')
+    fig.tight_layout()
+    
+    # Save the figure
+    plt.savefig('Figures/FreqResponse_AllPeaks.eps', format='eps')
     
     plt.show()
 
+#%%
+import os
 
+def plot_io_function(Lvect, ioLinG, peaksLin, FreqData, subj, ear_side):
+    fig, ax = plt.subplots(figsize=(5, 5))  # Adjust figure size if needed
+    colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
+
+    # Increase font size globally
+    plt.rcParams.update({'font.size': 14})
+
+    for i in range(0, len(peaksLin), 2):
+        ax.plot(Lvect[:], ioLinG[:, i], color=colors[i % len(colors)], linestyle='-',
+                label=f'Lin {FreqData[peaksLin[i]] / 1e3:.2f} kHz')
+
+    # Add the dotted reference line
+    ax.plot(Lvect[:], Lvect[:] - 70, ':', color='gray', label='DPOAE')
+
+    # Set plot limits
+    ax.set_ylim([-25, 10])
+    ax.set_xlim([40, 75])
+
+    # Labels with larger font
+    ax.set_xlabel('Click level (dB peSPL)', fontsize=14)
+    ax.set_ylabel('Magnitude (dB SPL)', fontsize=14)
+
+    # Increase tick size
+    ax.tick_params(axis='both', labelsize=12)
+
+    # Move legend completely outside the graph
+    ax.legend(loc='upper center', bbox_to_anchor=(0.5, 1.3), ncol=2, fontsize=12, frameon=False)
+
+    # Add subject info in the upper left corner
+    ax.text(0.02, 0.98, f"{subj}, {ear_side} ear", transform=ax.transAxes, fontsize=14,
+            verticalalignment='top', horizontalalignment='left')
+
+    # Save figure
+    filename = f"Figures/CEOAE_IO_{subj}_{ear_side}.png"
+    plt.savefig(filename, dpi=300, bbox_inches='tight')
+    print(f"Figure saved: {filename}")
+
+    fig.tight_layout()
+    plt.show()
+
+# Sort data before plotting
+sort_indices_L = np.argsort(Lvect_L)
+Lvect_L = Lvect_L[sort_indices_L]
+ioLinG_L = ioLinG_L[sort_indices_L, :]
+
+sort_indices_R = np.argsort(Lvect_R)
+Lvect_R = Lvect_R[sort_indices_R]
+ioLinG_R = ioLinG_R[sort_indices_R, :]
+
+# Call function for both ears
+plot_io_function(Lvect_L, ioLinG_L, peaksLin_L, FreqData_L, subjN_L[:-1], "left")
+plot_io_function(Lvect_R, ioLinG_R, peaksLin_R, FreqData_R, subjN_R[:-1], "right")
+
+
+#%%
+
+freq_arrayL = np.array(FreqData_L[peaksLin_L])
+# Desired frequencies (in Hz)
+desired_freqs = np.array([1000, 2000, 3000])  
+
+# Find the closest values
+closest_indicesL = [np.abs(freq_arrayL - f).argmin() for f in desired_freqs]
+closest_valuesL = freq_arrayL[closest_indicesL]  # Get actual closest values
+
+# Print results
+for target, idx, closest in zip(desired_freqs, closest_indicesL, closest_valuesL):
+    print(f"Closest to {target} Hz: {closest} Hz (Index: {idx})")
+
+
+
+freq_arrayR = np.array(FreqData_R[peaksLin_R])
+
+# Find the closest values
+closest_indicesR = [np.abs(freq_arrayR - f).argmin() for f in desired_freqs]
+closest_valuesR = freq_arrayR[closest_indicesR]  # Get actual closest values
+
+# Print results
+for target, idx, closest in zip(desired_freqs, closest_indicesR, closest_valuesR):
+    print(f"Closest to {target} Hz: {closest} Hz (Index: {idx})")
+
+# Call function for both ears
+plot_io_function(Lvect_L, ioLinG_L, peaksLin_L, FreqData_L, subjN_L[:-1], "left")
+plot_io_function(Lvect_R, ioLinG_R, peaksLin_R, FreqData_R, subjN_R[:-1], "right")
 
 
 
 #%% fitovani Gain fce
-
+'''
 #%%
 import numpy as np
 import matplotlib.pyplot as plt
@@ -944,3 +1222,4 @@ file_name = 'Estimace/CEOAEfit_results_' + subjN + '.mat'
 savemat(file_name, fit_results)
 
 print(f"Data successfully saved to {file_name}")
+'''

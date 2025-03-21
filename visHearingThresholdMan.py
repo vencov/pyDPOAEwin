@@ -57,7 +57,7 @@ def plot_audiogram(data):
 
 
 
-subjN = 's101'
+subjN = 's139'
 FolderName = 'Results/' + subjN + '/HT/'
 FileName = subjN + 'HTm.txt'
 # Usage example

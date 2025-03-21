@@ -53,7 +53,7 @@ def print_dicts_as_command_line(folder_path):
     print(f"{dRsorted}")
     
 # Specify the folder containing the files
-folder_path = "Results/s127/"
+folder_path = "Results/s139/"
 
 # Print the dictionaries as command line output
 print_dicts_as_command_line(folder_path)

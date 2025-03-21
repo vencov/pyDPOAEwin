@@ -1,5 +1,19 @@
 # -*- coding: utf-8 -*-
 """
+Created on Wed Mar 19 16:31:27 2025
+
+@author: vacla
+"""
+
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Mar 19 14:52:08 2025
+
+@author: vacla
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Fri Jan 24 19:15:20 2025
 
 @author: vacla
@@ -84,74 +98,58 @@ subjD['s094R'] = ['Results/s094/', '24_12_06_15_03_09_F2b_8000Hz', '24_12_06_15_
 subjD['s095L'] =  ['Results/s095/', '24_12_09_09_49_40_F2b_8000Hz', '24_12_09_09_50_34_F2b_8000Hz', '24_12_09_09_51_48_F2b_8000Hz', '24_12_09_09_52_42_F2b_8000Hz', '24_12_09_09_53_37_F2b_8000Hz', '24_12_09_09_54_52_F2b_8000Hz', '24_12_09_09_56_26_F2b_8000Hz', '24_12_09_09_57_20_F2b_8000Hz']
 subjD['s095R'] = ['Results/s095/', '24_12_09_09_25_05_F2b_8000Hz', '24_12_09_09_26_20_F2b_8000Hz', '24_12_09_09_27_34_F2b_8000Hz', '24_12_09_09_28_49_F2b_8000Hz', '24_12_09_09_30_25_F2b_8000Hz', '24_12_09_09_32_01_F2b_8000Hz', '24_12_09_09_33_57_F2b_8000Hz', '24_12_09_09_35_32_F2b_8000Hz']
 
-
 subjD['s996L'] = ['Results/s996/', '24_12_13_11_33_35_F2b_8000Hz', '24_12_13_11_35_09_F2b_8000Hz', '24_12_13_11_36_24_F2b_8000Hz', '24_12_13_11_37_38_F2b_8000Hz', '24_12_13_11_39_13_F2b_8000Hz', '24_12_13_11_40_48_F2b_8000Hz', '24_12_13_11_42_43_F2b_8000Hz', '24_12_13_11_44_39_F2b_8000Hz']
 subjD['s996R'] = ['Results/s996/', '24_12_13_12_01_48_F2b_8000Hz', '24_12_13_12_03_02_F2b_8000Hz', '24_12_13_12_03_57_F2b_8000Hz', '24_12_13_12_05_11_F2b_8000Hz', '24_12_13_12_06_26_F2b_8000Hz', '24_12_13_12_07_41_F2b_8000Hz', '24_12_13_12_09_16_F2b_8000Hz', '24_12_13_12_10_30_F2b_8000Hz']
 
+#subjD['s995Ladd'] = ['Results/s995/','24_12_20_11_39_46_F2b_8000Hz', '24_12_20_11_41_22_F2b_8000Hz', '24_12_20_11_42_59_F2b_8000Hz']
+#subjD['s995L'] = ['Results/s995/', '24_12_20_11_48_32_F2b_8000Hz', '24_12_20_11_49_47_F2b_8000Hz', '24_12_20_11_51_03_F2b_8000Hz', '24_12_20_11_52_39_F2b_8000Hz']
 
-subjD['s995Ladd'] = ['Results/s995/','24_12_20_11_39_46_F2b_8000Hz', '24_12_20_11_41_22_F2b_8000Hz', '24_12_20_11_42_59_F2b_8000Hz']
-subjD['s995L'] = ['Results/s995/', '24_12_20_11_48_32_F2b_8000Hz', '24_12_20_11_49_47_F2b_8000Hz', '24_12_20_11_51_03_F2b_8000Hz', '24_12_20_11_52_39_F2b_8000Hz']
-
-
+subjD['s995Lrep'] = ['Results/s995/','24_12_20_11_48_32_F2b_8000Hz','24_12_20_11_49_47_F2b_8000Hz', '24_12_20_11_51_03_F2b_8000Hz', '24_12_20_11_52_39_F2b_8000Hz']
+subjD['s995L'] = ['Results/s995/', '24_12_20_11_34_10_F2b_8000Hz', '24_12_20_11_36_06_F2b_8000Hz', '24_12_20_11_38_02_F2b_8000Hz']
 subjD['s995R'] = ['Results/s995/', '24_12_20_12_05_30_F2b_8000Hz', '24_12_20_12_06_45_F2b_8000Hz', '24_12_20_12_08_00_F2b_8000Hz', '24_12_20_12_09_16_F2b_8000Hz', '24_12_20_12_10_31_F2b_8000Hz', '24_12_20_12_11_46_F2b_8000Hz', '24_12_20_12_12_40_F2b_8000Hz', '24_12_20_12_13_58_F2b_8000Hz', '24_12_20_12_14_53_F2b_8000Hz', '24_12_20_12_16_30_F2b_8000Hz']
 
 
+#subjD['s995R'] = ['Results/s995/', '24_12_20_12_05_30_F2b_8000Hz', '24_12_20_12_06_45_F2b_8000Hz', '24_12_20_12_08_00_F2b_8000Hz', '24_12_20_12_09_16_F2b_8000Hz', '24_12_20_12_10_31_F2b_8000Hz', '24_12_20_12_11_46_F2b_8000Hz', '24_12_20_12_12_40_F2b_8000Hz', '24_12_20_12_13_58_F2b_8000Hz', '24_12_20_12_14_53_F2b_8000Hz', '24_12_20_12_16_30_F2b_8000Hz']
 
-subjD['s097L'] = ['Results/s097/', '24_12_10_09_33_01_F2b_8000Hz', '24_12_10_09_34_15_F2b_8000Hz', '24_12_10_09_35_29_F2b_8000Hz', '24_12_10_09_36_44_F2b_8000Hz', '24_12_10_09_37_58_F2b_8000Hz', '24_12_10_09_38_57_F2b_8000Hz', '24_12_10_09_40_12_F2b_8000Hz', '24_12_10_09_41_41_F2b_8000Hz']
-subjD['s097R'] = ['Results/s097/', '24_12_10_09_55_12_F2b_8000Hz', '24_12_10_09_56_27_F2b_8000Hz', '24_12_10_09_57_41_F2b_8000Hz', '24_12_10_09_59_11_F2b_8000Hz', '24_12_10_10_00_41_F2b_8000Hz', '24_12_10_10_01_40_F2b_8000Hz', '24_12_10_10_02_55_F2b_8000Hz', '24_12_10_10_04_09_F2b_8000Hz', '24_12_10_10_05_24_F2b_8000Hz']
-
-
-
-subjD['s995L2s'] =  ['Results/s995/', '25_02_07_13_29_24_F2b_8000Hz', '25_02_07_13_31_10_F2b_8000Hz', '25_02_07_13_32_26_F2b_8000Hz']
-subjD['s995R2s'] = ['Results/s995/', '25_02_07_14_00_07_F2b_8000Hz', '25_02_07_14_01_38_F2b_8000Hz', '25_02_07_14_02_46_F2b_8000Hz', '25_02_07_14_03_45_F2b_8000Hz', '25_02_07_14_05_01_F2b_8000Hz', '25_02_07_14_06_01_F2b_8000Hz', '25_02_07_14_07_17_F2b_8000Hz', '25_02_07_14_08_33_F2b_8000Hz']
-
- 
-subjD['s995L2_10'] = ['Results/s995/L1L210/','25_02_07_13_37_50_F2b_8000Hz','25_02_07_13_39_05_F2b_8000Hz', '_25_02_07_13_40_21_F2b_8000Hz','25_02_07_13_41_54_F2b_8000Hz']
-subjD['s995R2_10'] = ['Results/s995/L1L210/', '25_02_07_14_09_58_F2b_8000Hz', '25_02_07_14_11_14_F2b_8000Hz', '25_02_07_14_12_14_F2b_8000Hz']
+subjD['s999L_2'] = ['Results/s999/Feb2825/', 'L1_51dB_L2_30dB_f2f1_120.0_Oct_20_L', 'L1_53dB_L2_35dB_f2f1_120.0_Oct_20_L', 'L1_55dB_L2_40dB_f2f1_120.0_Oct_20_L', 'L1_57dB_L2_45dB_f2f1_120.0_Oct_20_L', 'L1_59dB_L2_50dB_f2f1_120.0_Oct_20_L', 'L1_61dB_L2_55dB_f2f1_120.0_Oct_20_L', 'L1_63dB_L2_60dB_f2f1_120.0_Oct_20_L', 'L1_65dB_L2_65dB_f2f1_120.0_Oct_20_L']
+subjD['s999R_2'] = ['Results/s999/Feb2825/', 'L1_51dB_L2_30dB_f2f1_120.0_Oct_20_R', 'L1_53dB_L2_35dB_f2f1_120.0_Oct_20_R', 'L1_55dB_L2_40dB_f2f1_120.0_Oct_20_R', 'L1_57dB_L2_45dB_f2f1_120.0_Oct_20_R', 'L1_59dB_L2_50dB_f2f1_120.0_Oct_20_R', 'L1_61dB_L2_55dB_f2f1_120.0_Oct_20_R', 'L1_63dB_L2_60dB_f2f1_120.0_Oct_20_R', 'L1_65dB_L2_65dB_f2f1_120.0_Oct_20_R']
 
 
-subjD['s140L'] = ['Results/s140/', '25_02_13_16_53_28_F2b_8000Hz', '25_02_13_16_54_44_F2b_8000Hz', '25_02_13_16_55_51_F2b_8000Hz', '25_02_13_16_57_07_F2b_8000Hz', '25_02_13_16_58_39_F2b_8000Hz', '25_02_13_16_59_54_F2b_8000Hz', '25_02_13_17_01_26_F2b_8000Hz', '25_02_13_17_02_42_F2b_8000Hz']
-subjD['s140R'] = ['Results/s140/', '25_02_13_16_24_56_F2b_8000Hz', '25_02_13_16_26_10_F2b_8000Hz', '25_02_13_16_27_27_F2b_8000Hz', '25_02_13_16_28_27_F2b_8000Hz', '25_02_13_16_29_42_F2b_8000Hz', '25_02_13_16_30_42_F2b_8000Hz', '25_02_13_16_32_14_F2b_8000Hz', '25_02_13_16_33_46_F2b_8000Hz']
+subjD['s989L'] =  ['Results/s989/', '25_03_07_13_28_05_F2b_8000Hz', '25_03_07_13_29_18_F2b_8000Hz', '25_03_07_13_30_31_F2b_8000Hz', '25_03_07_13_31_45_F2b_8000Hz', '25_03_07_13_33_18_F2b_8000Hz', '25_03_07_13_34_51_F2b_8000Hz', '25_03_07_13_36_44_F2b_8000Hz', '25_03_07_13_38_40_F2b_8000Hz']
+subjD['s989R'] = ['Results/s989/',  '25_03_07_13_58_56_F2b_8000Hz', '25_03_07_14_00_52_F2b_8000Hz', '25_03_07_14_02_46_F2b_8000Hz', '25_03_07_14_04_39_F2b_8000Hz']
+
+subjD['s994Lextra'] =  ['Results/s994/','25_01_07_11_53_13_F2b_8000Hz', '25_01_07_11_54_18_F2b_8000Hz', '25_01_07_11_55_56_F2b_8000Hz', '25_01_07_12_03_49_F2b_8000Hz', '25_01_07_12_05_45_F2b_8000Hz', '25_01_07_12_22_20_F2b_8000Hz'] 
+subjD['s994L'] =  ['Results/s994/', '25_01_07_12_23_36_F2b_8000Hz', '25_01_07_12_24_52_F2b_8000Hz', '25_01_07_12_26_30_F2b_8000Hz']
+subjD['s994R'] =  ['Results/s994/', '25_01_07_12_09_23_F2b_8000Hz', '25_01_07_12_10_40_F2b_8000Hz', '25_01_07_12_11_36_F2b_8000Hz', '25_01_07_12_12_53_F2b_8000Hz', '25_01_07_12_14_10_F2b_8000Hz', '25_01_07_12_15_29_F2b_8000Hz', '25_01_07_12_17_07_F2b_8000Hz']
 
 
-subjD['s120L'] = ['Results/s120/', '25_02_19_11_22_51_F2b_8000Hz', '25_02_19_11_23_50_F2b_8000Hz', '25_02_19_11_24_49_F2b_8000Hz', '25_02_19_11_25_48_F2b_8000Hz', '25_02_19_11_26_46_F2b_8000Hz', '25_02_19_11_27_45_F2b_8000Hz', '25_02_19_11_28_44_F2b_8000Hz', '25_02_19_11_29_59_F2b_8000Hz', '25_02_19_11_31_16_F2b_8000Hz']
-subjD['s120R'] = ['Results/s120/', '25_02_19_11_41_44_F2b_8000Hz', '25_02_19_11_42_28_F2b_8000Hz', '25_02_19_11_43_43_F2b_8000Hz', '25_02_19_11_44_27_F2b_8000Hz', '25_02_19_11_45_25_F2b_8000Hz', '25_02_19_11_46_58_F2b_8000Hz', '25_02_19_11_48_12_F2b_8000Hz', '25_02_19_11_49_42_F2b_8000Hz', '25_02_19_11_50_57_F2b_8000Hz']
+subjD['s993L'] =  ['Results/s993/', '25_01_17_11_08_57_F2b_8000Hz', '25_01_17_11_10_17_F2b_8000Hz', '25_01_17_11_11_52_F2b_8000Hz', '25_01_17_11_13_26_F2b_8000Hz', '25_01_17_11_15_23_F2b_8000Hz']
+subjD['s993R'] =  ['Results/s993/', '25_01_17_11_35_05_F2b_8000Hz', '25_01_17_11_36_21_F2b_8000Hz', '25_01_17_11_37_55_F2b_8000Hz', '25_01_17_11_39_30_F2b_8000Hz', '25_01_17_11_41_05_F2b_8000Hz', '25_01_17_11_43_01_F2b_8000Hz', '25_01_17_11_44_36_F2b_8000Hz']
 
 
-subjD['s127L'] = ['Results/s127/', '25_02_05_13_51_54_F2b_8000Hz', '25_02_05_13_53_25_F2b_8000Hz', '25_02_05_13_54_40_F2b_8000Hz', '25_02_05_13_55_55_F2b_8000Hz', '25_02_05_13_57_10_F2b_8000Hz', '25_02_05_13_58_40_F2b_8000Hz', '25_02_05_13_59_55_F2b_8000Hz']
-subjD['s127R'] = ['Results/s127/', '25_02_05_14_18_12_F2b_8000Hz', '25_02_05_14_19_27_F2b_8000Hz', '25_02_05_14_20_42_F2b_8000Hz', '25_02_05_14_21_58_F2b_8000Hz', '25_02_05_14_23_29_F2b_8000Hz', '25_02_05_14_25_14_F2b_8000Hz', '25_02_05_14_25_58_F2b_8000Hz', '25_02_05_14_26_42_F2b_8000Hz']
+subjD['s992L'] = ['Results/s992/', '25_01_24_11_47_26_F2b_8000Hz', '25_01_24_11_49_01_F2b_8000Hz', '25_01_24_11_50_36_F2b_8000Hz', '25_01_24_11_52_59_F2b_8000Hz', '25_01_24_12_01_44_F2b_8000Hz']
+
+subjD['s992R1'] = ['Results/s992/', '25_01_24_11_33_47_F2b_8000Hz', '25_01_24_11_35_12_F2b_8000Hz', '25_01_24_11_37_29_F2b_8000Hz']
+subjD['s992R2'] = ['Results/s992/','25_01_24_12_12_50_F2b_8000Hz', '25_01_24_12_14_46_F2b_8000Hz', '25_01_24_12_16_42_F2b_8000Hz']
 
 
-subjD['s139L'] = ['Results/s139/', '25_03_03_13_44_54_F2b_8000Hz', '25_03_03_13_46_40_F2b_8000Hz', '25_03_03_13_49_01_F2b_8000Hz', '25_03_03_13_51_05_F2b_8000Hz']
-subjD['s139R'] = ['Results/s139/', '25_03_03_14_11_28_F2b_8000Hz', '25_03_03_14_12_59_F2b_8000Hz', '25_03_03_14_14_44_F2b_8000Hz', '25_03_03_14_16_31_F2b_8000Hz']
-
-subjD['s139L_10'] = ['Results/s139/L1L210/', '25_03_03_13_53_00_F2b_8000Hz', '25_03_03_13_54_30_F2b_8000Hz']
-subjD['s139R_10'] = ['Results/s139/L1L210/', '25_03_03_14_18_37_F2b_8000Hz', '25_03_03_14_20_07_F2b_8000Hz']
-
-subjD['s138L'] = ['Results/s138/', '25_03_03_16_10_43_F2b_8000Hz', '25_03_03_16_12_14_F2b_8000Hz', '25_03_03_16_13_45_F2b_8000Hz', '25_03_03_16_15_46_F2b_8000Hz', '25_03_03_16_17_33_F2b_8000Hz', '25_03_03_16_19_44_F2b_8000Hz']
-subjD['s138R'] = ['Results/s138/', '25_03_03_16_36_15_F2b_8000Hz', '25_03_03_16_37_46_F2b_8000Hz', '25_03_03_16_39_32_F2b_8000Hz', '25_03_03_16_41_03_F2b_8000Hz']
-
-subjD['s138L_10'] = ['Results/s138/L1L210/', '25_03_03_16_21_35_F2b_8000Hz', '25_03_03_16_23_06_F2b_8000Hz']
-subjD['s138R_10'] = ['Results/s138/L1L210/', '25_03_03_16_42_42_F2b_8000Hz', '25_03_03_16_44_15_F2b_8000Hz']
-
-subjD['s135L_10'] = ['Results/s135/L1L210/', '25_02_19_10_00_27_F2b_8000Hz', '25_02_19_10_01_26_F2b_8000Hz']
-subjD['s135R_10'] = ['Results/s135/L1L210/', '25_02_19_10_22_49_F2b_8000Hz', '25_02_19_10_23_48_F2b_8000Hz']
-
-subjD['s135L'] = ['Results/s135/', '25_02_19_09_50_25_F2b_8000Hz', '25_02_19_09_51_55_F2b_8000Hz', '25_02_19_09_53_40_F2b_8000Hz', '25_02_19_09_55_26_F2b_8000Hz', '25_02_19_09_57_11_F2b_8000Hz', '25_02_19_09_58_50_F2b_8000Hz']
-subjD['s135R'] = ['Results/s135/', '25_02_19_10_14_03_F2b_8000Hz', '25_02_19_10_15_52_F2b_8000Hz', '25_02_19_10_17_07_F2b_8000Hz', '25_02_19_10_18_38_F2b_8000Hz', '25_02_19_10_19_53_F2b_8000Hz', '25_02_19_10_21_15_F2b_8000Hz']
+subjD['s989L'] =  ['Results/s989/', '25_03_07_13_28_05_F2b_8000Hz', '25_03_07_13_29_18_F2b_8000Hz', '25_03_07_13_30_31_F2b_8000Hz', '25_03_07_13_31_45_F2b_8000Hz', '25_03_07_13_33_18_F2b_8000Hz', '25_03_07_13_34_51_F2b_8000Hz', '25_03_07_13_36_44_F2b_8000Hz', '25_03_07_13_38_40_F2b_8000Hz']
+subjD['s989R'] = ['Results/s989/',  '25_03_07_13_58_56_F2b_8000Hz', '25_03_07_14_00_52_F2b_8000Hz', '25_03_07_14_02_46_F2b_8000Hz', '25_03_07_14_04_39_F2b_8000Hz']
 
 
-subjD['s096L'] = ['Results/s096/', '24_12_09_13_24_12_F2b_8000Hz', '24_12_09_13_25_28_F2b_8000Hz', '24_12_09_13_26_58_F2b_8000Hz', '24_12_09_13_28_28_F2b_8000Hz', '24_12_09_13_29_28_F2b_8000Hz', '24_12_09_13_30_43_F2b_8000Hz', '24_12_09_13_31_58_F2b_8000Hz']
-subjD['s096R'] = ['Results/s096/', '24_12_09_13_46_18_F2b_8000Hz', '24_12_09_13_47_49_F2b_8000Hz']
+subjD['s989Ladd'] = ['Results/s989/L1L210/', '25_03_07_13_41_06_F2b_8000Hz', '25_03_07_13_42_19_F2b_8000Hz', '25_03_07_13_43_12_F2b_8000Hz']
+subjD['s989Radd'] = ['Results/s989/L1L210/', '25_03_07_14_07_02_F2b_8000Hz', '25_03_07_14_09_53_F2b_8000Hz', '25_03_07_14_11_25_F2b_8000Hz']
 
-subjD['s096R_10'] = ['Results/s096/L1L210/', '24_12_09_13_49_23_F2b_8000Hz', '24_12_09_13_50_53_F2b_8000Hz']
+subjD['s989Ladd15'] = ['Results/s989/L1L210/', '25_03_07_13_44_28_F2b_8000Hz', '25_03_07_13_45_22_F2b_8000Hz']
+subjD['s989Radd15'] = ['Results/s989/L1L210/', '25_03_07_14_12_45_F2b_8000Hz', '25_03_07_14_14_21_F2b_8000Hz']
 
-subjD['s098L'] = ['Results/s098/', '24_12_11_13_25_43_F2b_8000Hz', '24_12_11_13_26_27_F2b_8000Hz', '24_12_11_13_27_28_F2b_8000Hz', '24_12_11_13_28_45_F2b_8000Hz', '24_12_11_13_30_31_F2b_8000Hz', '24_12_11_13_32_02_F2b_8000Hz']
-subjD['s098R'] = ['Results/s098/', '24_12_11_13_44_03_F2b_8000Hz', '24_12_11_13_44_48_F2b_8000Hz', '24_12_11_13_45_34_F2b_8000Hz', '24_12_11_13_46_50_F2b_8000Hz', '24_12_11_13_48_06_F2b_8000Hz', '24_12_11_13_49_37_F2b_8000Hz', '24_12_11_13_51_08_F2b_8000Hz']
+subjD['s989R_L2_55_L1_65_70'] = ['Results/s989/L1L210/', '25_03_07_14_11_25_F2b_8000Hz', '25_03_07_14_14_21_F2b_8000Hz']
 
 
-subjN_L = 's139L'
-subjN_R = 's139L_10'
+subjD['s989R_L2_60_L1_70_75'] = ['Results/s989/L1L210/','25_03_07_14_09_53_F2b_8000Hz','25_03_07_14_12_45_F2b_8000Hz']
+
+subjN_L = 's989R'
+subjN_R = 's989R_L2_60_L1_70_75'
 
 
 #subjN = 's055L_L2_55'
@@ -159,7 +157,7 @@ subjN_R = 's139L_10'
 def mother_wavelet2(Nw,Nt,df,dt):
     vlnky = np.zeros((Nt,Nw))
     tx = (np.arange(Nt)-Nw)*dt
-    for k in range(Nw):
+    for k in range(Nw): 
         vlnky[:,k] = np.cos(2*np.pi*(k+1)*df*tx)*1/(1+(0.075*(k+1)*2*np.pi*df*tx)**4)
     return vlnky
 
@@ -413,10 +411,29 @@ def getDPgram(path,DatePat):
                 #fxF1_4,HxF1_4, fxF2_4,HxF2_4 = estimateFreqResp(recSig4[lat:,0], f2f1, f2b, f2e, octpersec, GainMic)
                 
                 
-                recMat1 = np.c_[recMat1, recSig1[lat:,0]]  # add to make a matrix with columns for every run
-                recMat2 = np.c_[recMat2, recSig2[lat:,0]]  # add to make a matrix with columns for every run
-                recMat3 = np.c_[recMat3, recSig3[lat:,0]]  # add to make a matrix with columns for every run
-                recMat4 = np.c_[recMat4, recSig4[lat:,0]]  # add to make a matrix with columns for every run
+                
+                max_len = max(recSig1.shape[0], recSig2.shape[0], recSig3.shape[0], recSig4.shape[0])
+                max_mat = recMat1.shape[0]
+                # Function to pad a matrix with zeros
+                def pad_matrix(matrix, max_len):
+                    rows, cols = matrix.shape
+                    if rows < max_len:
+                        pad = np.zeros((max_len - rows, cols))
+                        return np.vstack((matrix, pad))
+                    return matrix
+                
+                # Apply padding
+                recSig1 = pad_matrix(recSig1, max_len)
+                recSig2 = pad_matrix(recSig2, max_len)
+                recSig3 = pad_matrix(recSig3, max_len)
+                recSig4 = pad_matrix(recSig4, max_len)
+                
+                
+                
+                recMat1 = np.c_[recMat1, recSig1[lat:max_mat+lat,0]]  # add to make a matrix with columns for every run
+                recMat2 = np.c_[recMat2, recSig2[lat:max_mat+lat,0]]  # add to make a matrix with columns for every run
+                recMat3 = np.c_[recMat3, recSig3[lat:max_mat+lat,0]]  # add to make a matrix with columns for every run
+                recMat4 = np.c_[recMat4, recSig4[lat:max_mat+lat,0]]  # add to make a matrix with columns for every run
            
     
                 #oaeDS = (np.nanmean(recMat1,1)+np.nanmean(recMat2,1)+np.nanmean(recMat3,1)+np.nanmean(recMat4,1))/4  # exclude samples set to NaN (noisy samples)
@@ -448,7 +465,7 @@ def getDPgram(path,DatePat):
     sigma2 = np.sqrt(1/(Nsamp*n)*np.sum(np.sum(noiseM2**2,1)))
     sigma3 = np.sqrt(1/(Nsamp*n)*np.sum(np.sum(noiseM3**2,1)))
     sigma4 = np.sqrt(1/(Nsamp*n)*np.sum(np.sum(noiseM4**2,1)))
-    Nt = 8
+    Nt = 12
     Theta1 = Nt*sigma1 # estimation of the threshold for sample removal
     Theta2 = Nt*sigma2 # estimation of the threshold for sample removal
     Theta3 = Nt*sigma3 # estimation of the threshold for sample removal
@@ -537,8 +554,8 @@ for i in range(1,len(subjD[subjN_L])):
     #DPgrD10 = getDPgram(path, deL_r10)
 for i in range(1,len(subjD[subjN_R])):
     DPgrD_R, rateOct_R, L2_R, f2f1_R, Nchosen_R = getDPgram(subjD[subjN_R][0], subjD[subjN_R][i])
-    DPgr_R[str(L2_R)] = DPgrD_R
-    DPgr_R[str(L2_R)+'ch'] = Nchosen_R
+    DPgr_R[str(i)+str(L2_R)] = DPgrD_R
+    DPgr_R[str(i)+str(L2_R)+'ch'] = Nchosen_R
     L2list_R.append(L2_R)  # list of L2 values
     f2f1list_R.append(f2f1_R)
 
@@ -586,76 +603,81 @@ InfoOnData(DPgr_L)
 #%%
 import matplotlib.pyplot as plt
 import numpy as np
-
+FSize = 18
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 6), constrained_layout=True)
 pREF = np.sqrt(2) * 2e-5
 
 Nopak = 4  # number of presentations
 
-fxx_L = DPgr_L['55']['fxx']
-fxx_R = DPgr_R['55']['fxx']
+fxx_L = DPgr_L['60']['fxx']
+fxx_R = DPgr_R[str(1)+'60']['fxx']
 f2xx_L = f2f1list_L[-1] * fxx_L[: int(len(fxx_L) // 2) + 1] / (2 - f2f1)
 f2xx_R = f2f1list_R[-1] * fxx_R[: int(len(fxx_R) // 2) + 1] / (2 - f2f1)
 f2xx_L /= 1000
 f2xx_R /= 1000
 
-cList = ['C1', 'C3', 'C2', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10', 'C11']
+cList = ['C0', 'C1', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10', 'C11']
 
 L2mensi = L2list_L if len(L2list_L)<=len(L2list_R) else L2list_R
 
+label1 = 'SP: $L_1$ = 63 dB, $L_2$ = 60 dB'
+label2 = ['$L_1$ = 70 dB, $L_2$ = 60 dB', '$L_1$ = 75 dB, $L_2$ = 60 dB' ]
 for i in range(len(L2mensi)):
     # Left ear data (included in legend)
-    ax1.plot(
-        f2xx_L,
-        20 * np.log10(np.abs(DPgr_L[str(L2mensi[i])]['NLgr']) / pREF),
-        color=cList[i],
-        label=str(L2mensi[i])
-    )
-
-    # Left ear noise (not in legend)
-    ax1.plot(
-        f2xx_L,
-        20 * np.log10(np.abs(DPgr_L[str(L2mensi[i])]['NLgrN']) / pREF),
-        ':',
-        color=cList[i],
-        label='_nolegend_'
-    )
+    if i==0:
+        ax1.plot(
+            f2xx_L,
+            20 * np.log10(np.abs(DPgr_L[str(L2mensi[i])]['NLgr']) / pREF),
+            color=cList[i],
+            label=label1
+        )
+        
+        # Left ear noise (not in legend)
+        ax1.plot(
+            f2xx_L,
+            20 * np.log10(np.abs(DPgr_L[str(L2mensi[i])]['NLgrN']) / pREF),
+            ':',
+            color=cList[i],
+            label='_nolegend_'
+        )
 
     # Right ear data (not in legend)
     ax1.plot(
         f2xx_R,
-        20 * np.log10(np.abs(DPgr_R[str(L2mensi[i])]['NLgr']) / pREF),
+        20 * np.log10(np.abs(DPgr_R[str(i+1)+str(L2mensi[i])]['NLgr']) / pREF),
         '--',
-        color=cList[i],
-        label='_nolegend_'
-    )
+        color=cList[i+1],
+        label=label2[i]    )
 
     # Right ear noise (not in legend)
     ax1.plot(
         f2xx_R,
-        20 * np.log10(np.abs(DPgr_R[str(L2mensi[i])]['NLgrN']) / pREF),
+        20 * np.log10(np.abs(DPgr_R[str(i+1)+str(L2mensi[i])]['NLgrN']) / pREF),
         ':',
-        color=cList[i],
+        color=cList[i+1],
         label='_nolegend_'
     )
 
 ax1.set_xlim([0.5, 8])
 ax1.set_ylim([-30, 20])
-ax1.set_ylabel('Amplitude (dB SPL)', fontsize=14)
+ax1.set_ylabel('Amplitude (dB SPL)', fontsize=FSize)
 
 # Set x-tick lines inward & increase font size
-ax1.tick_params(axis='x', direction='in', labelsize=12)
-ax1.tick_params(axis='y', direction='in', labelsize=12)
+ax1.tick_params(axis='x', direction='in', labelsize=FSize-2)
+ax1.tick_params(axis='y', direction='in', labelsize=FSize-2)
 
 cycle = 2 * np.pi
 F2start = 700 / 1000
 idx1 = np.where(f2xx_L >= F2start)[0][0]  # Frequency index for unwrapping
 
+
+PhShL = [0,0,0,1]
+PhShR = [1,1,1,0]
 for i in range(len(L2mensi)):
     # Left ear phase (included in legend)
     ax2.plot(
         f2xx_L[idx1:],
-        np.unwrap(np.angle(DPgr_L[str(L2mensi[i])]['NLgr'][idx1:])) / cycle,
+        np.unwrap(np.angle(DPgr_L[str(L2mensi[i])]['NLgr'][idx1:])) / cycle+PhShL[i],
         color=cList[i],
         label=str(L2mensi[i])
     )
@@ -663,7 +685,7 @@ for i in range(len(L2mensi)):
     # Right ear phase (not in legend)
     ax2.plot(
         f2xx_R[idx1:],
-        np.unwrap(np.angle(DPgr_R[str(L2mensi[i])]['NLgr'][idx1:])) / cycle,
+        np.unwrap(np.angle(DPgr_R[str(i+1) + str(L2mensi[i])]['NLgr'][idx1:])) / cycle+PhShR[i],
         '--',
         color=cList[i],
         label='_nolegend_'
@@ -671,18 +693,17 @@ for i in range(len(L2mensi)):
 
 ax2.set_xlim([0.5, 8])
 ax2.set_ylim([-5, 1])
-ax2.set_xlabel(r'Frequency $f_{\rm 2}$ (kHz)', fontsize=14)
-ax2.set_ylabel('Phase (cycles)', fontsize=14)
+ax2.set_xlabel(r'Frequency $f_{\rm 2}$ (kHz)', fontsize=FSize)
+ax2.set_ylabel('Phase (cycles)', fontsize=FSize)
 
 # Set x-tick lines inward & increase font size
-ax2.tick_params(axis='x', direction='in', labelsize=12)
-ax2.tick_params(axis='y', direction='in',labelsize=12)
+ax2.tick_params(axis='x', direction='in', labelsize=FSize-2)
+ax2.tick_params(axis='y', direction='in',labelsize=FSize-2)
 
 # Place only one legend outside the plot (to the right) with italic L and subscript 2
 ax1.legend(
-    title=r"$\mathit{L}_2$ dB FPL",  # L2 in italic with subscript
     title_fontsize=14,
-    fontsize=12,
+    fontsize=FSize,
     loc='center left',
     bbox_to_anchor=(1, 0.5)
 )
@@ -690,281 +711,315 @@ ax1.legend(
 import matplotlib.lines as mlines
 
 # Custom legend handles
-left_ear_line = mlines.Line2D([], [], color='black', linestyle='-', label='Left ear')
-right_ear_line = mlines.Line2D([], [], color='black', linestyle='--', label='Right ear')
+#left_ear_line = mlines.Line2D([], [], color='black', linestyle='-', label='Left ear')
+#right_ear_line = mlines.Line2D([], [], color='black', linestyle='--', label='Right ear')
 
 # Create L2 labels without duplicating line styles
 l2_handles = [mlines.Line2D([], [], color=cList[i], linestyle='-', label=str(L2mensi[i])) for i in range(len(L2mensi))]
 
 # First legend: Ear distinction
-legend1 = ax1.legend(handles=[left_ear_line, right_ear_line], loc='upper right', title="")
+#legend1 = ax1.legend(handles=[left_ear_line, right_ear_line], loc='upper right', title="")
 
 # Second legend: L2 values
-legend2 = ax1.legend(handles=l2_handles, title=r"$\mathit{L}_2$ dB FPL", title_fontsize=14, fontsize=12, loc='center left', bbox_to_anchor=(1, 0.5))
+legend2 = ax1.legend( title_fontsize=FSize-4, fontsize=FSize-4, loc='center right', bbox_to_anchor=(1, 0.7))
 
 # Add the first legend back to the plot
-ax1.add_artist(legend1)
+#ax1.add_artist(legend1)
 
-ax2.text(0.05, 0.05, subjN_L[:-1], transform=ax2.transAxes, fontsize=12, verticalalignment='bottom', horizontalalignment='left')
+ax2.text(0.05, 0.05, subjN_L[:-1], transform=ax2.transAxes, fontsize=FSize-4, verticalalignment='bottom', horizontalalignment='left')
 
 plt.show()
 
-plt.savefig(f'Figures/DPgrams/DPgrBothEars{subjN_L}.png', format='png', dpi=300)
+plt.savefig(f'Figures/DPgrams/DPgrL1p10p15vsSP_{subjN_L}.png', format='png', dpi=300)
+
 
 
 #%% fitting
 
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Define center frequencies
-CF = [2000, 3000, 4000, 7000]
-CFidx = np.zeros_like(CF)
-
-DPioNL_L = []
-GAdpNL_L = []
-NOxNL_L = []
-NOxNL_R = []
-DPioNL_R = []
-GAdpNL_R = []
-
-# Find indices of CF in f2xx_R
-for i in range(len(CF)):
-    CFidx[i] = np.where(f2xx_R >= 0.001*CF[i])[0][0]
-
-    IOx_L = []
-    GAx_L = []
-    NOx_L = []
-    for j in range(len(L2list_L)):
-        IOx_L.append(20 * np.log10(np.abs(DPgr_L[str(L2list_L[j])]['NLgr'][CFidx[i]]) / pREF))
-        GAx_L.append(IOx_L[j] - L2list_L[j])
-        NOx_L.append(20 * np.log10(np.abs(DPgr_L[str(L2list_L[j])]['NLgrN'][CFidx[i]])/pREF))
-    DPioNL_L.append(IOx_L)
-    GAdpNL_L.append(GAx_L)
-    NOxNL_L.append(NOx_L)
-
-    IOx_R = []
-    GAx_R = []
-    NOx_R = []
-    for j in range(len(L2list_R)):
-        IOx_R.append(20 * np.log10(np.abs(DPgr_R[str(L2list_R[j])]['NLgr'][CFidx[i]]) / pREF))
-        GAx_R.append(IOx_R[j] - L2list_R[j])
-        NOx_R.append(20 * np.log10(np.abs(DPgr_R[str(L2list_R[j])]['NLgrN'][CFidx[i]])/pREF))
-
-    DPioNL_R.append(IOx_R)
-    GAdpNL_R.append(GAx_R)
-    NOxNL_R.append(NOx_R)
+# import numpy as np
+# import matplotlib.pyplot as plt
+
+# # Define center frequencies
+# CF = [2000]
+# CFidx = np.zeros_like(CF)
+
+# DPioNL_L = []
+# GAdpNL_L = []
+# NOxNL_L = []
+# NOxNL_R = []
+# DPioNL_R = []
+# GAdpNL_R = []
+
+# # Find indices of CF in f2xx_R
+# for i in range(len(CF)):
+#     CFidx[i] = np.where(f2xx_R >= 0.001*CF[i])[0][0]
+
+#     IOx_L = []
+#     GAx_L = []
+#     NOx_L = []
+#     for j in range(len(L2list_L)):
+#         IOx_L.append(20 * np.log10(np.abs(DPgr_L[str(L2list_L[j])]['NLgr'][CFidx[i]]) / pREF))
+#         GAx_L.append(IOx_L[j] - L2list_L[j])
+#         NOx_L.append(20 * np.log10(np.abs(DPgr_L[str(L2list_L[j])]['NLgrN'][CFidx[i]])/pREF))
+#     DPioNL_L.append(IOx_L)
+#     GAdpNL_L.append(GAx_L)
+#     NOxNL_L.append(NOx_L)
+    
+#     IOx_R = []
+#     GAx_R = []
+#     NOx_R = []
+#     for j in range(len(L2list_R)):
+#         IOx_R.append(20 * np.log10(np.abs(DPgr_R[str(L2list_R[j])]['NLgr'][CFidx[i]]) / pREF))
+#         GAx_R.append(IOx_R[j] - L2list_R[j])
+#         NOx_R.append(20 * np.log10(np.abs(DPgr_R[str(L2list_R[j])]['NLgrN'][CFidx[i]])/pREF))
+        
+#     DPioNL_R.append(IOx_R)
+#     GAdpNL_R.append(GAx_R)
+#     NOxNL_R.append(NOx_R)
+
+# # Create figure
+# fig, ax = plt.subplots(figsize=(5, 4))
+
+# # Store colors for consistency
+# colors = []
+
+# # Plot left ear data (solid lines)
+# for i in range(len(CF)):
+#     line, = ax.plot(
+#         L2list_L, DPioNL_L[i], label=r'${\it f}_2$ = ' + str(CF[i] / 1000) + ' kHz'
+#     )
+#     colors.append(line.get_color())  # Store color for right ear
+#     ax.plot(L2list_L, NOxNL_L[i], color=colors[i], 
+#                                linestyle=':', linewidth=0.5, label="_nolegend_")
+    
+   
+
+# # Plot right ear data (dashed lines with same colors)
+# for i in range(len(CF)):
+#     ax.plot(
+#         L2list_R, DPioNL_R[i], linestyle='--', color=colors[i], label='_nolegend_'
+#     )
+#     ax.plot(L2list_R, NOxNL_R[i], color=colors[i], 
+#                                linestyle=':', linewidth=0.5, label="_nolegend_")
+    
+
+# # Convert L2list to NumPy array for element-wise operations
+# L2array = np.array(L2list_L+[25])
+
+# # Reference line (gray dashed line with slope 1, shifted 35 dB down)
+# ax.plot(L2array, L2array - 40, color='gray', linestyle='--', linewidth=1)
+
+# # Set x and y limits
+# ax.set_xlim([20, 70])  
+# ax.set_ylim([-20, 20])
+
+# # Increase font sizes
+# label_fontsize = 16
+# legend_fontsize = 12
+# text_fontsize = FSize-2
+
+# # Labels and legend
+# ax.set_ylabel('Amplitude (dB SPL)', fontsize=label_fontsize)
+# ax.set_xlabel(r'$L_2$ (dB FPL)', fontsize=label_fontsize)
+# ax.legend(fontsize=legend_fontsize)
+
+# # Add subject name and ear information to the bottom-right corner
+# ear = "left ear" if subjN_L[-1] == 'L' else "right ear"
+# subject_name = subjN_L[:-1]
+# text_to_display = f'{subject_name}'
+
+# ax.text(
+#     0.16, 0.08, text_to_display, transform=ax.transAxes, 
+#     fontsize=text_fontsize, verticalalignment='top', horizontalalignment='right'
+# )
+
+# # Increase tick label font sizes and set both x and y tick marks inward
+# ax.tick_params(axis='both', which='major', labelsize=label_fontsize, direction='in')
+
+# # Adjust layout and show plot
+# plt.tight_layout()
+# plt.show()
 
-# Create figure
-fig, ax = plt.subplots(figsize=(7, 5))
-
-# Store colors for consistency
-colors = []
 
-# Plot left ear data (solid lines)
-for i in range(len(CF)):
-    line, = ax.plot(
-        L2list_L, DPioNL_L[i], label=r'${\it f}_2$ = ' + str(CF[i] / 1000) + ' kHz'
-    )
-    colors.append(line.get_color())  # Store color for right ear
-    ax.plot(L2list_L, NOxNL_L[i], color=colors[i],
-                               linestyle=':', linewidth=0.5, label="_nolegend_")
+# import matplotlib.lines as mlines
 
+# # Custom legend handles for left and right ear
+# left_ear_line = mlines.Line2D([], [], color='black', linestyle='-', label='Left ear')
+# right_ear_line = mlines.Line2D([], [], color='black', linestyle='--', label='Right ear')
 
+# # Create L2 labels (without duplicating line styles)
+# l2_handles = [
+#     mlines.Line2D([], [], color=colors[i], linestyle='-', label=r'${\it f}_2$ = ' + str(int(CF[i] / 1000))) 
+#     for i in range(len(CF))
+# ]
 
-# Plot right ear data (dashed lines with same colors)
-for i in range(len(CF)):
-    ax.plot(
-        L2list_R, DPioNL_R[i], linestyle='--', color=colors[i], label='_nolegend_'
-    )
-    ax.plot(L2list_R, NOxNL_R[i], color=colors[i],
-                               linestyle=':', linewidth=0.5, label="_nolegend_")
+# # First legend: Ear distinction (top right)
+# legend1 = ax.legend(handles=[left_ear_line, right_ear_line], loc='upper right', title="")
 
+# # Second legend: Frequency labels (side)
+# legend2 = ax.legend(handles=l2_handles, title=r"$\mathit{f}_2$ (kHz)", title_fontsize=14, fontsize=12, loc='upper left')
 
-# Convert L2list to NumPy array for element-wise operations
-L2array = np.array(L2list_L)
+# # Add the first legend back to the plot
+# ax.add_artist(legend1)
 
-# Reference line (gray dashed line with slope 1, shifted 35 dB down)
-ax.plot(L2array, L2array - 35, color='gray', linestyle='--', linewidth=1)
+# # Subject name & ear information (bottom left)
+# text_to_display = ''
+# ax.text(
+#     0.02, 0.05, text_to_display, transform=ax.transAxes, 
+#     fontsize=legend_fontsize, verticalalignment='bottom', horizontalalignment='left'
+# )
 
-# Set x and y limits
-ax.set_xlim([20, 70])
-ax.set_ylim([-20, 20])
 
-# Increase font sizes
-label_fontsize = 16
-legend_fontsize = 12
-text_fontsize = 13
 
-# Labels and legend
-ax.set_ylabel('Amplitude (dB SPL)', fontsize=label_fontsize)
-ax.set_xlabel(r'$L_2$ (dB FPL)', fontsize=label_fontsize)
-ax.legend(fontsize=legend_fontsize)
+# # Save the figure
+# plt.savefig(f'Figures/DPgrams/ioBothEars{subjN_L}.png', format='png', dpi=300)
 
-# Add subject name and ear information to the bottom-right corner
-ear = "left ear" if subjN_L[-1] == 'L' else "right ear"
-subject_name = subjN_L[:-1]
-text_to_display = f'{subject_name}'
 
-ax.text(
-    0.1, 0.05, text_to_display, transform=ax.transAxes,
-    fontsize=text_fontsize, verticalalignment='top', horizontalalignment='right'
-)
 
-# Increase tick label font sizes and set both x and y tick marks inward
-ax.tick_params(axis='both', which='major', labelsize=label_fontsize, direction='in')
+# #%%
 
-# Adjust layout and show plot
-plt.tight_layout()
-plt.show()
 
+# # Convert L2list to a NumPy array for element-wise operations
+# L2array_L = np.array(L2list_L)
+# L2array_R = np.array(L2list_R)
 
-import matplotlib.lines as mlines
+# is_ascending = np.all(np.diff(L2array_L) > 0)  # True if strictly increasing
 
-# Custom legend handles for left and right ear
-left_ear_line = mlines.Line2D([], [], color='black', linestyle='-', label='Left ear')
-right_ear_line = mlines.Line2D([], [], color='black', linestyle='--', label='Right ear')
 
-# Create L2 labels (without duplicating line styles)
-l2_handles = [
-    mlines.Line2D([], [], color=colors[i], linestyle='-', label=r'${\it f}_2$ = ' + str(int(CF[i] / 1000)))
-    for i in range(len(CF))
-]
+# # Define your desired range
+# L2_min, L2_max = 30, 60  
 
-# First legend: Ear distinction (top right)
-legend1 = ax.legend(handles=[left_ear_line, right_ear_line], loc='upper right', title="")
+# # Initialize lists to store results for each x
+# DPio_selected_L, NFio_selected_L, cumsum_results_L, nDPio_results_L = [], [], [], []
+# DPio_selected_R, NFio_selected_R, cumsum_results_R, nDPio_results_R = [], [], [], []
 
-# Second legend: Frequency labels (side)
-legend2 = ax.legend(handles=l2_handles, title=r"$\mathit{f}_2$ (kHz)", title_fontsize=14, fontsize=12, loc='upper left')
+# # Loop over all x in DPioNL
+# for x in range(len(DPioNL_L)):
+#     if is_ascending:
+#         L2array_L = np.flip(L2array_L)
+        
+#         DPio = np.flip(np.array(DPioNL_L[x]))
+#         NFio = np.flip(np.array(NOxNL_L[x]))
+#     else:    
+#         DPio = np.array(DPioNL_L[x])
+#         NFio = np.array(NOxNL_L[x])
 
-# Add the first legend back to the plot
-ax.add_artist(legend1)
+#     # Select elements where L2array is within the desired range
+#     mask = (L2array_L >= L2_min) & (L2array_L <= L2_max)
+#     DPio, NFio = DPio[mask], NFio[mask]
 
-# Subject name & ear information (bottom left)
-text_to_display = ''
-ax.text(
-    0.02, 0.05, text_to_display, transform=ax.transAxes,
-    fontsize=legend_fontsize, verticalalignment='bottom', horizontalalignment='left'
-)
+#     # Normalize DPio values
+#     nDPio = (10**(DPio / 20)) / np.max(10**(DPio / 20))
 
+#     # Compute the valid mask for cumulative sum condition
+#     valid_mask1 = (DPio - NFio) > 6
+#     valid_mask2 = DPio > -20
+#     valid_mask = valid_mask1*valid_mask2
 
 
-# Save the figure
-plt.savefig(f'Figures/DPgrams/ioBothEars{subjN_L}.png', format='png', dpi=300)
+#     # Compute cumulative sum only for valid values
+#     cumsum_result = np.cumsum(np.where(valid_mask, nDPio, 0))
 
-#%%
+#     # Store results
+#     DPio_selected_L.append(DPio)
+#     NFio_selected_L.append(NFio)
+#     nDPio_results_L.append(nDPio)
+#     cumsum_results_L.append(cumsum_result)
 
-# Convert L2list to a NumPy array for element-wise operations
-L2array_L = np.array(L2list_L)
-L2array_R = np.array(L2list_R)
+# # Loop over all x in DPioNL
+# for x in range(len(DPioNL_R)): 
+#     if is_ascending:
+        
+#         L2array_R = np.flip(L2array_R)
+#         DPio = np.flip(np.array(DPioNL_R[x]))
+#         NFio = np.flip(np.array(NOxNL_R[x]))
+#     else:
+#         DPio = np.array(DPioNL_R[x])
+#         NFio = np.array(NOxNL_R[x])
 
+#     # Select elements where L2array is within the desired range
+#     mask = (L2array_R >= L2_min) & (L2array_R <= L2_max)
+#     DPio, NFio = DPio[mask], NFio[mask]
 
+#     # Normalize DPio values
+#     nDPio = (10**(DPio / 20)) / np.max(10**(DPio / 20))
 
-# Define your desired range
-L2_min, L2_max = 30, 60
+#     # Compute the valid mask for cumulative sum condition
+#     valid_mask1 = (DPio - NFio) > 6
+#     valid_mask2 = DPio > -20
+#     valid_mask = valid_mask1*valid_mask2
 
-# Initialize lists to store results for each x
-DPio_selected_L, NFio_selected_L, cumsum_results_L, nDPio_results_L = [], [], [], []
-DPio_selected_R, NFio_selected_R, cumsum_results_R, nDPio_results_R = [], [], [], []
+#     # Compute cumulative sum only for valid values
+#     cumsum_result = np.cumsum(np.where(valid_mask, nDPio, 0))
 
-# Loop over all x in DPioNL
-for x in range(len(DPioNL_L)):
-    DPio = np.array(DPioNL_L[x])
-    NFio = np.array(NOxNL_L[x])
+#     # Store results
+#     DPio_selected_R.append(DPio)
+#     NFio_selected_R.append(NFio)
+#     nDPio_results_R.append(nDPio)
+#     cumsum_results_R.append(cumsum_result)
 
-    # Select elements where L2array is within the desired range
-    mask = (L2array_L >= L2_min) & (L2array_L <= L2_max)
-    DPio, NFio = DPio[mask], NFio[mask]
 
-    # Normalize DPio values
-    nDPio = (10**(DPio / 20)) / np.max(10**(DPio / 20))
 
-    # Compute the valid mask for cumulative sum condition
-    valid_mask1 = (DPio - NFio) > 6
-    valid_mask2 = DPio > -20
-    valid_mask = valid_mask1*valid_mask2
+# fig, ax = plt.subplots(figsize=(7, 5))
 
+# colors = []  # Store colors for consistency
 
-    # Compute cumulative sum only for valid values
-    cumsum_result = np.cumsum(np.where(valid_mask, nDPio, 0))
+# mask_L = (L2array_L >= L2_min) & (L2array_L <= L2_max)
 
-    # Store results
-    DPio_selected_L.append(DPio)
-    NFio_selected_L.append(NFio)
-    nDPio_results_L.append(nDPio)
-    cumsum_results_L.append(cumsum_result)
+# mask_R = (L2array_L >= L2_min) & (L2array_L <= L2_max)
 
-# Loop over all x in DPioNL
-for x in range(len(DPioNL_R)):
-    DPio = np.array(DPioNL_R[x])
-    NFio = np.array(NOxNL_R[x])
 
-    # Select elements where L2array is within the desired range
-    mask = (L2array_R >= L2_min) & (L2array_R <= L2_max)
-    DPio, NFio = DPio[mask], NFio[mask]
+# # Plot left ear data (solid lines)
+# for i in range(len(cumsum_results_L)):
+#     line, = ax.plot(L2list_L[1:len(cumsum_results_L[i])+1], cumsum_results_L[i] * 5, label=f'${{\it f}}_2$ = {CF[i] / 1000} kHz')
+#     colors.append(line.get_color())  # Store color for right ear
 
-    # Normalize DPio values
-    nDPio = (10**(DPio / 20)) / np.max(10**(DPio / 20))
+# # Plot right ear data (dashed lines, same colors)
+# for i in range(len(cumsum_results_R)):
+#     ax.plot(L2list_R[1:len(cumsum_results_R[i])+1], cumsum_results_R[i] * 5, '--', color=colors[i], label='_nolegend_')
 
-    # Compute the valid mask for cumulative sum condition
-    valid_mask1 = (DPio - NFio) > 6
-    valid_mask2 = DPio > -20
-    valid_mask = valid_mask1*valid_mask2
+# # Reverse X-axis (high to low L2 values)
+# ax.invert_xaxis()
 
-    # Compute cumulative sum only for valid values
-    cumsum_result = np.cumsum(np.where(valid_mask, nDPio, 0))
+# # Labels
+# ax.set_xlabel(r'$L_2$ (dB FPL)', fontsize=14)
+# ax.set_ylabel('$\sum_{L_2=60}^{30} DPOAE(L_2) \Delta L$', fontsize=14)
 
-    # Store results
-    DPio_selected_R.append(DPio)
-    NFio_selected_R.append(NFio)
-    nDPio_results_R.append(nDPio)
-    cumsum_results_R.append(cumsum_result)
+# # Custom legend handles
+# left_ear_line = mlines.Line2D([], [], color='black', linestyle='-', label='Left ear')
+# right_ear_line = mlines.Line2D([], [], color='black', linestyle='--', label='Right ear')
 
+# # Create separate legends
+# legend1 = ax.legend(handles=[left_ear_line, right_ear_line], loc='upper center', title="", fontsize=12)
+# l2_handles = [
+#     mlines.Line2D([], [], color=colors[i], linestyle='-', label=f'${{\it f}}_2$ = {int(CF[i] / 1000)}') for i in range(len(CF))
+# ]
+# legend2 = ax.legend(handles=l2_handles, title=r"$\mathit{f}_2$ (kHz)", title_fontsize=12, fontsize=12, loc='upper left')
+# ax.add_artist(legend1)  # Add ear legend separately
+# ax.set_ylim([5,30])
+# # Save & show
 
+# # Increase tick label font sizes and set both x and y tick marks inward
+# ax.tick_params(axis='both', which='major', labelsize=label_fontsize, direction='in')
 
-fig, ax = plt.subplots(figsize=(7, 5))
 
-colors = []  # Store colors for consistency
+# plt.tight_layout()
+# plt.savefig(f'Figures/CumsumBothEars{subjN_L}.png', format='png', dpi=300)
+# plt.show()
+    
 
-mask_L = (L2array_L >= L2_min) & (L2array_L <= L2_max)
+# #%% save into matfile
 
-mask_R = (L2array_L >= L2_min) & (L2array_L <= L2_max)
+# data = {'CF':CF,'DPioNL':DPioNL,'NOxNL':NOxNL,'L2array':L2array,'cres':cumsum_results,'L2min':L2_min,'L2max':L2_max}
 
+# # File name for saving
+# file_name = 'Estimace/DPioCS_results_' + subjN + '.mat'
 
-# Plot left ear data (solid lines)
-for i in range(len(cumsum_results_L)):
-    line, = ax.plot(L2array_L[mask_L], cumsum_results_L[i] * 5, label=f'${{\it f}}_2$ = {CF[i] / 1000} kHz')
-    colors.append(line.get_color())  # Store color for right ear
+# # Save the data into a .mat file
+# savemat(file_name, data)
 
-# Plot right ear data (dashed lines, same colors)
-for i in range(len(cumsum_results_R)):
-    ax.plot(L2array_R[mask_R], cumsum_results_R[i] * 5, '--', color=colors[i], label='_nolegend_')
+# print(f"Data successfully saved to {file_name}")
 
-# Reverse X-axis (high to low L2 values)
-ax.invert_xaxis()
 
-# Labels
-ax.set_xlabel(r'$L_2$ (dB FPL)', fontsize=14)
-ax.set_ylabel('$\sum_{L_2=60}^{30} DPOAE(L_2) \Delta L$', fontsize=14)
 
-# Custom legend handles
-left_ear_line = mlines.Line2D([], [], color='black', linestyle='-', label='Left ear')
-right_ear_line = mlines.Line2D([], [], color='black', linestyle='--', label='Right ear')
 
-# Create separate legends
-legend1 = ax.legend(handles=[left_ear_line, right_ear_line], loc='upper center', title="", fontsize=12)
-l2_handles = [
-    mlines.Line2D([], [], color=colors[i], linestyle='-', label=f'${{\it f}}_2$ = {int(CF[i] / 1000)}') for i in range(len(CF))
-]
-legend2 = ax.legend(handles=l2_handles, title=r"$\mathit{f}_2$ (kHz)", title_fontsize=12, fontsize=12, loc='upper left')
-ax.add_artist(legend1)  # Add ear legend separately
-ax.set_ylim([5,30])
-# Save & show
-
-# Increase tick label font sizes and set both x and y tick marks inward
-ax.tick_params(axis='both', which='major', labelsize=label_fontsize, direction='in')
-
-
-plt.tight_layout()
-plt.savefig(f'Figures/CumsumBothEars{subjN_L}.png', format='png', dpi=300)
-plt.show()
