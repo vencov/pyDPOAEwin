@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Fri Apr  4 10:46:18 2025
+
+@author: audiobunka
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Adapted mainDPOAEnongui4PhaseWLT
 
 Created on Fri Sep 27 13:07:01 2024
@@ -44,7 +51,7 @@ plt.close('all')
 
 #save_path = 'Results/s003'
 #subj_name = 's003'
-save_path = 'Results/s004/Apr0425'
+save_path = 'Results/pokus'
 subj_name = 's004'
 
 # now to stop measurement by s key
@@ -90,7 +97,7 @@ while runningM:
     running = True  # loop is running
     #L2 = L2list[iL2]
     L1 = int(0.4*L2+39)  # scissor paradigm
-    L1 = L2 + 15  # L2 + 10 dB paradigm
+    
     def get_time() -> str:
         # to get current time
         now_time = datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S')
@@ -416,6 +423,7 @@ while runningM:
     iL2 += 1
     if runningM:
         Lstep = get_user_input("Write level step in dB", Lstep)
+        r = get_user_input("Write sweep rate in oct/sec", r)
         L2 = L2 - Lstep       
      
 

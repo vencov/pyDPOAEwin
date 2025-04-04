@@ -6,7 +6,7 @@ from scipy.io import loadmat, savemat
 import matplotlib.pyplot as plt
 from UserModules.pyRMEsd import RMEplayrecBias
 from UserModules.pyUtilities import butter_highpass_filter
-from UserModules.pyDPOAEmodule import create_noise, generateClickTrain, getSClat, changeSampleRate
+from UserModules.pyDPOAEmodule import create_noise, generateClickTrainMEMR, getSClat, changeSampleRate
 import datetime
 
 fsamp = 44100
@@ -14,15 +14,16 @@ mod_len = 4
 bufsize = 4096
 micGain = 40
 Npulse = 2048
-channelN = 6
+Npulse = 512
+channelN = 5
 lb = 40
-lend = 96
-LcStart = 64  # starting click level
-Lref = 58.5
+lend = 110
+LcStart = 70  # starting click level
+Lref = 59.1
 
 subj_name = 's004'
 save_path = 'ResultsMEMR/s004/'
-ear = 'L'
+ear = 'P'
 
 plt.close('all')
 changeSampleRate(fsamp, bufsize, SC=10)
@@ -50,7 +51,7 @@ Nnoisetr = len(noise_train)
 Nclicks = Nnoisetr // Npulse
 
 cfname = 'clickInBP_OK400_4000_44k1.mat'
-yupr = generateClickTrain(cfname, Nclicks)
+yupr = generateClickTrainMEMR(cfname, Nclicks, Npulse=Npulse)
 
 len_diff = len(noise_train) - len(yupr)
 yupr_train = np.pad(yupr, (0, len_diff), 'constant', constant_values=0)
@@ -104,7 +105,7 @@ def get_time() -> str:
     return now_time
 t_ = get_time()
 
-while counter <= 19:
+while counter <= 14:
     
     recorded_clicktrain = RMEplayrecBias(Amp * clicktrain_with_noise, fsamp, SC=10, buffersize=4096)
     corrected_clicktrain = recorded_clicktrain[latency_SC:, 0]
@@ -116,7 +117,7 @@ while counter <= 19:
         counterSTR = str(counter) 
         
     data = {"clicktrain":corrected_clicktrain}
-    file_name = 'MEMRclicktrain_' + subj_name + '_' + t_[2:] + '_' + counterSTR + '_' + ear
+    file_name = 'MEMRclicktrain10_' + subj_name + '_' + t_[2:] + '_' + counterSTR + '_' + ear
     savemat(save_path + '/' + file_name + '.mat', data)
     counter += 1
 

@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Fri Apr  4 10:30:14 2025
+
+@author: audiobunka
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Adapted mainDPOAEnongui4PhaseWLT
 
 Created on Fri Sep 27 13:07:01 2024
@@ -21,7 +28,8 @@ f2e = 500 # f2 end frequency
 f2f1 = 1.2  # f2/f1 ratio
 #L1 = 53    # intensity of f1 tone
 L2list = np.arange(55,20,-5)  # make a list of L2 values
-L2 = 65
+L2 = 55
+L1 = 60
 Lstep = 5
 artThresh = 12  # threshodl for artifact removal
 
@@ -89,8 +97,8 @@ iL2 = 0
 while runningM:
     running = True  # loop is running
     #L2 = L2list[iL2]
-    L1 = int(0.4*L2+39)  # scissor paradigm
-    L1 = L2 + 15  # L2 + 10 dB paradigm
+    #L1 = int(0.4*L2+39)  # scissor paradigm
+    #L1 = L2 + 15  # L2 + 10 dB paradigm
     def get_time() -> str:
         # to get current time
         now_time = datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S')
@@ -416,7 +424,7 @@ while runningM:
     iL2 += 1
     if runningM:
         Lstep = get_user_input("Write level step in dB", Lstep)
-        L2 = L2 - Lstep       
+        L1 = L1 + Lstep       
      
 
 # Register a hotkey (e.g., 's') to stop the loop

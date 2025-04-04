@@ -19,6 +19,22 @@ import matplotlib.pylab as plt
 
 
 
+def generateClickTrainMEMR(cfname,Nclicks,Npulse=2048):
+
+    from scipy.io import loadmat
+
+    cf = loadmat(cfname)
+    clickIn = cf['clickIn'][0][:400]
+    clickIn = clickIn/max(clickIn)
+    
+    zero_pad = np.zeros(Npulse-len(clickIn))
+    clickIn = np.concatenate((clickIn,zero_pad))
+    clickT = np.tile(clickIn,Nclicks)
+
+
+    return clickT
+
+
 def generateClickTrain(cfname,Nclicks,Npulse=2048):
 
     from scipy.io import loadmat
@@ -118,7 +134,7 @@ def generateSSSPhase(fs,fstart,fstop,phase,octpersec,Level,channel):
     #print(T)
     
     #fade = [441, 441]   # samlpes to fade-in and fade-out the input signal
-    fade = [1024, 2400]   # samlpes to fade-in and fade-out the input signal
+    fade = [int(1024/(octpersec/2)), int(2400/(octpersec/2))]   # samlpes to fade-in and fade-out the input signal (related to swept rate 4.4.25)
     L = T/np.log(fstop/fstart)
     t = np.arange(0,np.round(fs*T-1)/fs,1/fs)  # time axis
     s = np.sin(2*np.pi*(fstart)*L*np.exp(t/L)+phase)       # generated swept-sine signal
