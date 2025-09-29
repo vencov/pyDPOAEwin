@@ -20,6 +20,6 @@ fsamp = 44100
 buffersize = 2048
 
 
-latSC = getSClat(fsamp,buffersize)
+latSC = getSClat(fsamp,buffersize,10)
 
 

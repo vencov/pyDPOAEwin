@@ -1,8 +1,17 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Sep 23 10:06:36 2025
+
+for LF bias with smaller cutoff
+
+@author: audiobunka
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 import os
 from scipy.io import savemat, loadmat
-from UserModules.pyDPOAEmodule import sendChirpToEar, giveRforTScalibration, getSClat, changeSampleRate
+from UserModules.pyDPOAEmodule import sendChirpToEarBias, giveRforTScalibration, getSClat, changeSampleRate
 
 fsamp = 44100
 MicGain = 0
@@ -16,7 +25,7 @@ buffersize = 2048
 changeSampleRate(fsamp,buffersize,SC=10)
 lat_SC = getSClat(fsamp,buffersize)
 
-Hinear1, Hinear2, fxinear, y1, y2, y1all, y2all = sendChirpToEar(AmpChirp=AmpChirp,fsamp=fsamp,MicGain=MicGain,Nchirps=300,buffersize=buffersize,latency_SC=lat_SC)
+Hinear1, Hinear2, fxinear, y1, y2, y1all, y2all = sendChirpToEarBias(AmpChirp=AmpChirp,fsamp=fsamp,MicGain=MicGain,Nchirps=300,buffersize=buffersize,latency_SC=lat_SC)
 #xxx, Hinear1, Hinear2, fxinear = sendChirpToEar(fsamp,MicGain)
 
 # choose SPL (0) or FPL (1) calibration

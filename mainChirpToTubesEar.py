@@ -29,17 +29,18 @@ pathfolder = 'Calibration_files/Files'
 #TL = 'Sp03'
 #TL = 'LLS'
 TLlist = [72,62,55,37,26,'LLT']
-TLlist = [78,65,36,30,25,'LLT']
-#FLlist = ['TScalTube01_090424v2','TScalTube02_090424v2','TScalTube03_090424v2','TScalTube04_090424v2','TScalTube05_090424v2','TScalLLS_090424v2']
+TLlist = [28.9,34.0,40.1,69.1,82.7,'LLT']
+FLlist = ['TScalTube05_071725vPH','TScalTube04_071725vPH','TScalTube03_071725vPH','TScalTube02_071725vPH','TScalTube01_071725vPH','TScalLLS_071725vPH']
 latSC = 4169
-FLlist = ['TScalLLT_040724vPH']
-TLlist = ['LLT']
+#FLlist = ['TScalLLT_071725vPH']
+#TLlist = ['LLT']
 
 for i in range(len(TLlist)):
     buffersize = 2048
     latSC = getSClat(fsamp,buffersize)
 
-    Hinear1, Hinear2, fxinear, y1, y2 = sendChirpToEar(AmpChirp=AmpChirp,fsamp=fsamp,MicGain=40,Nchirps=300,buffersize=2048,latency_SC=latSC)
+    Hinear1, Hinear2, fxinear, y1, y2, ry1, ry2 = sendChirpToEar(AmpChirp=AmpChirp,fsamp=fsamp,MicGain=40,Nchirps=300,buffersize=2048,latency_SC=latSC)
+    #Hinear1, Hinear2, fxinear, y_mean1, y_mean2, recordedchirp1, recordedchirp2
     #(AmpChirp=AmpChirp,fsamp=fsamp,MicGain=MicGain,Nchirps=300,buffersize=buffersize,latency_SC=lat_SC)
     TL = TLlist[i]
 
@@ -61,4 +62,4 @@ for i in range(len(TLlist)):
     ax.plot(y2)
     plt.show()
     
-   # input("Press Enter to continue...")
+    input("Press Enter to continue...")

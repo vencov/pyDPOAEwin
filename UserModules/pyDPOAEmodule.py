@@ -210,7 +210,64 @@ def generateDPOAEstimulusPhase(f2f1,fs,f2start,f2stop,phase1,phase2,octpersec,L1
     
     return tone1, tone2  # returning back two tones separately for presentation by each speaker
 
+def generateBBNOAEprobe(fs,fb,fe,Tdur,Level,channel):
 
+    # === Parameters you define ===
+    
+    
+    band = [fb, fe]             # Bandwidth [Hz] (e.g., 2-8 kHz)
+    fade = [2048, 2048]             # Fade-in/out samples
+    channel = 1                     # Choose probe calibration channel
+    
+    # === 1. Generate broadband noise ===
+    N = int(Tdur * fs)
+    noise = np.random.randn(N)  # white noise (0 mean, unit variance)
+    
+    # Band-limit the noise using FFT filtering
+    NoiseFFT = np.fft.rfft(noise)
+    freqs = np.fft.rfftfreq(N, d=1/fs)
+    band_mask = (freqs >= band[0]) & (freqs <= band[1])
+    NoiseFFT[~band_mask] = 0  # zero out frequencies outside desired band
+    s = np.fft.irfft(NoiseFFT, n=N)
+    
+    # === 2. Apply fade-in and fade-out ===
+    if fade[0] > 0:
+        s[:fade[0]] *= (-np.cos(np.arange(fade[0]) / fade[0] * np.pi) + 1) / 2
+    if fade[1] > 0:
+        s[-fade[1]:] *= (np.cos(np.arange(fade[1]) / fade[1] * np.pi) + 1) / 2
+    
+    # === 3. Zero-padding for better FFT resolution ===
+    s = np.pad(s, (0, 16384), 'constant')
+    fft_len = len(s)
+    
+    # === 4. Load calibration data ===
+    probecal = loadmat('Calibration_files/Files/InEarCalData.mat')
+    if channel == 1:
+        Hprobe = probecal['Hinear1']
+        fxprobe = probecal['fxinear']
+    elif channel == 2:
+        Hprobe = probecal['Hinear2']
+        fxprobe = probecal['fxinear']
+    
+    # === 5. Transform noise to frequency domain ===
+    Sin = np.fft.rfft(s, fft_len)
+    fxSin = np.fft.rfftfreq(fft_len, d=1/fs)
+    
+    # === 6. Interpolate calibration response ===
+    Hrint = np.interp(fxSin, fxprobe.flatten(), Hprobe.flatten())
+    
+    # === 7. Apply calibration correction in frequency domain ===
+    SinC = Sin / Hrint
+    
+    # === 8. Back to time domain ===
+    sig = np.fft.irfft(SinC)
+    
+    # === 9. Set desired SPL level ===
+    p0 = 2e-5
+    sig = p0 * 10**(Level / 20) *np.sqrt(2)* sig # / np.sqrt(np.mean(sig**2))
+    
+    return sig
+    
 
 
 
@@ -407,6 +464,175 @@ def sendChirpToEar(*,AmpChirp=0.01,fsamp=44100,MicGain=40,Nchirps=300,buffersize
 
     fxinear = fx
     return Hinear1, Hinear2, fxinear, y_mean1, y_mean2, recordedchirp1, recordedchirp2
+
+
+
+
+
+def calcPressuresFPL(Pecs1,R1,Zsrc1,Z01):
+    
+
+    Pfor1 = Pecs1 / (1 + R1)      # forward pressure
+    Prev1 = R1*Pfor1               # reverse pressure
+    Rsrc1 = (Zsrc1-Z01)/(Zsrc1+Z01) # probe reflectance
+    Pifw1 = Pfor1*(1-R1*Rsrc1)    # initial pressure wave
+
+    return Pfor1,Prev1,Rsrc1,Pifw1
+
+
+def sendChirpToEarBias(*,AmpChirp=0.01,fsamp=44100,MicGain=40,Nchirps=300,buffersize=2048,latency_SC=8236,SC=10):
+    '''
+    creates a chirptrain and sends it into the sound card
+    recorded response is used for calibration of OAE probe
+    Input parameters:
+    AmpChirp .... Signal amplitude
+    fsamp .... sampling frequency (constructed for 44100 Hz)
+    MicGain .... gain on the OAE probe
+    Nchirps .... number of chirps in the chirptrain
+    buffersize .... number of samples in the chirp (buffer)
+    latency_SC .... sound card latency
+    '''
+    #import numpy as np
+    #import sys
+    #import os
+    #import matplotlib.pyplot as plt
+
+    #current = os.path.dirname(os.path.realpath(__file__)) # find path to the current file
+    #UMdir = os.path.dirname(current)+'/UserModules'  # set path to the UserModules folder
+    #sys.path.append(UMdir) # add the path to the module into sys.path
+     # import needed functions from pyRMEsd module
+    #from pyDPOAEmodule import makeChirpTrain  # import needed functions from pyRMEsd module
+
+    #fsamp = 44100
+    plotflag = 0  # plot responses? for debuging purposes set to 1
+    f1 = 0  # start frequency
+    f2 = fsamp/2 # stop frequency
+    Nsamp = buffersize  # number of samples in the chirp
+    chirptrain, chirpIn = makeChirpTrain(f1,f2,Nsamp,fsamp,Nchirps)
+    # make matrix with 3 columns, each column has signal for each channel: 1, 2, 3
+    chirpmatrix1 = np.vstack((chirptrain,np.zeros_like(chirptrain),chirptrain)).T 
+    
+    # send to soundcard and record
+    recordedchirp1 = RMEplayrec(AmpChirp*chirpmatrix1,fsamp,SC=SC,buffersize=buffersize)
+
+    chirpmatrix2 = np.vstack((np.zeros_like(chirptrain),chirptrain,chirptrain)).T
+    
+    time.sleep(0.5)
+    recordedchirp2 = RMEplayrec(AmpChirp*chirpmatrix2,fsamp,SC=SC,buffersize=buffersize)
+    #recordedchirp2 = recordedchirp1
+
+    # process the recorded chirps
+
+    # high pass filter
+    print('msize1:',np.shape(chirpmatrix1))
+    print('msize2:',np.shape(chirpmatrix2))
+
+    print('size1:',np.shape(recordedchirp1))
+    print('size2:',np.shape(recordedchirp2))
+    cutoff = 20 # cutoff frequency for high pass filter to filter out low frequency noise
+    recordedchirp1 = butter_highpass_filter(recordedchirp1[:,0], cutoff, fsamp, 1)
+    recordedchirp2 = butter_highpass_filter(recordedchirp2[:,0], cutoff, fsamp, 1)
+    if plotflag:
+        fig,ax = plt.subplots()
+        ax.plot(recordedchirp1)
+        ax.plot(recordedchirp2)
+        ax.title("recorded chirptrains")
+        ax.set_xlabel("samples")
+        ax.set_ylabel("amplitude")
+        plt.show()
+    
+
+    #latency_SC = 5170 # sound card latency (can be removed from the begining of recorded signal)
+    #latency_SC = 8681 # sound card latency (can be removed from the begining of recorded signal)
+
+    y_stripSClat1 = recordedchirp1[latency_SC:] # remove the SC latency
+    y_reshaped1 = np.reshape(y_stripSClat1[:Nchirps*Nsamp],(Nchirps,Nsamp))
+    
+    y_stripSClat2 = recordedchirp2[latency_SC:] # remove the SC latency
+    y_reshaped2 = np.reshape(y_stripSClat2[:Nchirps*Nsamp],(Nchirps,Nsamp))
+
+    # take the mean across some responses:
+    Nchskip = 10 # skip first ten chirps
+
+    y_mean1 = np.mean(y_reshaped1.T[:,Nchskip:],axis=1)
+    y_mean2 = np.mean(y_reshaped2.T[:,Nchskip:],axis=1)
+    
+    # artifact rejection (reject frams which are affected by some artifact)
+    
+    y_dev1 = y_reshaped1.T[:,Nchskip:] - y_mean1[:,np.newaxis]
+    y_dev2 = y_reshaped2.T[:,Nchskip:] - y_mean2[:,np.newaxis]
+    # Example threshold
+    threshold = 0.01  # Adjust this based on your criteria
+
+    # Compute the maximum absolute deviation for each frame
+    max_dev_per_frame1 = np.max(np.abs(y_dev1), axis=0)
+    max_dev_per_frame2 = np.max(np.abs(y_dev2), axis=0)
+
+    # Identify frames where the deviation exceeds the threshold
+    frames_to_skip1 = np.where(max_dev_per_frame1 > threshold)[0]
+    frames_to_skip2 = np.where(max_dev_per_frame2 > threshold)[0]
+
+    print("Frames to skip:", frames_to_skip1)
+    print("Frames to skip:", frames_to_skip2)
+    
+    # Select only the columns that are NOT in frames_to_skip
+    valid_columns1 = np.setdiff1d(np.arange(y_reshaped1.T[:, Nchskip:].shape[1]), frames_to_skip1)
+    valid_columns2 = np.setdiff1d(np.arange(y_reshaped2.T[:, Nchskip:].shape[1]), frames_to_skip2)
+    # Compute the mean only for the selected columns
+    y_mean1 = np.mean(y_reshaped1.T[:, Nchskip:][:, valid_columns1], axis=1)
+    y_mean2 = np.mean(y_reshaped2.T[:, Nchskip:][:, valid_columns2], axis=1)
+    
+    if plotflag:
+        fig,ax = plt.subplots()
+        ax.plot(y_mean1)
+        ax.plot(y_mean2)
+        ax.title("mean value of the recorded chirps")
+        ax.set_xlabel("samples")
+        ax.set_ylabel("amplitude")
+        plt.show()
+    #fig,(ax1,ax2) = plt.subplots(2,1)
+    #ax1.plot(y_reshaped.T)
+    #ax2.plot(y_mean)
+    
+    # calculate spectrum
+
+    Nmean1 = len(y_mean1)  # length of the data
+    NmeanUp1 = int(2**np.ceil(2+np.log2(Nmean1)))  # interpolated length of the spectrum
+    ChResp1 =  np.fft.rfft(y_mean1,NmeanUp1)/np.fft.rfft(AmpChirp*chirpIn,NmeanUp1)
+    fxCh1 = np.arange(NmeanUp1)*fsamp/NmeanUp1
+    fxCh1 = fxCh1[:NmeanUp1//2+1]
+
+    Nmean2 = len(y_mean2)  # length of the data
+    NmeanUp2 = int(2**np.ceil(2+np.log2(Nmean2)))  # interpolated length of the spectrum
+    ChResp2 =  np.fft.rfft(y_mean2,NmeanUp2)/np.fft.rfft(AmpChirp*chirpIn,NmeanUp2)
+    fxCh2 = np.arange(NmeanUp2)*fsamp/NmeanUp2
+    fxCh2 = fxCh2[:NmeanUp2//2+1]   
+
+    # to smooth out noise, Savitzky-Golay filter is used
+    ChRespAbs1 = savgol_filter(np.abs(ChResp1), 20, 2)
+    ChRespImag1 = savgol_filter(np.unwrap(np.angle(ChResp1)), 20, 2)
+
+    ChRespAbs2 = savgol_filter(np.abs(ChResp2), 20, 2)
+    ChRespImag2 = savgol_filter(np.unwrap(np.angle(ChResp2)), 20, 2)
+      
+    # change on 8.3.2024 to remove miccal
+    #MicC = loadmat('MicCalCurve.mat')  # load calibration curve for the microphone
+    #fx = MicC['fx'][0]
+    #Hoaemic = MicC['Hoaemic'][0]
+    fx = np.arange(100,18e3,5)
+
+    ChRespI1 = np.interp(fx,fxCh1,ChRespAbs1)*np.exp(1j*np.interp(fx,fxCh1,ChRespImag1))
+    ChRespI2 = np.interp(fx,fxCh2,ChRespAbs2)*np.exp(1j*np.interp(fx,fxCh2,ChRespImag2))
+
+    #Hinear1 = ChRespI1/(Hoaemic*(10**(MicGain/20))) # convert recorded response to Pascals
+    #Hinear2 = ChRespI2/(Hoaemic*(10**(MicGain/20)))
+    Hinear1 = ChRespI1/(0.003*10**(MicGain/20))
+    Hinear2 = ChRespI2/(0.003*10**(MicGain/20))
+
+
+    fxinear = fx
+    return Hinear1, Hinear2, fxinear, y_mean1, y_mean2, recordedchirp1, recordedchirp2
+
 
 def giveRforTScalibration(Zec,fxPecs,num_iterations=20):
     '''
@@ -926,12 +1152,12 @@ def calcDPstst(oaeDS,f2f1,f2,f1,fsamp,Twin,T,GainMic,Thresh):
 
 
 
-def calcDPststBias(oaeDS,f2f1,f2,f1,fsamp,Twin,T,GainMic,Thresh):
+def calcDPststBias(oaeDS,f2f1,f2,f1,fsamp,Nwin,GainMic,Thresh):
 
     # reshape to Twin frames
 
-    Nwin = int(Twin*fsamp)
-    Nframes = int(int(T*fsamp)/Nwin)
+    
+    Nframes = len(oaeDS)//Nwin
     print(Nwin)
     print(Nframes)
     oaeRSh = np.reshape(oaeDS[:Nwin*Nframes],(Nwin,Nframes),'F')
@@ -948,7 +1174,7 @@ def calcDPststBias(oaeDS,f2f1,f2,f1,fsamp,Twin,T,GainMic,Thresh):
     
        
 
-    for i in range(2,Nframes-2):
+    for i in range(6,Nframes-6):
         Spect = 2*np.fft.rfft(oaeRSh[:,i])/Nwin
 
         Spnoise = np.concatenate((Spect[idxFdp-4:idxFdp-1],Spect[idxFdp+2:idxFdp+5]))

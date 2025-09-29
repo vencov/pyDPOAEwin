@@ -32,12 +32,19 @@ def loadTubeResp(Filename):
     return H1T01, H2T01, fx, Pe01, Pe02, Tube['TL'][0][0]   # return freq responses for both speakers
 
 
-H1T01, H2T01, fxT01, Pe1T01, Pe2T01, TL1 = loadTubeResp('Calibration_files/Files/TScalTube01_040724vPH.mat')
-H1T02, H2T02, fxT02, Pe1T02, Pe2T02, TL2 = loadTubeResp('Calibration_files/Files/TScalTube02_040724vPH.mat')
-H1T03, H2T03, fxT03, Pe1T03, Pe2T03, TL3 = loadTubeResp('Calibration_files/Files/TScalTube03_040724vPH.mat')
-H1T04, H2T04, fxT04, Pe1T04, Pe2T04, TL4 = loadTubeResp('Calibration_files/Files/TScalTube04_040724vPH.mat')
-H1T05, H2T05, fxT05, Pe1T05, Pe2T05, TL5 = loadTubeResp('Calibration_files/Files/TScalTube05_040724vPH.mat')
-H1LLS, H2LLS, fxLLS, Pe1LLT, Pe2LLT, TLLL = loadTubeResp('Calibration_files/Files/TScalLLT_040724vPH.mat')
+#H1T01, H2T01, fxT01, Pe1T01, Pe2T01, TL1 = loadTubeResp('Calibration_files/Files/TScalTube01_040724vPH.mat')
+#H1T02, H2T02, fxT02, Pe1T02, Pe2T02, TL2 = loadTubeResp('Calibration_files/Files/TScalTube02_040724vPH.mat')
+#H1T03, H2T03, fxT03, Pe1T03, Pe2T03, TL3 = loadTubeResp('Calibration_files/Files/TScalTube03_040724vPH.mat')
+#H1T04, H2T04, fxT04, Pe1T04, Pe2T04, TL4 = loadTubeResp('Calibration_files/Files/TScalTube04_040724vPH.mat')
+#H1T05, H2T05, fxT05, Pe1T05, Pe2T05, TL5 = loadTubeResp('Calibration_files/Files/TScalTube05_040724vPH.mat')
+#H1LLS, H2LLS, fxLLS, Pe1LLT, Pe2LLT, TLLL = loadTubeResp('Calibration_files/Files/TScalLLT_040724vPH.mat')
+
+H1T01, H2T01, fxT01, Pe1T01, Pe2T01, TL1 = loadTubeResp('Calibration_files/Files/TScalTube01_071725vPH.mat')
+H1T02, H2T02, fxT02, Pe1T02, Pe2T02, TL2 = loadTubeResp('Calibration_files/Files/TScalTube02_071725vPH.mat')
+H1T03, H2T03, fxT03, Pe1T03, Pe2T03, TL3 = loadTubeResp('Calibration_files/Files/TScalTube03_071725vPH.mat')
+H1T04, H2T04, fxT04, Pe1T04, Pe2T04, TL4 = loadTubeResp('Calibration_files/Files/TScalTube04_071725vPH.mat')
+H1T05, H2T05, fxT05, Pe1T05, Pe2T05, TL5 = loadTubeResp('Calibration_files/Files/TScalTube05_071725vPH.mat')
+H1LLS, H2LLS, fxLLS, Pe1LLT, Pe2LLT, TLLL = loadTubeResp('Calibration_files/Files/TScalLLS_071725vPH.mat')
     
 fig,ax = plt.subplots()
 ax.plot(fxLLS,20*np.log10(np.abs(H1LLS)))
@@ -359,7 +366,7 @@ THpar = {}
 THpar['Psrc1'] = Psrc1; THpar['Psrc2'] = Psrc2; THpar['Zsrc1'] = Zsrc1; THpar['Zsrc2'] = Zsrc2; THpar['fxTS'] = fxS
 
 from scipy.io import savemat
-savemat('Calibration_files/Files/THpar_040724.mat',THpar)
+savemat('Calibration_files/Files/THpar_071725vPH.mat',THpar)
 
 fig,ax = plt.subplots()
 ax.plot(fxS,np.abs(Psrc1))

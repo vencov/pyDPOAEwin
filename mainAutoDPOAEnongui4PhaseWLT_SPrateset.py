@@ -33,7 +33,7 @@ Lstep = 5
 artThresh = 12  # threshodl for artifact removal
 
 #L1 = 55
-r = 8   # sweep rate in octaves per second
+r = 4   # sweep rate in octaves per second
 fsamp = 44100; lat_SC=8236; bufsize = 2048  # 44100 Hz 2048 buffersize# sampling freuqency
 fsamp = 96000; lat_SC= 16448; bufsize = 4096
 #fsamp = 96000; lat_SC= 12352; bufsize = 4096
@@ -51,8 +51,8 @@ plt.close('all')
 
 #save_path = 'Results/s003'
 #subj_name = 's003'
-save_path = 'Results/pokus'
-subj_name = 's004'
+save_path = 'Results/s150'
+subj_name = 's150'
 
 # now to stop measurement by s key
 
@@ -402,7 +402,12 @@ while runningM:
             cycle = 2*np.pi
             ax2.plot(fx2sub[~np.isnan(SDPOAEmwf)],DPphaseU/cycle,color='C0',linewidth=1.2)
             ax2.plot(fx2sub[~np.isnan(SNLmwf)],DPphaseNLU/cycle,color='C1',linewidth=1.2)
+            ax2.set_xlim([500,8000])
+            ax2.set_ylim([-40,2])
+
+            ax2.set_ylabel('Phase (cycles)')
             
+            ax2.set_xlabel('Frequency $f_2$ (Hz)')
 
             
             

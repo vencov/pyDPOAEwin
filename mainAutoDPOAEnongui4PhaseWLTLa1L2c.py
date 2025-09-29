@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Apr  4 10:30:14 2025
+Created on Fri Apr  4 10:02:07 2025
 
-@author: audiobunka
+@author: vacla
 """
 
 # -*- coding: utf-8 -*-
@@ -28,13 +28,13 @@ f2e = 500 # f2 end frequency
 f2f1 = 1.2  # f2/f1 ratio
 #L1 = 53    # intensity of f1 tone
 L2list = np.arange(55,20,-5)  # make a list of L2 values
-L2 = 50
-L1 = 60
+L2 = 65
+L1 = 65
 Lstep = 5
-artThresh = 12  # threshodl for artifact removal
+
 
 #L1 = 55
-r = 4   # sweep rate in octaves per second
+r = 2   # sweep rate in octaves per second
 fsamp = 44100; lat_SC=8236; bufsize = 2048  # 44100 Hz 2048 buffersize# sampling freuqency
 fsamp = 96000; lat_SC= 16448; bufsize = 4096
 #fsamp = 96000; lat_SC= 12352; bufsize = 4096
@@ -42,7 +42,7 @@ fsamp = 96000; lat_SC= 16436; bufsize = 4096
 fsamp = 96000; lat_SC= 20532; bufsize = 4096
 #fsamp = 96000; lat_SC= 20544; bufsize = 4096
 
-DevNum = 10
+DevNum = 36
 changeSampleRate(fsamp,bufsize,SC=DevNum)
 lat_SC = getSClat(fsamp,bufsize,SC=DevNum)
 micGain = 40
@@ -52,8 +52,9 @@ plt.close('all')
 
 #save_path = 'Results/s003'
 #subj_name = 's003'
-save_path = 'Results/s150'
-subj_name = 's150'
+save_path = 'Results/s984/'
+subj_name = 's984'
+
 
 # now to stop measurement by s key
 
@@ -98,7 +99,7 @@ while runningM:
     running = True  # loop is running
     #L2 = L2list[iL2]
     #L1 = int(0.4*L2+39)  # scissor paradigm
-    #L1 = L2 + 15  # L2 + 10 dB paradigm
+    
     def get_time() -> str:
         # to get current time
         now_time = datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S')
@@ -251,11 +252,10 @@ while runningM:
             sigma2 = np.sqrt(1/(Nsamp*counter)*np.sum(np.sum(noiseM2**2,1)))
             sigma3 = np.sqrt(1/(Nsamp*counter)*np.sum(np.sum(noiseM3**2,1)))
             sigma4 = np.sqrt(1/(Nsamp*counter)*np.sum(np.sum(noiseM4**2,1)))
-            
-            Theta1 = artThresh*sigma1 # estimation of the threshold for sample removal
-            Theta2 = artThresh*sigma2 # estimation of the threshold for sample removal
-            Theta3 = artThresh*sigma3 # estimation of the threshold for sample removal
-            Theta4 = artThresh*sigma4 # estimation of the threshold for sample removal
+            Theta1 = 12*sigma1 # estimation of the threshold for sample removal
+            Theta2 = 12*sigma2 # estimation of the threshold for sample removal
+            Theta3 = 12*sigma3 # estimation of the threshold for sample removal
+            Theta4 = 12*sigma4 # estimation of the threshold for sample removal
 
             # now we have to make NAN where the noise was to large, but we have to do it in the wave
             # which 
@@ -405,11 +405,10 @@ while runningM:
             ax2.plot(fx2sub[~np.isnan(SNLmwf)],DPphaseNLU/cycle,color='C1',linewidth=1.2)
             
             ax2.set_xlim([500,8000])
-            ax2.set_ylim([-40,2])
-            
+            ax2.set_ylim([-40,5])
             ax2.set_ylabel('Phase (cycles)')
-             
             ax2.set_xlabel('Frequency $f_2$ (Hz)')
+
             
             
             if f2b<f2e:
@@ -429,6 +428,7 @@ while runningM:
     iL2 += 1
     if runningM:
         Lstep = get_user_input("Write level step in dB", Lstep)
+        r = get_user_input("Write swept sine rate in oct/sec", r)
         L1 = L1 + Lstep       
      
 

@@ -104,7 +104,16 @@ subjD['s120R'] = ['Results/s120/', '25_02_19_11_41_44_F2b_8000Hz', '25_02_19_11_
 subjD['s136L'] = ['Results/s136/', '25_02_12_11_36_53_F2b_8000Hz', '25_02_12_11_38_24_F2b_8000Hz', '25_02_12_11_40_11_F2b_8000Hz', '25_02_12_11_41_43_F2b_8000Hz', '25_02_12_11_43_31_F2b_8000Hz', '25_02_12_11_45_19_F2b_8000Hz', '25_02_12_11_46_56_F2b_8000Hz', '25_02_12_11_47_13_F2b_8000Hz', '25_02_12_11_48_47_F2b_8000Hz']
 subjD['s136R'] = ['Results/s136/', '25_02_12_12_05_55_F2b_8000Hz', '25_02_12_12_08_48_F2b_8000Hz', '25_02_12_12_10_04_F2b_8000Hz', '25_02_12_12_11_35_F2b_8000Hz', '25_02_12_12_13_23_F2b_8000Hz', '25_02_12_12_15_26_F2b_8000Hz', '25_02_12_12_17_21_F2b_8000Hz', '25_02_12_12_17_37_F2b_8000Hz', '25_02_12_12_19_08_F2b_8000Hz']
 
-subjN = 's088R'
+
+subjD['s146R'] = ['Results/s146/', '25_06_03_10_45_34_F2b_8000Hz', '25_06_03_10_46_16_F2b_8000Hz', '25_06_03_10_47_07_F2b_8000Hz', '25_06_03_10_47_50_F2b_8000Hz', '25_06_03_10_48_32_F2b_8000Hz', '25_06_03_10_49_15_F2b_8000Hz', '25_06_03_10_50_20_F2b_8000Hz', '25_06_03_10_51_15_F2b_8000Hz', '25_06_03_10_52_09_F2b_8000Hz']
+
+subjD['s147L'] = ['Results/s147/', '25_06_04_13_20_20_F2b_8000Hz', '25_06_04_13_21_25_F2b_8000Hz', '25_06_04_13_22_30_F2b_8000Hz', '25_06_04_13_23_24_F2b_8000Hz', '25_06_04_13_24_18_F2b_8000Hz', '25_06_04_13_25_23_F2b_8000Hz', '25_06_04_13_26_28_F2b_8000Hz', '25_06_04_13_27_45_F2b_8000Hz']
+subjD['s147R'] = ['Results/s147/', '25_06_04_13_49_37_F2b_8000Hz', '25_06_04_13_50_42_F2b_8000Hz', '25_06_04_13_51_35_F2b_8000Hz', '25_06_04_13_52_40_F2b_8000Hz', '25_06_04_13_53_56_F2b_8000Hz', '25_06_04_13_55_13_F2b_8000Hz', '25_06_04_13_56_19_F2b_8000Hz', '25_06_04_13_57_34_F2b_8000Hz']
+
+
+subjN = 's147L'
+
+
 
 #subjN = 's055L_L2_55'
 
@@ -590,6 +599,8 @@ ax2.text(0.3, 0.2, text_to_display, transform=ax2.transAxes,
 # Save the second plot as well (optional)
 plt.savefig('Figures/DPgrams/dpgr' + subjN + '.png', format='png', dpi=300)  # Save the second graph
 
+#%%
+
 
 #%% visualization
 
@@ -610,7 +621,8 @@ for i in range(len(CF)):
     GAx = []
     NOx = []  # Background noise array
     for j in range(len(L2list)):
-        IOx.append(20*np.log10(np.abs(DPgr[str(L2list[j])]['NLgr'][CFidx[i]])/pREF))
+        #IOx.append(20*np.log10(np.abs(DPgr[str(L2list[j])]['NLgr'][CFidx[i]])/pREF))
+        IOx.append((np.abs(DPgr[str(L2list[j])]['NLgr'][CFidx[i]])/pREF))
         GAx.append(IOx[j]-L2list[j])
         # Extract background noise and convert to dB
         NOx.append(20 * np.log10(np.abs(DPgr[str(L2list[j])]['NLgrN'][CFidx[i]])/pREF))

@@ -15,15 +15,15 @@ bufsize = 4096
 micGain = 40
 Npulse = 2048
 Npulse = 512
-channelN = 5
+channelN = 6
 lb = 40
 lend = 110
 LcStart = 70  # starting click level
-Lref = 59.1
+Lref = 58.3
 
-subj_name = 's004'
-save_path = 'ResultsMEMR/s004/'
-ear = 'P'
+subj_name = 's077'
+save_path = 'ResultsMEMR/s077/'
+ear = 'L'
 
 plt.close('all')
 changeSampleRate(fsamp, bufsize, SC=10)
@@ -105,7 +105,7 @@ def get_time() -> str:
     return now_time
 t_ = get_time()
 
-while counter <= 14:
+while counter <= 4:
     
     recorded_clicktrain = RMEplayrecBias(Amp * clicktrain_with_noise, fsamp, SC=10, buffersize=4096)
     corrected_clicktrain = recorded_clicktrain[latency_SC:, 0]
