@@ -45,14 +45,14 @@ DevNum = 10
 changeSampleRate(fsamp,bufsize,SC=DevNum)
 lat_SC = getSClat(fsamp,bufsize,SC=DevNum)
 micGain = 40
-ear_t = 'R' # which ear
+ear_t = 'L' # which ear
 
 plt.close('all')
 
 #save_path = 'Results/s003'
 #subj_name = 's003'
-save_path = 'Results/s150'
-subj_name = 's150'
+save_path = 'Results/fav6'
+subj_name = 'fav6'
 
 # now to stop measurement by s key
 

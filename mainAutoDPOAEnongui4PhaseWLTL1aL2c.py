@@ -28,7 +28,7 @@ f2e = 500 # f2 end frequency
 f2f1 = 1.2  # f2/f1 ratio
 #L1 = 53    # intensity of f1 tone
 L2list = np.arange(55,20,-5)  # make a list of L2 values
-L2 = 50
+L2 = 55
 L1 = 60
 Lstep = 5
 artThresh = 12  # threshodl for artifact removal
@@ -52,8 +52,8 @@ plt.close('all')
 
 #save_path = 'Results/s003'
 #subj_name = 's003'
-save_path = 'Results/s150'
-subj_name = 's150'
+save_path = 'Results/s151'
+subj_name = 's151'
 
 # now to stop measurement by s key
 

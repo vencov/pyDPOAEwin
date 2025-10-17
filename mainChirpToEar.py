@@ -5,7 +5,7 @@ from scipy.io import savemat, loadmat
 from UserModules.pyDPOAEmodule import sendChirpToEar, giveRforTScalibration, getSClat, changeSampleRate
 
 fsamp = 44100
-MicGain = 0
+MicGain = 40
 lat_SC=8236  # 44100 Hz 2048 buffersize
 lat_SC=8205  # 44100 Hz 2048 buffersize
 #lat_SC=8356  # 44100 Hz 2048 buffersize
@@ -20,7 +20,7 @@ Hinear1, Hinear2, fxinear, y1, y2, y1all, y2all = sendChirpToEar(AmpChirp=AmpChi
 #xxx, Hinear1, Hinear2, fxinear = sendChirpToEar(fsamp,MicGain)
 
 # choose SPL (0) or FPL (1) calibration
-FPL = 0
+FPL = 1
 pathfolder = 'Calibration_files/Files'  # path for saving calib file
 
 if not os.path.exists(pathfolder):
