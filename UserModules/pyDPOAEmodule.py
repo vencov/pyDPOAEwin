@@ -277,7 +277,8 @@ def synchronized_swept_sine_spectra_shifted(f1s,L1sw,fsamp,Nsamp,tshift):
     '''
     # frequency axis
     #f = np.linspace(0,fsamp,Nsamp,endpoint=False)
-    f = np.linspace(0,fsamp/2,num=round(Nsamp/2)+1)  # half of the spectrum
+    #f = np.linspace(0,fsamp/2,num=round(Nsamp/2)+1)  # half of the spectrum
+    f = np.fft.rfftfreq(Nsamp,d=1.0/fsamp)
     # spectra of the synchronized swept-sine signal [1, Eq.(42)]
     X = 1/2*np.emath.sqrt(L1sw/f)*np.exp(1j*2*np.pi*f*L1sw*(1 - np.log(f/f1s)) - 1j*np.pi/4)*np.exp(-1j*2*np.pi*f*tshift)
     X[0] = np.inf # protect from devision by zero
@@ -1276,7 +1277,8 @@ def fceDPOAEinwinSShm(oaeDS,Nsamp,f1s,L1sw,rF,fsamp,hmfftlen):
     % time windows which does not start at 0 time)
     '''
     tshift = 0
-    fft_len = int(2**np.ceil(np.log2(len(oaeDS)))) # number of samples for fft 
+    #fft_len = int(2**np.ceil(np.log2(len(oaeDS)))) # number of samples for fft 
+    fft_len = len(oaeDS) 
     S,f = synchronized_swept_sine_spectra_shifted(f1s,L1sw,fsamp,fft_len,tshift)
 
     # spectra of the output signal

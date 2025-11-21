@@ -97,21 +97,32 @@ subjD['s135R'] = ['Results/s135/', '25_02_19_10_14_03_F2b_8000Hz', '25_02_19_10_
 subjD['s102L'] = ['Results/s102/', '24_12_18_14_30_09_F2b_8000Hz', '24_12_18_14_31_39_F2b_8000Hz', '24_12_18_14_33_30_F2b_8000Hz', '24_12_18_14_35_09_F2b_8000Hz', '24_12_18_14_36_23_F2b_8000Hz', '24_12_18_14_38_09_F2b_8000Hz', '24_12_18_14_39_39_F2b_8000Hz', '24_12_18_14_41_10_F2b_8000Hz']
 subjD['s102R'] = ['Results/s102/', '24_12_18_14_56_47_F2b_8000Hz', '24_12_18_14_57_31_F2b_8000Hz', '24_12_18_14_58_35_F2b_8000Hz', '24_12_18_14_59_34_F2b_8000Hz', '24_12_18_15_01_04_F2b_8000Hz', '24_12_18_15_02_18_F2b_8000Hz', '24_12_18_15_03_33_F2b_8000Hz', '24_12_18_15_04_48_F2b_8000Hz']
 
-
 subjD['s120L'] = ['Results/s120/', '25_02_19_11_22_51_F2b_8000Hz', '25_02_19_11_23_50_F2b_8000Hz', '25_02_19_11_24_49_F2b_8000Hz', '25_02_19_11_25_48_F2b_8000Hz', '25_02_19_11_26_46_F2b_8000Hz', '25_02_19_11_27_45_F2b_8000Hz', '25_02_19_11_28_44_F2b_8000Hz', '25_02_19_11_29_59_F2b_8000Hz', '25_02_19_11_31_16_F2b_8000Hz']
 subjD['s120R'] = ['Results/s120/', '25_02_19_11_41_44_F2b_8000Hz', '25_02_19_11_42_28_F2b_8000Hz', '25_02_19_11_43_43_F2b_8000Hz', '25_02_19_11_44_27_F2b_8000Hz', '25_02_19_11_45_25_F2b_8000Hz', '25_02_19_11_46_58_F2b_8000Hz', '25_02_19_11_48_12_F2b_8000Hz', '25_02_19_11_49_42_F2b_8000Hz', '25_02_19_11_50_57_F2b_8000Hz']
 
 subjD['s136L'] = ['Results/s136/', '25_02_12_11_36_53_F2b_8000Hz', '25_02_12_11_38_24_F2b_8000Hz', '25_02_12_11_40_11_F2b_8000Hz', '25_02_12_11_41_43_F2b_8000Hz', '25_02_12_11_43_31_F2b_8000Hz', '25_02_12_11_45_19_F2b_8000Hz', '25_02_12_11_46_56_F2b_8000Hz', '25_02_12_11_47_13_F2b_8000Hz', '25_02_12_11_48_47_F2b_8000Hz']
 subjD['s136R'] = ['Results/s136/', '25_02_12_12_05_55_F2b_8000Hz', '25_02_12_12_08_48_F2b_8000Hz', '25_02_12_12_10_04_F2b_8000Hz', '25_02_12_12_11_35_F2b_8000Hz', '25_02_12_12_13_23_F2b_8000Hz', '25_02_12_12_15_26_F2b_8000Hz', '25_02_12_12_17_21_F2b_8000Hz', '25_02_12_12_17_37_F2b_8000Hz', '25_02_12_12_19_08_F2b_8000Hz']
 
-
 subjD['s146R'] = ['Results/s146/', '25_06_03_10_45_34_F2b_8000Hz', '25_06_03_10_46_16_F2b_8000Hz', '25_06_03_10_47_07_F2b_8000Hz', '25_06_03_10_47_50_F2b_8000Hz', '25_06_03_10_48_32_F2b_8000Hz', '25_06_03_10_49_15_F2b_8000Hz', '25_06_03_10_50_20_F2b_8000Hz', '25_06_03_10_51_15_F2b_8000Hz', '25_06_03_10_52_09_F2b_8000Hz']
+
+subjD['s146L'] = ['Results/s146/', '25_06_03_10_18_11_F2b_8000Hz', '25_06_03_10_20_22_F2b_8000Hz', '25_06_03_10_21_17_F2b_8000Hz', '25_06_03_10_22_26_F2b_8000Hz', '25_06_03_10_23_20_F2b_8000Hz', '25_06_03_10_24_16_F2b_8000Hz', '25_06_03_10_25_10_F2b_8000Hz', '25_06_03_10_26_04_F2b_8000Hz', '25_06_03_10_27_10_F2b_8000Hz']
+
+
 
 subjD['s147L'] = ['Results/s147/', '25_06_04_13_20_20_F2b_8000Hz', '25_06_04_13_21_25_F2b_8000Hz', '25_06_04_13_22_30_F2b_8000Hz', '25_06_04_13_23_24_F2b_8000Hz', '25_06_04_13_24_18_F2b_8000Hz', '25_06_04_13_25_23_F2b_8000Hz', '25_06_04_13_26_28_F2b_8000Hz', '25_06_04_13_27_45_F2b_8000Hz']
 subjD['s147R'] = ['Results/s147/', '25_06_04_13_49_37_F2b_8000Hz', '25_06_04_13_50_42_F2b_8000Hz', '25_06_04_13_51_35_F2b_8000Hz', '25_06_04_13_52_40_F2b_8000Hz', '25_06_04_13_53_56_F2b_8000Hz', '25_06_04_13_55_13_F2b_8000Hz', '25_06_04_13_56_19_F2b_8000Hz', '25_06_04_13_57_34_F2b_8000Hz']
 
 
-subjN = 's147L'
+subjD['s149R'] = ['Results/s149/', '25_09_09_09_43_49_F2b_8000Hz', '25_09_09_09_44_33_F2b_8000Hz', '25_09_09_09_45_17_F2b_8000Hz', '25_09_09_09_45_59_F2b_8000Hz', '25_09_09_09_46_42_F2b_8000Hz', '25_09_09_09_47_14_F2b_8000Hz', '25_09_09_09_48_08_F2b_8000Hz', '25_09_09_09_49_02_F2b_8000Hz', '25_09_09_09_49_56_F2b_8000Hz']
+
+subjD['s149L'] = ['Results/s149/', '25_09_09_09_15_16_F2b_8000Hz', '25_09_09_09_31_32_F2b_8000Hz','25_09_09_09_32_04_F2b_8000Hz',  '25_09_09_09_30_23_F2b_8000Hz', '25_09_09_09_30_56_F2b_8000Hz','25_09_09_09_27_03_F2b_8000Hz', '25_09_09_09_27_57_F2b_8000Hz',   '25_09_09_09_28_29_F2b_8000Hz', '25_09_09_09_29_12_F2b_8000Hz']
+                  
+subjD['s145L'] = ['Results/s145/', '25_05_21_10_46_38_F2b_8000Hz', '25_05_21_10_47_34_F2b_8000Hz', '25_05_21_10_48_30_F2b_8000Hz', '25_05_21_10_49_26_F2b_8000Hz', '25_05_21_10_50_36_F2b_8000Hz', '25_05_21_10_51_46_F2b_8000Hz', '25_05_21_10_52_57_F2b_8000Hz', '25_05_21_10_53_54_F2b_8000Hz']
+subjD['s145R'] =  ['Results/s145/', '25_05_21_11_09_00_F2b_8000Hz', '25_05_21_11_09_56_F2b_8000Hz', '25_05_21_11_10_50_F2b_8000Hz', '25_05_21_11_11_45_F2b_8000Hz', '25_05_21_11_12_55_F2b_8000Hz', '25_05_21_11_14_05_F2b_8000Hz', '25_05_21_11_15_16_F2b_8000Hz', '25_05_21_11_16_44_F2b_8000Hz']
+
+#, '25_09_09_09_15_16_F2b_8000Hz', '25_09_09_09_16_11_F2b_8000Hz', '25_09_09_09_17_05_F2b_8000Hz', '25_09_09_09_17_49_F2b_8000Hz', '25_09_09_09_18_43_F2b_8000Hz', '25_09_09_09_19_37_F2b_8000Hz', '25_09_09_09_20_53_F2b_8000Hz', '25_09_09_09_21_59_F2b_8000Hz',      , '25_09_09_09_30_23_F2b_8000Hz',  
+
+subjN = 's102R'
 
 
 
@@ -153,7 +164,7 @@ def wavelet_filterDPOAE(signal, wavelet_basis,fx):
     
     
     
-    for k in range(10,400):
+    for k in range(4,400):
         # Compute the Fourier transform of the wavelet basis function
         wbtf = 2*np.fft.fft(wavelet_basis[:, k])/len(wavelet_basis[:, k])
         
@@ -607,7 +618,7 @@ plt.savefig('Figures/DPgrams/dpgr' + subjN + '.png', format='png', dpi=300)  # S
 
 import numpy as np
 
-CF = [2000,3000,4000,7000]
+CF = [1000,1500,2000,3000,4000,7000]
 CFidx = np.zeros_like(CF)
 
 DPioNL = []
@@ -621,8 +632,8 @@ for i in range(len(CF)):
     GAx = []
     NOx = []  # Background noise array
     for j in range(len(L2list)):
-        #IOx.append(20*np.log10(np.abs(DPgr[str(L2list[j])]['NLgr'][CFidx[i]])/pREF))
-        IOx.append((np.abs(DPgr[str(L2list[j])]['NLgr'][CFidx[i]])/pREF))
+        IOx.append(20*np.log10(np.abs(DPgr[str(L2list[j])]['NLgr'][CFidx[i]])/pREF))
+        #IOx.append((np.abs(DPgr[str(L2list[j])]['NLgr'][CFidx[i]])/pREF))
         GAx.append(IOx[j]-L2list[j])
         # Extract background noise and convert to dB
         NOx.append(20 * np.log10(np.abs(DPgr[str(L2list[j])]['NLgrN'][CFidx[i]])/pREF))
@@ -638,6 +649,8 @@ data_line.append(ax.plot(L2list, DPioNL[0], label=r'${\it f}_2$ = '+ str(CF[0]) 
 data_line.append(ax.plot(L2list, DPioNL[1], label=r'${\it f}_2$ = '+ str(CF[1]) + ' kHz'))
 data_line.append(ax.plot(L2list, DPioNL[2], label=r'${\it f}_2$ = '+ str(CF[2]) + ' kHz'))
 data_line.append(ax.plot(L2list, DPioNL[3], label=r'${\it f}_2$ = '+ str(CF[3]) + ' kHz'))
+data_line.append(ax.plot(L2list, DPioNL[4], label=r'${\it f}_2$ = '+ str(CF[3]) + ' kHz'))
+data_line.append(ax.plot(L2list, DPioNL[5], label=r'${\it f}_2$ = '+ str(CF[3]) + ' kHz'))
 noise_lines.append(ax.plot(L2list, NOxNL[0], color=data_line[0][0].get_color(), 
                                linestyle=':', linewidth=0.5, label="_nolegend_"))
 noise_lines.append(ax.plot(L2list, NOxNL[1], color=data_line[1][0].get_color(), 
@@ -707,7 +720,7 @@ plt.tight_layout()
 
 #%% fitting
 
-
+'''
 from numpy.polynomial.polynomial import Polynomial
 from scipy.io import savemat
 import numpy as np
@@ -851,7 +864,7 @@ filename = f'estData{subjN}.mat'
 savemat(filename, estimated_results)
 
 print(f'Saved estimated results to {filename}')
-
+'''
 
 #%%
 
@@ -965,6 +978,8 @@ for i in range(len(cumsum_results)):
     
 
 #%% save into matfile
+
+from scipy.io import savemat
 
 data = {'CF':CF,'DPioNL':DPioNL,'NOxNL':NOxNL,'L2array':L2array,'cres':cumsum_results,'L2min':L2_min,'L2max':L2_max}
 

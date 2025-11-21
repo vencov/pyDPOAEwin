@@ -64,7 +64,7 @@ subjD['s082R'] =  ['Results/s082/', '24_03_26_10_04_34_F2b_8000Hz', '24_03_26_10
 subjD['s083L'] = ['Results/s083/', '24_03_26_14_45_37_F2b_8000Hz', '24_03_26_14_46_43_F2b_8000Hz', '24_03_26_14_47_48_F2b_8000Hz', '24_03_26_14_48_54_F2b_8000Hz', '24_03_26_14_50_01_F2b_8000Hz', '24_03_26_14_51_11_F2b_8000Hz', '24_03_26_14_52_27_F2b_8000Hz', '24_03_26_14_53_32_F2b_8000Hz', '24_03_26_14_54_42_F2b_8000Hz']
 subjD['s083R'] =  ['Results/s083/', '24_03_26_15_15_01_F2b_8000Hz', '24_03_26_15_16_23_F2b_8000Hz', '24_03_26_15_17_31_F2b_8000Hz', '24_03_26_15_18_39_F2b_8000Hz', '24_03_26_15_19_49_F2b_8000Hz', '24_03_26_15_20_55_F2b_8000Hz', '24_03_26_15_22_49_F2b_8000Hz', '24_03_26_15_24_32_F2b_8000Hz', '24_03_26_15_25_48_F2b_8000Hz']
 
-#subjN = 's055L_L2_55'
+subjN = 's075L'
 
 def mother_wavelet2(Nw,Nt,df,dt):
     vlnky = np.zeros((Nt,Nw))
@@ -102,7 +102,7 @@ def wavelet_filterDPOAE(signal, wavelet_basis,fx):
     
     
     
-    for k in range(20,400):
+    for k in range(5,400):
         # Compute the Fourier transform of the wavelet basis function
         wbtf = 2*np.fft.fft(wavelet_basis[:, k])/len(wavelet_basis[:, k])
         
@@ -269,7 +269,7 @@ def getDPgram(path,DatePat):
             data = loadmat(path+ dir_list[k])
             #lat = 16448
             rateOct = data['r'][0][0]
-            if 'a' in data.keys():
+            if 'lat_SC' in data.keys():
                 print("Key 'lat_SC' exists.")
                 lat = data['lat_SC'][0][0]
             else:
@@ -561,7 +561,7 @@ plt.savefig('Figures/DPgrams/dpgr' + subjN + '.png', format='png', dpi=300)  # S
 
 import numpy as np
 
-CF = [1000,1500,2000,3000]
+CF = [1000,1500,2000,3000,4000,6000,7000]
 CFidx = np.zeros_like(CF)
 
 DPioNL = []
@@ -591,6 +591,9 @@ data_line.append(ax.plot(L2list, DPioNL[0], label=r'${\it f}_2$ = 1 kHz'))
 data_line.append(ax.plot(L2list, DPioNL[1], label=r'${\it f}_2$ = 1.5 kHz'))
 data_line.append(ax.plot(L2list, DPioNL[2], label=r'${\it f}_2$ = 2 kHz'))
 data_line.append(ax.plot(L2list, DPioNL[3], label=r'${\it f}_2$ = 3 kHz'))
+data_line.append(ax.plot(L2list, DPioNL[4], label=r'${\it f}_2$ = 4 kHz'))
+data_line.append(ax.plot(L2list, DPioNL[5], label=r'${\it f}_2$ = 6 kHz'))
+data_line.append(ax.plot(L2list, DPioNL[6], label=r'${\it f}_2$ = 7 kHz'))
 noise_lines.append(ax.plot(L2list, NOxNL[0], color=data_line[0][0].get_color(), 
                                linestyle=':', linewidth=0.5, label="_nolegend_"))
 noise_lines.append(ax.plot(L2list, NOxNL[1], color=data_line[1][0].get_color(), 
@@ -658,151 +661,24 @@ plt.tight_layout()
 # Adjust layout for the second plot
 plt.tight_layout()
 
-#%% fitting
 
+#%% save into matfile
 
-from numpy.polynomial.polynomial import Polynomial
 from scipy.io import savemat
-import numpy as np
-from numpy.polynomial import Polynomial
 
-def fit_polynomial(L2, y_data, degree=4, max_slope_limit=50):
-    """
-    Fit a polynomial to the given data and calculate key estimates.
-
-    Parameters:
-    - L2: array-like, input x-axis values (L2 levels)
-    - y_data: array-like, input y-axis values (measured amplitudes)
-    - degree: int, the degree of the polynomial to fit (default is 4)
-    - max_slope_limit: float, the maximum allowable slope (default is 50 dB)
-
-    Returns:
-    - p: Polynomial, the fitted polynomial object
-    - max_slope: float, maximum slope of the fitted curve (capped at max_slope_limit)
-    - L2_at_max_slope: float, L2 level at maximum slope
-    - OAE_level_at_max_slope: float, OAE level at maximum slope
-    - L2_half_slope: float, L2 level where slope equals 1/2
-    - OAE_level_half_slope: float, OAE level at slope 1/2
-    - L2_half_max_slope: float, L2 level where slope equals max_slope/2 (above max slope)
-    - OAE_level_half_max_slope: float, OAE level at max_slope/2
-    """
-
-    # Fit the polynomial
-    p = Polynomial.fit(L2, y_data, deg=degree)
-
-    # Generate fitted values
-    x_fit = np.linspace(np.min(L2), np.max(L2), 100)
-    y_fit = p(x_fit)
-
-    
-
-    # Calculate slopes numerically for the fitted data
-    dy = np.gradient(y_fit, x_fit)
-
-    # Find the maximum slope and its corresponding L2 level
-    max_slope_index = np.argmax(dy[:70])
-    max_slope = dy[max_slope_index]
-
-    # Cap the maximum slope at the specified limit
-    if max_slope > max_slope_limit:
-        max_slope = max_slope_limit
-
-    L2_at_max_slope = x_fit[max_slope_index]
-    OAE_level_at_max_slope = y_fit[max_slope_index]
-
-    # Calculate the target slopes (1/2 and max_slope/2)
-    slope_half = 1 / 2
-    slope_half_max = max_slope / 2
-
-    # Find the first point where the slope is below or equal to 1/2, after the max slope
-    indices_above_max_slope = np.where(x_fit > L2_at_max_slope)[0]
-    half_slope_index = np.where(dy[indices_above_max_slope] <= slope_half)[0]
-
-    if len(half_slope_index) > 0:
-        L2_half_slope = x_fit[indices_above_max_slope[half_slope_index[0]]]
-        OAE_level_half_slope = y_fit[indices_above_max_slope[half_slope_index[0]]]
-    else:
-        L2_half_slope = None
-        OAE_level_half_slope = None
-
-    # Find the first point where the slope is below or equal to max_slope/2, after the max slope
-    half_max_slope_index = np.where(dy[indices_above_max_slope] <= slope_half_max)[0]
-    if len(half_max_slope_index) > 0:
-        L2_half_max_slope = x_fit[indices_above_max_slope[half_max_slope_index[0]]]
-        OAE_level_half_max_slope = y_fit[indices_above_max_slope[half_max_slope_index[0]]]
-    else:
-        L2_half_max_slope = None
-        OAE_level_half_max_slope = None
-
-    return (p, max_slope, L2_at_max_slope, OAE_level_at_max_slope,
-            L2_half_slope, OAE_level_half_slope,
-            L2_half_max_slope, OAE_level_half_max_slope)
+# with cumsum
+# data = {'CF':CF,'DPioNL':DPioNL,'NOxNL':NOxNL,'L2array':L2array,'cres':cumsum_results,'L2min':L2_min,'L2max':L2_max}
+# no cumsum
+data = {'CF':CF,'DPioNL':DPioNL,'NOxNL':NOxNL,'L2array':L2array}
 
 
-# Example usage
+# File name for saving
+file_name = 'Estimace/DPioCSNoCS_results_' + subjN + '.mat'
 
-L2 = np.array(L2list)
+# Save the data into a .mat file
+savemat(file_name, data)
 
-# Create a dictionary to hold all estimated results
-estimated_results = {}
-for i in range(4):  # Loop through each dataset index
-   
-    y_data = DPioNL[i]
-    # Call the fitting function
-    fit_results = fit_polynomial(L2, y_data, degree=4)
-    
-    x_fit = np.linspace(np.min(L2), np.max(L2), 100)  # Smooth curve for the fit
-    y_fit = fit_results[0](x_fit)
-    
-    # Plot fitted curve using the same color as the data but exclude from legend
-    ax.plot(x_fit, y_fit, color=data_line[i][0].get_color(), linestyle='--', linewidth=1, 
-            label="_nolegend_")  # No label in the legend for the fit
+print(f"Data successfully saved to {file_name}")
 
-    # Extract key points from the fit results
-    L2_at_max_slope = fit_results[2]
-    OAE_level_at_max_slope = fit_results[3]
-    L2_half_slope = fit_results[4]  # Slope of 1/2
-    OAE_level_half_slope = fit_results[5]
-    L2_half_max_slope = fit_results[6]  # Slope of max_slope / 2
-    OAE_level_half_max_slope = fit_results[7]
-
-    # Plot the point where the slope is maximum but exclude from legend
-    ax.plot(L2_at_max_slope, OAE_level_at_max_slope, 'o', color=data_line[i][0].get_color(), 
-            markersize=8, label="_nolegend_")  # Circle marker, no legend
-
-    # Plot the point where the slope is 1/2 but exclude from legend
-    if L2_half_slope is not None:
-        ax.plot(L2_half_slope, OAE_level_half_slope, 's', color=data_line[i][0].get_color(), 
-                markersize=8, label="_nolegend_")  # Square marker, no legend
-
-    # Plot the point where the slope is max_slope/2 but exclude from legend
-    if L2_half_max_slope is not None:
-        ax.plot(L2_half_max_slope, OAE_level_half_max_slope, '^', color=data_line[i][0].get_color(), 
-                markersize=8, label="_nolegend_")  # Triangle marker, no legend
-
-    # Store results in the dictionary
-    estimated_results[f'fit_results_{i}'] = {
-        'fitted_polynomial': fit_results[0],
-        'max_slope': fit_results[1],
-        'L2_at_max_slope': fit_results[2],
-        'OAE_level_at_max_slope': fit_results[3],
-        'L2_half_slope': fit_results[4],
-        'OAE_level_half_slope': fit_results[5],
-        'L2_half_max_slope': fit_results[6],
-        'OAE_level_half_max_slope': fit_results[7],
-    }
-
-# Show legend only for data
-ax.legend()
-
-
-# Save the second plot as well (optional)
-plt.savefig('Figures/DPgrams/io' + subjN + '.png', format='png', dpi=300)  # Save the second graph
-
-# Save the results to a .mat file
-filename = f'estData{subjN}.mat'
-savemat(filename, estimated_results)
-
-print(f'Saved estimated results to {filename}')
 
 
